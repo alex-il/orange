@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exp:Export Version="3.0"
+    xmlns:L7p="http://www.layer7tech.com/ws/policy"
+    xmlns:exp="http://www.layer7tech.com/ws/policy/export" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+    <exp:References>
+        <IncludedPolicyReference
+            RefType="com.l7tech.console.policy.exporter.IncludedPolicyReference"
+            guid="64c9a16a-3a6b-423e-b95c-740f4634b097" included="true"
+            name="Legacy - SOAP Response Template" soap="false" type="INCLUDE_FRAGMENT">
+            <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** Legacy - SOAP Response Template"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtyZXF1ZXN0LmVsYXBzZWRUaW1lfQ=="/>
+                        <L7p:VariableToSet stringValue="timeToReply"/>
+                    </L7p:SetVariable>
+                    <L7p:HardcodedResponse>
+                        <L7p:AssertionComment assertionComment="included">
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Return immediate and proceed"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:AssertionComment>
+                        <L7p:Base64ResponseBody stringValue="PHNvYXBlbnY6RW52ZWxvcGUgeG1sbnM6c29hcGVudj0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iIHhtbG5zOnNlcj0iaHR0cDovL3d3dy5vcmFuZ2UuY28uaWwvc2VydmljZXMiPgogICA8c29hcGVudjpIZWFkZXIvPgogICA8c29hcGVudjpCb2R5PgogICAgICA8c2VyOkxlZ2FjeUludm9jYXRpb25SZXNwb25zZT4KICAgICAgICAgJHtvdXRwdXR9CiAgICAgICAgIDxyZXF1ZXN0SWQ+JHtwYXJ0bmVyLnJlcXVlc3RpZH08L3JlcXVlc3RJZD4KICAgICAgPC9zZXI6TGVnYWN5SW52b2NhdGlvblJlc3BvbnNlPgogICA8L3NvYXBlbnY6Qm9keT4KPC9zb2FwZW52OkVudmVsb3BlPgo="/>
+                        <L7p:EarlyResponse booleanValue="true"/>
+                        <L7p:ResponseContentType stringValue="text/xml; charset=${config.targetEnc}"/>
+                    </L7p:HardcodedResponse>
+                </wsp:All>
+            </wsp:Policy>
+        </IncludedPolicyReference>
+        <IncludedPolicyReference
+            RefType="com.l7tech.console.policy.exporter.IncludedPolicyReference"
+            guid="072deb26-f3c5-4345-88c0-ca8ee1a8d898" included="true"
+            name="Legacy - Get Response Status" soap="false" type="INCLUDE_FRAGMENT">
+            <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="Extract the status and status code from the response"/>
+                        <L7p:Enabled booleanValue="false"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="For DBE"/>
+                        <L7p:Enabled booleanValue="false"/>
+                    </L7p:CommentAssertion>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Get Response Status"/>
+                        <L7p:Enabled booleanValue="false"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Respone = ${rawResponse}"/>
+                        <L7p:Enabled booleanValue="false"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtyYXdSZXNwb25zZX0="/>
+                        <L7p:ContentType stringValue="text/xml; charset=utf-8"/>
+                        <L7p:DataType variableDataType="message"/>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:VariableToSet stringValue="localRawResponse"/>
+                    </L7p:SetVariable>
+                    <L7p:ResponseXpathAssertion>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:VariablePrefix stringValue="status"/>
+                        <L7p:XmlMsgSrc stringValue="localRawResponse"/>
+                        <L7p:XpathExpression xpathExpressionValue="included">
+                            <L7p:Expression stringValue="//STATUS"/>
+                            <L7p:Namespaces mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                </L7p:entry>
+                            </L7p:Namespaces>
+                            <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                        </L7p:XpathExpression>
+                    </L7p:ResponseXpathAssertion>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="status.result = ${status.result}"/>
+                        <L7p:Enabled booleanValue="false"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:ResponseXpathAssertion>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:VariablePrefix stringValue="statusCode"/>
+                        <L7p:XmlMsgSrc stringValue="localRawResponse"/>
+                        <L7p:XpathExpression xpathExpressionValue="included">
+                            <L7p:Expression stringValue="//STATUS_CODE"/>
+                            <L7p:Namespaces mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                </L7p:entry>
+                            </L7p:Namespaces>
+                            <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                        </L7p:XpathExpression>
+                    </L7p:ResponseXpathAssertion>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="statusCode.result = ${statusCode.result}"/>
+                        <L7p:Enabled booleanValue="false"/>
+                    </L7p:AuditDetailAssertion>
+                    <wsp:OneOrMore L7p:Enabled="false" wsp:Usage="Required">
+                        <wsp:All L7p:Enabled="false" wsp:Usage="Required">
+                            <L7p:ComparisonAssertion>
+                                <L7p:CaseSensitive booleanValue="false"/>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:Expression1 stringValue="${status.result}"/>
+                                <L7p:ExpressionIsVariable booleanValue="false"/>
+                                <L7p:Operator operatorNull="null"/>
+                                <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:RightValue stringValue="ERROR"/>
+                                    </L7p:item>
+                                </L7p:Predicates>
+                            </L7p:ComparisonAssertion>
+                            <L7p:ResponseXpathAssertion>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:VariablePrefix stringValue="statusText"/>
+                                <L7p:XmlMsgSrc stringValue="localRawResponse"/>
+                                <L7p:XpathExpression xpathExpressionValue="included">
+                                    <L7p:Expression stringValue="//STATUS_MESSAGE"/>
+                                    <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                    </L7p:Namespaces>
+                                    <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                                </L7p:XpathExpression>
+                            </L7p:ResponseXpathAssertion>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="status text = ${statusText}"/>
+                                <L7p:Enabled booleanValue="false"/>
+                            </L7p:AuditDetailAssertion>
+                        </wsp:All>
+                        <L7p:TrueAssertion>
+                            <L7p:Enabled booleanValue="false"/>
+                        </L7p:TrueAssertion>
+                    </wsp:OneOrMore>
+                </wsp:All>
+            </wsp:Policy>
+        </IncludedPolicyReference>
+    </exp:References>
+    <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+        <wsp:All wsp:Usage="Required">
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** Legacy Standard Post Invocation Fragment"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** This gets called last by all legacy services."/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="Policy Fragment: Legacy - Post Invocation Fragment"/>
+            </L7p:AuditDetailAssertion>
+            <L7p:SetVariable>
+                <L7p:Base64Expression stringValue=""/>
+                <L7p:DataType variableDataType="dateTime"/>
+                <L7p:DateOffsetExpression stringValue=""/>
+                <L7p:Enabled booleanValue="false"/>
+                <L7p:VariableToSet stringValue="executeTime"/>
+            </L7p:SetVariable>
+            <wsp:OneOrMore wsp:Usage="Required">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:ComparisonAssertion>
+                        <L7p:CaseSensitive booleanValue="false"/>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:Expression1 stringValue="partner.invokeMethod"/>
+                        <L7p:ExpressionIsVariable booleanValue="false"/>
+                        <L7p:Operator operatorNull="null"/>
+                        <L7p:Predicates predicates="included">
+                            <L7p:item dataType="included">
+                                <L7p:Type variableDataType="string"/>
+                            </L7p:item>
+                            <L7p:item binary="included">
+                                <L7p:RightValue stringValue="synchronous"/>
+                            </L7p:item>
+                        </L7p:Predicates>
+                    </L7p:ComparisonAssertion>
+                    <L7p:Regex>
+                        <L7p:AutoTarget booleanValue="false"/>
+                        <L7p:OtherTargetMessageVariable stringValue="output"/>
+                        <L7p:Regex stringValue="&amp;lt;/IF_REPLY&amp;gt;\s+"/>
+                        <L7p:RegexName stringValue="ReplaceSpaces"/>
+                        <L7p:Replace booleanValue="true"/>
+                        <L7p:Replacement stringValue="&amp;lt;/IF_REPLY&amp;gt;"/>
+                        <L7p:Target target="OTHER"/>
+                    </L7p:Regex>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Response: ${output}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:Include>
+                        <L7p:PolicyGuid stringValue="64c9a16a-3a6b-423e-b95c-740f4634b097"/>
+                    </L7p:Include>
+                </wsp:All>
+                <L7p:TrueAssertion/>
+                <L7p:assertionComment>
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="Only return a response if it is synchronous"/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:assertionComment>
+            </wsp:OneOrMore>
+            <wsp:All L7p:Enabled="false" wsp:Usage="Required">
+                <L7p:HardcodedResponse>
+                    <L7p:AssertionComment assertionComment="included">
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="// Return query response."/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:AssertionComment>
+                    <L7p:Base64ResponseBody stringValue="PHNvYXBlbnY6RW52ZWxvcGUgeG1sbnM6c29hcGVudj0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iIHhtbG5zOnNlcj0iaHR0cDovL3d3dy5vcmFuZ2UuY28uaWwvc2VydmljZXMiPgogICA8c29hcGVudjpIZWFkZXIvPgogICA8c29hcGVudjpCb2R5PgogICAgICA8c2VyOkxlZ2FjeUludm9jYXRpb25SZXNwb25zZT4KICAgICAgICAgJHtvdXRwdXR9CiAgICAgICAgIDxyZXF1ZXN0SWQ+JHtwYXJ0bmVyLnJlcXVlc3RpZH08L3JlcXVlc3RJZD4KICAgICAgPC9zZXI6TGVnYWN5SW52b2NhdGlvblJlc3BvbnNlPgogICA8L3NvYXBlbnY6Qm9keT4KPC9zb2FwZW52OkVudmVsb3BlPgo="/>
+                    <L7p:Enabled booleanValue="false"/>
+                    <L7p:ResponseContentType stringValue="text/xml; charset=${config.targetEnc}"/>
+                </L7p:HardcodedResponse>
+                <L7p:ComparisonAssertion>
+                    <L7p:CaseSensitive booleanValue="false"/>
+                    <L7p:Enabled booleanValue="false"/>
+                    <L7p:Expression1 stringValue="${async.mainpart}"/>
+                    <L7p:Expression2 stringValue="false"/>
+                    <L7p:ExpressionIsVariable booleanValue="false"/>
+                    <L7p:Predicates predicates="included">
+                        <L7p:item binary="included">
+                            <L7p:CaseSensitive booleanValue="false"/>
+                            <L7p:RightValue stringValue="false"/>
+                        </L7p:item>
+                    </L7p:Predicates>
+                </L7p:ComparisonAssertion>
+            </wsp:All>
+            <L7p:AuditDetailAssertion>
+                <L7p:CustomLoggerSuffix stringValue="splunk"/>
+                <L7p:Detail stringValue="serviceName=${serviceName} requestId=${partner.requestId} processingTime=${request.elapsedTime}"/>
+                <L7p:Enabled booleanValue="false"/>
+                <L7p:LoggingOnly booleanValue="true"/>
+            </L7p:AuditDetailAssertion>
+            <L7p:Include>
+                <L7p:PolicyGuid stringValue="072deb26-f3c5-4345-88c0-ca8ee1a8d898"/>
+            </L7p:Include>
+        </wsp:All>
+    </wsp:Policy>
+</exp:Export>

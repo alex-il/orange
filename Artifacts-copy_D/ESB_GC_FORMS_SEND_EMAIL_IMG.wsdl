@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s1="http://www.tibco.com/schemas/IF-SRB/GW/ESB/xsd.esbOpsRequest.xsd" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s2="http://www.tibco.com/schemas/IF-SRB/GW/ESB/xsd.esbOpsResponse.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:import namespace="http://www.tibco.com/schemas/IF-SRB/GW/ESB/xsd.esbOpsRequest.xsd" />
+      <s:import namespace="http://www.tibco.com/schemas/IF-SRB/GW/ESB/xsd.esbOpsResponse.xsd" />
+      <s:element name="GC_FORMS_SEND_EMAIL_IMG">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="esbOps" type="s1:RequestOperationalParameters" />
+            <s:element minOccurs="0" maxOccurs="1" name="inputParameters" type="tns:inputParametersTypeEmail" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="inputParametersTypeEmail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmailAddress" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GC_FORMS_SEND_EMAIL_IMGResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="esbOps" type="s2:ResponseOperationalParameters" />
+            <s:element minOccurs="0" maxOccurs="1" name="outputParameters" type="s2:outputParametersType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.tibco.com/schemas/IF-SRB/GW/ESB/xsd.esbOpsRequest.xsd">
+      <s:complexType name="RequestOperationalParameters">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="serviceName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="async" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="cacheTimeMax" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="callbackServiceName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="correlationInfo" type="s1:correlation" />
+          <s:element minOccurs="0" maxOccurs="1" name="requestId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="consumerTimeout" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="providerTimeout" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="reqOrigin" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="reqOriginApp" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="reqOriginator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="invokerId" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="correlation">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="correlationId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="externalId" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.tibco.com/schemas/IF-SRB/GW/ESB/xsd.esbOpsResponse.xsd">
+      <s:complexType name="ResponseOperationalParameters">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="requestId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="serviceName" type="s:string" />
+          <s:choice minOccurs="1" maxOccurs="1">
+            <s:element minOccurs="0" maxOccurs="1" name="eta" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="request-no-found" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="responseStatus">
+              <s:complexType>
+                <s:sequence>
+                  <s:element minOccurs="0" maxOccurs="1" name="status" type="s:string" />
+                  <s:element minOccurs="0" maxOccurs="1" name="statusCode" type="s:string" />
+                  <s:element minOccurs="0" maxOccurs="1" name="statusMessage" type="s:string" />
+                  <s:element minOccurs="0" maxOccurs="1" name="debugInfo" type="s:string" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:choice>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="outputParametersType" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GC_FORMS_SEND_EMAIL_IMGSoapIn">
+    <wsdl:part name="parameters" element="tns:GC_FORMS_SEND_EMAIL_IMG" />
+  </wsdl:message>
+  <wsdl:message name="GC_FORMS_SEND_EMAIL_IMGSoapOut">
+    <wsdl:part name="parameters" element="tns:GC_FORMS_SEND_EMAIL_IMGResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ESB_GC_FORMS_SEND_EMAIL_IMGSoap">
+    <wsdl:operation name="GC_FORMS_SEND_EMAIL_IMG">
+      <wsdl:input message="tns:GC_FORMS_SEND_EMAIL_IMGSoapIn" />
+      <wsdl:output message="tns:GC_FORMS_SEND_EMAIL_IMGSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ESB_GC_FORMS_SEND_EMAIL_IMGSoap" type="tns:ESB_GC_FORMS_SEND_EMAIL_IMGSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GC_FORMS_SEND_EMAIL_IMG">
+      <soap:operation soapAction="http://tempuri.org/GC_FORMS_SEND_EMAIL_IMG" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ESB_GC_FORMS_SEND_EMAIL_IMGSoap12" type="tns:ESB_GC_FORMS_SEND_EMAIL_IMGSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GC_FORMS_SEND_EMAIL_IMG">
+      <soap12:operation soapAction="http://tempuri.org/GC_FORMS_SEND_EMAIL_IMG" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ESB_GC_FORMS_SEND_EMAIL_IMG">
+    <wsdl:port name="ESB_GC_FORMS_SEND_EMAIL_IMGSoap" binding="tns:ESB_GC_FORMS_SEND_EMAIL_IMGSoap">
+      <soap:address location="http://vmformstest/FORMS_CALLBACK/ESB_GC_FORMS_SEND_EMAIL_IMG.ASMX" />
+    </wsdl:port>
+    <wsdl:port name="ESB_GC_FORMS_SEND_EMAIL_IMGSoap12" binding="tns:ESB_GC_FORMS_SEND_EMAIL_IMGSoap12">
+      <soap12:address location="http://vmformstest/FORMS_CALLBACK/ESB_GC_FORMS_SEND_EMAIL_IMG.ASMX" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

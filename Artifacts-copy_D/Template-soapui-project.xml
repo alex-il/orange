@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="Template" resourceRoot="" soapui-version="4.5.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="SERVICE_NAME" type="wsdl" bindingName="{http://www.orange.co.il/services}SERVICE_NAME" soapVersion="1_1" anonymous="optional" definition="file:/D:/Artifacts/SERVICE_NAME.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\D:\Artifacts\SERVICE_NAME.wsdl"><con:part><con:url>file:\D:\Artifacts\SERVICE_NAME.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="SampleService" targetNamespace="http://www.orange.co.il/services" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.orange.co.il/services" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.orange.co.il/services">
+      <xsd:element name="Invoke">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="serviceName" type="xsd:string"/>
+            <xsd:choice>
+              <xsd:element name="requestId" type="xsd:string"></xsd:element>
+              <xsd:element name="invocationParameters" type="tns:invocationParameters"></xsd:element>
+            </xsd:choice>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="InvokeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:choice>
+              <xsd:element name="eta" type="xsd:double"></xsd:element>
+              <xsd:element name="response" type="xsd:string"></xsd:element>
+              <xsd:element name="notThereYet" type="xsd:string"></xsd:element>
+            </xsd:choice>
+            <xsd:element name="requestId" type="xsd:string"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="invocationParameters">
+        <xsd:sequence>
+          <xsd:element name="async" type="xsd:boolean" maxOccurs="1" minOccurs="0"></xsd:element>
+          <xsd:element name="arguments" type="tns:ServiceArguments"></xsd:element>
+          <xsd:element name="sleep" type="xsd:int" minOccurs="0" maxOccurs="1"></xsd:element>
+          <xsd:element name="cacheTTL" type="xsd:int" minOccurs="0" maxOccurs="1"></xsd:element>
+          <xsd:element name="callbackServiceName" type="xsd:string" minOccurs="0" maxOccurs="1"></xsd:element>
+          <xsd:element name="correlationInfo" type="tns:correlation" minOccurs="0" maxOccurs="1"></xsd:element>
+          <xsd:element name="requestId" type="xsd:string" maxOccurs="1" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="correlation">
+        <xsd:sequence>
+          <xsd:element name="correlationId" type="xsd:string"/>
+          <xsd:element name="externalId" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ServiceArguments">
+        <xsd:sequence>
+          <xsd:element name="input" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="SERVICE_NAME">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SERVICE_NAMEResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="out" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="InputMessage" type="xsd:string"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="InvokeRequest">
+    <wsdl:part element="tns:Invoke" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="InvokeResponse">
+    <wsdl:part element="tns:InvokeResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="SERVICE_NAMERequest">
+    <wsdl:part name="parameters" element="tns:SERVICE_NAME"/>
+  </wsdl:message>
+  <wsdl:message name="SERVICE_NAMEResponse">
+    <wsdl:part name="parameters" element="tns:SERVICE_NAMEResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="SERVICE_NAME">
+    <wsdl:operation name="Invoke">
+      <wsdl:input message="tns:InvokeRequest"/>
+      <wsdl:output message="tns:InvokeResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="SERVICE_NAME">
+      <wsdl:input message="tns:SERVICE_NAMERequest"/>
+      <wsdl:output message="tns:SERVICE_NAMEResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SERVICE_NAME" type="tns:SERVICE_NAME">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Invoke">
+      <soap:operation soapAction="http://www.orange.co.il/services/NewOperation"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SERVICE_NAME">
+      <soap:operation soapAction="http://www.orange.co.il/services/SERVICE_NAME"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SERVICE_NAME">
+    <wsdl:port binding="tns:SERVICE_NAME" name="SERVICE_NAME">
+      <soap:address location="www.orange.co.il"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>www.orange.co.il</con:endpoint><con:endpoint>http://OSN15958:8088/mockSERVICE_NAME</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.orange.co.il/services/NewOperation" name="Invoke" bindingOperationName="Invoke" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>www.orange.co.il</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://www.orange.co.il/services">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:Invoke>
+         <serviceName>?</serviceName>
+         <!--You have a CHOICE of the next 2 items at this level-->
+         <requestId>?</requestId>
+         <invocationParameters>
+            <!--Optional:-->
+            <async>?</async>
+            <arguments>
+               <input>?</input>
+            </arguments>
+            <!--Optional:-->
+            <sleep>?</sleep>
+            <!--Optional:-->
+            <cacheTTL>?</cacheTTL>
+            <!--Optional:-->
+            <callbackServiceName>?</callbackServiceName>
+            <!--Optional:-->
+            <correlationInfo>
+               <correlationId>?</correlationId>
+               <!--Optional:-->
+               <externalId>?</externalId>
+            </correlationInfo>
+            <!--Optional:-->
+            <requestId>?</requestId>
+         </invocationParameters>
+      </ser:Invoke>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.orange.co.il/services/NewOperation"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.orange.co.il/services/SERVICE_NAME" name="SERVICE_NAME" bindingOperationName="SERVICE_NAME" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>www.orange.co.il</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://www.orange.co.il/services">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:SERVICE_NAME>
+         <in>?</in>
+      </ser:SERVICE_NAME>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.orange.co.il/services/SERVICE_NAME"/></con:call></con:operation></con:interface><con:testSuite name="SERVICE_NAME TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Invoke TestCase" searchProperties="true"><con:settings/><con:testStep type="request" name="Invoke"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>SERVICE_NAME</con:interface><con:operation>Invoke</con:operation><con:request name="Invoke"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>www.orange.co.il</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://www.orange.co.il/services">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:Invoke>
+         <serviceName>?</serviceName>
+         <!--You have a CHOICE of the next 2 items at this level-->
+         <requestId>?</requestId>
+         <invocationParameters>
+            <!--Optional:-->
+            <async>?</async>
+            <arguments>
+               <input>?</input>
+            </arguments>
+            <!--Optional:-->
+            <sleep>?</sleep>
+            <!--Optional:-->
+            <cacheTTL>?</cacheTTL>
+            <!--Optional:-->
+            <callbackServiceName>?</callbackServiceName>
+            <!--Optional:-->
+            <correlationInfo>
+               <correlationId>?</correlationId>
+               <!--Optional:-->
+               <externalId>?</externalId>
+            </correlationInfo>
+            <!--Optional:-->
+            <requestId>?</requestId>
+         </invocationParameters>
+      </ser:Invoke>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig action="http://www.orange.co.il/services/NewOperation"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="SERVICE_NAME TestCase" searchProperties="true"><con:settings/><con:testStep type="request" name="SERVICE_NAME"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>SERVICE_NAME</con:interface><con:operation>SERVICE_NAME</con:operation><con:request name="SERVICE_NAME"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>www.orange.co.il</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://www.orange.co.il/services">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:SERVICE_NAME>
+         <in>?</in>
+      </ser:SERVICE_NAME>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig action="http://www.orange.co.il/services/SERVICE_NAME"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite name="Web TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="true" maxResults="0" name="Web TestCase" searchProperties="true"><con:settings/><con:testStep type="httprequest" name="Web TestCase"><con:settings/><con:config method="GET" xsi:type="con:HttpRequest" name="Web TestCase" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://Web TestCase</con:endpoint><con:request/><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:mockService port="8088" path="/mockSERVICE_NAME" host="OSN15958" name="SERVICE_NAME MockService"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:mockOperation name="Invoke" interface="SERVICE_NAME" operation="Invoke"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://www.orange.co.il/services">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:InvokeResponse>
+         <!--You have a CHOICE of the next 3 items at this level-->
+         <eta>?</eta>
+         <response>?</response>
+         <notThereYet>?</notThereYet>
+         <requestId>?</requestId>
+      </ser:InvokeResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.orange.co.il/services/NewOperation"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="SERVICE_NAME" interface="SERVICE_NAME" operation="SERVICE_NAME"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://www.orange.co.il/services">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:SERVICE_NAMEResponse>
+         <out>?</out>
+      </ser:SERVICE_NAMEResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.orange.co.il/services/SERVICE_NAME"/></con:response><con:dispatchConfig/></con:mockOperation><con:properties/></con:mockService><con:properties/><con:wssContainer/></con:soapui-project>

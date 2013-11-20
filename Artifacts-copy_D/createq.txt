@@ -1,0 +1,2 @@
+Connect tcp://vmifgw1:7337
+Delete all queues q.service.preprod.>

@@ -1,0 +1,872 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exp:Export Version="3.0"
+    xmlns:L7p="http://www.layer7tech.com/ws/policy"
+    xmlns:exp="http://www.layer7tech.com/ws/policy/export" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+    <exp:References/>
+    <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+        <wsp:All wsp:Usage="Required">
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** Legacy Parse Payload"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** Parse the payload if ${config.parsed} is true"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** Note: Parsing is service specific"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="Policy Fragment: Legacy - Parse Payload"/>
+            </L7p:AuditDetailAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*** Do the parsing"/>
+            </L7p:CommentAssertion>
+            <wsp:OneOrMore wsp:Usage="Required">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtwYXlsb2FkLnJlc3VsdH0="/>
+                        <L7p:ContentType stringValue="text/xml; charset=utf-8"/>
+                        <L7p:DataType variableDataType="message"/>
+                        <L7p:VariableToSet stringValue="testMessage"/>
+                    </L7p:SetVariable>
+                    <L7p:ResponseXpathAssertion>
+                        <L7p:VariablePrefix stringValue=""/>
+                        <L7p:XmlMsgSrc stringValue="testMessage"/>
+                        <L7p:XpathExpression xpathExpressionValue="included">
+                            <L7p:Expression stringValue="/"/>
+                            <L7p:Namespaces mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                </L7p:entry>
+                            </L7p:Namespaces>
+                            <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                        </L7p:XpathExpression>
+                    </L7p:ResponseXpathAssertion>
+                    <wsp:OneOrMore wsp:Usage="Required">
+                        <wsp:All wsp:Usage="Required">
+                            <L7p:CacheLookup>
+                                <L7p:CacheEntryKey stringValue="${serviceName}.arguments"/>
+                                <L7p:CacheId stringValue="svcConfig"/>
+                                <L7p:ContentTypeOverride stringValue=""/>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:MaxEntryAgeSeconds stringValue="30000"/>
+                                <L7p:OtherTargetMessageVariable stringValue="arguments1"/>
+                                <L7p:Target target="OTHER"/>
+                            </L7p:CacheLookup>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHthcmd1bWVudHMxLm1haW5wYXJ0fQ=="/>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:VariableToSet stringValue="params"/>
+                            </L7p:SetVariable>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjb25maWcuYXJndW1lbnRzfQ=="/>
+                                <L7p:VariableToSet stringValue="params"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="config.arguments=${params}"/>
+                                <L7p:Enabled booleanValue="false"/>
+                            </L7p:AuditDetailAssertion>
+                        </wsp:All>
+                        <L7p:AuditDetailAssertion>
+                            <L7p:Detail stringValue="NO ARGUMENTS FROM CACHE!!!!!"/>
+                        </L7p:AuditDetailAssertion>
+                    </wsp:OneOrMore>
+                    <L7p:Split>
+                        <L7p:InputVariable stringValue="params"/>
+                        <L7p:OutputVariable stringValue="params.list"/>
+                    </L7p:Split>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtwb2xpY3kubnVsbHZhbHVlfQ=="/>
+                        <L7p:VariableToSet stringValue="nullcv"/>
+                    </L7p:SetVariable>
+                    <L7p:ForEachLoop L7p:Usage="Required"
+                        loopVariable="params.list" variablePrefix="param">
+                        <L7p:AuditDetailAssertion>
+                            <L7p:Detail stringValue="current parameter: ${param.current}"/>
+                        </L7p:AuditDetailAssertion>
+                        <wsp:OneOrMore wsp:Usage="Required">
+                            <wsp:All wsp:Usage="Required">
+                                <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="ZmFsc2U="/>
+                                    <L7p:VariableToSet stringValue="parameterWasFound"/>
+                                </L7p:SetVariable>
+                                <L7p:SetVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Cast the payload to a message type"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:Base64Expression stringValue="JHtwYXlsb2FkLnJlc3VsdH0="/>
+                                    <L7p:ContentType stringValue="text/xml; charset=utf-8"/>
+                                    <L7p:DataType variableDataType="message"/>
+                                    <L7p:VariableToSet stringValue="payload.xml"/>
+                                </L7p:SetVariable>
+                                <L7p:Split>
+                                    <L7p:InputVariable stringValue="param.current"/>
+                                    <L7p:OutputVariable stringValue="param.current.list"/>
+                                    <L7p:SplitPattern stringValue=":"/>
+                                </L7p:Split>
+                                <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="JHtwYXJhbS5jdXJyZW50Lmxpc3RbMF19"/>
+                                    <L7p:VariableToSet stringValue="param.name"/>
+                                </L7p:SetVariable>
+                                <L7p:AuditDetailAssertion>
+                                    <L7p:Detail stringValueReference="inline"><![CDATA[param.current.list[0] = ${param.name}
+param.current.list[1] = ${param.current.list[1]}
+param.current.list[2] = ${param.current.list[2]}
+payload.xml.mainpart = ${payload.xml.mainpart}]]></L7p:Detail>
+                                </L7p:AuditDetailAssertion>
+                                <L7p:ResponseXpathAssertion>
+                                    <L7p:VariablePrefix stringValue="parameter"/>
+                                    <L7p:XmlMsgSrc stringValue="payload.xml"/>
+                                    <L7p:XpathExpression xpathExpressionValue="included">
+                                    <L7p:Expression stringValue="//*[lower-case(local-name()) = 'params_list']/*[local-name()=$param.name]"/>
+                                    <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                    </L7p:Namespaces>
+                                    <L7p:XpathVersion xpathVersion="XPATH_2_0"/>
+                                    </L7p:XpathExpression>
+                                </L7p:ResponseXpathAssertion>
+                                <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="dHJ1ZQ=="/>
+                                    <L7p:VariableToSet stringValue="parameterWasFound"/>
+                                </L7p:SetVariable>
+                                <wsp:OneOrMore wsp:Usage="Required">
+                                    <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${parameter.result}"/>
+                                    <L7p:ExpressionIsVariable booleanValue="false"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:Negated booleanValue="true"/>
+                                    <L7p:Operator operator="EMPTY"/>
+                                    <L7p:RightValue stringValue=""/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                    </L7p:ComparisonAssertion>
+                                    <wsp:OneOrMore wsp:Usage="Required">
+                                    <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${param.current.list[1]}"/>
+                                    <L7p:ExpressionIsVariable booleanValue="false"/>
+                                    <L7p:MultivaluedComparison multivaluedComparison="ANY"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:RightValue stringValue="CLOB"/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                    </L7p:ComparisonAssertion>
+                                    <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${param.current.list[1]}"/>
+                                    <L7p:ExpressionIsVariable booleanValue="false"/>
+                                    <L7p:MultivaluedComparison multivaluedComparison="ANY"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:RightValue stringValue="VARCHAR2"/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                    </L7p:ComparisonAssertion>
+                                    </wsp:OneOrMore>
+                                    <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Not an empty string, or empty and the data type is VARCHAR2 or CLOB"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:assertionComment>
+                                </wsp:OneOrMore>
+                                <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Enabled booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${parameter.result}"/>
+                                    <L7p:ExpressionIsVariable booleanValue="false"/>
+                                    <L7p:MultivaluedComparison multivaluedComparison="FIRST"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                    </L7p:item>
+                                    <L7p:item stringLength="included">
+                                    <L7p:Max intValue="-1"/>
+                                    <L7p:Min intValue="1"/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                </L7p:ComparisonAssertion>
+                                <wsp:OneOrMore L7p:Enabled="false" wsp:Usage="Required">
+                                    <wsp:All L7p:Enabled="false" wsp:Usage="Required">
+                                    <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Enabled booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${param.current.list[1]}"/>
+                                    <L7p:ExpressionIsVariable booleanValue="false"/>
+                                    <L7p:MultivaluedComparison multivaluedComparison="FIRST"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:RightValue stringValue="DATE"/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                    </L7p:ComparisonAssertion>
+                                    <L7p:Regex>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Date format to DD-MM-YY"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:AutoTarget booleanValue="false"/>
+                                    <L7p:Enabled booleanValue="false"/>
+
+                                    <L7p:OtherTargetMessageVariable stringValue="parameter.result"/>
+                                    <L7p:Regex stringValue="/"/>
+                                    <L7p:Replace booleanValue="true"/>
+                                    <L7p:ReplaceRepeatCount intValue="2"/>
+                                    <L7p:Replacement stringValue="-"/>
+                                    <L7p:Target target="OTHER"/>
+                                    </L7p:Regex>
+                                    <L7p:Regex>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Date format to DD-MM-YY"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:AutoTarget booleanValue="false"/>
+                                    <L7p:Enabled booleanValue="false"/>
+
+                                    <L7p:OtherTargetMessageVariable stringValue="parameter.result"/>
+                                    <L7p:Regex stringValue="-\d{2}(\d{2})$"/>
+                                    <L7p:Replace booleanValue="true"/>
+                                    <L7p:ReplaceRepeatCount intValue="2"/>
+                                    <L7p:Replacement stringValue="-$1"/>
+                                    <L7p:Target target="OTHER"/>
+                                    </L7p:Regex>
+                                    <L7p:Regex>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Date format to DD-MM-YY"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:AutoTarget booleanValue="false"/>
+                                    <L7p:Enabled booleanValue="false"/>
+
+                                    <L7p:OtherTargetMessageVariable stringValue="parameter.result"/>
+                                    <L7p:Regex stringValue="[Jj][Aa][Nn]"/>
+                                    <L7p:Replace booleanValue="true"/>
+                                    <L7p:ReplaceRepeatCount intValue="2"/>
+                                    <L7p:Replacement stringValue="01"/>
+                                    <L7p:Target target="OTHER"/>
+                                    </L7p:Regex>
+                                    <L7p:Regex>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Date format to DD-MM-YY"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:AutoTarget booleanValue="false"/>
+                                    <L7p:Enabled booleanValue="false"/>
+
+                                    <L7p:OtherTargetMessageVariable stringValue="parameter.result"/>
+                                    <L7p:Regex stringValue="[Ff][Ee][Bb]"/>
+                                    <L7p:Replace booleanValue="true"/>
+                                    <L7p:ReplaceRepeatCount intValue="2"/>
+                                    <L7p:Replacement stringValue="01"/>
+                                    <L7p:Target target="OTHER"/>
+                                    </L7p:Regex>
+                                    <L7p:Regex>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Date format to DD-MM-YY"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:AutoTarget booleanValue="false"/>
+                                    <L7p:Enabled booleanValue="false"/>
+
+                                    <L7p:OtherTargetMessageVariable stringValue="parameter.result"/>
+                                    <L7p:Regex stringValue="[Mm][Aa][Rr]"/>
+                                    <L7p:Replace booleanValue="true"/>
+                                    <L7p:ReplaceRepeatCount intValue="2"/>
+                                    <L7p:Replacement stringValue="01"/>
+                                    <L7p:Target target="OTHER"/>
+                                    </L7p:Regex>
+                                    <L7p:Regex>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Date format to DD-MM-YY"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:AutoTarget booleanValue="false"/>
+                                    <L7p:Enabled booleanValue="false"/>
+
+                                    <L7p:OtherTargetMessageVariable stringValue="parameter.result"/>
+                                    <L7p:Regex stringValue="[Aa][Pp][Rr]"/>
+                                    <L7p:Replace booleanValue="true"/>
+                                    <L7p:ReplaceRepeatCount intValue="2"/>
+                                    <L7p:Replacement stringValue="01"/>
+                                    <L7p:Target target="OTHER"/>
+                                    </L7p:Regex>
+                                    <L7p:Regex>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Date format to DD-MM-YY"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:AutoTarget booleanValue="false"/>
+                                    <L7p:Enabled booleanValue="false"/>
+
+                                    <L7p:OtherTargetMessageVariable stringValue="parameter.result"/>
+                                    <L7p:Regex stringValue="[Mm][Aa][Yy]"/>
+                                    <L7p:Replace booleanValue="true"/>
+                                    <L7p:ReplaceRepeatCount intValue="2"/>
+                                    <L7p:Replacement stringValue="01"/>
+                                    <L7p:Target target="OTHER"/>
+                                    </L7p:Regex>
+                                    <L7p:Regex>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Date format to DD-MM-YY"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:AutoTarget booleanValue="false"/>
+                                    <L7p:Enabled booleanValue="false"/>
+
+                                    <L7p:OtherTargetMessageVariable stringValue="parameter.result"/>
+                                    <L7p:Regex stringValue="[Jj][Uu][Nn]"/>
+                                    <L7p:Replace booleanValue="true"/>
+                                    <L7p:ReplaceRepeatCount intValue="2"/>
+                                    <L7p:Replacement stringValue="01"/>
+                                    <L7p:Target target="OTHER"/>
+                                    </L7p:Regex>
+                                    <L7p:Regex>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Date format to DD-MM-YY"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:AutoTarget booleanValue="false"/>
+                                    <L7p:Enabled booleanValue="false"/>
+
+                                    <L7p:OtherTargetMessageVariable stringValue="parameter.result"/>
+                                    <L7p:Regex stringValue="[Jj][Uu][Ll]"/>
+                                    <L7p:Replace booleanValue="true"/>
+                                    <L7p:ReplaceRepeatCount intValue="2"/>
+                                    <L7p:Replacement stringValue="01"/>
+                                    <L7p:Target target="OTHER"/>
+                                    </L7p:Regex>
+                                    <L7p:Regex>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Date format to DD-MM-YY"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:AutoTarget booleanValue="false"/>
+                                    <L7p:Enabled booleanValue="false"/>
+
+                                    <L7p:OtherTargetMessageVariable stringValue="parameter.result"/>
+                                    <L7p:Regex stringValue="[Aa][Uu][Gg]"/>
+                                    <L7p:Replace booleanValue="true"/>
+                                    <L7p:ReplaceRepeatCount intValue="2"/>
+                                    <L7p:Replacement stringValue="01"/>
+                                    <L7p:Target target="OTHER"/>
+                                    </L7p:Regex>
+                                    <L7p:Regex>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Date format to DD-MM-YY"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:AutoTarget booleanValue="false"/>
+                                    <L7p:Enabled booleanValue="false"/>
+
+                                    <L7p:OtherTargetMessageVariable stringValue="parameter.result"/>
+                                    <L7p:Regex stringValue="[Ss][Ee][Pp]"/>
+                                    <L7p:Replace booleanValue="true"/>
+                                    <L7p:ReplaceRepeatCount intValue="2"/>
+                                    <L7p:Replacement stringValue="01"/>
+                                    <L7p:Target target="OTHER"/>
+                                    </L7p:Regex>
+                                    <L7p:Regex>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Date format to DD-MM-YY"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:AutoTarget booleanValue="false"/>
+                                    <L7p:Enabled booleanValue="false"/>
+
+                                    <L7p:OtherTargetMessageVariable stringValue="parameter.result"/>
+                                    <L7p:Regex stringValue="[Oo][Cc][Tt]"/>
+                                    <L7p:Replace booleanValue="true"/>
+                                    <L7p:ReplaceRepeatCount intValue="2"/>
+                                    <L7p:Replacement stringValue="01"/>
+                                    <L7p:Target target="OTHER"/>
+                                    </L7p:Regex>
+                                    <L7p:Regex>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Date format to DD-MM-YY"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:AutoTarget booleanValue="false"/>
+                                    <L7p:Enabled booleanValue="false"/>
+
+                                    <L7p:OtherTargetMessageVariable stringValue="parameter.result"/>
+                                    <L7p:Regex stringValue="[Nn][Oo][Vv]"/>
+                                    <L7p:Replace booleanValue="true"/>
+                                    <L7p:ReplaceRepeatCount intValue="2"/>
+                                    <L7p:Replacement stringValue="01"/>
+                                    <L7p:Target target="OTHER"/>
+                                    </L7p:Regex>
+                                    <L7p:Regex>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Date format to DD-MM-YY"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:AutoTarget booleanValue="false"/>
+                                    <L7p:Enabled booleanValue="false"/>
+
+                                    <L7p:OtherTargetMessageVariable stringValue="parameter.result"/>
+                                    <L7p:Regex stringValue="[Dd][Ee][Cc]"/>
+                                    <L7p:Replace booleanValue="true"/>
+                                    <L7p:ReplaceRepeatCount intValue="2"/>
+                                    <L7p:Replacement stringValue="01"/>
+                                    <L7p:Target target="OTHER"/>
+                                    </L7p:Regex>
+                                    </wsp:All>
+                                    <L7p:TrueAssertion>
+                                    <L7p:Enabled booleanValue="false"/>
+                                    </L7p:TrueAssertion>
+                                    <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="//Date Format"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:assertionComment>
+                                </wsp:OneOrMore>
+                                <wsp:OneOrMore wsp:Usage="Required">
+                                    <wsp:All wsp:Usage="Required">
+                                    <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${param.current.list[1]}"/>
+                                    <L7p:ExpressionIsVariable booleanValue="false"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:RightValue stringValue="DATE"/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                    </L7p:ComparisonAssertion>
+                                    <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="JHtwYXJhbWV0ZXIucmVzdWx0fQ=="/>
+                                    <L7p:DataType variableDataType="dateTime"/>
+                                    <L7p:DateOffsetExpression stringValue=""/>
+                                    <L7p:VariableToSet stringValue="parameter.result"/>
+                                    </L7p:SetVariable>
+                                    </wsp:All>
+                                    <L7p:TrueAssertion/>
+                                    <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="Convert date fields to Date context variables"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:assertionComment>
+                                </wsp:OneOrMore>
+                                <L7p:SetVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Append to arguments.str"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:Base64Expression stringValue="JHthcmd1bWVudHMuc3RyfSR7cGFyYW1ldGVyLnJlc3VsdH18"/>
+                                    <L7p:Enabled booleanValue="false"/>
+                                    <L7p:VariableToSet stringValue="arguments.str"/>
+                                </L7p:SetVariable>
+                                <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:SourceVariableName stringValue="parameter.result"/>
+                                    <L7p:TargetVariableName stringValue="arguments"/>
+                                </L7p:ManipulateMultiValuedVariable>
+                                <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// XPathed the parameter"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:assertionComment>
+                            </wsp:All>
+                            <wsp:OneOrMore wsp:Usage="Required">
+                                <wsp:All wsp:Usage="Required">
+                                    <wsp:All wsp:Usage="Required">
+                                    <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${param.current.list[1]}"/>
+                                    <L7p:ExpressionIsVariable booleanValue="false"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:RightValue stringValue="NUMBER"/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                    </L7p:ComparisonAssertion>
+                                    <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${parameter.result}"/>
+                                    <L7p:ExpressionIsVariable booleanValue="false"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:Operator operator="EMPTY"/>
+                                    <L7p:RightValue stringValue=""/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                    </L7p:ComparisonAssertion>
+                                    <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${parameterWasFound}"/>
+                                    <L7p:ExpressionIsVariable booleanValue="false"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="boolean"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:RightValue stringValue="true"/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                    </L7p:ComparisonAssertion>
+                                    <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Consummer passed an empty value for a NUMBER"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:assertionComment>
+                                    </wsp:All>
+                                    <L7p:SetVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Default value"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:Base64Expression stringValue="JHthcmd1bWVudHMuc3RyfU5VTEw="/>
+                                    <L7p:Enabled booleanValue="false"/>
+                                    <L7p:VariableToSet stringValue="arguments.str"/>
+                                    </L7p:SetVariable>
+                                    <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:SourceVariableName stringValue="policy.nullvalue"/>
+                                    <L7p:TargetVariableName stringValue="arguments"/>
+                                    </L7p:ManipulateMultiValuedVariable>
+                                    <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// If it is empty and is a number send a NULL"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:assertionComment>
+                                </wsp:All>
+                                <wsp:All wsp:Usage="Required">
+                                    <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${param.current.list[2]}"/>
+                                    <L7p:ExpressionIsVariable booleanValue="false"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:Negated booleanValue="true"/>
+                                    <L7p:Operator operator="EMPTY"/>
+                                    <L7p:RightValue stringValue=""/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                    </L7p:ComparisonAssertion>
+                                    <wsp:OneOrMore wsp:Usage="Required">
+                                    <wsp:All wsp:Usage="Required">
+                                    <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${param.current.list[1]}"/>
+
+                                    <L7p:ExpressionIsVariable booleanValue="false"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:RightValue stringValue="DATE"/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                    </L7p:ComparisonAssertion>
+                                    <L7p:AuditDetailAssertion>
+                                    <L7p:Detail stringValue="{param.current.list[1]} = ${param.current.list[1]}"/>
+                                    </L7p:AuditDetailAssertion>
+                                    <L7p:SetVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// changed by blain 15.07.13"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:Base64Expression stringValue="JHtwb2xpY3kubnVsbHZhbHVlfQ=="/>
+                                    <L7p:DataType variableDataType="dateTime"/>
+
+                                    <L7p:DateOffsetExpression stringValue=""/>
+                                    <L7p:VariableToSet stringValue="parameter.value"/>
+                                    </L7p:SetVariable>
+                                    </wsp:All>
+                                    <L7p:SetVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// changed by blain 15.07.13"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:Base64Expression stringValue="JHtwb2xpY3kubnVsbHZhbHVlfQ=="/>
+                                    <L7p:VariableToSet stringValue="parameter.value"/>
+                                    </L7p:SetVariable>
+                                    <L7p:SetVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Default value"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:Base64Expression stringValue="JHtwYXJhbS5jdXJyZW50Lmxpc3RbMl19"/>
+                                    <L7p:Enabled booleanValue="false"/>
+                                    <L7p:VariableToSet stringValue="parameter.value"/>
+                                    </L7p:SetVariable>
+                                    <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="If parameter is a Date parameter, then convert default to a Date context variable"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:assertionComment>
+                                    </wsp:OneOrMore>
+                                    <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// changed by blain 15.07.13"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:SourceVariableName stringValue="policy.nullvalue"/>
+                                    <L7p:TargetVariableName stringValue="arguments"/>
+                                    </L7p:ManipulateMultiValuedVariable>
+                                    <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// If there is a default use it"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:assertionComment>
+                                </wsp:All>
+                                <wsp:All wsp:Usage="Required">
+                                    <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="PFJFUVVFU1RfU1RBVFVTPg0KICAgIDxTVEFUVVM+RVJST1I8L1NUQVRVUz4NCiAgICA8U1RBVFVTX0NPREU+NDwvU1RBVFVTX0NPREU+DQogICAgPFNUQVRVU19NRVNTQUdFPk1hbmRhdG9yeSBQYXJhbSAke3BhcmFtLmN1cnJlbnQubGlzdFswXX0gbm90IGZvdW5kIGluIHJlcXVlc3QhPC9TVEFUVVNfTUVTU0FHRT4NCjwvUkVRVUVTVF9TVEFUVVM+"/>
+                                    <L7p:VariableToSet stringValue="errorMessage"/>
+                                    </L7p:SetVariable>
+                                    <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="dHJ1ZQ=="/>
+                                    <L7p:VariableToSet stringValue="param.break"/>
+                                    </L7p:SetVariable>
+                                    <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="RVJST1I="/>
+                                    <L7p:VariableToSet stringValue="status"/>
+                                    </L7p:SetVariable>
+                                    <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="Parameter was not in request and does not have a default. Return error"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:assertionComment>
+                                </wsp:All>
+                                <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Either 1) Empty arg and not a string 2) not existing arg"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:assertionComment>
+                            </wsp:OneOrMore>
+                            <L7p:assertionComment>
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Append to ${arguments}"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:assertionComment>
+                        </wsp:OneOrMore>
+                    </L7p:ForEachLoop>
+                    <wsp:OneOrMore wsp:Usage="Required">
+                        <L7p:ComparisonAssertion>
+                            <L7p:CaseSensitive booleanValue="false"/>
+                            <L7p:Expression1 stringValue="${errorMessage}"/>
+                            <L7p:ExpressionIsVariable booleanValue="false"/>
+                            <L7p:Operator operatorNull="null"/>
+                            <L7p:Predicates predicates="included">
+                                <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                </L7p:item>
+                                <L7p:item binary="included">
+                                    <L7p:Negated booleanValue="true"/>
+                                    <L7p:Operator operator="EMPTY"/>
+                                    <L7p:RightValue stringValue=""/>
+                                </L7p:item>
+                            </L7p:Predicates>
+                        </L7p:ComparisonAssertion>
+                        <wsp:All wsp:Usage="Required">
+                            <L7p:Regex>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Strip the trailing comma"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:AutoTarget booleanValue="false"/>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:OtherTargetMessageVariable stringValue="arguments.str"/>
+                                <L7p:Regex stringValue="\|$"/>
+                                <L7p:Replace booleanValue="true"/>
+                                <L7p:Replacement stringValue=""/>
+                                <L7p:Target target="OTHER"/>
+                            </L7p:Regex>
+                            <L7p:Split>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:InputVariable stringValue="arguments.str"/>
+                                <L7p:OutputVariable stringValue="arguments"/>
+                                <L7p:SplitPattern stringValue="\|"/>
+                            </L7p:Split>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="arguments=${arguments}"/>
+                            </L7p:AuditDetailAssertion>
+                        </wsp:All>
+                    </wsp:OneOrMore>
+                </wsp:All>
+                <L7p:SetVariable>
+                    <L7p:Base64Expression stringValue="PFJFUVVFU1RfU1RBVFVTPg0KICAgIDxTVEFUVVM+RVJST1I8L1NUQVRVUz4NCiAgICA8U1RBVFVTX0NPREU+NDwvU1RBVFVTX0NPREU+DQogICAgPFNUQVRVU19NRVNTQUdFPklucHV0IFhNTCB3YXMgbm90IHdlbGwgZm9ybWVkLjwvU1RBVFVTX01FU1NBR0U+DQo8L1JFUVVFU1RfU1RBVFVTPg=="/>
+                    <L7p:VariableToSet stringValue="errorMessage"/>
+                </L7p:SetVariable>
+            </wsp:OneOrMore>
+        </wsp:All>
+    </wsp:Policy>
+</exp:Export>

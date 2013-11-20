@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exp:Export Version="3.0"
+    xmlns:L7p="http://www.layer7tech.com/ws/policy"
+    xmlns:exp="http://www.layer7tech.com/ws/policy/export" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+    <exp:References>
+        <JMSConnectionReference RefType="com.l7tech.console.policy.exporter.JMSEndpointReference">
+            <OID>1114112</OID>
+            <ConnectionTemplate>true</ConnectionTemplate>
+            <EndpointTemplate>true</EndpointTemplate>
+            <InitialContextFactoryClassname>com.tibco.tibjms.naming.TibjmsInitialContextFactory</InitialContextFactoryClassname>
+            <JndiUrl>tcp://vmems1test3:7222</JndiUrl>
+            <QueueFactoryUrl>ESBL7QCF</QueueFactoryUrl>
+            <TopicFactoryUrl/>
+            <DestinationFactoryUrl/>
+            <Name>Outbound Template Queue for Async Invocations</Name>
+            <DestinationName/>
+            <Type>Queue</Type>
+        </JMSConnectionReference>
+        <IncludedPolicyReference
+            RefType="com.l7tech.console.policy.exporter.IncludedPolicyReference"
+            guid="2e3e0cdb-bc0d-4db8-9ad7-0e24c65f8152" included="true"
+            name="Legacy - Send SNMP Message" soap="false" type="INCLUDE_FRAGMENT">
+            <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Send SNMP Message"/>
+                    </L7p:AuditDetailAssertion>
+                    <wsp:OneOrMore wsp:Usage="Required">
+                        <wsp:All wsp:Usage="Required">
+                            <L7p:CacheLookup>
+                                <L7p:CacheEntryKey stringValue="${serviceName}"/>
+                                <L7p:ContentTypeOverride stringValue=""/>
+                                <L7p:MaxEntryAgeSeconds stringValue="60"/>
+                            </L7p:CacheLookup>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="SNMP trap for service ${serviceName} is under rate limit"/>
+                            </L7p:AuditDetailAssertion>
+                        </wsp:All>
+                        <wsp:All wsp:Usage="Required">
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="SNMP message for service ${serviceName} has been sent!"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:CacheStorage>
+                                <L7p:CacheEntryKey stringValue="${serviceName}"/>
+                                <L7p:MaxEntries stringValue="1"/>
+                                <L7p:MaxEntryAgeSeconds stringValue="60"/>
+                            </L7p:CacheStorage>
+                            <L7p:SnmpTrap>
+                                <L7p:Oid stringValue="${oidToSend}"/>
+                                <L7p:TargetHostname stringValue="${gateway.partner.snmp.server}"/>
+                            </L7p:SnmpTrap>
+                        </wsp:All>
+                    </wsp:OneOrMore>
+                </wsp:All>
+            </wsp:Policy>
+        </IncludedPolicyReference>
+    </exp:References>
+    <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+        <wsp:All wsp:Usage="Required">
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** Legacy Asynchronous Invocation"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** Invoke the service with an asynchronous call. We will drop it on a queue associated with"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="**     this service (q.service.${service.name})"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:AuditAssertion/>
+            <L7p:ComparisonAssertion>
+                <L7p:Expression1 stringValue="${partner.invokeMethod}"/>
+                <L7p:Expression2 stringValue="asynchronous"/>
+                <L7p:ExpressionIsVariable booleanValue="false"/>
+                <L7p:Predicates predicates="included">
+                    <L7p:item binary="included">
+                        <L7p:RightValue stringValue="asynchronous"/>
+                    </L7p:item>
+                </L7p:Predicates>
+            </L7p:ComparisonAssertion>
+            <L7p:SetVariable>
+                <L7p:Base64Expression stringValue=""/>
+                <L7p:DataType variableDataType="dateTime"/>
+                <L7p:DateOffsetExpression stringValue=""/>
+                <L7p:DateOffsetField intValue="14"/>
+                <L7p:VariableToSet stringValue="publishTime"/>
+            </L7p:SetVariable>
+            <wsp:OneOrMore wsp:Usage="Required">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtyZXF1ZXN0TWVzc2FnZS5tYWlucGFydH0="/>
+                        <L7p:ContentType stringValue="text/xml; charset=utf-8"/>
+                        <L7p:DataType variableDataType="message"/>
+                        <L7p:VariableToSet stringValue="localRequest"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValueReference="inline"><![CDATA[Async Invocation: ${request.mainpart}
+====
+${localRequest.mainpart}
+====
+${requestMessage.mainpart}]]></L7p:Detail>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Async Invocation: about to route to q.service.${gateway.partner.environment}.${service.name}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:JmsRoutingAssertion>
+                        <L7p:DynamicJmsRoutingProperties dynamicJmsRoutingProperties="included">
+                            <L7p:DestPassword stringValue=""/>
+                            <L7p:DestQName stringValue="q.service.${gateway.partner.environment}.${service.name}"/>
+                            <L7p:DestUserName stringValue=""/>
+                            <L7p:JndiPassword stringValue=""/>
+                            <L7p:JndiUserName stringValue=""/>
+                        </L7p:DynamicJmsRoutingProperties>
+                        <L7p:EndpointName stringValue="Outbound Template Queue for Async Invocations"/>
+                        <L7p:EndpointOid boxedLongValue="1114112"/>
+                        <L7p:RequestDeliveryMode jmsDeliveryMode="PERSISTENT"/>
+                        <L7p:RequestJmsMessagePropertyRuleSet jmsMessagePropertyRuleSet="included">
+                            <L7p:PassThruAll booleanValue="false"/>
+                            <L7p:Rules jmsMessagePropertyRuleArray="included">
+                                <L7p:item jmsMessagePropertyRule="included">
+                                    <L7p:CustomPattern stringValue="${partner.requestid}"/>
+                                    <L7p:Name stringValue="partner.requestid"/>
+                                </L7p:item>
+                            </L7p:Rules>
+                        </L7p:RequestJmsMessagePropertyRuleSet>
+                        <L7p:RequestPriority stringValue="4"/>
+                        <L7p:RequestTarget MessageTarget="included">
+                            <L7p:OtherTargetMessageVariable stringValue="localRequest"/>
+                            <L7p:Target target="OTHER"/>
+                        </L7p:RequestTarget>
+                        <L7p:RequestTimeToLive stringValue="0"/>
+                        <L7p:ResponseJmsMessagePropertyRuleSet jmsMessagePropertyRuleSet="included">
+                            <L7p:Rules jmsMessagePropertyRuleArray="included"/>
+                        </L7p:ResponseJmsMessagePropertyRuleSet>
+                        <L7p:ResponseTarget MessageTarget="included">
+                            <L7p:OtherTargetMessageVariable stringValue="foo"/>
+                            <L7p:Target target="OTHER"/>
+                            <L7p:TargetModifiedByGateway booleanValue="true"/>
+                        </L7p:ResponseTarget>
+                        <L7p:ResponseTimeout stringValue="${gateway.partner.outbound.queue.timeout}"/>
+                    </L7p:JmsRoutingAssertion>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Async Invocation: message routed"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="dHJ1ZQ=="/>
+                        <L7p:VariableToSet stringValue="asyncEnqueued"/>
+                    </L7p:SetVariable>
+                    <L7p:assertionComment>
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="// Try to enqueue the request"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:assertionComment>
+                </wsp:All>
+                <wsp:All wsp:Usage="Required">
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Enqueue to outbound queue failed!"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="MTAwLjE="/>
+                        <L7p:VariableToSet stringValue="oidToSend"/>
+                    </L7p:SetVariable>
+                    <L7p:Include>
+                        <L7p:PolicyGuid stringValue="2e3e0cdb-bc0d-4db8-9ad7-0e24c65f8152"/>
+                    </L7p:Include>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="ZmFsc2U="/>
+                        <L7p:VariableToSet stringValue="asyncEnqueued"/>
+                    </L7p:SetVariable>
+                    <L7p:assertionComment>
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="// Handle enqueue failure"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:assertionComment>
+                </wsp:All>
+                <L7p:assertionComment>
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="// Try to enqueue the request with a short timeout"/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:assertionComment>
+            </wsp:OneOrMore>
+            <L7p:SetVariable>
+                <L7p:Base64Expression stringValue="ZmFsc2U="/>
+                <L7p:VariableToSet stringValue="partner.tracing.response"/>
+            </L7p:SetVariable>
+        </wsp:All>
+    </wsp:Policy>
+</exp:Export>

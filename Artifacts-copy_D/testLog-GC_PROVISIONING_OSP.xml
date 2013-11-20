@@ -1,0 +1,34 @@
+
+if=312:l7=124	GC_PROVISIONING_OSP (HTTP, PARSED=true, 1304041315391552991, UTF-8->UTF-8) - Sync Invalid
+=========================================================================================
+<IF_REQUEST><SERVICE_NAME>GC_PROVISIONING_OSP</SERVICE_NAME><PARAMS_LIST><OSP_REQUEST><![CDATA[
+<OspRequest version="1.0"><Login>PN-TIBCO</Login><Password>pntibco</Password><Service>pn</Service>
+	<Object name="pn_user" method="remove">
+		<Attribute name="mast_nbr">0547585833</Attribute>
+	</Object>
+</OspRequest>
+]]>
+</OSP_REQUEST>
+</PARAMS_LIST>
+</IF_REQUEST>		
+----- IF Response
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY>
+    <SERVICE_NAME>GC_PROVISIONING_OSP</SERVICE_NAME>
+    <REQUEST_STATUS>
+        <STATUS>SUCCESS</STATUS>
+        <STATUS_CODE>0</STATUS_CODE>
+        <STATUS_MESSAGE/>
+    </REQUEST_STATUS>
+    <REQUEST_RESULT>&lt;OspResponse version="1.0"&gt;
+&lt;Result&gt;0&lt;/Result&gt;
+&lt;Error&gt;&lt;Code&gt;1&lt;/Code&gt;&lt;Text&gt;PN USER NOT FOUND&lt;/Text&gt;&lt;/Error&gt;
+&lt;/OspResponse&gt;
+</REQUEST_RESULT>
+</IF_REPLY>
+-----   L7 Response  -----
+<OspResponse version="1.0">
+<Result>0</Result>
+<Error><Code>1</Code><Text>PN USER NOT FOUND</Text></Error>
+</OspResponse>
+

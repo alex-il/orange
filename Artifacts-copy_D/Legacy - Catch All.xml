@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exp:Export Version="3.0"
+    xmlns:L7p="http://www.layer7tech.com/ws/policy"
+    xmlns:exp="http://www.layer7tech.com/ws/policy/export" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+    <exp:References/>
+    <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+        <wsp:All wsp:Usage="Required">
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** Legacy Standard Catch All "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** Service not found call"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="Policy Fragment: Legacy - Catch All"/>
+            </L7p:AuditDetailAssertion>
+            <L7p:HardcodedResponse>
+                <L7p:AssertionComment assertionComment="included">
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="// Return query response."/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:AssertionComment>
+                <L7p:Base64ResponseBody stringValue="PHNvYXBlbnY6RW52ZWxvcGUgeG1sbnM6c29hcGVudj0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iIHhtbG5zOnNlcj0iaHR0cDovL3d3dy5vcmFuZ2UuY28uaWwvc2VydmljZXMiPgogICA8c29hcGVudjpIZWFkZXIvPgogICA8c29hcGVudjpCb2R5PgogICAgICA8c2VyOkludm9rZVJlc3BvbnNlPgogICAgICAgICA8cmVzcG9uc2U+Jmx0Oz94bWwgdmVyc2lvbj0mcXVvdDsxLjAmcXVvdDsgZW5jb2Rpbmc9JnF1b3Q7VVRGLTgmcXVvdDsgPyZndDsgCiZsdDtJRl9SRVBMWSZndDsKICAmbHQ7U0VSVklDRV9OQU1FJmd0OyR7Y29uZmlnLnNlcnZpY2VOYW1lfSZsdDsvU0VSVklDRV9OQU1FJmd0OyAKICAmbHQ7UkVRVUVTVF9TVEFUVVMmZ3Q7CiAgICAmbHQ7U1RBVFVTJmd0O0VSUk9SJmx0Oy9TVEFUVVMmZ3Q7IAogICAgJmx0O1NUQVRVU19DT0RFJmd0OzIwMDAxJmx0Oy9TVEFUVVNfQ09ERSZndDsgCiAgICAmbHQ7U1RBVFVTX01FU1NBR0UmZ3Q7U2VydmljZSBOb3QgRm91bmQmbHQ7L1NUQVRVU19NRVNTQUdFJmd0OyAKICAmbHQ7L1JFUVVFU1RfU1RBVFVTJmd0OwombHQ7L0lGX1JFUExZJmd0OzwvcmVzcG9uc2U+CiAgICAgIDwvc2VyOkludm9rZVJlc3BvbnNlPgogICA8L3NvYXBlbnY6Qm9keT4KPC9zb2FwZW52OkVudmVsb3BlPgo="/>
+            </L7p:HardcodedResponse>
+        </wsp:All>
+    </wsp:Policy>
+</exp:Export>

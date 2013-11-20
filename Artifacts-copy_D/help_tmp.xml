@@ -1,0 +1,39 @@
+${servicename.result}.urlEncoding
+
+if service.method='POST' and service.urlEncoding !='N'
+{
+   if (not(service.TargetEncoding)) // there is no tag TargetEncoding
+   {   
+      contet-Type = "application/x-www-form-urlencoded" 
+   }
+   else
+   {
+     if (upper-case(service.TargetEncoding) = 'NONE')
+     {
+          content-type = "application/x-www-form-urlencoded"
+     }
+     else
+     {
+         content-type = concat("application/x-www-form-urlencoded;charset=",service.TargetEncoding))
+     }
+   }
+}
+
+if(service.method='GET')
+{
+	if (not($Start/root/TargetEncoding)) 
+	{
+		content-type = "text/html; charset=utf-8" 
+	}
+	else 
+	{
+		content-type = concat("text/html; charset=",service.TargetEncoding)
+	}
+}
+
+if (exists(service.TargetEncoding))
+{
+	concat('text/html;charset=',service.TargetEncoding)
+}
+
+

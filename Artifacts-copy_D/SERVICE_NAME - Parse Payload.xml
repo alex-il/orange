@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exp:Export Version="3.0"
+    xmlns:L7p="http://www.layer7tech.com/ws/policy"
+    xmlns:exp="http://www.layer7tech.com/ws/policy/export" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+    <exp:References/>
+    <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+        <wsp:All wsp:Usage="Required">
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="**SERVICE_NAME Parse Payload"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** Parse the payload if ${config.parsed} is true"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** Note: Parsing is service specific"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="Policy Fragment: SERVICE_NAME - Parse Payload"/>
+            </L7p:AuditDetailAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*** Do the parsing"/>
+            </L7p:CommentAssertion>
+            <L7p:SetVariable>
+                <L7p:AssertionComment assertionComment="included">
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="// Initialize the list of arguments"/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:AssertionComment>
+                <L7p:Base64Expression stringValue=""/>
+                <L7p:VariableToSet stringValue="arguments.str"/>
+            </L7p:SetVariable>
+            <L7p:SetVariable>
+                <L7p:Base64Expression stringValue="RU1BSUw="/>
+                <L7p:VariableToSet stringValue="params"/>
+            </L7p:SetVariable>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="config.parameters=${config.parameters}"/>
+            </L7p:AuditDetailAssertion>
+            <L7p:Split>
+                <L7p:InputVariable stringValue="params"/>
+                <L7p:OutputVariable stringValue="params.list"/>
+            </L7p:Split>
+            <L7p:ForEachLoop L7p:Usage="Required"
+                loopVariable="params.list" variablePrefix="param">
+                <L7p:AuditDetailAssertion>
+                    <L7p:Detail stringValue="current parameter: ${param.current}"/>
+                </L7p:AuditDetailAssertion>
+                <wsp:OneOrMore wsp:Usage="Required">
+                    <wsp:All wsp:Usage="Required">
+                        <L7p:SetVariable>
+                            <L7p:AssertionComment assertionComment="included">
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Cast the payload to a message type"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:AssertionComment>
+                            <L7p:Base64Expression stringValue="JHtwYXlsb2FkLnJlc3VsdH0="/>
+                            <L7p:ContentType stringValue="text/xml; charset=utf-8"/>
+                            <L7p:DataType variableDataType="message"/>
+                            <L7p:VariableToSet stringValue="payload.xml"/>
+                        </L7p:SetVariable>
+                        <L7p:ResponseXpathAssertion>
+                            <L7p:VariablePrefix stringValue="parameter"/>
+                            <L7p:XmlMsgSrc stringValue="payload.xml"/>
+                            <L7p:XpathExpression xpathExpressionValue="included">
+                                <L7p:Expression stringValue="/IF_REQUEST/PARAMS_LIST/*[local-name()=$param.current]"/>
+                                <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                </L7p:Namespaces>
+                                <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                            </L7p:XpathExpression>
+                        </L7p:ResponseXpathAssertion>
+                        <L7p:AuditDetailAssertion>
+                            <L7p:Detail stringValueReference="inline"><![CDATA[${arguments.str}
+ohad
+${parameter.result}]]></L7p:Detail>
+                            <L7p:Enabled booleanValue="false"/>
+                        </L7p:AuditDetailAssertion>
+                        <L7p:ComparisonAssertion>
+                            <L7p:CaseSensitive booleanValue="false"/>
+                            <L7p:Expression1 stringValue="${parameter.result}"/>
+                            <L7p:FailIfVariableNotFound booleanValue="false"/>
+                            <L7p:MultivaluedComparison multivaluedComparison="FIRST"/>
+                            <L7p:Operator operatorNull="null"/>
+                            <L7p:Predicates predicates="included">
+                                <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                </L7p:item>
+                                <L7p:item stringLength="included">
+                                    <L7p:Max intValue="-1"/>
+                                    <L7p:Min intValue="1"/>
+                                </L7p:item>
+                            </L7p:Predicates>
+                        </L7p:ComparisonAssertion>
+                        <L7p:SetVariable>
+                            <L7p:AssertionComment assertionComment="included">
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Append to arguments.str"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:AssertionComment>
+                            <L7p:Base64Expression stringValue="JHthcmd1bWVudHMuc3RyfSR7cGFyYW1ldGVyLnJlc3VsdH18"/>
+                            <L7p:VariableToSet stringValue="arguments.str"/>
+                        </L7p:SetVariable>
+                        <L7p:assertionComment>
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// XPathed the parameter"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:assertionComment>
+                    </wsp:All>
+                    <L7p:SetVariable>
+                        <L7p:AssertionComment assertionComment="included">
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// NULL"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:AssertionComment>
+                        <L7p:Base64Expression stringValue="JHthcmd1bWVudHMuc3RyfU5VTEx8"/>
+                        <L7p:VariableToSet stringValue="arguments.str"/>
+                    </L7p:SetVariable>
+                    <L7p:SetVariable>
+                        <L7p:AssertionComment assertionComment="included">
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// NULL"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:AssertionComment>
+                        <L7p:Base64Expression stringValue="JHthcmd1bWVudHMuc3RyfXw="/>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:VariableToSet stringValue="arguments.str"/>
+                    </L7p:SetVariable>
+                    <L7p:assertionComment>
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="// Append to ${arguments}"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:assertionComment>
+                </wsp:OneOrMore>
+            </L7p:ForEachLoop>
+            <L7p:Regex>
+                <L7p:AssertionComment assertionComment="included">
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="// Strip the trailing comma"/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:AssertionComment>
+                <L7p:AutoTarget booleanValue="false"/>
+                <L7p:OtherTargetMessageVariable stringValue="arguments.str"/>
+                <L7p:Regex stringValue="\|$"/>
+                <L7p:Replace booleanValue="true"/>
+                <L7p:Replacement stringValue=""/>
+                <L7p:Target target="OTHER"/>
+            </L7p:Regex>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="arguments.str=${arguments.str}"/>
+            </L7p:AuditDetailAssertion>
+            <L7p:Split>
+                <L7p:InputVariable stringValue="arguments.str"/>
+                <L7p:OutputVariable stringValue="arguments"/>
+                <L7p:SplitPattern stringValue="\|"/>
+            </L7p:Split>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="arguments=${arguments}"/>
+            </L7p:AuditDetailAssertion>
+        </wsp:All>
+    </wsp:Policy>
+</exp:Export>

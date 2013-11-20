@@ -1,0 +1,2444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exp:Export Version="3.0"
+    xmlns:L7p="http://www.layer7tech.com/ws/policy"
+    xmlns:exp="http://www.layer7tech.com/ws/policy/export" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+    <exp:References>
+        <JdbcConnectionReference RefType="com.l7tech.console.policy.exporter.JdbcConnectionReference">
+            <ConnectionName>Tracer Database</ConnectionName>
+            <DriverClass>com.l7tech.jdbc.oracle.OracleDriver</DriverClass>
+            <JdbcUrl>jdbc:l7tech:oracle://it1dev01:1521;SID=ifdev1</JdbcUrl>
+            <UserName>IFRT_A</UserName>
+        </JdbcConnectionReference>
+        <IncludedPolicyReference
+            RefType="com.l7tech.console.policy.exporter.IncludedPolicyReference"
+            guid="1fc5df24-3538-4c2d-8774-49ced9877831" included="true"
+            name="Legacy - Audit Accept Request To DBE" soap="false" type="INCLUDE_FRAGMENT">
+            <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="**Legacy  Audit Accept Request To Tracer DB"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** Insert request to tracing DB"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** Insert to Request table"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Audit Accept Request To DBE"/>
+                    </L7p:AuditDetailAssertion>
+                    <wsp:OneOrMore wsp:Usage="Required">
+                        <wsp:All wsp:Usage="Required">
+                            <L7p:ComparisonAssertion>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:Expression1 stringValue="${audit.var.partner.tracing.response}"/>
+                                <L7p:Expression2 stringValue="True"/>
+                                <L7p:FailIfVariableNotFound booleanValue="false"/>
+                                <L7p:Predicates predicates="included">
+                                    <L7p:item binary="included">
+                                    <L7p:RightValue stringValue="True"/>
+                                    </L7p:item>
+                                </L7p:Predicates>
+                            </L7p:ComparisonAssertion>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="TlVMTA=="/>
+                                <L7p:VariableToSet stringValue="nullcv"/>
+                            </L7p:SetVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_ID"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="partner.requestid"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <wsp:OneOrMore wsp:Usage="Required">
+                                <wsp:All wsp:Usage="Required">
+                                    <L7p:ResponseXpathAssertion>
+                                    <L7p:VariablePrefix stringValue="reqOrigin"/>
+                                    <L7p:XmlMsgSrc stringValue="requestMessage"/>
+                                    <L7p:XpathExpression xpathExpressionValue="included">
+                                    <L7p:Expression stringValue="/s:Envelope/s:Body/ser:Invoke/invocationParameters/reqOrigin/text()"/>
+                                    <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                    <L7p:entry>
+                                    <L7p:key stringValue="ser"/>
+                                    <L7p:value stringValue="http://www.orange.co.il/services"/>
+                                    </L7p:entry>
+                                    </L7p:Namespaces>
+                                    <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                                    </L7p:XpathExpression>
+                                    </L7p:ResponseXpathAssertion>
+                                    <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_ORIGIN"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:SourceVariableName stringValue="reqOrigin.result"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                    </L7p:ManipulateMultiValuedVariable>
+                                </wsp:All>
+                                <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_ORIGIN"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:SourceVariableName stringValue="nullcv"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                </L7p:ManipulateMultiValuedVariable>
+                                <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="Try to get the reqOrigin"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:assertionComment>
+                            </wsp:OneOrMore>
+                            <wsp:OneOrMore wsp:Usage="Required">
+                                <wsp:All wsp:Usage="Required">
+                                    <L7p:ResponseXpathAssertion>
+                                    <L7p:VariablePrefix stringValue="reqOriginator"/>
+                                    <L7p:XmlMsgSrc stringValue="requestMessage"/>
+                                    <L7p:XpathExpression xpathExpressionValue="included">
+                                    <L7p:Expression stringValue="/s:Envelope/s:Body/ser:Invoke/invocationParameters/reqOriginator/text()"/>
+                                    <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="ser"/>
+                                    <L7p:value stringValue="http://www.orange.co.il/services"/>
+                                    </L7p:entry>
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                    </L7p:Namespaces>
+                                    <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                                    </L7p:XpathExpression>
+                                    </L7p:ResponseXpathAssertion>
+                                    <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_ORIGINATOR"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:SourceVariableName stringValue="reqOriginator.result"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                    </L7p:ManipulateMultiValuedVariable>
+                                </wsp:All>
+                                <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_ORIGINATOR"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:SourceVariableName stringValue="nullcv"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                </L7p:ManipulateMultiValuedVariable>
+                                <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="Try to get the reqOriginator"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:assertionComment>
+                            </wsp:OneOrMore>
+                            <wsp:OneOrMore wsp:Usage="Required">
+                                <wsp:All wsp:Usage="Required">
+                                    <L7p:ResponseXpathAssertion>
+                                    <L7p:VariablePrefix stringValue="reqOriginApp"/>
+                                    <L7p:XmlMsgSrc stringValue="requestMessage"/>
+                                    <L7p:XpathExpression xpathExpressionValue="included">
+                                    <L7p:Expression stringValue="/s:Envelope/s:Body/ser:Invoke/invocationParameters/reqOriginApp/text()"/>
+                                    <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="ser"/>
+                                    <L7p:value stringValue="http://www.orange.co.il/services"/>
+                                    </L7p:entry>
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                    </L7p:Namespaces>
+                                    <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                                    </L7p:XpathExpression>
+                                    </L7p:ResponseXpathAssertion>
+                                    <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_ORIGINAPP"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:SourceVariableName stringValue="reqOriginApp.result"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                    </L7p:ManipulateMultiValuedVariable>
+                                </wsp:All>
+                                <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_ORIGINAPP"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:SourceVariableName stringValue="nullcv"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                </L7p:ManipulateMultiValuedVariable>
+                                <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="Try to get the reqOriginApp"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:assertionComment>
+                            </wsp:OneOrMore>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_ORIGIN_IP"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="requestIP"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_SERVICE_NAME"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="serviceName"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_XML_REQUEST"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="original.payload.result"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_XML_REPLY"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_ENCRYPTED"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="QUNDRVBU"/>
+                                <L7p:VariableToSet stringValue="statusValue"/>
+                            </L7p:SetVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_STATUS"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="statusValue"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_STATUS_CODE"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_STATUS_TEXT"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHthY2NlcHRUaW1lfQ=="/>
+                                <L7p:DataType variableDataType="dateTime"/>
+                                <L7p:DateOffsetExpression stringValue=""/>
+                                <L7p:VariableToSet stringValue="acceptTime"/>
+                            </L7p:SetVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_ACCEPT_TIME"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="acceptTime"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_EXECUTE_TIME"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_REPLY_TIME"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_CANCEL_TIME"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_CANCEL_TIMEOUT"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_COMPENSATION_REQUEST"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <wsp:OneOrMore wsp:Usage="Required">
+                                <wsp:All wsp:Usage="Required">
+                                    <L7p:ResponseXpathAssertion>
+                                    <L7p:VariablePrefix stringValue="correlationID"/>
+                                    <L7p:XmlMsgSrc stringValue="requestMessage"/>
+                                    <L7p:XpathExpression xpathExpressionValue="included">
+                                    <L7p:Expression stringValue="/s:Envelope/s:Body/ser:Invoke/invocationParameters/correlationInfo/correlationId/text()"/>
+                                    <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="ser"/>
+                                    <L7p:value stringValue="http://www.orange.co.il/services"/>
+                                    </L7p:entry>
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                    </L7p:Namespaces>
+                                    <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                                    </L7p:XpathExpression>
+                                    </L7p:ResponseXpathAssertion>
+                                    <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_CORRELATION_ID"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:SourceVariableName stringValue="correlationID.result"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                    </L7p:ManipulateMultiValuedVariable>
+                                </wsp:All>
+                                <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_CORRELATION_ID"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:SourceVariableName stringValue="nullcv"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                </L7p:ManipulateMultiValuedVariable>
+                                <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="Try to get the correlation ID"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:assertionComment>
+                            </wsp:OneOrMore>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_CANCEL_REQUEST_ID"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_SRB"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nodeid[1]"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_SI"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_TRACE"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_STUB_ADDRESS"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_STUB_DELAY"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_CALLBACK_SERVICE_NAME"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_CALLBACK_REQUEST_ID"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_PROXY_SRB_REQUEST_ID"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_MAIN_SRB_REQUEST_ID"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_PROXY_SRB_PARAMS"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_SCHEDULE_TIME"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_RETRY_COUNT"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_CURR_RETRY"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_RETRY_INTERVAL"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_RETRY_SOURCE_REQUEST_ID"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_OLD_STATUS_LIST"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue=""/>
+                                <L7p:DataType variableDataType="dateTime"/>
+                                <L7p:DateOffsetExpression stringValue=""/>
+                                <L7p:VariableToSet stringValue="queueTime"/>
+                            </L7p:SetVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_QUEUE_PUBLISHE_TIME"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="queueTime"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_ORIGINAL_TIME"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="Tg=="/>
+                                <L7p:VariableToSet stringValue="shouldEncrypt"/>
+                            </L7p:SetVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_SHOULD_ENCRYPT"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="shouldEncrypt"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="traceArgumants = ${dbe.traceArguments}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:JdbcQuery>
+                                <L7p:AllowMultiValuedVariables booleanValue="true"/>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Insert the tracer audit"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:AssertionFailureEnabled booleanValue="false"/>
+                                <L7p:ConnectionName stringValue="Tracer Database"/>
+                                <L7p:NullPattern stringValue="NULL"/>
+                                <L7p:Schema stringValue="IFRT_A"/>
+                                <L7p:SqlQuery stringValue="CALL IF_DBE52_PKG.UPSERT_REQUEST(${dbe.traceArguments})"/>
+                                <L7p:VariablePrefix stringValue="tracerQuery"/>
+                            </L7p:JdbcQuery>
+                            <L7p:JdbcQuery>
+                                <L7p:AllowMultiValuedVariables booleanValue="true"/>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Test to test3 Environment"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:AssertionFailureEnabled booleanValue="false"/>
+                                <L7p:ConnectionName stringValue="Tracer Database Test3"/>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:NullPattern stringValue="NULL"/>
+                                <L7p:Schema stringValue="IFRT_TST3A"/>
+                                <L7p:SqlQuery stringValue="CALL IF_DBE52_PKG.UPSERT_REQUEST(${dbe.traceArguments})"/>
+                                <L7p:VariablePrefix stringValue="tracerQuery"/>
+                            </L7p:JdbcQuery>
+                            <L7p:JdbcQuery>
+                                <L7p:AllowMultiValuedVariables booleanValue="true"/>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Test"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:AssertionFailureEnabled booleanValue="false"/>
+                                <L7p:ConnectionName stringValue="Tracer Database"/>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:NullPattern stringValue="NULL"/>
+                                <L7p:Schema stringValue="IFRT_A"/>
+                                <L7p:SqlQuery stringValue="CALL IF_DBE52_PKG.UPSERT_REQUEST(1306041547080238401, 1, 3, 2, '10.13.32.100', 'GC_PRESERVE_NP_CRM', NULL , NULL, NULL, 'ACCEPT', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'N')"/>
+                                <L7p:VariablePrefix stringValue="tracerQuery"/>
+                            </L7p:JdbcQuery>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_ID"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="partner.requestid"/>
+                                <L7p:TargetVariableName stringValue="dbe.appendTraceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="QWN0aW9uOiBbbWV0aG9kPSR7cGFydG5lci5pbnZva2VNZXRob2R9LCBRb1NMZXZlbD1oaWdoLCB0aW1lb3V0PT9d"/>
+                                <L7p:VariableToSet stringValue="traceMessage"/>
+                            </L7p:SetVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_ID"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="traceMessage"/>
+                                <L7p:TargetVariableName stringValue="dbe.appendTraceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:JdbcQuery>
+                                <L7p:AllowMultiValuedVariables booleanValue="true"/>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Insert the tracer audit"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:AssertionFailureEnabled booleanValue="false"/>
+                                <L7p:ConnectionName stringValue="Tracer Database"/>
+                                <L7p:NullPattern stringValue="NULL"/>
+                                <L7p:Schema stringValue="IFRT_A"/>
+                                <L7p:SqlQuery stringValue="CALL IF_DBE52_PKG.APPEND_TRACE(${dbe.appendTraceArguments})"/>
+                                <L7p:VariablePrefix stringValue="tracerQuery"/>
+                            </L7p:JdbcQuery>
+                            <L7p:JdbcQuery>
+                                <L7p:AllowMultiValuedVariables booleanValue="true"/>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Insert the tracer audit"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:AssertionFailureEnabled booleanValue="false"/>
+                                <L7p:ConnectionName stringValue="Tracer Database"/>
+                                <L7p:NullPattern stringValue="NULL"/>
+                                <L7p:SqlQuery stringValue="COMMIT"/>
+                                <L7p:VariablePrefix stringValue="tracerQuery"/>
+                            </L7p:JdbcQuery>
+                        </wsp:All>
+                        <L7p:TrueAssertion/>
+                    </wsp:OneOrMore>
+                </wsp:All>
+            </wsp:Policy>
+        </IncludedPolicyReference>
+        <JdbcConnectionReference RefType="com.l7tech.console.policy.exporter.JdbcConnectionReference">
+            <ConnectionName>Tracer Database Test3</ConnectionName>
+            <DriverClass>com.l7tech.jdbc.oracle.OracleDriver</DriverClass>
+            <JdbcUrl>jdbc:l7tech:oracle://it3tst3:1521;SID=iftst3</JdbcUrl>
+            <UserName>IFRT_TST3A</UserName>
+        </JdbcConnectionReference>
+        <IncludedPolicyReference
+            RefType="com.l7tech.console.policy.exporter.IncludedPolicyReference"
+            guid="2da95e90-cf11-47da-938a-60746d04c6f5" included="true"
+            name="Legacy - Tracer Audit Request To DBE" soap="false" type="INCLUDE_FRAGMENT">
+            <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** Legacy  Audit Request To Tracer DB"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** Insert request to tracing DB"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** Update Request table"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** Decision for sending directly to DB or via Queue is set by ${gateway.dbe.destination}"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="**    which must be one of 'queue' OR 'db' (case sensitive)"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** Yaara - always send to queue and not database"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:AuditAssertion>
+                        <L7p:SaveRequest booleanValue="true"/>
+                        <L7p:SaveResponse booleanValue="true"/>
+                    </L7p:AuditAssertion>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:CustomLoggerSuffix stringValue="DBE"/>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Audit Request To DBE"/>
+                        <L7p:LoggingOnly booleanValue="true"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:CustomLoggerSuffix stringValue="DBE"/>
+                        <L7p:Detail stringValue="*** Yaara audit.var.executeTime = ${audit.var.executeTime}"/>
+                        <L7p:LoggingOnly booleanValue="true"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHthdWRpdC5yZXF1ZXN0Lm1haW5wYXJ0fQ=="/>
+                        <L7p:ContentType stringValue="text/xml; charset=utf-8"/>
+                        <L7p:DataType variableDataType="message"/>
+                        <L7p:VariableToSet stringValue="requestMessage"/>
+                    </L7p:SetVariable>
+                    <wsp:All wsp:Usage="Required">
+                        <wsp:All wsp:Usage="Required">
+                            <L7p:ComparisonAssertion>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:Expression1 stringValue="${audit.var.partner.tracing.response}"/>
+                                <L7p:Expression2 stringValue="True"/>
+                                <L7p:FailIfVariableNotFound booleanValue="false"/>
+                                <L7p:Predicates predicates="included">
+                                    <L7p:item binary="included">
+                                    <L7p:RightValue stringValue="True"/>
+                                    </L7p:item>
+                                </L7p:Predicates>
+                            </L7p:ComparisonAssertion>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="TlVMTA=="/>
+                                <L7p:VariableToSet stringValue="nullcv"/>
+                            </L7p:SetVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// P_REQ_ID"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="audit.var.partner.requestid"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <wsp:OneOrMore wsp:Usage="Required">
+                                <wsp:All wsp:Usage="Required">
+                                    <L7p:ResponseXpathAssertion>
+                                    <L7p:VariablePrefix stringValue="reqOrigin"/>
+                                    <L7p:XmlMsgSrc stringValue="requestMessage"/>
+                                    <L7p:XpathExpression xpathExpressionValue="included">
+                                    <L7p:Expression stringValue="/s:Envelope/s:Body/ser:Invoke/invocationParameters/reqOrigin/text()"/>
+                                    <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="ser"/>
+                                    <L7p:value stringValue="http://www.orange.co.il/services"/>
+                                    </L7p:entry>
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                    </L7p:Namespaces>
+                                    <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                                    </L7p:XpathExpression>
+                                    </L7p:ResponseXpathAssertion>
+                                    <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_ORIGIN"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:SourceVariableName stringValue="reqOrigin.result"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                    </L7p:ManipulateMultiValuedVariable>
+                                </wsp:All>
+                                <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_ORIGIN"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:SourceVariableName stringValue="nullcv"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                </L7p:ManipulateMultiValuedVariable>
+                                <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Try to get the reqOrigin"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:assertionComment>
+                            </wsp:OneOrMore>
+                            <wsp:OneOrMore wsp:Usage="Required">
+                                <wsp:All wsp:Usage="Required">
+                                    <L7p:ResponseXpathAssertion>
+                                    <L7p:VariablePrefix stringValue="reqOriginator"/>
+                                    <L7p:XmlMsgSrc stringValue="requestMessage"/>
+                                    <L7p:XpathExpression xpathExpressionValue="included">
+                                    <L7p:Expression stringValue="/s:Envelope/s:Body/ser:Invoke/invocationParameters/reqOriginator/text()"/>
+                                    <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="ser"/>
+                                    <L7p:value stringValue="http://www.orange.co.il/services"/>
+                                    </L7p:entry>
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                    </L7p:Namespaces>
+                                    <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                                    </L7p:XpathExpression>
+                                    </L7p:ResponseXpathAssertion>
+                                    <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_ORIGINATOR"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:SourceVariableName stringValue="reqOriginator.result"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                    </L7p:ManipulateMultiValuedVariable>
+                                </wsp:All>
+                                <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_ORIGINATOR"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:SourceVariableName stringValue="nullcv"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                </L7p:ManipulateMultiValuedVariable>
+                                <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Try to get the reqOriginator"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:assertionComment>
+                            </wsp:OneOrMore>
+                            <wsp:OneOrMore wsp:Usage="Required">
+                                <wsp:All wsp:Usage="Required">
+                                    <L7p:ResponseXpathAssertion>
+                                    <L7p:VariablePrefix stringValue="reqOriginApp"/>
+                                    <L7p:XmlMsgSrc stringValue="requestMessage"/>
+                                    <L7p:XpathExpression xpathExpressionValue="included">
+                                    <L7p:Expression stringValue="/s:Envelope/s:Body/ser:Invoke/invocationParameters/reqOriginApp/text()"/>
+                                    <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="ser"/>
+                                    <L7p:value stringValue="http://www.orange.co.il/services"/>
+                                    </L7p:entry>
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                    </L7p:Namespaces>
+                                    <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                                    </L7p:XpathExpression>
+                                    </L7p:ResponseXpathAssertion>
+                                    <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_ORIGINAPP"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:SourceVariableName stringValue="reqOriginApp.result"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                    </L7p:ManipulateMultiValuedVariable>
+                                </wsp:All>
+                                <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_ORIGINAPP"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:SourceVariableName stringValue="nullcv"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                </L7p:ManipulateMultiValuedVariable>
+                                <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Try to get the reqOriginApp"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:assertionComment>
+                            </wsp:OneOrMore>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHthdWRpdC5yZXF1ZXN0LnRjcC5yZW1vdGVBZGRyZXNzfQ=="/>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:VariableToSet stringValue="reqOriginIP"/>
+                            </L7p:SetVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_ORIGIN_IP"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:SourceVariableName stringValue="reqOriginIP"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// P_REQ_ORIGIN_IP"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_SERVICE_NAME"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="audit.var.serviceName"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <wsp:All wsp:Usage="Required">
+                                <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${gateway.dbe.destination}"/>
+                                    <L7p:FailIfVariableNotFound booleanValue="false"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:RightValue stringValue="queue"/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                </L7p:ComparisonAssertion>
+                                <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="JHthdWRpdC52YXIub3JpZ2luYWwucGF5bG9hZC5yZXN1bHR9"/>
+                                    <L7p:VariableToSet stringValue="payload.request"/>
+                                </L7p:SetVariable>
+                                <L7p:EncodeDecode>
+                                    <L7p:SourceVariableName stringValue="payload.request"/>
+                                    <L7p:TargetDataType variableDataType="string"/>
+                                    <L7p:TargetVariableName stringValue="payload.request.b64"/>
+                                    <L7p:TransformType transformType="BASE64_ENCODE"/>
+                                </L7p:EncodeDecode>
+                                <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_XML_REQUEST"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:SourceVariableName stringValue="payload.request.b64"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                </L7p:ManipulateMultiValuedVariable>
+                                <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="JHthdWRpdC52YXIucmF3UmVzcG9uc2V9"/>
+                                    <L7p:VariableToSet stringValue="payload.reply"/>
+                                </L7p:SetVariable>
+                                <L7p:EncodeDecode>
+                                    <L7p:SourceVariableName stringValue="payload.reply"/>
+                                    <L7p:TargetDataType variableDataType="string"/>
+                                    <L7p:TargetVariableName stringValue="payload.reply.b64"/>
+                                    <L7p:TransformType transformType="BASE64_ENCODE"/>
+                                </L7p:EncodeDecode>
+                                <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_XML_REPLY"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:SourceVariableName stringValue="payload.reply.b64"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                </L7p:ManipulateMultiValuedVariable>
+                                <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// P_REQ_XML_REQUEST &amp; P_REQ_XML_REPLY"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:assertionComment>
+                            </wsp:All>
+                            <wsp:OneOrMore L7p:Enabled="false" wsp:Usage="Required">
+                                <wsp:All L7p:Enabled="false" wsp:Usage="Required">
+                                    <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Enabled booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${gateway.dbe.destination}"/>
+                                    <L7p:FailIfVariableNotFound booleanValue="false"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:RightValue stringValue="db"/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                    </L7p:ComparisonAssertion>
+                                    <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_XML_REQUEST"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:Enabled booleanValue="false"/>
+                                    <L7p:SourceVariableName stringValue="audit.var.payload.result"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                    </L7p:ManipulateMultiValuedVariable>
+                                    <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_XML_REPLY"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:Enabled booleanValue="false"/>
+                                    <L7p:SourceVariableName stringValue="nullcv"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                    </L7p:ManipulateMultiValuedVariable>
+                                    <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Process for direct to database"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:assertionComment>
+                                </wsp:All>
+                                <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Handle request and response to escape if they go to queue or directly to db"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:assertionComment>
+                            </wsp:OneOrMore>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_ENCRYPTED"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="QUNDRVBU"/>
+                                <L7p:VariableToSet stringValue="statusValue"/>
+                            </L7p:SetVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_STATUS"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="audit.var.status.result"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_STATUS_CODE"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="audit.var.statusCode.result"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <wsp:All wsp:Usage="Required">
+                                <wsp:OneOrMore wsp:Usage="Required">
+                                    <wsp:All wsp:Usage="Required">
+                                    <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${audit.var.statusText.result}"/>
+                                    <L7p:FailIfVariableNotFound booleanValue="false"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:Negated booleanValue="true"/>
+                                    <L7p:Operator operator="EMPTY"/>
+                                    <L7p:RightValue stringValue=""/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                    </L7p:ComparisonAssertion>
+                                    <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:SourceVariableName stringValue="audit.var.statusText.result"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                    </L7p:ManipulateMultiValuedVariable>
+                                    </wsp:All>
+                                    <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:SourceVariableName stringValue="nullcv"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                    </L7p:ManipulateMultiValuedVariable>
+                                </wsp:OneOrMore>
+                                <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// P_REQ_STATUS_TEXT"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:assertionComment>
+                            </wsp:All>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_ACCEPT_TIME"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="audit.var.originalAcceptTime"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <wsp:OneOrMore wsp:Usage="Required">
+                                <wsp:All wsp:Usage="Required">
+                                    <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${audit.var.executeTime}"/>
+                                    <L7p:MultivaluedComparison multivaluedComparison="ANY"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="dateTime"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Negated booleanValue="true"/>
+                                    <L7p:Operator operator="EMPTY"/>
+                                    <L7p:RightValue stringValue=""/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                    </L7p:ComparisonAssertion>
+                                    <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_EXECUTE_TIME"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:SourceVariableName stringValue="audit.var.executeTime"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                    </L7p:ManipulateMultiValuedVariable>
+                                </wsp:All>
+                                <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_EXECUTE_TIME"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:SourceVariableName stringValue="nullcv"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                </L7p:ManipulateMultiValuedVariable>
+                                <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_EXECUTE_TIME"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:assertionComment>
+                            </wsp:OneOrMore>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_REPLY_TIME"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="audit.var.replyTime"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_CANCEL_TIME"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_CANCEL_TIMEOUT"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_COMPENSATION_REQUEST"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <wsp:OneOrMore wsp:Usage="Required">
+                                <wsp:All wsp:Usage="Required">
+                                    <L7p:ResponseXpathAssertion>
+                                    <L7p:VariablePrefix stringValue="correlationID"/>
+                                    <L7p:XmlMsgSrc stringValue="requestMessage"/>
+                                    <L7p:XpathExpression xpathExpressionValue="included">
+                                    <L7p:Expression stringValue="/s:Envelope/s:Body/ser:Invoke/invocationParameters/correlationInfo/correlationId/text()"/>
+                                    <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="ser"/>
+                                    <L7p:value stringValue="http://www.orange.co.il/services"/>
+                                    </L7p:entry>
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                    </L7p:Namespaces>
+                                    <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                                    </L7p:XpathExpression>
+                                    </L7p:ResponseXpathAssertion>
+                                    <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_CORRELATION_ID"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:SourceVariableName stringValue="correlationID.result"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                    </L7p:ManipulateMultiValuedVariable>
+                                </wsp:All>
+                                <L7p:ManipulateMultiValuedVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_CORRELATION_ID"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:SourceVariableName stringValue="nullcv"/>
+                                    <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                                </L7p:ManipulateMultiValuedVariable>
+                                <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="Try to get the correlation ID"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:assertionComment>
+                            </wsp:OneOrMore>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_CANCEL_REQUEST_ID"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_SRB"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_SI"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="QWN0aW9uOiBbbWV0aG9kPSR7YXVkaXQudmFyLnBhcnRuZXIuaW52b2tlTWV0aG9kfSwgUW9TTGV2ZWw9aGlnaCwgdGltZW91dD0/XQ=="/>
+                                <L7p:VariableToSet stringValue="traceMessage"/>
+                            </L7p:SetVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_TRACE"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="traceMessage"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_STUB_ADDRESS"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_STUB_DELAY"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_CALLBACK_SERVICE_NAME"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_CALLBACK_REQUEST_ID"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_PROXY_SRB_REQUEST_ID"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_MAIN_SRB_REQUEST_ID"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_PROXY_SRB_PARAMS"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_SCHEDULE_TIME"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_RETRY_COUNT"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_CURR_RETRY"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_RETRY_INTERVAL"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_RETRY_SOURCE_REQUEST_ID"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_OLD_STATUS_LIST"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="nullcv"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue=""/>
+                                <L7p:DataType variableDataType="dateTime"/>
+                                <L7p:DateOffsetExpression stringValue=""/>
+                                <L7p:VariableToSet stringValue="queueTime"/>
+                            </L7p:SetVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_QUEUE_PUBLISHE_TIME"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="queueTime"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue=""/>
+                                <L7p:DataType variableDataType="dateTime"/>
+                                <L7p:DateOffsetExpression stringValue=""/>
+                                <L7p:VariableToSet stringValue="originalTime"/>
+                            </L7p:SetVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_REQ_ORIGINAL_TIME"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="originalTime"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="WQ=="/>
+                                <L7p:VariableToSet stringValue="shouldEncrypt"/>
+                            </L7p:SetVariable>
+                            <L7p:ManipulateMultiValuedVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="P_SHOULD_ENCRYPT"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:SourceVariableName stringValue="shouldEncrypt"/>
+                                <L7p:TargetVariableName stringValue="dbe.traceArguments"/>
+                            </L7p:ManipulateMultiValuedVariable>
+                            <wsp:All wsp:Usage="Required">
+                                <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Enabled booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${gateway.dbe.destination}"/>
+                                    <L7p:FailIfVariableNotFound booleanValue="false"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:RightValue stringValue="queue"/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                </L7p:ComparisonAssertion>
+                                <L7p:AuditDetailAssertion>
+                                    <L7p:CustomLoggerSuffix stringValue="DBE"/>
+                                    <L7p:Detail stringValue="Push DBE via queue"/>
+                                    <L7p:LoggingOnly booleanValue="true"/>
+                                </L7p:AuditDetailAssertion>
+                                <wsp:OneOrMore wsp:Usage="Required">
+                                    <L7p:Include>
+                                    <L7p:PolicyGuid stringValue="194369f4-fc32-45af-8a74-d9fb774dc695"/>
+                                    </L7p:Include>
+                                    <wsp:All wsp:Usage="Required">
+                                    <L7p:AuditDetailAssertion>
+                                    <L7p:CustomLoggerSuffix stringValue="DBE"/>
+                                    <L7p:Detail stringValue="Error writing to Tracer queue: ${audit.details.last.fulltext}"/>
+                                    <L7p:LoggingOnly booleanValue="true"/>
+                                    </L7p:AuditDetailAssertion>
+                                    <L7p:AuditDetailAssertion>
+                                    <L7p:CustomLoggerSuffix stringValue="DBE"/>
+                                    <L7p:Detail stringValue="WARNING: Could not send to Tracer by ${gateway.dbe.destination}"/>
+                                    <L7p:LoggingOnly booleanValue="true"/>
+                                    </L7p:AuditDetailAssertion>
+                                    <L7p:AuditDetailAssertion>
+                                    <L7p:CustomLoggerSuffix stringValue="DBE"/>
+                                    <L7p:Detail stringValue="${dbe.traceArguments|,}"/>
+                                    <L7p:LoggingOnly booleanValue="true"/>
+                                    </L7p:AuditDetailAssertion>
+                                    <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Did not write to queue, so write it to a local file. Send alerts if possible!"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:assertionComment>
+                                    </wsp:All>
+                                    <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Send to queue or local file if it fails"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:assertionComment>
+                                </wsp:OneOrMore>
+                                <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Send to queue"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:assertionComment>
+                            </wsp:All>
+                            <L7p:assertionComment>
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Build ${dbe.traceArguments}"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:assertionComment>
+                        </wsp:All>
+                        <wsp:OneOrMore L7p:Enabled="false" wsp:Usage="Required">
+                            <wsp:All L7p:Enabled="false" wsp:Usage="Required">
+                                <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Enabled booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${gateway.dbe.destination}"/>
+                                    <L7p:FailIfVariableNotFound booleanValue="false"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:RightValue stringValue="db"/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                </L7p:ComparisonAssertion>
+                                <L7p:AuditDetailAssertion>
+                                    <L7p:CustomLoggerSuffix stringValue="DBE"/>
+                                    <L7p:Detail stringValue="Push DBE directly to db"/>
+                                    <L7p:Enabled booleanValue="false"/>
+                                    <L7p:LoggingOnly booleanValue="true"/>
+                                </L7p:AuditDetailAssertion>
+                                <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="MjAw"/>
+                                    <L7p:Enabled booleanValue="false"/>
+                                    <L7p:VariableToSet stringValue="dbe.timeOut"/>
+                                </L7p:SetVariable>
+                                <L7p:Include>
+                                    <L7p:Enabled booleanValue="false"/>
+                                    <L7p:PolicyGuid stringValue="2b0cbee2-1f07-450a-9ede-021100bd3dd7"/>
+                                </L7p:Include>
+                                <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Send to DB"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:assertionComment>
+                            </wsp:All>
+                            <L7p:assertionComment>
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Put it somewhere (queue or DB, fail to local log file via custom DBE package)"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:assertionComment>
+                        </wsp:OneOrMore>
+                        <L7p:assertionComment>
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Build ${dbe.traceArguments} and send to DB"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:assertionComment>
+                    </wsp:All>
+                </wsp:All>
+            </wsp:Policy>
+        </IncludedPolicyReference>
+        <IncludedPolicyReference
+            RefType="com.l7tech.console.policy.exporter.IncludedPolicyReference"
+            guid="194369f4-fc32-45af-8a74-d9fb774dc695" included="true"
+            name="Legacy - Tracer Push DBE onto queue" soap="false" type="INCLUDE_FRAGMENT">
+            <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** Push the DBE record on to the queue"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** Expects ${dbe.traceArguments} to be set"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** Push it as a simple text/xml with all fields wrapped in CDATA"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** Content will get picked off queue by 'Legacy - Tracer: Drain Queue' and sent"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="**    to database with a rate limit"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:CustomLoggerSuffix stringValue="DBE"/>
+                        <L7p:Detail stringValue="Policy Fragment: Tracer: Push DBE onto Tracer queue"/>
+                        <L7p:LoggingOnly booleanValue="true"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="PGRiZT48YXJnPiR7ZGJlLnRyYWNlQXJndW1lbnRzfDwvYXJnPjxhcmc+fTwvYXJnPjwvZGJlPg=="/>
+                        <L7p:ContentType stringValue="text/xml; charset=utf-8"/>
+                        <L7p:DataType variableDataType="message"/>
+                        <L7p:VariableToSet stringValue="dbe.traceMessage"/>
+                    </L7p:SetVariable>
+                    <L7p:JmsRoutingAssertion>
+                        <L7p:EndpointName stringValue="Tracer Audit Outbound Queue"/>
+                        <L7p:EndpointOid boxedLongValue="14090241"/>
+                        <L7p:RequestDeliveryMode jmsDeliveryMode="NON_PERSISTENT"/>
+                        <L7p:RequestJmsMessagePropertyRuleSet jmsMessagePropertyRuleSet="included">
+                            <L7p:Rules jmsMessagePropertyRuleArray="included"/>
+                        </L7p:RequestJmsMessagePropertyRuleSet>
+                        <L7p:RequestPriority stringValue="4"/>
+                        <L7p:RequestTarget MessageTarget="included">
+                            <L7p:OtherTargetMessageVariable stringValue="dbe.traceMessage"/>
+                            <L7p:Target target="OTHER"/>
+                        </L7p:RequestTarget>
+                        <L7p:RequestTimeToLive stringValue="0"/>
+                        <L7p:ResponseJmsMessagePropertyRuleSet jmsMessagePropertyRuleSet="included">
+                            <L7p:Rules jmsMessagePropertyRuleArray="included"/>
+                        </L7p:ResponseJmsMessagePropertyRuleSet>
+                        <L7p:ResponseTimeout stringValue="500"/>
+                    </L7p:JmsRoutingAssertion>
+                </wsp:All>
+            </wsp:Policy>
+        </IncludedPolicyReference>
+        <JMSConnectionReference RefType="com.l7tech.console.policy.exporter.JMSEndpointReference">
+            <OID>14090241</OID>
+            <ConnectionTemplate>false</ConnectionTemplate>
+            <EndpointTemplate>false</EndpointTemplate>
+            <InitialContextFactoryClassname>com.tibco.tibjms.naming.TibjmsInitialContextFactory</InitialContextFactoryClassname>
+            <JndiUrl>tcp://vmems1test3:7222</JndiUrl>
+            <QueueFactoryUrl>ESBL7QCF</QueueFactoryUrl>
+            <TopicFactoryUrl/>
+            <DestinationFactoryUrl/>
+            <Name>Tracer Audit Outbound Queue</Name>
+            <DestinationName>q.system.dev1.tracer</DestinationName>
+            <Type>Queue</Type>
+        </JMSConnectionReference>
+        <IncludedPolicyReference
+            RefType="com.l7tech.console.policy.exporter.IncludedPolicyReference"
+            guid="2b0cbee2-1f07-450a-9ede-021100bd3dd7" included="true"
+            name="Legacy - Tracer Send DBE to Database" soap="false" type="INCLUDE_FRAGMENT">
+            <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** Insert the DBE record into the database"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** Expects ${dbe.traceArguments} and ${dbe.timeOut} to be set"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** v1.0.0 - Jay MacDonald - 2013-03-14"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:AuditAssertion/>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:CustomLoggerSuffix stringValue="DBE"/>
+                        <L7p:Detail stringValue="Policy Fragment: Send DBE Message to Database"/>
+                        <L7p:LoggingOnly booleanValue="true"/>
+                    </L7p:AuditDetailAssertion>
+                    <wsp:OneOrMore wsp:Usage="Required">
+                        <wsp:All wsp:Usage="Required">
+                            <L7p:AuditDetailAssertion>
+                                <L7p:CustomLoggerSuffix stringValue="DBE"/>
+                                <L7p:Detail stringValue="********** gateway.latencyAlertThreshold.db = ${gateway.latencyAlertThreshold.db}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:CustomLoggerSuffix stringValue="DBE"/>
+                                <L7p:Detail stringValueReference="inline"><![CDATA[>>> About to write to DBE:
+>>>${dbe.traceArguments|,}<<<]]></L7p:Detail>
+                            </L7p:AuditDetailAssertion>
+                            <wsp:All wsp:Usage="Required">
+                                <L7p:JdbcQuery>
+                                    <L7p:AllowMultiValuedVariables booleanValue="true"/>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Insert the tracer audit"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:AssertionFailureEnabled booleanValue="false"/>
+                                    <L7p:ConnectionName stringValue="Tracer Database"/>
+                                    <L7p:NullPattern stringValue="NULL"/>
+                                    <L7p:QueryTimeout stringValue="${dbe.timeOut}"/>
+                                    <L7p:Schema stringValue="IFRT_A"/>
+                                    <L7p:SqlQuery stringValue="CALL IF_DBE52_PKG.UPSERT_REQUEST(${dbe.traceArguments})"/>
+                                </L7p:JdbcQuery>
+                                <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="JHthc3NlcnRpb24ubGF0ZW5jeS5tc30="/>
+                                    <L7p:DataType variableDataType="int"/>
+                                    <L7p:VariableToSet stringValue="test.latency"/>
+                                </L7p:SetVariable>
+                                <wsp:OneOrMore wsp:Usage="Required">
+                                    <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${test.latency}"/>
+                                    <L7p:FailIfVariableNotFound booleanValue="false"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="int"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Operator operator="LT"/>
+                                    <L7p:RightValue stringValue="${gateway.latencyAlertThreshold.db}"/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                    </L7p:ComparisonAssertion>
+                                    <L7p:AuditDetailAssertion>
+                                    <L7p:CustomLoggerSuffix stringValue="DBE"/>
+                                    <L7p:Detail stringValue="Slow DBE call: Elapsed=${request.elapsedTime} Query time=${test.latency}"/>
+                                    <L7p:LoggingOnly booleanValue="true"/>
+                                    </L7p:AuditDetailAssertion>
+                                    <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Audit long DB calls"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:assertionComment>
+                                </wsp:OneOrMore>
+                                <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Call DB and report slow queries to DBE log"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:assertionComment>
+                            </wsp:All>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:CustomLoggerSuffix stringValue="DBE"/>
+                                <L7p:Detail stringValue="Insert ${requestId}: ela=${request.elapsedTime} lat=${assertion.latency.ms}"/>
+                                <L7p:LoggingOnly booleanValue="true"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:CustomLoggerSuffix stringValue="DBE"/>
+                                <L7p:Detail stringValue=">>> Finished writing to DBE"/>
+                                <L7p:LoggingOnly booleanValue="true"/>
+                            </L7p:AuditDetailAssertion>
+                            <wsp:All wsp:Usage="Required">
+                                <L7p:JdbcQuery>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Commit"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:AssertionFailureEnabled booleanValue="false"/>
+                                    <L7p:ConnectionName stringValue="Tracer Database"/>
+                                    <L7p:NamingMap mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="REQ_SERVICE_NAME"/>
+                                    <L7p:value stringValue="service_name"/>
+                                    </L7p:entry>
+                                    </L7p:NamingMap>
+                                    <L7p:NullPattern stringValue="NULL"/>
+                                    <L7p:QueryTimeout stringValue="${dbe.timeOut}"/>
+                                    <L7p:SqlQuery stringValue="COMMIT"/>
+                                </L7p:JdbcQuery>
+                                <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="JHthc3NlcnRpb24ubGF0ZW5jeS5tc30="/>
+                                    <L7p:DataType variableDataType="int"/>
+                                    <L7p:VariableToSet stringValue="test.latency"/>
+                                </L7p:SetVariable>
+                                <wsp:OneOrMore wsp:Usage="Required">
+                                    <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${test.latency}"/>
+                                    <L7p:FailIfVariableNotFound booleanValue="false"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="int"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Operator operator="LT"/>
+                                    <L7p:RightValue stringValue="${gateway.latencyAlertThreshold.db}"/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                    </L7p:ComparisonAssertion>
+                                    <L7p:AuditDetailAssertion>
+                                    <L7p:CustomLoggerSuffix stringValue="DBE"/>
+                                    <L7p:Detail stringValue="Slow DBE call: Elapsed=${request.elapsedTime} Query time=${test.latency}"/>
+                                    <L7p:LoggingOnly booleanValue="true"/>
+                                    </L7p:AuditDetailAssertion>
+                                    <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Audit long DB calls"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:assertionComment>
+                                </wsp:OneOrMore>
+                                <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Call DB and report slow queries to DBE log"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:assertionComment>
+                            </wsp:All>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:CustomLoggerSuffix stringValue="DBE"/>
+                                <L7p:Detail stringValue="Commit ${requestId}: ela=${request.elapsedTime} lat=${assertion.latency.ms}"/>
+                                <L7p:LoggingOnly booleanValue="true"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:CustomLoggerSuffix stringValue="DBE"/>
+                                <L7p:Detail stringValue=">>> Finished looking up value"/>
+                                <L7p:LoggingOnly booleanValue="true"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:assertionComment>
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Make the JDBC call"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:assertionComment>
+                        </wsp:All>
+                        <wsp:All wsp:Usage="Required">
+                            <L7p:AuditDetailAssertion>
+                                <L7p:CustomLoggerSuffix stringValue="DBE"/>
+                                <L7p:Detail stringValue="Error writing to DBE database: ${audit.details.last.fulltext}"/>
+                                <L7p:LoggingOnly booleanValue="true"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:CustomLoggerSuffix stringValue="DBE"/>
+                                <L7p:Detail stringValue="WARNING: Could not send to Tracer by ${gateway.dbe.destination}"/>
+                                <L7p:LoggingOnly booleanValue="true"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:CustomLoggerSuffix stringValue="DBE"/>
+                                <L7p:Detail stringValue="${dbe.traceArguments|,}"/>
+                                <L7p:LoggingOnly booleanValue="true"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:assertionComment>
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Did not write to database, so write it to a local file. Send alerts if possible!"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:assertionComment>
+                        </wsp:All>
+                        <L7p:assertionComment>
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Call the JDBC to do the insert, log to DBE custom logger if it fails"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:assertionComment>
+                    </wsp:OneOrMore>
+                </wsp:All>
+            </wsp:Policy>
+        </IncludedPolicyReference>
+    </exp:References>
+    <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+        <wsp:All wsp:Usage="Required">
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="****************************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** Handle message type audit events"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** Policy is invoked after every message to invoke the DBE/Tracer logic. First handle standard auditing"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="**     if ${audit.level} is 900 (WARNING) or above. Next call the DBE/Tracer logic to push the request along"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="**     with metrics to the DBE/Tracer database"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** v1.0.0 - jmacdonald, njordan, yjacobsen - 2013-03-17"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="****************************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:ComparisonAssertion>
+                <L7p:CaseSensitive booleanValue="false"/>
+                <L7p:Expression1 stringValue="${audit.type}"/>
+                <L7p:FailIfVariableNotFound booleanValue="false"/>
+                <L7p:Operator operatorNull="null"/>
+                <L7p:Predicates predicates="included">
+                    <L7p:item dataType="included">
+                        <L7p:Type variableDataType="string"/>
+                    </L7p:item>
+                    <L7p:item binary="included">
+                        <L7p:RightValue stringValue="message"/>
+                    </L7p:item>
+                </L7p:Predicates>
+            </L7p:ComparisonAssertion>
+            <wsp:OneOrMore L7p:Enabled="false" wsp:Usage="Required">
+                <L7p:ComparisonAssertion>
+                    <L7p:AssertionComment assertionComment="included">
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="// 900 = WARNING"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:AssertionComment>
+                    <L7p:CaseSensitive booleanValue="false"/>
+                    <L7p:Enabled booleanValue="false"/>
+                    <L7p:Expression1 stringValue="${audit.level}"/>
+                    <L7p:FailIfVariableNotFound booleanValue="false"/>
+                    <L7p:Operator operatorNull="null"/>
+                    <L7p:Predicates predicates="included">
+                        <L7p:item dataType="included">
+                            <L7p:Type variableDataType="int"/>
+                        </L7p:item>
+                        <L7p:item binary="included">
+                            <L7p:CaseSensitive booleanValue="false"/>
+                            <L7p:Operator operator="LT"/>
+                            <L7p:RightValue stringValue="900"/>
+                        </L7p:item>
+                    </L7p:Predicates>
+                </L7p:ComparisonAssertion>
+                <wsp:All L7p:Enabled="false" wsp:Usage="Required">
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="Start Auto-Generated Sink Policy"/>
+                        <L7p:Enabled booleanValue="false"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*** DO NOT MODIFY THE AUTO-GENERATED PORTION OF THIS POLICY ***"/>
+                        <L7p:Enabled booleanValue="false"/>
+                    </L7p:CommentAssertion>
+                    <L7p:UUIDGenerator>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:TargetVariable stringValue="record.guid"/>
+                    </L7p:UUIDGenerator>
+                    <L7p:JdbcQuery>
+                        <L7p:AssertionFailureEnabled booleanValue="false"/>
+                        <L7p:ConnectionName stringValue="Tracer Database"/>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:SqlQuery stringValue="insert into audit_main(id,nodeid,time,type,audit_level,name,message,ip_address,user_name,user_id,provider_oid,signature,properties,entity_class,entity_id,status,request_id,service_oid,operation_name,authenticated,authenticationType,request_length,response_length,request_xml,response_xml,response_status,routing_latency,component_id,action) values (${record.guid},${audit.nodeId},${audit.time},${audit.type},${audit.level},${audit.name},${audit.message},${audit.ipAddress},${audit.user.name},${audit.user.id},${audit.user.idProv},${audit.signature},${audit.properties},${audit.entity.class},${audit.entity.oid},${audit.status},${audit.requestId},${audit.serviceOid},${audit.operationName},${audit.authenticated},${audit.authType},${audit.savedRequestContentLength},${audit.savedResponseContentLength},${audit.reqZip},${audit.resZip},${audit.responseStatus},${audit.routingLatency},${audit.componentId},${audit.action})"/>
+                    </L7p:JdbcQuery>
+                    <L7p:ForEachLoop L7p:Enabled="false"
+                        L7p:Usage="Required"
+                        loopVariable="audit.details" variablePrefix="i">
+                        <L7p:UUIDGenerator>
+                            <L7p:Enabled booleanValue="false"/>
+                            <L7p:TargetVariable stringValue="detail.guid"/>
+                        </L7p:UUIDGenerator>
+                        <L7p:JdbcQuery>
+                            <L7p:AssertionFailureEnabled booleanValue="false"/>
+                            <L7p:ConnectionName stringValue="Tracer Database"/>
+                            <L7p:Enabled booleanValue="false"/>
+                            <L7p:SqlQuery stringValue="insert into audit_detail( audit_oid,time,component_id,ordinal,message_id,exception_message,properties) values (${record.guid},${i.current.time},${i.current.componentId},${i.current.ordinal},${i.current.messageId},${i.current.exception},${i.current.properties})"/>
+                        </L7p:JdbcQuery>
+                    </L7p:ForEachLoop>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*** END OF AUTO-GENERATED SINK POLICY ***"/>
+                        <L7p:Enabled booleanValue="false"/>
+                    </L7p:CommentAssertion>
+                    <L7p:assertionComment>
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="// Auto generated - write to external DB"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:assertionComment>
+                </wsp:All>
+                <wsp:All L7p:Enabled="false" wsp:Usage="Required">
+                    <L7p:AuditDetailAssertion>
+                        <L7p:CustomLoggerSuffix stringValue="externalAudit"/>
+                        <L7p:Detail stringValue="Failed to write to audit DB: ${audit.var.service.name}:${record.guid} - ${audit.message}"/>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:LoggingOnly booleanValue="true"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:CustomLoggerSuffix stringValue="externalAudit"/>
+                        <L7p:Detail stringValueReference="inline"><![CDATA[${audit.var.service.name}:${record.guid} - ${audit.nodeId},${audit.time},${audit.type},${audit.level},${audit.name},${audit.message},${audit.ipAddress},${audit.user.name},${audit.user.id},${audit.user.idProv},${audit.signature},${audit.properties},${audit.entity.class},${audit.entity.oid},${audit.status},${audit.requestId},${audit.serviceOid},${audit.operationName},${audit.authenticated},${audit.authType},${audit.savedRequestContentLength}
+,${audit.savedResponseContentLength},${audit.reqZip},${audit.resZip},${audit.responseStatus},${audit.routingLatency},${audit.componentId},${audit.action}]]></L7p:Detail>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:LoggingOnly booleanValue="true"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:assertionComment>
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="// External DB failed"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:assertionComment>
+                </wsp:All>
+                <L7p:assertionComment>
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="// External audit policy"/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:assertionComment>
+            </wsp:OneOrMore>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="Insert additional assertions from this point forward"/>
+            </L7p:CommentAssertion>
+            <wsp:OneOrMore wsp:Usage="Required">
+                <L7p:TrueAssertion>
+                    <L7p:AssertionComment assertionComment="included">
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="LEFT.COMMENT"/>
+                                <L7p:value stringValue="REMOVE ME"/>
+                            </L7p:entry>
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="// Enable this assertion to disable DBE/Tracer routing"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:AssertionComment>
+                    <L7p:Enabled booleanValue="false"/>
+                </L7p:TrueAssertion>
+                <L7p:ComparisonAssertion>
+                    <L7p:CaseSensitive booleanValue="false"/>
+                    <L7p:Expression1 stringValue="${audit.var.partner.tracing}"/>
+                    <L7p:FailIfVariableNotFound booleanValue="false"/>
+                    <L7p:Operator operatorNull="null"/>
+                    <L7p:Predicates predicates="included">
+                        <L7p:item dataType="included">
+                            <L7p:Type variableDataType="string"/>
+                        </L7p:item>
+                        <L7p:item binary="included">
+                            <L7p:Negated booleanValue="true"/>
+                            <L7p:RightValue stringValue="true"/>
+                        </L7p:item>
+                    </L7p:Predicates>
+                </L7p:ComparisonAssertion>
+                <L7p:Include>
+                    <L7p:Enabled booleanValue="false"/>
+                    <L7p:PolicyGuid stringValue="1fc5df24-3538-4c2d-8774-49ced9877831"/>
+                </L7p:Include>
+                <L7p:Include>
+                    <L7p:PolicyGuid stringValue="2da95e90-cf11-47da-938a-60746d04c6f5"/>
+                </L7p:Include>
+                <L7p:TrueAssertion>
+                    <L7p:AssertionComment assertionComment="included">
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="LEFT.COMMENT"/>
+                                <L7p:value stringValue="??? Should we?"/>
+                            </L7p:entry>
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="// Always succeed so we don't drop to local db"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:AssertionComment>
+                </L7p:TrueAssertion>
+                <L7p:assertionComment>
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="// Audit request to DBE/Tracer if ${audit.var.partner.tracing}=true"/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:assertionComment>
+            </wsp:OneOrMore>
+        </wsp:All>
+    </wsp:Policy>
+</exp:Export>

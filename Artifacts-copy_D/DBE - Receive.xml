@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exp:Export Version="3.0"
+    xmlns:L7p="http://www.layer7tech.com/ws/policy"
+    xmlns:exp="http://www.layer7tech.com/ws/policy/export" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+    <exp:References>
+        <JdbcConnectionReference RefType="com.l7tech.console.policy.exporter.JdbcConnectionReference">
+            <ConnectionName>Tracer Database</ConnectionName>
+            <DriverClass>com.l7tech.jdbc.oracle.OracleDriver</DriverClass>
+            <JdbcUrl>jdbc:l7tech:oracle://it1dev01:1521;SID=ifdev1</JdbcUrl>
+            <UserName>IFRT_A</UserName>
+            <AdditionalProperties/>
+        </JdbcConnectionReference>
+    </exp:References>
+    <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+        <wsp:All wsp:Usage="Required">
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** DBE Receive"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="**  Update tracer, REQ_TRACE  only for Receive legacy action"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="**  Call DBE append procedure"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="**   Yaara.G 13.08.2013"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="Policy Fragment: DBE - Receive"/>
+            </L7p:AuditDetailAssertion>
+            <L7p:SetVariable>
+                <L7p:Base64Expression stringValue=""/>
+                <L7p:DataType variableDataType="dateTime"/>
+                <L7p:DateOffsetExpression stringValue=""/>
+                <L7p:VariableToSet stringValue="Time"/>
+            </L7p:SetVariable>
+            <L7p:SetVariable>
+                <L7p:Base64Expression stringValue="QWN0aW9uOiBSZWNlaXZlWyR7VGltZX1d"/>
+                <L7p:VariableToSet stringValue="req.trace"/>
+            </L7p:SetVariable>
+            <L7p:ManipulateMultiValuedVariable>
+                <L7p:SourceVariableName stringValue="partner.requestId"/>
+                <L7p:TargetVariableName stringValue="arguments"/>
+            </L7p:ManipulateMultiValuedVariable>
+            <L7p:ManipulateMultiValuedVariable>
+                <L7p:SourceVariableName stringValue="req.trace"/>
+                <L7p:TargetVariableName stringValue="arguments"/>
+            </L7p:ManipulateMultiValuedVariable>
+            <wsp:OneOrMore wsp:Usage="Required">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:JdbcQuery>
+                        <L7p:AssertionFailureEnabled booleanValue="false"/>
+                        <L7p:ConnectionName stringValue="Tracer Database"/>
+                        <L7p:ConvertVariablesToStrings booleanValue="false"/>
+                        <L7p:Schema stringValue="IFRT_A"/>
+                        <L7p:SqlQuery stringValue="CALL IF_DBE_L7_PKG.APPEND_TRACE (${arguments})"/>
+                    </L7p:JdbcQuery>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:AssertionComment assertionComment="included">
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="  // write to splunk"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:AssertionComment>
+                        <L7p:CustomLoggerSuffix stringValue="splunk"/>
+                        <L7p:Detail stringValue="writing to DBE database: ${arguments|,}"/>
+                        <L7p:LoggingOnly booleanValue="true"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:assertionComment>
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue=" // Call the DBE append"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:assertionComment>
+                </wsp:All>
+                <wsp:All wsp:Usage="Required">
+                    <L7p:AuditDetailAssertion>
+                        <L7p:CustomLoggerSuffix stringValue="DBE"/>
+                        <L7p:Detail stringValue="Error writing to DBE database: ${audit.details.last.fulltext}"/>
+                        <L7p:LoggingOnly booleanValue="true"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:CustomLoggerSuffix stringValue="DBE"/>
+                        <L7p:Detail stringValue="${arguments|,}"/>
+                        <L7p:LoggingOnly booleanValue="true"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:assertionComment>
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="  // Write to log if writing to DBE failed"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:assertionComment>
+                </wsp:All>
+                <L7p:assertionComment>
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="  // Write to tracer database. If failes write to log."/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:assertionComment>
+            </wsp:OneOrMore>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="successful write to DBE"/>
+            </L7p:AuditDetailAssertion>
+        </wsp:All>
+    </wsp:Policy>
+</exp:Export>

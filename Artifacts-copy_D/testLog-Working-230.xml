@@ -1,0 +1,1431 @@
+Passed: 
+	CS_BULK_UPDATE_CONTR_CUST - 1 Match success
+	GC_DIALER_MAKE_CALL - 1 Match success
+	CS_CUST_MAIL_COMM_INTRANET - 1 Match success
+	CS_MANAGE_CREDIT_CARD - 1 Match success
+	GC_MANAGE_IR_VOB_PROVISIONING - 1 Match success
+	SC_WEB_GENERATE_TOKEN_CRM - 1 Match success
+	GC_IVR_MODIFY_ORDER_CRM2 - 1 Match success
+
+7 Passed, 15 Not Failed, 0 Only Match Error,  0 Valid Success, 1 Valid Error, 0 Invalid, 0 Fault
+
+if=2387:l7=2153	GC_IVR_MODIFY_ORDER_CRM2 (HTTP, PARSED=false, 1304021948372598791, UTF-8->UTF-8) - Sync Match Success
+=====================================================================================================
+<?xml version="1.0" encoding="UTF-8" ?><IF_REQUEST IF_SERVICE_NAME="GC_IVR_MODIFY_ORDER_CRM2"><SERVICE_NAME>GC_IVR_MODIFY_ORDER_CRM2</SERVICE_NAME><PARAMS_LIST><MSISDN>546597519</MSISDN><PRODUCT><PROD_ID>Oklik Service</PROD_ID><ACTION_REASON>UPDATE</ACTION_REASON><ATTRIB_NAME>Allow MMS</ATTRIB_NAME><ATTRIB_VALUE>Y</ATTRIB_VALUE><ATTRIB_NAME>Forward MMS</ATTRIB_NAME><ATTRIB_VALUE>none</ATTRIB_VALUE><ATTRIB_NAME>Copy MMS</ATTRIB_NAME><ATTRIB_VALUE>none</ATTRIB_VALUE></PRODUCT></PARAMS_LIST></IF_REQUEST>
+----- IF Response
+<?xml version="1.0" encoding="UTF-8"?><IF_REPLY IF_SERVICE_NAME="GC_IVR_MODIFY_ORDER_CRM2"><SERVICE_NAME>GC_IVR_MODIFY_ORDER_CRM2</SERVICE_NAME><REQUEST_STATUS><STATUS>Success</STATUS><STATUS_CODE>0</STATUS_CODE><STATUS_MESSAGE></STATUS_MESSAGE></REQUEST_STATUS><REQUEST_RESULT><MSISDN>546597519</MSISDN><PRODUCT><PROD_ID>Oklik Service</PROD_ID><ACTION_REASON>UPDATE</ACTION_REASON><ATTRIB_NAME>Allow MMS</ATTRIB_NAME><ATTRIB_VALUE>Y</ATTRIB_VALUE><ATTRIB_NAME>Forward MMS</ATTRIB_NAME><ATTRIB_VALUE>none</ATTRIB_VALUE><ATTRIB_NAME>Copy MMS</ATTRIB_NAME><ATTRIB_VALUE>none</ATTRIB_VALUE></PRODUCT><ERROR_MESSAGE></ERROR_MESSAGE><RESPONSE_DESCRIPTION></RESPONSE_DESCRIPTION><ERROR_CODE>0</ERROR_CODE></REQUEST_RESULT></IF_REPLY>
+-----   L7 Response  -----
+<?xml version="1.0" encoding="UTF-8"?><IF_REPLY IF_SERVICE_NAME="GC_IVR_MODIFY_ORDER_CRM2"><SERVICE_NAME>GC_IVR_MODIFY_ORDER_CRM2</SERVICE_NAME><REQUEST_STATUS><STATUS>Success</STATUS><STATUS_CODE>0</STATUS_CODE><STATUS_MESSAGE></STATUS_MESSAGE></REQUEST_STATUS><REQUEST_RESULT><MSISDN>546597519</MSISDN><PRODUCT><PROD_ID>Oklik Service</PROD_ID><ACTION_REASON>UPDATE</ACTION_REASON><ATTRIB_NAME>Allow MMS</ATTRIB_NAME><ATTRIB_VALUE>Y</ATTRIB_VALUE><ATTRIB_NAME>Forward MMS</ATTRIB_NAME><ATTRIB_VALUE>none</ATTRIB_VALUE><ATTRIB_NAME>Copy MMS</ATTRIB_NAME><ATTRIB_VALUE>none</ATTRIB_VALUE></PRODUCT><ERROR_MESSAGE>.כרגע בתהליך של שינוי אפשרות אחרת. לא ניתן ליצור הזמנה חדשה</ERROR_MESSAGE><RESPONSE_DESCRIPTION>.כרגע בתהליך של שינוי אפשרות אחרת. לא ניתן ליצור הזמנה חדשה</RESPONSE_DESCRIPTION><ERROR_CODE>2040</ERROR_CODE></REQUEST_RESULT></IF_REPLY>
+
+if=530:l7=577	CS_CUST_MAIL_COMM_INTRANET (HTTP, PARSED=false, 1304030718157859991, UTF-8->UTF-8) - Sync Match Success
+=======================================================================================================
+<IF_REQUEST><SERVICE_NAME>CS_CUST_MAIL_COMM_INTRANET</SERVICE_NAME><PARAMS_LIST><METHOD>NewMessage</METHOD><PARAMETERS><![CDATA[<MESSAGE_PLATFORM>MAIL</MESSAGE_PLATFORM><MESSAGE_TYPE>MESSAGE</MESSAGE_TYPE><MAIL_FROM_DISPLAY_NAME>Tomer Tzarfati</MAIL_FROM_DISPLAY_NAME><MAIL_FROM_EMAIL_ADDRESS>tomer.tzarfati@orange.co.il</MAIL_FROM_EMAIL_ADDRESS><MAIL_SUBJECT>בדיקה בדיקה בדיקה</MAIL_SUBJECT><MAIL_HTML_BODY>אהלן, מה קורה??
+</MAIL_HTML_BODY><RECIPIENTS><MAIL_TO><DISPLAY_NAME>tomer.tzarfati@servicetest.orange.co.il</DISPLAY_NAME><EMAIL_ADDRESS>tomer.tzarfati@servicetest.orange.co.il</EMAIL_ADDRESS></MAIL_TO></RECIPIENTS>]]></PARAMETERS></PARAMS_LIST></IF_REQUEST>
+----- IF Response
+<?xml version="1.0" encoding="UTF-8"?><IF_REPLY><SERVICE_NAME>CS_CUST_MAIL_COMM_INTRANET</SERVICE_NAME><REQUEST_STATUS><STATUS>SUCCESS</STATUS><STATUS_CODE>0</STATUS_CODE><STATUS_MESSAGE></STATUS_MESSAGE></REQUEST_STATUS><REQUEST_RESULT><MESSAGE_ID>130803</MESSAGE_ID></REQUEST_RESULT></IF_REPLY>
+-----   L7 Response  -----
+<?xml version="1.0" encoding="UTF-8"?><IF_REPLY><SERVICE_NAME>CS_CUST_MAIL_COMM_INTRANET</SERVICE_NAME><REQUEST_STATUS><STATUS>SUCCESS</STATUS><STATUS_CODE>0</STATUS_CODE><STATUS_MESSAGE></STATUS_MESSAGE></REQUEST_STATUS><REQUEST_RESULT><MESSAGE_ID>130804</MESSAGE_ID></REQUEST_RESULT></IF_REPLY>
+
+if=2106:l7=1467	CS_MANAGE_CREDIT_CARD (HTTP, PARSED=false, 1304021459122483791, UTF-8->UTF-8) - Sync Match Success
+==================================================================================================
+<IF_REQUEST><SERVICE_NAME>CS_MANAGE_CREDIT_CARD</SERVICE_NAME><PARAMS_LIST><SOURCE>VANTIVE</SOURCE><SPECIAL_CREDIT_FLAG>N</SPECIAL_CREDIT_FLAG><ASHRAIT_REQ><ashrait><request><command>doDeal</command><requestId/><dateTime/><version>1001</version><language>HEB</language><mayBeDuplicate>0</mayBeDuplicate><doDeal><terminalNumber /><track2></track2><cardNo>64200094</cardNo><cardExpiration>0115</cardExpiration><transactionType>Debit</transactionType><creditType>RegularCredit</creditType><authNumber>12345</authNumber><currency>ILS</currency><transactionCode>Phone</transactionCode><total>80000</total><firstPayment></firstPayment><periodicalPayment></periodicalPayment><numberOfPayments></numberOfPayments><validation>Normal</validation></doDeal></request></ashrait></ASHRAIT_REQ></PARAMS_LIST></IF_REQUEST>
+----- IF Response
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY><SERVICE_NAME>CS_MANAGE_CREDIT_CARD</SERVICE_NAME><REQUEST_STATUS><STATUS>SUCCESS</STATUS><STATUS_CODE>0</STATUS_CODE><STATUS_MESSAGE/><DEBUG_INFO/></REQUEST_STATUS><REQUEST_RESULT><ASHRAIT_RES><ashrait><response><command>doDeal</command><dateTime>2013-05-03 02:48</dateTime><requestId/><tranId>116435</tranId><result>000</result><message>עסקה תקינה</message><userMessage>עסקה תקינה</userMessage><additionalInfo/><version>1001</version><language>Heb</language><doDeal><status>000</status><statusText>עסקה תקינה</statusText><terminalNumber>0962644</terminalNumber><cardNo>64200094</cardNo><cardName>ישראכרט</cardName><cardExpiration>0115</cardExpiration><cardType code="0">Local</cardType><creditCompany code="10">Isracard</creditCompany><cardBrand code="0">PrivateLabel</cardBrand><cardAcquirer code="1">Isracard</cardAcquirer><serviceCode>000</serviceCode><transactionType code="02">AuthDebit</transactionType><creditType code="1">RegularCredit</creditType><currency code="1">ILS</currency><transactionCode code="50">Phone</transactionCode><total>80000</total><balance/><starTotal>0</starTotal><firstPayment/><periodicalPayment/><numberOfPayments/><clubId/><clubCode/><validation code="2">Normal</validation><commReason code=" ">NoComm</commReason><idStatus code="0">Absent</idStatus><cvvStatus code="0">Absent</cvvStatus><authSource code="3">VoiceMail</authSource><authNumber>0012345</authNumber><fileNumber>25</fileNumber><slaveTerminalNumber>001</slaveTerminalNumber><slaveTerminalSequence>001</slaveTerminalSequence><creditGroup/><pinKeyIn/><pfsc/><eci/><cavv code=" "/><user/><addonData/><supplierNumber>5116801</supplierNumber><intIn>B64200094C80000D011150E0012345J2T0115</intIn><intOt>0000000000000006420009401000201150000080000        000000001021 150  3001234500000000000000000025001001        טרכארשי0                   </intOt></doDeal></response></ashrait></ASHRAIT_RES></REQUEST_RESULT></IF_REPLY>
+-----   L7 Response  -----
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY><SERVICE_NAME>CS_MANAGE_CREDIT_CARD</SERVICE_NAME><REQUEST_STATUS><STATUS>SUCCESS</STATUS><STATUS_CODE>0</STATUS_CODE><STATUS_MESSAGE/><DEBUG_INFO/></REQUEST_STATUS><REQUEST_RESULT><ASHRAIT_RES><ashrait><response><command>doDeal</command><dateTime>2013-05-03 02:48</dateTime><requestId/><tranId>116437</tranId><result>000</result><message>עסקה תקינה</message><userMessage>עסקה תקינה</userMessage><additionalInfo/><version>1001</version><language>Heb</language><doDeal><status>000</status><statusText>עסקה תקינה</statusText><terminalNumber>0962644</terminalNumber><cardNo>64200094</cardNo><cardName>ישראכרט</cardName><cardExpiration>0115</cardExpiration><cardType code="0">Local</cardType><creditCompany code="10">Isracard</creditCompany><cardBrand code="0">PrivateLabel</cardBrand><cardAcquirer code="1">Isracard</cardAcquirer><serviceCode>000</serviceCode><transactionType code="02">AuthDebit</transactionType><creditType code="1">RegularCredit</creditType><currency code="1">ILS</currency><transactionCode code="50">Phone</transactionCode><total>80000</total><balance/><starTotal>0</starTotal><firstPayment/><periodicalPayment/><numberOfPayments/><clubId/><clubCode/><validation code="2">Normal</validation><commReason code=" ">NoComm</commReason><idStatus code="0">Absent</idStatus><cvvStatus code="0">Absent</cvvStatus><authSource code="3">VoiceMail</authSource><authNumber>0012345</authNumber><fileNumber>25</fileNumber><slaveTerminalNumber>001</slaveTerminalNumber><slaveTerminalSequence>001</slaveTerminalSequence><creditGroup/><pinKeyIn/><pfsc/><eci/><cavv code=" "/><user/><addonData/><supplierNumber>5116801</supplierNumber><intIn>B64200094C80000D011150E0012345J2T0115</intIn><intOt>0000000000000006420009401000201150000080000        000000001021 150  3001234500000000000000000025001001        טרכארשי0                   </intOt></doDeal></response></ashrait></ASHRAIT_RES></REQUEST_RESULT></IF_REPLY>
+
+if=2839:l7=2605	GC_GET_MESSAGE_DETAILS_CRM2 (HTTP, PARSED=false, 1304030516030022291, UTF-8->UTF-8) - Sync Semantically Exact
+=============================================================================================================
+<?xml version="1.0" encoding="UTF-8"?>
+                                    <IF_REQUEST IF_SERVICE_NAME="GC_GET_MESSAGE_DETAILS_CRM2">
+                                    <SERVICE_NAME>GC_GET_MESSAGE_DETAILS_CRM2</SERVICE_NAME>
+                                    <PARAMS_LIST>
+                                    <CUSTOMER_ID>5910923</CUSTOMER_ID>
+                                    <FULL_INFORMATION>Y</FULL_INFORMATION>
+                                    <FROM_DATE></FROM_DATE>
+                                    <TO_DATE></TO_DATE>
+                                    </PARAMS_LIST>
+                                    </IF_REQUEST>
+----- IF Response
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY>
+<SERVICE_NAME>GC_GET_MESSAGE_DETAILS_CRM2</SERVICE_NAME>
+<REQUEST_STATUS>
+<STATUS>SUCCESS</STATUS>
+<STATUS_CODE>0</STATUS_CODE>
+<STATUS_MESSAGE/>
+</REQUEST_STATUS>
+<REQUEST_RESULT>
+<MESSAGE_RECORD>
+<CUSTOMER_ID>5910923</CUSTOMER_ID>
+<CUST_CODE>1.15561434</CUST_CODE>
+<CONTRACT_ID>10962971</CONTRACT_ID>
+<MSISDN>1-3RVNSCM</MSISDN>
+<SYSTEM>דיוור</SYSTEM>
+<OBJECT_TYPE>עסקה קצובה</OBJECT_TYPE>
+<OBJECT_ID>34220794</OBJECT_ID>
+<MESSAGE_ID>1-3RUENAW</MESSAGE_ID>
+<MESSAGE_TITLE>548147498</MESSAGE_TITLE>
+<MESSAGE_BODY>• עד לתאריך 30/06/2014 הנך נהנה מזיכוי עבור רכישת מכשיר בגין שימוש בחודש הקודם</MESSAGE_BODY>
+<MEDIA>Mail-</MEDIA>
+<MESSAGE_TO>5910923</MESSAGE_TO>
+<MESSAGE_CC/>
+<MESSAGE_BCC/>
+<FORMAT_CODE/>
+<USER_NAME>DELIVERY</USER_NAME>
+<REQUIRED_DATE>01/07/2011 06:27</REQUIRED_DATE>
+<STATUS>נשלח</STATUS>
+<STATUS_DATE>01/07/2011 06:38</STATUS_DATE>
+<RESPOND_ID/>
+<RESPOND_ERROR_CODE/>
+<RESPOND_STATUS/>
+<IMMEDIATE>Y</IMMEDIATE>
+<SENDER/>
+<TEMPLATE>31</TEMPLATE>
+<MESSAGE_BODY_LONG/>
+<CREATED_DATE>01/07/2011</CREATED_DATE>
+<DISPLAY_CODE/>
+<SHORT_TEXT/>
+<ACTION_DATE/>
+</MESSAGE_RECORD>
+<MESSAGE_RECORD>
+<CUSTOMER_ID>5910923</CUSTOMER_ID>
+<CUST_CODE>1.15561434</CUST_CODE>
+<CONTRACT_ID>10962971</CONTRACT_ID>
+<MSISDN>1-3RVNSCM</MSISDN>
+<SYSTEM>דיוור</SYSTEM>
+<OBJECT_TYPE>עסקה קצובה</OBJECT_TYPE>
+<OBJECT_ID>34220793</OBJECT_ID>
+<MESSAGE_ID>1-3RUEL68</MESSAGE_ID>
+<MESSAGE_TITLE>548147498</MESSAGE_TITLE>
+<MESSAGE_BODY>• עד לתאריך 30/06/2014 הנך נהנה מהחזר עבור התחייבות למפעיל אחר- תלוי שימוש בחודש קודם</MESSAGE_BODY>
+<MEDIA>Mail-</MEDIA>
+<MESSAGE_TO>5910923</MESSAGE_TO>
+<MESSAGE_CC/>
+<MESSAGE_BCC/>
+<FORMAT_CODE/>
+<USER_NAME>DELIVERY</USER_NAME>
+<REQUIRED_DATE>01/07/2011 06:27</REQUIRED_DATE>
+<STATUS>נשלח</STATUS>
+<STATUS_DATE>01/07/2011 06:38</STATUS_DATE>
+<RESPOND_ID/>
+<RESPOND_ERROR_CODE/>
+<RESPOND_STATUS/>
+<IMMEDIATE>Y</IMMEDIATE>
+<SENDER/>
+<TEMPLATE>31</TEMPLATE>
+<MESSAGE_BODY_LONG/>
+<CREATED_DATE>01/07/2011</CREATED_DATE>
+<DISPLAY_CODE/>
+<SHORT_TEXT/>
+<ACTION_DATE/>
+</MESSAGE_RECORD>
+<MESSAGE_RECORD>
+<CUSTOMER_ID>5910923</CUSTOMER_ID>
+<CUST_CODE>1.15561434</CUST_CODE>
+<CONTRACT_ID>10962970</CONTRACT_ID>
+<MSISDN>1-3SCUQ1I</MSISDN>
+<SYSTEM>דיוור</SYSTEM>
+<OBJECT_TYPE>עסקה קצובה</OBJECT_TYPE>
+<OBJECT_ID>34220807</OBJECT_ID>
+<MESSAGE_ID>1-3RUEIY8</MESSAGE_ID>
+<MESSAGE_TITLE>544507681</MESSAGE_TITLE>
+<MESSAGE_BODY>• עד לתאריך 30/06/2014 הנך נהנה מהחזר עבור התחייבות למפעיל אחר- תלוי שימוש בחודש קודם</MESSAGE_BODY>
+<MEDIA>Mail-</MEDIA>
+<MESSAGE_TO>5910923</MESSAGE_TO>
+<MESSAGE_CC/>
+<MESSAGE_BCC/>
+<FORMAT_CODE/>
+<USER_NAME>DELIVERY</USER_NAME>
+<REQUIRED_DATE>01/07/2011 06:27</REQUIRED_DATE>
+<STATUS>נשלח</STATUS>
+<STATUS_DATE>01/07/2011 06:38</STATUS_DATE>
+<RESPOND_ID/>
+<RESPOND_ERROR_CODE/>
+<RESPOND_STATUS/>
+<IMMEDIATE>Y</IMMEDIATE>
+<SENDER/>
+<TEMPLATE>31</TEMPLATE>
+<MESSAGE_BODY_LONG/>
+<CREATED_DATE>01/07/2011</CREATED_DATE>
+<DISPLAY_CODE/>
+<SHORT_TEXT/>
+<ACTION_DATE/>
+</MESSAGE_RECORD>
+<MESSAGE_RECORD>
+<CUSTOMER_ID>5910923</CUSTOMER_ID>
+<CUST_CODE>1.15561434</CUST_CODE>
+<CONTRACT_ID>10962970</CONTRACT_ID>
+<MSISDN>1-3SCUQ1I</MSISDN>
+<SYSTEM>דיוור</SYSTEM>
+<OBJECT_TYPE>עסקה קצובה</OBJECT_TYPE>
+<OBJECT_ID>34220808</OBJECT_ID>
+<MESSAGE_ID>1-3RUEJOW</MESSAGE_ID>
+<MESSAGE_TITLE>544507681</MESSAGE_TITLE>
+<MESSAGE_BODY>• עד לתאריך 30/06/2014 הנך נהנה מזיכוי עבור רכישת מכשיר בגין שימוש בחודש הקודם</MESSAGE_BODY>
+<MEDIA>Mail-</MEDIA>
+<MESSAGE_TO>5910923</MESSAGE_TO>
+<MESSAGE_CC/>
+<MESSAGE_BCC/>
+<FORMAT_CODE/>
+<USER_NAME>DELIVERY</USER_NAME>
+<REQUIRED_DATE>01/07/2011 06:27</REQUIRED_DATE>
+<STATUS>נשלח</STATUS>
+<STATUS_DATE>01/07/2011 06:38</STATUS_DATE>
+<RESPOND_ID/>
+<RESPOND_ERROR_CODE/>
+<RESPOND_STATUS/>
+<IMMEDIATE>Y</IMMEDIATE>
+<SENDER/>
+<TEMPLATE>31</TEMPLATE>
+<MESSAGE_BODY_LONG/>
+<CREATED_DATE>01/07/2011</CREATED_DATE>
+<DISPLAY_CODE/>
+<SHORT_TEXT/>
+<ACTION_DATE/>
+</MESSAGE_RECORD>
+<MESSAGE_RECORD>
+<CUSTOMER_ID>5910923</CUSTOMER_ID>
+<CUST_CODE>1.15561434</CUST_CODE>
+<CONTRACT_ID>10962970</CONTRACT_ID>
+<MSISDN>1-3SCUQ1I</MSISDN>
+<SYSTEM>RPE-IFBL</SYSTEM>
+<OBJECT_TYPE>reg_10</OBJECT_TYPE>
+<OBJECT_ID>IFBL</OBJECT_ID>
+<MESSAGE_ID>1-3TZPFV6</MESSAGE_ID>
+<MESSAGE_TITLE/>
+<MESSAGE_BODY>07/07/2011 23:15 שלום, מנוי 523062477 ניצל מעל 75% מנפח הגלישה הכלול בחבילה הגלישה שברשותו. חריגה מחבילה כרוכה בתשלום. פרטים על תעריפי חריגה והתאמת חבילות ב my orange</MESSAGE_BODY>
+<MEDIA>SMS-DATA</MEDIA>
+<MESSAGE_TO>0523062477</MESSAGE_TO>
+<MESSAGE_CC/>
+<MESSAGE_BCC/>
+<FORMAT_CODE>84_4036</FORMAT_CODE>
+<USER_NAME/>
+<REQUIRED_DATE>07/07/2011 23:15</REQUIRED_DATE>
+<STATUS>נשלח</STATUS>
+<STATUS_DATE>07/07/2011 23:16</STATUS_DATE>
+<RESPOND_ID>TRID: 78070720112316335387
+MOISH#</RESPOND_ID>
+<RESPOND_ERROR_CODE/>
+<RESPOND_STATUS/>
+<IMMEDIATE>Y</IMMEDIATE>
+<SENDER/>
+<TEMPLATE/>
+<MESSAGE_BODY_LONG/>
+<CREATED_DATE>07/07/2011</CREATED_DATE>
+<DISPLAY_CODE>75</DISPLAY_CODE>
+<SHORT_TEXT>שלום, המנוי ניצל מעל 75% מנפח הגלישה הכלול בחבילה הגלישה שברשותו. חריגה מחבילה כרוכה בתשלום. פרטים על תעריפי חריגה והתאמת חבילות ב my orange</SHORT_TEXT>
+<ACTION_DATE>07/07/2011 23:15</ACTION_DATE>
+</MESSAGE_RECORD>
+<MESSAGE_RECORD>
+<CUSTOMER_ID>5910923</CUSTOMER_ID>
+<CUST_CODE>1.15561434</CUST_CODE>
+<CONTRACT_ID>10962970</CONTRACT_ID>
+<MSISDN>1-3SCUQ1I</MSISDN>
+<SYSTEM>RPE-IFBL</SYSTEM>
+<OBJECT_TYPE>reg_10</OBJECT_TYPE>
+<OBJECT_ID>IFBL</OBJECT_ID>
+<MESSAGE_ID>1-3UCTN20</MESSAGE_ID>
+<MESSAGE_TITLE/>
+<MESSAGE_BODY>10/07/2011 10:32 שלום, מנוי 523062477 ניצל מעל 95% מנפח הגלישה הכלול בחבילה הגלישה שברשותו. חריגה מחבילה כרוכה בתשלום. פרטים על תעריפי חריגה והתאמת חבילות ב my orange</MESSAGE_BODY>
+<MEDIA>SMS-DATA</MEDIA>
+<MESSAGE_TO>0523062477</MESSAGE_TO>
+<MESSAGE_CC/>
+<MESSAGE_BCC/>
+<FORMAT_CODE>83_4036</FORMAT_CODE>
+<USER_NAME/>
+<REQUIRED_DATE>10/07/2011 10:32</REQUIRED_DATE>
+<STATUS>נשלח</STATUS>
+<STATUS_DATE>10/07/2011 10:32</STATUS_DATE>
+<RESPOND_ID>TRID: 78100720111032506194
+MOISH#</RESPOND_ID>
+<RESPOND_ERROR_CODE/>
+<RESPOND_STATUS/>
+<IMMEDIATE>Y</IMMEDIATE>
+<SENDER/>
+<TEMPLATE/>
+<MESSAGE_BODY_LONG/>
+<CREATED_DATE>10/07/2011</CREATED_DATE>
+<DISPLAY_CODE>95</DISPLAY_CODE>
+<SHORT_TEXT>שלום, המנוי ניצל מעל 95% מנפח הגלישה הכלול בחבילה הגלישה שברשותו. חריגה מחבילה כרוכה בתשלום. פרטים על תעריפי חריגה והתאמת חבילות ב my orange</SHORT_TEXT>
+<ACTION_DATE>10/07/2011 10:32</ACTION_DATE>
+</MESSAGE_RECORD>
+<MESSAGE_RECORD>
+<CUSTOMER_ID>5910923</CUSTOMER_ID>
+<CUST_CODE>1.15561434</CUST_CODE>
+<CONTRACT_ID/>
+<MSISDN/>
+<SYSTEM>VANTIVE</SYSTEM>
+<OBJECT_TYPE>INVOICE_MAIL_CONFIRMATION</OBJECT_TYPE>
+<OBJECT_ID>93440001</OBJECT_ID>
+<MESSAGE_ID>1-3YLZZ6T</MESSAGE_ID>
+<MESSAGE_TITLE>הצטרפותך לשירות חשבונית במייל</MESSAGE_TITLE>
+<MESSAGE_BODY/>
+<MEDIA>Formatted Email Long-</MEDIA>
+<MESSAGE_TO>nitzah_ibm@yahoo.com</MESSAGE_TO>
+<MESSAGE_CC/>
+<MESSAGE_BCC/>
+<FORMAT_CODE/>
+<USER_NAME/>
+<REQUIRED_DATE>24/07/2011 11:07</REQUIRED_DATE>
+<STATUS>נשלח</STATUS>
+<STATUS_DATE>24/07/2011 11:40</STATUS_DATE>
+<RESPOND_ID/>
+<RESPOND_ERROR_CODE/>
+<RESPOND_STATUS/>
+<IMMEDIATE>Y</IMMEDIATE>
+<SENDER>Orange Bill</SENDER>
+<TEMPLATE/>
+<MESSAGE_BODY_LONG><![CDATA[<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1255" /></head>
+<body bgcolor="#FFFFFF" style="direction:rtl;font-size:13px;font-family:Arial;">
+<table width="682"  cellpadding="0" cellspacing="0" align="center" style="font-size:13px;font-family:Arial;border-style:solid;border-width:10px;border-color:#E5E5E5;">
+<tr><td style="padding-right:10px;padding-top:10px;padding-bottom:10px;">
+<br/>לקוח יקר,<br /><br />
+תודה על שבחרת בשירות חשבונית במייל.<br />
+להלן תנאי השירות:<br />
+<ul>
+<li>שירות חשבונית במייל מחליף את שליחת החשבונית החודשית בדואר </li>
+<li>השירות ניתן ללקוחות שאמצעי התשלום שלהם תקף ומעודכן במערכות החברה. </li>
+<li><span dir="rtl"> עם הצטרפותך לשירות תהנה מהטבה חד פעמית בת </span><span dir="rtl"> 60 דקות ליעדי </span><span dir="rtl"> orange </span><span dir="rtl"> ובזק בישראל בלבד. </span> </li>
+</ul>
+על מנת להשלים את תהליך הרישום אנא <a style="color:orange;" href="http://www.orange.co.il/email/confirmRegistration/?PID=93440001">לחץ כאן</a> לאימות כתובת הדוא"ל ולאישור תנאי הרישום.<br/>
+<br/>
+<img src="http://www.orange.co.il/Global/a_mail/logo.gif" width="43" height="43" align="left"/><br/>
+</td></tr></table></body></html>]]></MESSAGE_BODY_LONG>
+<CREATED_DATE>24/07/2011</CREATED_DATE>
+<DISPLAY_CODE/>
+<SHORT_TEXT/>
+<ACTION_DATE/>
+</MESSAGE_RECORD>
+<MESSAGE_RECORD>
+<CUSTOMER_ID>5910923</CUSTOMER_ID>
+<CUST_CODE>1.15561434</CUST_CODE>
+<CONTRACT_ID>10962970</CONTRACT_ID>
+<MSISDN>1-3SCUQ1I</MSISDN>
+<SYSTEM>דיוור</SYSTEM>
+<OBJECT_TYPE>עסקה קצובה</OBJECT_TYPE>
+<OBJECT_ID>34325194</OBJECT_ID>
+<MESSAGE_ID>1-3YXVZWG</MESSAGE_ID>
+<MESSAGE_TITLE>523062477</MESSAGE_TITLE>
+<MESSAGE_BODY>• עד לתאריך 24/08/2011 הנך נהנה מהטבת 60 דקות ליעדי orange ומפעילים פנים ארציים ללא חיוב כהטבה • עם סיום ההטבה, תחויב בתעריפים המלאים החלים עליך</MESSAGE_BODY>
+<MEDIA>Mail-</MEDIA>
+<MESSAGE_TO>5910923</MESSAGE_TO>
+<MESSAGE_CC/>
+<MESSAGE_BCC/>
+<FORMAT_CODE/>
+<USER_NAME>DELIVERY</USER_NAME>
+<REQUIRED_DATE>25/07/2011 06:16</REQUIRED_DATE>
+<STATUS>לא לשליחה</STATUS>
+<STATUS_DATE>25/07/2011 06:16</STATUS_DATE>
+<RESPOND_ID/>
+<RESPOND_ERROR_CODE/>
+<RESPOND_STATUS/>
+<IMMEDIATE>Y</IMMEDIATE>
+<SENDER/>
+<TEMPLATE>31</TEMPLATE>
+<MESSAGE_BODY_LONG/>
+<CREATED_DATE>25/07/2011</CREATED_DATE>
+<DISPLAY_CODE/>
+<SHORT_TEXT/>
+<ACTION_DATE/>
+</MESSAGE_RECORD>
+<MESSAGE_RECORD>
+<CUSTOMER_ID>5910923</CUSTOMER_ID>
+<CUST_CODE>1.15561434</CUST_CODE>
+<CONTRACT_ID/>
+<MSISDN/>
+<SYSTEM>דיוור</SYSTEM>
+<OBJECT_TYPE>עסקה קצובה</OBJECT_TYPE>
+<OBJECT_ID>5910923</OBJECT_ID>
+<MESSAGE_ID>1-3YXWZ98</MESSAGE_ID>
+<MESSAGE_TITLE>כל עסקה היא התחלה חדשה</MESSAGE_TITLE>
+<MESSAGE_BODY>"&lt;!DOCTYPE HTML PUBLIC ""-//W3C//DTD HTML 4.01//EN"" ""http://www.w3.org/TR/html4/strict.dtd""&gt;
+&lt;html&gt;
+&lt;head&gt;
+      &lt;title&gt;כל עסקה היא התחלה חדשה&lt;/title&gt;
+      &lt;meta http-equiv=""Content-Type"" content=""text/html; charset=windows-1255""&gt;
+&lt;/head&gt;
+&lt;body style=""padding:auto; margin:auto;width:810px;height:566px;""&gt;&lt;BR&gt;&lt;BR&gt;   
+&lt;center&gt;     
+&lt;div &gt;
+&lt;img src=""http://direct.orange.co.il/static/selfservice/mailImages/70006222.jpg"" 
+ alt=""לצפייה בעסקאות הקצובות שביצעת לאחרונה, פתח את הקובת המצורף למייל זה"" border=""0"" 
+ title=""לצפייה בעסקאות הקצובות שביצעת לאחרונה, פתח את הקובת המצורף למייל זה"" 
+ style=""width:810px;height:566px;""
+ width=810 
+ height=566&gt;     
+&lt;/center&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;"</MESSAGE_BODY>
+<MEDIA>Formatted Email-</MEDIA>
+<MESSAGE_TO>nitzah_ibm@yahoo.com</MESSAGE_TO>
+<MESSAGE_CC/>
+<MESSAGE_BCC/>
+<FORMAT_CODE/>
+<USER_NAME>DELIVERY</USER_NAME>
+<REQUIRED_DATE>25/07/2011 06:40</REQUIRED_DATE>
+<STATUS>נשלח</STATUS>
+<STATUS_DATE>25/07/2011 06:47</STATUS_DATE>
+<RESPOND_ID/>
+<RESPOND_ERROR_CODE/>
+<RESPOND_STATUS/>
+<IMMEDIATE>Y</IMMEDIATE>
+<SENDER>direct@orange.co.il</SENDER>
+<TEMPLATE/>
+<MESSAGE_BODY_LONG/>
+<CREATED_DATE>25/07/2011</CREATED_DATE>
+<DISPLAY_CODE/>
+<SHORT_TEXT/>
+<ACTION_DATE/>
+</MESSAGE_RECORD>
+</REQUEST_RESULT>
+</IF_REPLY>
+-----   L7 Response  -----
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY>
+<SERVICE_NAME>GC_GET_MESSAGE_DETAILS_CRM2</SERVICE_NAME>
+<REQUEST_STATUS>
+<STATUS>SUCCESS</STATUS>
+<STATUS_CODE>0</STATUS_CODE>
+<STATUS_MESSAGE/>
+</REQUEST_STATUS>
+<REQUEST_RESULT>
+<MESSAGE_RECORD>
+<CUSTOMER_ID>5910923</CUSTOMER_ID>
+<CUST_CODE>1.15561434</CUST_CODE>
+<CONTRACT_ID>10962971</CONTRACT_ID>
+<MSISDN>1-3RVNSCM</MSISDN>
+<SYSTEM>דיוור</SYSTEM>
+<OBJECT_TYPE>עסקה קצובה</OBJECT_TYPE>
+<OBJECT_ID>34220794</OBJECT_ID>
+<MESSAGE_ID>1-3RUENAW</MESSAGE_ID>
+<MESSAGE_TITLE>548147498</MESSAGE_TITLE>
+<MESSAGE_BODY>• עד לתאריך 30/06/2014 הנך נהנה מזיכוי עבור רכישת מכשיר בגין שימוש בחודש הקודם</MESSAGE_BODY>
+<MEDIA>Mail-</MEDIA>
+<MESSAGE_TO>5910923</MESSAGE_TO>
+<MESSAGE_CC/>
+<MESSAGE_BCC/>
+<FORMAT_CODE/>
+<USER_NAME>DELIVERY</USER_NAME>
+<REQUIRED_DATE>01/07/2011 06:27</REQUIRED_DATE>
+<STATUS>נשלח</STATUS>
+<STATUS_DATE>01/07/2011 06:38</STATUS_DATE>
+<RESPOND_ID/>
+<RESPOND_ERROR_CODE/>
+<RESPOND_STATUS/>
+<IMMEDIATE>Y</IMMEDIATE>
+<SENDER/>
+<TEMPLATE>31</TEMPLATE>
+<MESSAGE_BODY_LONG/>
+<CREATED_DATE>01/07/2011</CREATED_DATE>
+<DISPLAY_CODE/>
+<SHORT_TEXT/>
+<ACTION_DATE/>
+</MESSAGE_RECORD>
+<MESSAGE_RECORD>
+<CUSTOMER_ID>5910923</CUSTOMER_ID>
+<CUST_CODE>1.15561434</CUST_CODE>
+<CONTRACT_ID>10962971</CONTRACT_ID>
+<MSISDN>1-3RVNSCM</MSISDN>
+<SYSTEM>דיוור</SYSTEM>
+<OBJECT_TYPE>עסקה קצובה</OBJECT_TYPE>
+<OBJECT_ID>34220793</OBJECT_ID>
+<MESSAGE_ID>1-3RUEL68</MESSAGE_ID>
+<MESSAGE_TITLE>548147498</MESSAGE_TITLE>
+<MESSAGE_BODY>• עד לתאריך 30/06/2014 הנך נהנה מהחזר עבור התחייבות למפעיל אחר- תלוי שימוש בחודש קודם</MESSAGE_BODY>
+<MEDIA>Mail-</MEDIA>
+<MESSAGE_TO>5910923</MESSAGE_TO>
+<MESSAGE_CC/>
+<MESSAGE_BCC/>
+<FORMAT_CODE/>
+<USER_NAME>DELIVERY</USER_NAME>
+<REQUIRED_DATE>01/07/2011 06:27</REQUIRED_DATE>
+<STATUS>נשלח</STATUS>
+<STATUS_DATE>01/07/2011 06:38</STATUS_DATE>
+<RESPOND_ID/>
+<RESPOND_ERROR_CODE/>
+<RESPOND_STATUS/>
+<IMMEDIATE>Y</IMMEDIATE>
+<SENDER/>
+<TEMPLATE>31</TEMPLATE>
+<MESSAGE_BODY_LONG/>
+<CREATED_DATE>01/07/2011</CREATED_DATE>
+<DISPLAY_CODE/>
+<SHORT_TEXT/>
+<ACTION_DATE/>
+</MESSAGE_RECORD>
+<MESSAGE_RECORD>
+<CUSTOMER_ID>5910923</CUSTOMER_ID>
+<CUST_CODE>1.15561434</CUST_CODE>
+<CONTRACT_ID>10962970</CONTRACT_ID>
+<MSISDN>1-3SCUQ1I</MSISDN>
+<SYSTEM>דיוור</SYSTEM>
+<OBJECT_TYPE>עסקה קצובה</OBJECT_TYPE>
+<OBJECT_ID>34220807</OBJECT_ID>
+<MESSAGE_ID>1-3RUEIY8</MESSAGE_ID>
+<MESSAGE_TITLE>544507681</MESSAGE_TITLE>
+<MESSAGE_BODY>• עד לתאריך 30/06/2014 הנך נהנה מהחזר עבור התחייבות למפעיל אחר- תלוי שימוש בחודש קודם</MESSAGE_BODY>
+<MEDIA>Mail-</MEDIA>
+<MESSAGE_TO>5910923</MESSAGE_TO>
+<MESSAGE_CC/>
+<MESSAGE_BCC/>
+<FORMAT_CODE/>
+<USER_NAME>DELIVERY</USER_NAME>
+<REQUIRED_DATE>01/07/2011 06:27</REQUIRED_DATE>
+<STATUS>נשלח</STATUS>
+<STATUS_DATE>01/07/2011 06:38</STATUS_DATE>
+<RESPOND_ID/>
+<RESPOND_ERROR_CODE/>
+<RESPOND_STATUS/>
+<IMMEDIATE>Y</IMMEDIATE>
+<SENDER/>
+<TEMPLATE>31</TEMPLATE>
+<MESSAGE_BODY_LONG/>
+<CREATED_DATE>01/07/2011</CREATED_DATE>
+<DISPLAY_CODE/>
+<SHORT_TEXT/>
+<ACTION_DATE/>
+</MESSAGE_RECORD>
+<MESSAGE_RECORD>
+<CUSTOMER_ID>5910923</CUSTOMER_ID>
+<CUST_CODE>1.15561434</CUST_CODE>
+<CONTRACT_ID>10962970</CONTRACT_ID>
+<MSISDN>1-3SCUQ1I</MSISDN>
+<SYSTEM>דיוור</SYSTEM>
+<OBJECT_TYPE>עסקה קצובה</OBJECT_TYPE>
+<OBJECT_ID>34220808</OBJECT_ID>
+<MESSAGE_ID>1-3RUEJOW</MESSAGE_ID>
+<MESSAGE_TITLE>544507681</MESSAGE_TITLE>
+<MESSAGE_BODY>• עד לתאריך 30/06/2014 הנך נהנה מזיכוי עבור רכישת מכשיר בגין שימוש בחודש הקודם</MESSAGE_BODY>
+<MEDIA>Mail-</MEDIA>
+<MESSAGE_TO>5910923</MESSAGE_TO>
+<MESSAGE_CC/>
+<MESSAGE_BCC/>
+<FORMAT_CODE/>
+<USER_NAME>DELIVERY</USER_NAME>
+<REQUIRED_DATE>01/07/2011 06:27</REQUIRED_DATE>
+<STATUS>נשלח</STATUS>
+<STATUS_DATE>01/07/2011 06:38</STATUS_DATE>
+<RESPOND_ID/>
+<RESPOND_ERROR_CODE/>
+<RESPOND_STATUS/>
+<IMMEDIATE>Y</IMMEDIATE>
+<SENDER/>
+<TEMPLATE>31</TEMPLATE>
+<MESSAGE_BODY_LONG/>
+<CREATED_DATE>01/07/2011</CREATED_DATE>
+<DISPLAY_CODE/>
+<SHORT_TEXT/>
+<ACTION_DATE/>
+</MESSAGE_RECORD>
+<MESSAGE_RECORD>
+<CUSTOMER_ID>5910923</CUSTOMER_ID>
+<CUST_CODE>1.15561434</CUST_CODE>
+<CONTRACT_ID>10962970</CONTRACT_ID>
+<MSISDN>1-3SCUQ1I</MSISDN>
+<SYSTEM>RPE-IFBL</SYSTEM>
+<OBJECT_TYPE>reg_10</OBJECT_TYPE>
+<OBJECT_ID>IFBL</OBJECT_ID>
+<MESSAGE_ID>1-3TZPFV6</MESSAGE_ID>
+<MESSAGE_TITLE/>
+<MESSAGE_BODY>07/07/2011 23:15 שלום, מנוי 523062477 ניצל מעל 75% מנפח הגלישה הכלול בחבילה הגלישה שברשותו. חריגה מחבילה כרוכה בתשלום. פרטים על תעריפי חריגה והתאמת חבילות ב my orange</MESSAGE_BODY>
+<MEDIA>SMS-DATA</MEDIA>
+<MESSAGE_TO>0523062477</MESSAGE_TO>
+<MESSAGE_CC/>
+<MESSAGE_BCC/>
+<FORMAT_CODE>84_4036</FORMAT_CODE>
+<USER_NAME/>
+<REQUIRED_DATE>07/07/2011 23:15</REQUIRED_DATE>
+<STATUS>נשלח</STATUS>
+<STATUS_DATE>07/07/2011 23:16</STATUS_DATE>
+<RESPOND_ID>TRID: 78070720112316335387
+MOISH#</RESPOND_ID>
+<RESPOND_ERROR_CODE/>
+<RESPOND_STATUS/>
+<IMMEDIATE>Y</IMMEDIATE>
+<SENDER/>
+<TEMPLATE/>
+<MESSAGE_BODY_LONG/>
+<CREATED_DATE>07/07/2011</CREATED_DATE>
+<DISPLAY_CODE>75</DISPLAY_CODE>
+<SHORT_TEXT>שלום, המנוי ניצל מעל 75% מנפח הגלישה הכלול בחבילה הגלישה שברשותו. חריגה מחבילה כרוכה בתשלום. פרטים על תעריפי חריגה והתאמת חבילות ב my orange</SHORT_TEXT>
+<ACTION_DATE>07/07/2011 23:15</ACTION_DATE>
+</MESSAGE_RECORD>
+<MESSAGE_RECORD>
+<CUSTOMER_ID>5910923</CUSTOMER_ID>
+<CUST_CODE>1.15561434</CUST_CODE>
+<CONTRACT_ID>10962970</CONTRACT_ID>
+<MSISDN>1-3SCUQ1I</MSISDN>
+<SYSTEM>RPE-IFBL</SYSTEM>
+<OBJECT_TYPE>reg_10</OBJECT_TYPE>
+<OBJECT_ID>IFBL</OBJECT_ID>
+<MESSAGE_ID>1-3UCTN20</MESSAGE_ID>
+<MESSAGE_TITLE/>
+<MESSAGE_BODY>10/07/2011 10:32 שלום, מנוי 523062477 ניצל מעל 95% מנפח הגלישה הכלול בחבילה הגלישה שברשותו. חריגה מחבילה כרוכה בתשלום. פרטים על תעריפי חריגה והתאמת חבילות ב my orange</MESSAGE_BODY>
+<MEDIA>SMS-DATA</MEDIA>
+<MESSAGE_TO>0523062477</MESSAGE_TO>
+<MESSAGE_CC/>
+<MESSAGE_BCC/>
+<FORMAT_CODE>83_4036</FORMAT_CODE>
+<USER_NAME/>
+<REQUIRED_DATE>10/07/2011 10:32</REQUIRED_DATE>
+<STATUS>נשלח</STATUS>
+<STATUS_DATE>10/07/2011 10:32</STATUS_DATE>
+<RESPOND_ID>TRID: 78100720111032506194
+MOISH#</RESPOND_ID>
+<RESPOND_ERROR_CODE/>
+<RESPOND_STATUS/>
+<IMMEDIATE>Y</IMMEDIATE>
+<SENDER/>
+<TEMPLATE/>
+<MESSAGE_BODY_LONG/>
+<CREATED_DATE>10/07/2011</CREATED_DATE>
+<DISPLAY_CODE>95</DISPLAY_CODE>
+<SHORT_TEXT>שלום, המנוי ניצל מעל 95% מנפח הגלישה הכלול בחבילה הגלישה שברשותו. חריגה מחבילה כרוכה בתשלום. פרטים על תעריפי חריגה והתאמת חבילות ב my orange</SHORT_TEXT>
+<ACTION_DATE>10/07/2011 10:32</ACTION_DATE>
+</MESSAGE_RECORD>
+<MESSAGE_RECORD>
+<CUSTOMER_ID>5910923</CUSTOMER_ID>
+<CUST_CODE>1.15561434</CUST_CODE>
+<CONTRACT_ID/>
+<MSISDN/>
+<SYSTEM>VANTIVE</SYSTEM>
+<OBJECT_TYPE>INVOICE_MAIL_CONFIRMATION</OBJECT_TYPE>
+<OBJECT_ID>93440001</OBJECT_ID>
+<MESSAGE_ID>1-3YLZZ6T</MESSAGE_ID>
+<MESSAGE_TITLE>הצטרפותך לשירות חשבונית במייל</MESSAGE_TITLE>
+<MESSAGE_BODY/>
+<MEDIA>Formatted Email Long-</MEDIA>
+<MESSAGE_TO>nitzah_ibm@yahoo.com</MESSAGE_TO>
+<MESSAGE_CC/>
+<MESSAGE_BCC/>
+<FORMAT_CODE/>
+<USER_NAME/>
+<REQUIRED_DATE>24/07/2011 11:07</REQUIRED_DATE>
+<STATUS>נשלח</STATUS>
+<STATUS_DATE>24/07/2011 11:40</STATUS_DATE>
+<RESPOND_ID/>
+<RESPOND_ERROR_CODE/>
+<RESPOND_STATUS/>
+<IMMEDIATE>Y</IMMEDIATE>
+<SENDER>Orange Bill</SENDER>
+<TEMPLATE/>
+<MESSAGE_BODY_LONG><![CDATA[<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1255" /></head>
+<body bgcolor="#FFFFFF" style="direction:rtl;font-size:13px;font-family:Arial;">
+<table width="682"  cellpadding="0" cellspacing="0" align="center" style="font-size:13px;font-family:Arial;border-style:solid;border-width:10px;border-color:#E5E5E5;">
+<tr><td style="padding-right:10px;padding-top:10px;padding-bottom:10px;">
+<br/>לקוח יקר,<br /><br />
+תודה על שבחרת בשירות חשבונית במייל.<br />
+להלן תנאי השירות:<br />
+<ul>
+<li>שירות חשבונית במייל מחליף את שליחת החשבונית החודשית בדואר </li>
+<li>השירות ניתן ללקוחות שאמצעי התשלום שלהם תקף ומעודכן במערכות החברה. </li>
+<li><span dir="rtl"> עם הצטרפותך לשירות תהנה מהטבה חד פעמית בת </span><span dir="rtl"> 60 דקות ליעדי </span><span dir="rtl"> orange </span><span dir="rtl"> ובזק בישראל בלבד. </span> </li>
+</ul>
+על מנת להשלים את תהליך הרישום אנא <a style="color:orange;" href="http://www.orange.co.il/email/confirmRegistration/?PID=93440001">לחץ כאן</a> לאימות כתובת הדוא"ל ולאישור תנאי הרישום.<br/>
+<br/>
+<img src="http://www.orange.co.il/Global/a_mail/logo.gif" width="43" height="43" align="left"/><br/>
+</td></tr></table></body></html>]]></MESSAGE_BODY_LONG>
+<CREATED_DATE>24/07/2011</CREATED_DATE>
+<DISPLAY_CODE/>
+<SHORT_TEXT/>
+<ACTION_DATE/>
+</MESSAGE_RECORD>
+<MESSAGE_RECORD>
+<CUSTOMER_ID>5910923</CUSTOMER_ID>
+<CUST_CODE>1.15561434</CUST_CODE>
+<CONTRACT_ID>10962970</CONTRACT_ID>
+<MSISDN>1-3SCUQ1I</MSISDN>
+<SYSTEM>דיוור</SYSTEM>
+<OBJECT_TYPE>עסקה קצובה</OBJECT_TYPE>
+<OBJECT_ID>34325194</OBJECT_ID>
+<MESSAGE_ID>1-3YXVZWG</MESSAGE_ID>
+<MESSAGE_TITLE>523062477</MESSAGE_TITLE>
+<MESSAGE_BODY>• עד לתאריך 24/08/2011 הנך נהנה מהטבת 60 דקות ליעדי orange ומפעילים פנים ארציים ללא חיוב כהטבה • עם סיום ההטבה, תחויב בתעריפים המלאים החלים עליך</MESSAGE_BODY>
+<MEDIA>Mail-</MEDIA>
+<MESSAGE_TO>5910923</MESSAGE_TO>
+<MESSAGE_CC/>
+<MESSAGE_BCC/>
+<FORMAT_CODE/>
+<USER_NAME>DELIVERY</USER_NAME>
+<REQUIRED_DATE>25/07/2011 06:16</REQUIRED_DATE>
+<STATUS>לא לשליחה</STATUS>
+<STATUS_DATE>25/07/2011 06:16</STATUS_DATE>
+<RESPOND_ID/>
+<RESPOND_ERROR_CODE/>
+<RESPOND_STATUS/>
+<IMMEDIATE>Y</IMMEDIATE>
+<SENDER/>
+<TEMPLATE>31</TEMPLATE>
+<MESSAGE_BODY_LONG/>
+<CREATED_DATE>25/07/2011</CREATED_DATE>
+<DISPLAY_CODE/>
+<SHORT_TEXT/>
+<ACTION_DATE/>
+</MESSAGE_RECORD>
+<MESSAGE_RECORD>
+<CUSTOMER_ID>5910923</CUSTOMER_ID>
+<CUST_CODE>1.15561434</CUST_CODE>
+<CONTRACT_ID/>
+<MSISDN/>
+<SYSTEM>דיוור</SYSTEM>
+<OBJECT_TYPE>עסקה קצובה</OBJECT_TYPE>
+<OBJECT_ID>5910923</OBJECT_ID>
+<MESSAGE_ID>1-3YXWZ98</MESSAGE_ID>
+<MESSAGE_TITLE>כל עסקה היא התחלה חדשה</MESSAGE_TITLE>
+<MESSAGE_BODY>"&lt;!DOCTYPE HTML PUBLIC ""-//W3C//DTD HTML 4.01//EN"" ""http://www.w3.org/TR/html4/strict.dtd""&gt;
+&lt;html&gt;
+&lt;head&gt;
+      &lt;title&gt;כל עסקה היא התחלה חדשה&lt;/title&gt;
+      &lt;meta http-equiv=""Content-Type"" content=""text/html; charset=windows-1255""&gt;
+&lt;/head&gt;
+&lt;body style=""padding:auto; margin:auto;width:810px;height:566px;""&gt;&lt;BR&gt;&lt;BR&gt;   
+&lt;center&gt;     
+&lt;div &gt;
+&lt;img src=""http://direct.orange.co.il/static/selfservice/mailImages/70006222.jpg"" 
+ alt=""לצפייה בעסקאות הקצובות שביצעת לאחרונה, פתח את הקובת המצורף למייל זה"" border=""0"" 
+ title=""לצפייה בעסקאות הקצובות שביצעת לאחרונה, פתח את הקובת המצורף למייל זה"" 
+ style=""width:810px;height:566px;""
+ width=810 
+ height=566&gt;     
+&lt;/center&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;"</MESSAGE_BODY>
+<MEDIA>Formatted Email-</MEDIA>
+<MESSAGE_TO>nitzah_ibm@yahoo.com</MESSAGE_TO>
+<MESSAGE_CC/>
+<MESSAGE_BCC/>
+<FORMAT_CODE/>
+<USER_NAME>DELIVERY</USER_NAME>
+<REQUIRED_DATE>25/07/2011 06:40</REQUIRED_DATE>
+<STATUS>נשלח</STATUS>
+<STATUS_DATE>25/07/2011 06:47</STATUS_DATE>
+<RESPOND_ID/>
+<RESPOND_ERROR_CODE/>
+<RESPOND_STATUS/>
+<IMMEDIATE>Y</IMMEDIATE>
+<SENDER>direct@orange.co.il</SENDER>
+<TEMPLATE/>
+<MESSAGE_BODY_LONG/>
+<CREATED_DATE>25/07/2011</CREATED_DATE>
+<DISPLAY_CODE/>
+<SHORT_TEXT/>
+<ACTION_DATE/>
+</MESSAGE_RECORD>
+</REQUEST_RESULT>
+</IF_REPLY>
+
+if=2574:l7=406	SC_WEB_GENERATE_TOKEN_CRM (HTTP, PARSED=false, 1304091624097982391, UTF-8->UTF-8) - Sync Match Success
+======================================================================================================
+<IF_REQUEST><SERVICE_NAME>SC_WEB_GENERATE_TOKEN_CRM</SERVICE_NAME><PARAMS_LIST><TOKEN_DATA_TYPE>OPEN_BILL4U_INVOICE</TOKEN_DATA_TYPE><CSR_USER_PRIVILEGES></CSR_USER_PRIVILEGES><CUSTOMER_ID>2178078</CUSTOMER_ID><CONTRACT_ID></CONTRACT_ID><USER_TYPE>CustomerSingle</USER_TYPE><CSR_CRM_USERNAME>032582660</CSR_CRM_USERNAME><CSR_STATION_ID>OSN11507</CSR_STATION_ID><SYSTEM_NAME>VANTIVE</SYSTEM_NAME></PARAMS_LIST></IF_REQUEST>
+----- IF Response
+<IF_REPLY><SERVICE_NAME>SC_WEB_GENERATE_TOKEN_CRM</SERVICE_NAME><REQUEST_STATUS><STATUS>SUCCESS</STATUS><STATUS_CODE>0</STATUS_CODE><STATUS_MESSAGE></STATUS_MESSAGE></REQUEST_STATUS><REQUEST_RESULT><SS_TOKEN>e8afe33c-ccb4-455d-9e32-f20ac155190c</SS_TOKEN></REQUEST_RESULT></IF_REPLY>
+-----   L7 Response  -----
+<IF_REPLY><SERVICE_NAME>SC_WEB_GENERATE_TOKEN_CRM</SERVICE_NAME><REQUEST_STATUS><STATUS>SUCCESS</STATUS><STATUS_CODE>0</STATUS_CODE><STATUS_MESSAGE></STATUS_MESSAGE></REQUEST_STATUS><REQUEST_RESULT><SS_TOKEN>34d17fa0-5854-47fd-aab8-867c46a44695</SS_TOKEN></REQUEST_RESULT></IF_REPLY>
+
+if=250:l7=406	CS_BULK_UPDATE_CONTR_CUST (HTTP, PARSED=false, 1304092159119448291, UTF-8->UTF-8) - Sync Match Success
+======================================================================================================
+<IF_REQUEST>
+                                    <SERVICE_NAME>CS_BULK_UPDATE_CONTR_CUST</SERVICE_NAME>
+                                    <PARAMS_LIST>
+                                                    <SOURCE_CHANNEL>WEB</SOURCE_CHANNEL>
+                                                    <REQUEST_USERNAME>BISPORTAL</REQUEST_USERNAME>
+                                                    <ORDER_NUMBER>100981</ORDER_NUMBER>
+                                                    <ORDER_PART_NUMBER>1</ORDER_PART_NUMBER>
+                                                    <CUSTOMER_ID>300373</CUSTOMER_ID>
+                                                    <CONTACT_MAIL>eran.dahan5@orange.co.il</CONTACT_MAIL>
+                                                    <CONTACT_PHONE_NUMBER>0546664599</CONTACT_PHONE_NUMBER>
+                                                    <CONTRACTS_IN_ORDER>1</CONTRACTS_IN_ORDER>
+                                                    <TOPIC>עדכון פרטים</TOPIC>
+                                                    <SUB_TOPIC>פרטי מנוי</SUB_TOPIC>
+                                                    <BILLING><OBJECT>
+                                                   <OBJECT_ID>3364822</OBJECT_ID>
+                                                   <OBJECT_NAME>Contract</OBJECT_NAME><FIELDS>
+                                                        <FIELD_NAME>MADRIH_144</FIELD_NAME>
+                                                        <FIELD_CONTENT>X</FIELD_CONTENT>
+                                         </FIELDS><FIELDS>
+                                                        <FIELD_NAME>MADRIH_144_CORPORATE</FIELD_NAME>
+                                                        <FIELD_CONTENT>N</FIELD_CONTENT>
+                                        </FIELDS><FIELDS>
+                                                        <FIELD_NAME>MADRIH_144_INDIVIDUAL</FIELD_NAME>
+                                                        <FIELD_CONTENT>N</FIELD_CONTENT>
+                                        </FIELDS></OBJECT></BILLING>
+                                                    <BILL4U></BILL4U>
+                                    </PARAMS_LIST>
+                                </IF_REQUEST>
+----- IF Response
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY xmlns="">
+    <SERVICE_NAME>CS_BULK_UPDATE_CONTR_CUST</SERVICE_NAME>
+    <REQUEST_STATUS>
+        <STATUS>SUCCESS</STATUS>
+        <STATUS_CODE/>
+        <STATUS_MESSAGE/>
+    </REQUEST_STATUS>
+    <REQUEST_RESULT/>
+</IF_REPLY>
+-----   L7 Response  -----
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY xmlns="">
+    <SERVICE_NAME>CS_BULK_UPDATE_CONTR_CUST</SERVICE_NAME>
+    <REQUEST_STATUS>
+        <STATUS>SUCCESS</STATUS>
+        <STATUS_CODE/>
+        <STATUS_MESSAGE/>
+    </REQUEST_STATUS>
+    <REQUEST_RESULT/>
+</IF_REPLY>
+
+if=48:l7=187	GC_GET_USER_PACKAGE_FM (HTTP, PARSED=false, 1304092159510402291, UTF-8->UTF-8) - Sync NO MATCH ERROR
+====================================================================================================
+<IF_REQUEST><SERVICE_NAME>GC_GET_USER_PACKAGE_FM</SERVICE_NAME><PARAMS_LIST><MSISDN>0545237955</MSISDN><NEWDEVICETYPE>Motorola spirit M930</NEWDEVICETYPE></PARAMS_LIST></IF_REQUEST>
+----- IF Response
+<?xml version="1.0" encoding="UTF-8"?><IF_REPLY><SERVICE_NAME>GC_GET_USER_PACKAGE_FM</SERVICE_NAME><REQUEST_STATUS><STATUS>SUCCESS</STATUS><STATUS_CODE>0</STATUS_CODE><STATUS_MESSAGE /></REQUEST_STATUS><REQUEST_RESULT>
+<IF_REPLY>
+    <SERVICE_NAME>GC_GET_USER_PACKAGE_FM</SERVICE_NAME>
+    <REQUEST_STATUS>
+        <STATUS>ERROR</STATUS>
+        <STATUS_CODE>3</STATUS_CODE>
+        <STATUS_MESSAGE>SE-HTTP:Prepare QueryString error, argument XML_REQUEST not found in request</STATUS_MESSAGE>
+        <IS_CANCEL_NEEDED>N</IS_CANCEL_NEEDED>
+    </REQUEST_STATUS>
+    <REQUEST_ID>1305030248464221691</REQUEST_ID>
+</IF_REPLY></REQUEST_RESULT></IF_REPLY>
+-----   L7 Response  -----
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY>
+    <REQUEST_STATUS>
+        <STATUS>ERROR</STATUS>
+        <STATUS_CODE>5001</STATUS_CODE>
+        <STATUS_MESSAGE>Request Parse Error in RPE_Bulk_GW </STATUS_MESSAGE>
+        <DEBUG_INFO>A validation occurred while parsing:  validation error: unexpected content "MSISDN"; expected "OWNER_ID"   ({com.tibco.xml.validation}COMPLEX_E_UNEXPECTED_CONTENT) at /IF_REQUEST[1]/PARAMS_LIST[1]/MSISDN[1]
+com.tibco.xml.validation.exception.UnexpectedElementException: unexpected content "MSISDN"; expected "OWNER_ID"
+	at com.tibco.xml.validation.state.a.c.a(CMElementValidationState.java:476)
+	at com.tibco.xml.validation.state.a.c.b(CMElementValidationState.java:346)
+	at com.tibco.xml.validation.state.a.c.a(CMElementValidationState.java:142)
+	at com.tibco.xml.validation.state.driver.ValidationJazz.c(ValidationJazz.java:977)
+	at com.tibco.xml.validation.state.driver.ValidationJazz.b(ValidationJazz.java:882)
+	at com.tibco.xml.validation.state.driver.ValidationJazz.endAttributes(ValidationJazz.java:767)
+	at com.tibco.xml.validation.state.glue.XmlTreeNodeValidationDriver.xmlTreeNode(XmlTreeNodeValidationDriver.java:87)
+	at com.tibco.xml.validation.state.glue.XmlTreeNodeValidationDriver.xmlTreeNode(XmlTreeNodeValidationDriver.java:92)
+	at com.tibco.xml.validation.state.glue.XmlTreeNodeValidationDriver.xmlTreeNode(XmlTreeNodeValidationDriver.java:92)
+	at com.tibco.xml.validation.state.glue.XmlTreeNodeValidationDriver.xmlTreeNode(XmlTreeNodeValidationDriver.java:129)
+	at com.tibco.xml.xdata.bind.BindingRunner.validate(Unknown Source)
+	at com.tibco.plugin.xml.XMLParseActivity.eval(Unknown Source)
+	at com.tibco.pe.plugin.Activity.eval(Unknown Source)
+	at com.tibco.pe.core.TaskImpl.eval(Unknown Source)
+	at com.tibco.pe.core.Job.a(Unknown Source)
+	at com.tibco.pe.core.Job.k(Unknown Source)
+	at com.tibco.pe.core.JobDispatcher$JobCourier.a(Unknown Source)
+	at com.tibco.pe.core.JobDispatcher$JobCourier.run(Unknown Source)
+validation error: no declaration for element "MSISDN"   ({com.tibco.xml.validation}COMPLEX_E_MISSING_ELEMENT_DECLARATION) at /IF_REQUEST[1]/PARAMS_LIST[1]/MSISDN[1]
+com.tibco.xml.validation.exception.MissingDeclarationException: no declaration for element "MSISDN"
+	at com.tibco.xml.validation.state.driver.ValidationJazz.b(ValidationJazz.java:890)
+	at com.tibco.xml.validation.state.driver.ValidationJazz.endAttributes(ValidationJazz.java:767)
+	at com.tibco.xml.validation.state.glue.XmlTreeNodeValidationDriver.xmlTreeNode(XmlTreeNodeValidationDriver.java:87)
+	at com.tibco.xml.validation.state.glue.XmlTreeNodeValidationDriver.xmlTreeNode(XmlTreeNodeValidationDriver.java:92)
+	at com.tibco.xml.validation.state.glue.XmlTreeNodeValidationDriver.xmlTreeNode(XmlTreeNodeValidationDriver.java:92)
+	at com.tibco.xml.validation.state.glue.XmlTreeNodeValidationDriver.xmlTreeNode(XmlTreeNodeValidationDriver.java:129)
+	at com.tibco.xml.xdata.bind.BindingRunner.validate(Unknown Source)
+	at com.tibco.plugin.xml.XMLParseActivity.eval(Unknown Source)
+	at com.tibco.pe.plugin.Activity.eval(Unknown Source)
+	at com.tibco.pe.core.TaskImpl.eval(Unknown Source)
+	at com.tibco.pe.core.Job.a(Unknown Source)
+	at com.tibco.pe.core.Job.k(Unknown Source)
+	at com.tibco.pe.core.JobDispatcher$JobCourier.a(Unknown Source)
+	at com.tibco.pe.core.JobDispatcher$JobCourier.run(Unknown Source)
+.</DEBUG_INFO>
+    </REQUEST_STATUS>
+</IF_REPLY>
+
+if=2699:l7=2184	GC_USE_ENTITLEMENT_CRM2 (HTTP, PARSED=false, 1304030719289686191, UTF-8->UTF-8) - Sync Semantically Exact
+=========================================================================================================
+<?xml version="1.0" encoding="UTF-8" ?> 
+    <IF_REQUEST IF_SERVICE_NAME="GC_USE_ENTITLEMENT_CRM2">  <SERVICE_NAME>GC_USE_ENTITLEMENT_CRM2</SERVICE_NAME> 
+       <PARAMS_LIST>
+          <CUSTCODE>4.6895.00.00.102882</CUSTCODE> 
+  <SOURCE_SYSTEM>SWAP</SOURCE_SYSTEM> 
+  <SYSTEM_USER>VANTIVE</SYSTEM_USER>
+  <USER>יוליה רודז</USER> 
+   <CONTRACT_ID>454567</CONTRACT_ID> 
+  <ITEM_TYPE>CATALOG_NUMBER</ITEM_TYPE> 
+  <ITEM_ID>S-34345</ITEM_ID> 
+  <PRICE_NO_VAT>100</PRICE_NO_VAT> 
+  <PRICE_WITH_VAT>116</PRICE_WITH_VAT> 
+  <USE_QUANTITY>3</USE_QUANTITY> 
+  <ENTITLEMENT_ID>1-1EG8TYY</ENTITLEMENT_ID> 
+  <CUSTOM_FIELD1_NAME>מספר פניה</CUSTOM_FIELD1_NAME> 
+    <CUSTOM_FIELD1_VALUE>54794567</CUSTOM_FIELD1_VALUE>
+  <CUSTOM_FIELD2_NAME>SWAP מספר רשומת</CUSTOM_FIELD2_NAME>     
+  <CUSTOM_FIELD2_VALUE>65156612</CUSTOM_FIELD2_VALUE>
+  <CUSTOM_FIELD3_NAME>דגם מכשיר</CUSTOM_FIELD3_NAME> 
+  <CUSTOM_FIELD3_VALUE>IPHONE4</CUSTOM_FIELD3_VALUE>  
+   <CUSTOM_FIELD4_NAME/> 
+  <CUSTOM_FIELD4_VALUE/> 
+  <CUSTOM_FIELD5_NAME/> 
+  <CUSTOM_FIELD5_VALUE/> 
+    </PARAMS_LIST>
+  </IF_REQUEST>
+
+----- IF Response
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY>
+<SERVICE_NAME>GC_USE_ENTITLEMENT_CRM2</SERVICE_NAME>
+<REQUEST_STATUS>
+<STATUS>SUCCESS</STATUS>
+<STATUS_CODE>0</STATUS_CODE>
+<STATUS_MESSAGE/>
+</REQUEST_STATUS>
+<REQUEST_RESULT>
+<REQUEST_INFO_CODE>1000</REQUEST_INFO_CODE>
+<REQUEST_INFO>לא קיים הסכם ללקוח</REQUEST_INFO>
+</REQUEST_RESULT>
+</IF_REPLY>
+-----   L7 Response  -----
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY>
+<SERVICE_NAME>GC_USE_ENTITLEMENT_CRM2</SERVICE_NAME>
+<REQUEST_STATUS>
+<STATUS>SUCCESS</STATUS>
+<STATUS_CODE>0</STATUS_CODE>
+<STATUS_MESSAGE/>
+</REQUEST_STATUS>
+<REQUEST_RESULT>
+<REQUEST_INFO_CODE>1000</REQUEST_INFO_CODE>
+<REQUEST_INFO>לא קיים הסכם ללקוח</REQUEST_INFO>
+</REQUEST_RESULT>
+</IF_REPLY>
+
+if=2121:l7=1982	GC_CREATE_CONTACT_CRM2 (HTTP, PARSED=false, 1304041155092918591, UTF-8->UTF-8) - Sync Semantically Exact
+========================================================================================================
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REQUEST IF_SERVICE_NAME="GC_CREATE_CONTACT_CRM2">
+    <SERVICE_NAME>GC_CREATE_CONTACT_CRM2</SERVICE_NAME>
+    <PARAMS_LIST>
+        <CONTACT_DATA>
+            <FIRST_NAME>בדיקה</FIRST_NAME>
+            <LAST_NAME>בדיקה</LAST_NAME>
+            <SSN>308754548</SSN>
+            <HOME_PHONE>+9720548783120</HOME_PHONE>
+            <WORK_PHONE>+9720542429335</WORK_PHONE>
+            <BIRTH_DATE>01/01/2000</BIRTH_DATE>
+            <EMAIL_ADDR>roman.cheinin@orange.co.il</EMAIL_ADDR>
+        </CONTACT_DATA>
+    </PARAMS_LIST>
+</IF_REQUEST>
+----- IF Response
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY>
+<SERVICE_NAME>GC_CREATE_CONTACT_CRM2</SERVICE_NAME>
+<REQUEST_STATUS>
+<STATUS>SUCCESS</STATUS>
+<STATUS_CODE>0</STATUS_CODE>
+<STATUS_MESSAGE>SUCCESS</STATUS_MESSAGE>
+</REQUEST_STATUS>
+<REQUEST_RESULT>
+<CONTACT_ID>1-4N144D9</CONTACT_ID>
+</REQUEST_RESULT>
+</IF_REPLY>
+-----   L7 Response  -----
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY>
+<SERVICE_NAME>GC_CREATE_CONTACT_CRM2</SERVICE_NAME>
+<REQUEST_STATUS>
+<STATUS>SUCCESS</STATUS>
+<STATUS_CODE>0</STATUS_CODE>
+<STATUS_MESSAGE>SUCCESS</STATUS_MESSAGE>
+</REQUEST_STATUS>
+<REQUEST_RESULT>
+<CONTACT_ID>1-4N144D9</CONTACT_ID>
+</REQUEST_RESULT>
+</IF_REPLY>
+
+if=9953:l7=3214	GC_MANAGE_IR_VOB_PROVISIONING (HTTP, PARSED=false, 1304092234307266291, UTF-8->UTF-8) - Sync Match Success
+==========================================================================================================
+<?xml version = "1.0" encoding = "UTF-8"?>
+<IF_REQUEST>
+	<SERVICE_NAME>GC_MANAGE_IR_VOB_PROVISIONING</SERVICE_NAME>
+	<PARAMS_LIST>
+		<REQUESTER>012</REQUESTER>
+		<ACTION>DELETE</ACTION>
+		<MSISDN>737012312</MSISDN>
+		<USERNAME>shiroii@orange.net.il</USERNAME>
+		<PASSWORD>Aa123456</PASSWORD>
+		<REGISTRATION_DATE>190309</REGISTRATION_DATE>
+		<HIQID>1</HIQID>
+		<NEWUSERNAME/>
+		<NEW_MSISDN/>
+		<SUSPEND>1</SUSPEND>
+		<BAD_PAYMENT>1</BAD_PAYMENT>
+		<SERVICE_PARAMS/>
+	</PARAMS_LIST>
+</IF_REQUEST>
+----- IF Response
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY><SERVICE_NAME>GC_MANAGE_IR_VOB_PROVISIONING</SERVICE_NAME><REQUEST_STATUS><STATUS>SUCCESS</STATUS><STATUS_CODE>0</STATUS_CODE><STATUS_MESSAGE>Success</STATUS_MESSAGE></REQUEST_STATUS></IF_REPLY>
+-----   L7 Response  -----
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY><SERVICE_NAME>GC_MANAGE_IR_VOB_PROVISIONING</SERVICE_NAME><REQUEST_STATUS><STATUS>SUCCESS</STATUS><STATUS_CODE>0</STATUS_CODE><STATUS_MESSAGE>Success</STATUS_MESSAGE></REQUEST_STATUS></IF_REPLY>
+
+if=1747:l7=2106	GC_GET_PRODUCT_PRICE_FROM_MASTER_ORDER_CRM2 (HTTP, PARSED=false, 1304021510289922091, UTF-8->UTF-8) - Sync Semantically Exact
+=============================================================================================================================
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REQUEST IF_SERVICE_NAME="GC_GET_PRODUCT_PRICE_FROM_MASTER_ORDER_CRM2">
+<SERVICE_NAME>GC_GET_PRODUCT_PRICE_FROM_MASTER_ORDER_CRM2</SERVICE_NAME>
+<PARAMS_LIST>
+<MASTER_ORDER_NUMBER>1-10180829544</MASTER_ORDER_NUMBER>
+<PRODUCT_NAME>012Micro-Sim</PRODUCT_NAME>
+</PARAMS_LIST>
+</IF_REQUEST>
+----- IF Response
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY>
+<SERVICE_NAME>GC_GET_PRODUCT_PRICE_FROM_MASTER_ORDER_CRM2</SERVICE_NAME>
+<REQUEST_STATUS>
+<STATUS>SUCCESS</STATUS>
+<STATUS_CODE>0</STATUS_CODE>
+<STATUS_MESSAGE/>
+</REQUEST_STATUS>
+<REQUEST_RESULT>
+<REQUEST_INFO_CODE/>
+<REQUEST_INFO/>
+<LIST_PRICE>76.03</LIST_PRICE>
+<LIST_PRICE_TAX>88.96</LIST_PRICE_TAX>
+<PROMOTION_PRICE>41.88</PROMOTION_PRICE>
+<PROMOTION_PRICE_TAX>49</PROMOTION_PRICE_TAX>
+</REQUEST_RESULT>
+</IF_REPLY>
+-----   L7 Response  -----
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY>
+<SERVICE_NAME>GC_GET_PRODUCT_PRICE_FROM_MASTER_ORDER_CRM2</SERVICE_NAME>
+<REQUEST_STATUS>
+<STATUS>SUCCESS</STATUS>
+<STATUS_CODE>0</STATUS_CODE>
+<STATUS_MESSAGE/>
+</REQUEST_STATUS>
+<REQUEST_RESULT>
+<REQUEST_INFO_CODE/>
+<REQUEST_INFO/>
+<LIST_PRICE>76.03</LIST_PRICE>
+<LIST_PRICE_TAX>88.96</LIST_PRICE_TAX>
+<PROMOTION_PRICE>41.88</PROMOTION_PRICE>
+<PROMOTION_PRICE_TAX>49</PROMOTION_PRICE_TAX>
+</REQUEST_RESULT>
+</IF_REPLY>
+
+if=78:l7=203	CS_GET_SOG_INFO_PP (HTTP, PARSED=false, 1304030655122707291, UTF-8->UTF-8) - Sync VALID ERROR
+=============================================================================================
+<?xml version="1.0" encoding="UTF-8"?><IF_REQUEST
+><SERVICE_NAME
+>CS_GET_SOG_INFO_PP</SERVICE_NAME
+><PARAMS_LIST
+><MSISDN
+>545829518</MSISDN
+><MASTER_DETAILS
+>N</MASTER_DETAILS
+><CONTRACT_ID
+>6722289</CONTRACT_ID
+></PARAMS_LIST
+></IF_REQUEST
+>
+----- IF Response
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY><SERVICE_NAME>GC_GET_SOG_INFO_PP</SERVICE_NAME><REQUEST_STATUS><STATUS>SUCCESS</STATUS><STATUS_CODE>0</STATUS_CODE><STATUS_MESSAGE/></REQUEST_STATUS><REQUEST_RESULT/></IF_REPLY>
+-----   L7 Response  -----
+<IF_REPLY>
+<STATUS>ERROR</STATUS>
+<STATUS_MESSAGE>ESB:Comparison matched</STATUS_MESSAGE>
+</IF_REPLY>
+
+if=1575:l7=2044	GC_GET_CAMPAIGN_LEAD_CRM2 (HTTP, PARSED=false, 1304030401550745291, UTF-8->UTF-8) - Sync Semantically Exact
+===========================================================================================================
+<?xml version="1.0" encoding="UTF-8" ?><IF_REQUEST IF_SERVICE_NAME="GC_GET_CAMPAIGN_LEAD_CRM2"><SERVICE_NAME>GC_GET_CAMPAIGN_LEAD_CRM2</SERVICE_NAME><PARAMS_LIST><USER_CODE>MOSSDEVADMIN</USER_CODE><CAMPAIGN_SOURCE>Intranet</CAMPAIGN_SOURCE><CORRELATION_ID></CORRELATION_ID><IDM_TOKEN></IDM_TOKEN></PARAMS_LIST></IF_REQUEST>
+----- IF Response
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY>
+<SERVICE_NAME>GC_GET_CAMPAIGN_LEAD_CRM2</SERVICE_NAME>
+<REQUEST_STATUS>
+<STATUS>SUCCESS</STATUS>
+<STATUS_CODE>0</STATUS_CODE>
+<STATUS_MESSAGE/>
+</REQUEST_STATUS>
+<REQUEST_RESULT/>
+</IF_REPLY>
+-----   L7 Response  -----
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY>
+<SERVICE_NAME>GC_GET_CAMPAIGN_LEAD_CRM2</SERVICE_NAME>
+<REQUEST_STATUS>
+<STATUS>SUCCESS</STATUS>
+<STATUS_CODE>0</STATUS_CODE>
+<STATUS_MESSAGE/>
+</REQUEST_STATUS>
+<REQUEST_RESULT/>
+</IF_REPLY>
+
+if=1966:l7=7800	GC_GET_PRODUCT_ATTRIBUTES_CRM2 (HTTP, PARSED=false, 1304100600015305691, UTF-8->UTF-8) - Sync Semantically Exact
+================================================================================================================
+<?xml version="1.0" encoding="UTF-8" ?><IF_REQUEST IF_SERVICE_NAME="GC_GET_PRODUCT_ATTRIBUTES_CRM2"><SERVICE_NAME>GC_GET_PRODUCT_ATTRIBUTES_CRM2</SERVICE_NAME><PARAMS_LIST><PRODUCT_NAME>Voicemail</PRODUCT_NAME></PARAMS_LIST></IF_REQUEST>
+----- IF Response
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY>
+<SERVICE_NAME>_GET_PRODUCT_ATTRIBUTES_CRM2</SERVICE_NAME>
+<REQUEST_STATUS>
+<STATUS>SUCCESS</STATUS>
+<STATUS_CODE>0</STATUS_CODE>
+<STATUS_MESSAGE/>
+</REQUEST_STATUS>
+<PRODUCTS>
+<PRODUCT>
+<NAME>Voicemail</NAME>
+<PRODUCT_ID>1-1MS6P</PRODUCT_ID>
+<ATTRIBUTES>
+<ATTRIBUTE>
+<ATTRIBUTE_NAME>Voicemail Notification Type</ATTRIBUTE_NAME>
+<DATA_TYPE>Text</DATA_TYPE>
+<DEFAULT_VALUE>ICON ONLY</DEFAULT_VALUE>
+<DISPLAY_NAME>אייקון</DISPLAY_NAME>
+<NAME>Notification Type</NAME>
+<VALUE>
+<LIC_VALUE>Icon</LIC_VALUE>
+<ATTR_VALUE>Icon</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>SMS</LIC_VALUE>
+<ATTR_VALUE>SMS</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>ICON ONLY</LIC_VALUE>
+<ATTR_VALUE>ICON ONLY</ATTR_VALUE>
+</VALUE>
+</ATTRIBUTE>
+<ATTRIBUTE>
+<ATTRIBUTE_NAME>Boolean</ATTRIBUTE_NAME>
+<DATA_TYPE>Text</DATA_TYPE>
+<DEFAULT_VALUE>N</DEFAULT_VALUE>
+<DISPLAY_NAME>לא</DISPLAY_NAME>
+<NAME>Reset Password</NAME>
+<VALUE>
+<LIC_VALUE>Y</LIC_VALUE>
+<ATTR_VALUE>Y</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>N</LIC_VALUE>
+<ATTR_VALUE>N</ATTR_VALUE>
+</VALUE>
+</ATTRIBUTE>
+<ATTRIBUTE>
+<ATTRIBUTE_NAME>Language</ATTRIBUTE_NAME>
+<DATA_TYPE>Text</DATA_TYPE>
+<DEFAULT_VALUE/>
+<DISPLAY_NAME/>
+<NAME>Voicemail Language</NAME>
+<VALUE>
+<LIC_VALUE>Hebrew</LIC_VALUE>
+<ATTR_VALUE>Hebrew</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>English</LIC_VALUE>
+<ATTR_VALUE>English</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>Arabic</LIC_VALUE>
+<ATTR_VALUE>Arabic</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>Russian</LIC_VALUE>
+<ATTR_VALUE>Russian</ATTR_VALUE>
+</VALUE>
+</ATTRIBUTE>
+<ATTRIBUTE>
+<ATTRIBUTE_NAME>Level</ATTRIBUTE_NAME>
+<DATA_TYPE>Number</DATA_TYPE>
+<DEFAULT_VALUE>5</DEFAULT_VALUE>
+<DISPLAY_NAME>5</DISPLAY_NAME>
+<NAME>Voicemail Level</NAME>
+<VALUE>
+<LIC_VALUE>1</LIC_VALUE>
+<ATTR_VALUE>1</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>2</LIC_VALUE>
+<ATTR_VALUE>2</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>3</LIC_VALUE>
+<ATTR_VALUE>3</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>4</LIC_VALUE>
+<ATTR_VALUE>4</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>9</LIC_VALUE>
+<ATTR_VALUE>9</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>5</LIC_VALUE>
+<ATTR_VALUE>5</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>6</LIC_VALUE>
+<ATTR_VALUE>6</ATTR_VALUE>
+</VALUE>
+</ATTRIBUTE>
+<ATTRIBUTE>
+<ATTRIBUTE_NAME>Voicemail Type</ATTRIBUTE_NAME>
+<DATA_TYPE>Text</DATA_TYPE>
+<DEFAULT_VALUE>Legacy</DEFAULT_VALUE>
+<DISPLAY_NAME>תא הודעות קולי</DISPLAY_NAME>
+<NAME>Voicemail Type</NAME>
+<VALUE>
+<LIC_VALUE>Legacy</LIC_VALUE>
+<ATTR_VALUE>Legacy</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>Video</LIC_VALUE>
+<ATTR_VALUE>Video</ATTR_VALUE>
+</VALUE>
+</ATTRIBUTE>
+<ATTRIBUTE>
+<ATTRIBUTE_NAME>Waiting Time</ATTRIBUTE_NAME>
+<DATA_TYPE>Text</DATA_TYPE>
+<DEFAULT_VALUE>25 Sec</DEFAULT_VALUE>
+<DISPLAY_NAME>25 שניות</DISPLAY_NAME>
+<NAME>Waiting Time</NAME>
+<VALUE>
+<LIC_VALUE>30 Sec</LIC_VALUE>
+<ATTR_VALUE>30 Sec</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>15 Sec</LIC_VALUE>
+<ATTR_VALUE>15 Sec</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>25 Sec</LIC_VALUE>
+<ATTR_VALUE>25 Sec</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>No Auto Forward</LIC_VALUE>
+<ATTR_VALUE>No Auto Forward</ATTR_VALUE>
+</VALUE>
+</ATTRIBUTE>
+</ATTRIBUTES>
+</PRODUCT>
+</PRODUCTS>
+</IF_REPLY>
+-----   L7 Response  -----
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY>
+<SERVICE_NAME>_GET_PRODUCT_ATTRIBUTES_CRM2</SERVICE_NAME>
+<REQUEST_STATUS>
+<STATUS>SUCCESS</STATUS>
+<STATUS_CODE>0</STATUS_CODE>
+<STATUS_MESSAGE/>
+</REQUEST_STATUS>
+<PRODUCTS>
+<PRODUCT>
+<NAME>Voicemail</NAME>
+<PRODUCT_ID>1-1MS6P</PRODUCT_ID>
+<ATTRIBUTES>
+<ATTRIBUTE>
+<ATTRIBUTE_NAME>Voicemail Notification Type</ATTRIBUTE_NAME>
+<DATA_TYPE>Text</DATA_TYPE>
+<DEFAULT_VALUE>ICON ONLY</DEFAULT_VALUE>
+<DISPLAY_NAME>אייקון</DISPLAY_NAME>
+<NAME>Notification Type</NAME>
+<VALUE>
+<LIC_VALUE>Icon</LIC_VALUE>
+<ATTR_VALUE>Icon</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>SMS</LIC_VALUE>
+<ATTR_VALUE>SMS</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>ICON ONLY</LIC_VALUE>
+<ATTR_VALUE>ICON ONLY</ATTR_VALUE>
+</VALUE>
+</ATTRIBUTE>
+<ATTRIBUTE>
+<ATTRIBUTE_NAME>Boolean</ATTRIBUTE_NAME>
+<DATA_TYPE>Text</DATA_TYPE>
+<DEFAULT_VALUE>N</DEFAULT_VALUE>
+<DISPLAY_NAME>לא</DISPLAY_NAME>
+<NAME>Reset Password</NAME>
+<VALUE>
+<LIC_VALUE>Y</LIC_VALUE>
+<ATTR_VALUE>Y</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>N</LIC_VALUE>
+<ATTR_VALUE>N</ATTR_VALUE>
+</VALUE>
+</ATTRIBUTE>
+<ATTRIBUTE>
+<ATTRIBUTE_NAME>Language</ATTRIBUTE_NAME>
+<DATA_TYPE>Text</DATA_TYPE>
+<DEFAULT_VALUE/>
+<DISPLAY_NAME/>
+<NAME>Voicemail Language</NAME>
+<VALUE>
+<LIC_VALUE>Hebrew</LIC_VALUE>
+<ATTR_VALUE>Hebrew</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>English</LIC_VALUE>
+<ATTR_VALUE>English</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>Arabic</LIC_VALUE>
+<ATTR_VALUE>Arabic</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>Russian</LIC_VALUE>
+<ATTR_VALUE>Russian</ATTR_VALUE>
+</VALUE>
+</ATTRIBUTE>
+<ATTRIBUTE>
+<ATTRIBUTE_NAME>Level</ATTRIBUTE_NAME>
+<DATA_TYPE>Number</DATA_TYPE>
+<DEFAULT_VALUE>5</DEFAULT_VALUE>
+<DISPLAY_NAME>5</DISPLAY_NAME>
+<NAME>Voicemail Level</NAME>
+<VALUE>
+<LIC_VALUE>1</LIC_VALUE>
+<ATTR_VALUE>1</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>2</LIC_VALUE>
+<ATTR_VALUE>2</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>3</LIC_VALUE>
+<ATTR_VALUE>3</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>4</LIC_VALUE>
+<ATTR_VALUE>4</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>9</LIC_VALUE>
+<ATTR_VALUE>9</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>5</LIC_VALUE>
+<ATTR_VALUE>5</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>6</LIC_VALUE>
+<ATTR_VALUE>6</ATTR_VALUE>
+</VALUE>
+</ATTRIBUTE>
+<ATTRIBUTE>
+<ATTRIBUTE_NAME>Voicemail Type</ATTRIBUTE_NAME>
+<DATA_TYPE>Text</DATA_TYPE>
+<DEFAULT_VALUE>Legacy</DEFAULT_VALUE>
+<DISPLAY_NAME>תא הודעות קולי</DISPLAY_NAME>
+<NAME>Voicemail Type</NAME>
+<VALUE>
+<LIC_VALUE>Legacy</LIC_VALUE>
+<ATTR_VALUE>Legacy</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>Video</LIC_VALUE>
+<ATTR_VALUE>Video</ATTR_VALUE>
+</VALUE>
+</ATTRIBUTE>
+<ATTRIBUTE>
+<ATTRIBUTE_NAME>Waiting Time</ATTRIBUTE_NAME>
+<DATA_TYPE>Text</DATA_TYPE>
+<DEFAULT_VALUE>25 Sec</DEFAULT_VALUE>
+<DISPLAY_NAME>25 שניות</DISPLAY_NAME>
+<NAME>Waiting Time</NAME>
+<VALUE>
+<LIC_VALUE>30 Sec</LIC_VALUE>
+<ATTR_VALUE>30 Sec</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>15 Sec</LIC_VALUE>
+<ATTR_VALUE>15 Sec</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>25 Sec</LIC_VALUE>
+<ATTR_VALUE>25 Sec</ATTR_VALUE>
+</VALUE>
+<VALUE>
+<LIC_VALUE>No Auto Forward</LIC_VALUE>
+<ATTR_VALUE>No Auto Forward</ATTR_VALUE>
+</VALUE>
+</ATTRIBUTE>
+</ATTRIBUTES>
+</PRODUCT>
+</PRODUCTS>
+</IF_REPLY>
+
+if=858:l7=203	GC_DIALER_MAKE_CALL (HTTP, PARSED=false, 1304091209586039691, UTF-8->UTF-8) - Sync Match Success
+================================================================================================
+<IF_REQUEST><SERVICE_NAME>GC_DIALER_MAKE_CALL</SERVICE_NAME>
+<PARAMS_LIST>
+<APP_SCEN_NAME>GenericDialer</APP_SCEN_NAME>
+<DIAL_ID>513540</DIAL_ID>
+<LANG>He</LANG>
+<CALLING_FROM>?540000001</CALLING_FROM>
+<GSM>0549252777</GSM>
+<BILL_NUMBER_PREFIX>700</BILL_NUMBER_PREFIX>
+<SCEN_NAME>Dialer</SCEN_NAME>
+<SCENARIO_PARAMS><![CDATA[<SCEN_PARAMS>
+<DIAL_ATTEMPT_NUM>1</DIAL_ATTEMPT_NUM>
+<PARAMS/>
+<CAMP_PARAMS>
+<CAMP_NAME>DunningProcess</CAMP_NAME>
+
+<LANG_CODE>1</LANG_CODE>
+<LANG>He</LANG>
+<EVENTS>
+<EVENT>
+<VOICE_MAIL>
+<ACTION>
+<DIPOSIT_CAMP_MSG>
+</DIPOSIT_CAMP_MSG>
+</ACTION>
+</VOICE_MAIL>
+</EVENT>
+</EVENTS>
+<STEPS>
+<STEP>
+<PLAY_PROMPT>
+<WAV_FILE>Dunning1.wav</WAV_FILE>
+<LANG_CODE>1</LANG_CODE>
+<LANG>He</LANG>
+</PLAY_PROMPT>
+</STEP>
+<STEP>
+<PLAY_PROMPT>
+<WAV_FILE>Dunning2.wav</WAV_FILE>
+<LANG_CODE>1</LANG_CODE>
+<LANG>He</LANG>
+</PLAY_PROMPT>
+</STEP>
+<STEP>
+<PLAY_PROMPT>
+<WAV_FILE>Dunning2.wav</WAV_FILE>
+<LANG_CODE>1</LANG_CODE>
+<LANG>He</LANG>
+</PLAY_PROMPT>
+</STEP>
+</STEPS></CAMP_PARAMS>
+
+</SCEN_PARAMS>]]></SCENARIO_PARAMS></PARAMS_LIST></IF_REQUEST>
+
+----- IF Response
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY><SERVICE_NAME>GC_DIALER_MAKE_CALL</SERVICE_NAME><REQUEST_STATUS><STATUS>SUCCESS</STATUS><STATUS_CODE>0</STATUS_CODE><STATUS_MESSAGE/></REQUEST_STATUS><REQUEST_RESULT><FREE_RES_NUM>30</FREE_RES_NUM><CALL_STATUS>201</CALL_STATUS></REQUEST_RESULT></IF_REPLY>
+-----   L7 Response  -----
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY><SERVICE_NAME>GC_DIALER_MAKE_CALL</SERVICE_NAME><REQUEST_STATUS><STATUS>SUCCESS</STATUS><STATUS_CODE>0</STATUS_CODE><STATUS_MESSAGE/></REQUEST_STATUS><REQUEST_RESULT><FREE_RES_NUM>29</FREE_RES_NUM><CALL_STATUS>201</CALL_STATUS></REQUEST_RESULT></IF_REPLY>

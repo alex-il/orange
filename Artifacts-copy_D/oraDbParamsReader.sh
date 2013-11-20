@@ -1,0 +1,1 @@
+/app01/oraias/java6/jre1.6.0_45/bin/java -jar /app01/oraias/java6/oraDbParamsReader.jar $1

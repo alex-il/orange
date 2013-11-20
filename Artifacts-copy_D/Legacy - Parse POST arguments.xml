@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exp:Export Version="3.0"
+    xmlns:L7p="http://www.layer7tech.com/ws/policy"
+    xmlns:exp="http://www.layer7tech.com/ws/policy/export" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+    <exp:References>
+        <IncludedPolicyReference
+            RefType="com.l7tech.console.policy.exporter.IncludedPolicyReference"
+            guid="9b24fba0-6ba9-4c94-9d2b-04f611c4ff46" included="true"
+            name="Legacy - Escaper" soap="false" type="INCLUDE_FRAGMENT">
+            <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="**Legacy  Escaper"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** Escape request/response used by regular expession"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Escaper"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtqZGJjUXVlcnkucmV0dXJuX3ZhbHVlfQ=="/>
+                        <L7p:ContentType stringValue="text/xml; charset=utf-8"/>
+                        <L7p:DataType variableDataType="message"/>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:VariableToSet stringValue="responseOut"/>
+                    </L7p:SetVariable>
+                    <L7p:Regex>
+                        <L7p:AutoTarget booleanValue="false"/>
+                        <L7p:OtherTargetMessageVariable stringValue="responseOut"/>
+                        <L7p:Regex stringValue="&amp;"/>
+                        <L7p:RegexName stringValue="Replace &amp; with &amp;amp;"/>
+                        <L7p:Replace booleanValue="true"/>
+                        <L7p:Replacement stringValue="&amp;amp;"/>
+                        <L7p:Target target="OTHER"/>
+                    </L7p:Regex>
+                    <L7p:Regex>
+                        <L7p:AutoTarget booleanValue="false"/>
+                        <L7p:OtherTargetMessageVariable stringValue="responseOut"/>
+                        <L7p:Regex stringValue="&quot;"/>
+                        <L7p:RegexName stringValue="Replace &quot; with &amp;quot;"/>
+                        <L7p:Replace booleanValue="true"/>
+                        <L7p:Replacement stringValue="&amp;quot;"/>
+                        <L7p:Target target="OTHER"/>
+                    </L7p:Regex>
+                    <L7p:Regex>
+                        <L7p:AutoTarget booleanValue="false"/>
+                        <L7p:OtherTargetMessageVariable stringValue="responseOut"/>
+                        <L7p:Regex stringValue="'"/>
+                        <L7p:RegexName stringValue="Replace ' with &amp;apos;"/>
+                        <L7p:Replace booleanValue="true"/>
+                        <L7p:Replacement stringValue="&amp;apos;"/>
+                        <L7p:Target target="OTHER"/>
+                    </L7p:Regex>
+                    <L7p:Regex>
+                        <L7p:AutoTarget booleanValue="false"/>
+                        <L7p:OtherTargetMessageVariable stringValue="responseOut"/>
+                        <L7p:Regex stringValue="&lt;"/>
+                        <L7p:RegexName stringValue="Replace &lt; with &amp;lt;"/>
+                        <L7p:Replace booleanValue="true"/>
+                        <L7p:Replacement stringValue="&amp;lt;"/>
+                        <L7p:Target target="OTHER"/>
+                    </L7p:Regex>
+                    <L7p:Regex>
+                        <L7p:AutoTarget booleanValue="false"/>
+                        <L7p:OtherTargetMessageVariable stringValue="responseOut"/>
+                        <L7p:Regex stringValue=">"/>
+                        <L7p:RegexName stringValue="Replace > with &amp;gt;"/>
+                        <L7p:Replace booleanValue="true"/>
+                        <L7p:Replacement stringValue="&amp;gt;"/>
+                        <L7p:Target target="OTHER"/>
+                    </L7p:Regex>
+                    <L7p:HardcodedResponse>
+                        <L7p:Base64ResponseBody stringValue="JHtyZXNwb25zZU91dC5tYWlucGFydH0="/>
+                        <L7p:Enabled booleanValue="false"/>
+                    </L7p:HardcodedResponse>
+                </wsp:All>
+            </wsp:Policy>
+        </IncludedPolicyReference>
+    </exp:References>
+    <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+        <wsp:All wsp:Usage="Required">
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** Legacy Parse POST Arguments"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** Parse the payload for HTTP POST services"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** Build ${argumets} in order, copy to ${argumentsXml} msg"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*** Do the parsing"/>
+            </L7p:CommentAssertion>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="Policy Fragment: Legacy - Parse POST arguments"/>
+            </L7p:AuditDetailAssertion>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="Parsing POST: ${config.arguments}"/>
+            </L7p:AuditDetailAssertion>
+            <L7p:Split>
+                <L7p:InputVariable stringValue="config.arguments"/>
+                <L7p:OutputVariable stringValue="params.list"/>
+            </L7p:Split>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="payload.result = ${payload.result}"/>
+            </L7p:AuditDetailAssertion>
+            <L7p:SetVariable>
+                <L7p:AssertionComment assertionComment="included">
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="// Cast the payload to a message type"/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:AssertionComment>
+                <L7p:Base64Expression stringValue="JHtwYXlsb2FkLnJlc3VsdH0="/>
+                <L7p:ContentType stringValue="text/xml; charset=utf-8"/>
+                <L7p:DataType variableDataType="message"/>
+                <L7p:VariableToSet stringValue="payload.xml"/>
+            </L7p:SetVariable>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="params.list = ${params.list}"/>
+            </L7p:AuditDetailAssertion>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="payload.xml: ${payload.xml.mainpart}"/>
+            </L7p:AuditDetailAssertion>
+            <wsp:OneOrMore wsp:Usage="Required">
+                <wsp:All wsp:Usage="Required">
+                    <wsp:OneOrMore wsp:Usage="Required">
+                        <L7p:ComparisonAssertion>
+                            <L7p:CaseSensitive booleanValue="false"/>
+                            <L7p:Expression1 stringValue="${config.queryString}"/>
+                            <L7p:Operator operatorNull="null"/>
+                            <L7p:Predicates predicates="included">
+                                <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                </L7p:item>
+                                <L7p:item binary="included">
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Negated booleanValue="true"/>
+                                    <L7p:Operator operator="CONTAINS"/>
+                                    <L7p:RightValue stringValue="[CDATA["/>
+                                </L7p:item>
+                            </L7p:Predicates>
+                        </L7p:ComparisonAssertion>
+                        <wsp:All wsp:Usage="Required">
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjb25maWcucXVlcnlTdHJpbmd9"/>
+                                <L7p:ContentType stringValue="text/xml; charset=utf-8"/>
+                                <L7p:DataType variableDataType="message"/>
+                                <L7p:VariableToSet stringValue="responseOut"/>
+                            </L7p:SetVariable>
+                            <L7p:Include>
+                                <L7p:PolicyGuid stringValue="9b24fba0-6ba9-4c94-9d2b-04f611c4ff46"/>
+                            </L7p:Include>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtyZXNwb25zZU91dH0="/>
+                                <L7p:ContentType stringValue="text/xml; charset=utf-8"/>
+                                <L7p:DataType variableDataType="message"/>
+                                <L7p:VariableToSet stringValue="argumentsXml"/>
+                            </L7p:SetVariable>
+                        </wsp:All>
+                        <L7p:assertionComment>
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="//check  if queryStryng  DOES NOT contain CDATA"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:assertionComment>
+                    </wsp:OneOrMore>
+                    <wsp:OneOrMore wsp:Usage="Required">
+                        <L7p:ComparisonAssertion>
+                            <L7p:CaseSensitive booleanValue="false"/>
+                            <L7p:Expression1 stringValue="${config.queryString}"/>
+                            <L7p:Operator operatorNull="null"/>
+                            <L7p:Predicates predicates="included">
+                                <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                </L7p:item>
+                                <L7p:item binary="included">
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Negated booleanValue="true"/>
+                                    <L7p:Operator operator="CONTAINS"/>
+                                    <L7p:RightValue stringValue="[CDATA["/>
+                                </L7p:item>
+                            </L7p:Predicates>
+                        </L7p:ComparisonAssertion>
+                        <L7p:SetVariable>
+                            <L7p:Base64Expression stringValue="JHtjb25maWcucXVlcnlTdHJpbmd9"/>
+                            <L7p:ContentType stringValue="text/xml; charset=utf-8"/>
+                            <L7p:DataType variableDataType="message"/>
+                            <L7p:VariableToSet stringValue="argumentsXml"/>
+                        </L7p:SetVariable>
+                        <wsp:All L7p:Enabled="false" wsp:Usage="Required">
+                            <L7p:Regex>
+                                <L7p:AutoTarget booleanValue="false"/>
+                                <L7p:CaptureVar stringValue="tmp"/>
+                                <L7p:CaseInsensitive booleanValue="true"/>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:OtherTargetMessageVariable stringValue="payload.result"/>
+                                <L7p:Regex stringValue="\[CDATA\[(.*)\]\]"/>
+                                <L7p:RegexName stringValue="get post message"/>
+                                <L7p:Replacement stringValue=""/>
+                                <L7p:Target target="OTHER"/>
+                            </L7p:Regex>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHt0bXBbMV19"/>
+                                <L7p:ContentType stringValue="text/xml; charset=utf-8"/>
+                                <L7p:DataType variableDataType="message"/>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:VariableToSet stringValue="argumentsXml"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="argumentsXml=${argumentsXml.mainpart}"/>
+                                <L7p:Enabled booleanValue="false"/>
+                            </L7p:AuditDetailAssertion>
+                        </wsp:All>
+                        <L7p:AuditDetailAssertion>
+                            <L7p:Detail stringValue="DEBUG: --- no CDATA found queryString =:${config.queryString}"/>
+                            <L7p:Enabled booleanValue="false"/>
+                        </L7p:AuditDetailAssertion>
+                        <L7p:assertionComment>
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="//check  if queryStryng  contains CDATA"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:assertionComment>
+                    </wsp:OneOrMore>
+                    <L7p:ComparisonAssertion>
+                        <L7p:CaseSensitive booleanValue="false"/>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:Expression1 stringValue="${config.queryString}"/>
+                        <L7p:Operator operatorNull="null"/>
+                        <L7p:Predicates predicates="included">
+                            <L7p:item dataType="included">
+                                <L7p:Type variableDataType="string"/>
+                            </L7p:item>
+                            <L7p:item binary="included">
+                                <L7p:CaseSensitive booleanValue="false"/>
+                                <L7p:Operator operator="CONTAINS"/>
+                                <L7p:RightValue stringValue="{"/>
+                            </L7p:item>
+                        </L7p:Predicates>
+                    </L7p:ComparisonAssertion>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="queryString present"/>
+                        <L7p:Enabled booleanValue="false"/>
+                    </L7p:AuditDetailAssertion>
+                    <wsp:OneOrMore wsp:Usage="Required">
+                        <L7p:ComparisonAssertion>
+                            <L7p:CaseSensitive booleanValue="false"/>
+                            <L7p:Expression1 stringValue="${config.urlEncoding}"/>
+                            <L7p:Expression2 stringValue="Y"/>
+                            <L7p:ExpressionIsVariable booleanValue="false"/>
+                            <L7p:Negate booleanValue="true"/>
+                            <L7p:Predicates predicates="included">
+                                <L7p:item binary="included">
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Negated booleanValue="true"/>
+                                    <L7p:RightValue stringValue="Y"/>
+                                </L7p:item>
+                            </L7p:Predicates>
+                        </L7p:ComparisonAssertion>
+                        <L7p:EncodeDecode>
+                            <L7p:SourceVariableName stringValue="payload.result"/>
+                            <L7p:TargetDataType variableDataType="string"/>
+                            <L7p:TargetVariableName stringValue="argumentsXml"/>
+                            <L7p:TransformType transformType="URL_ENCODE"/>
+                        </L7p:EncodeDecode>
+                        <L7p:assertionComment>
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// If ${urlEncode} =Y should encode"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:assertionComment>
+                    </wsp:OneOrMore>
+                </wsp:All>
+                <wsp:All wsp:Usage="Required">
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="-------Create ?key=val&amp; string. No queryString."/>
+                        <L7p:Level stringValue="WARNING"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:ForEachLoop L7p:Usage="Required"
+                        loopVariable="params.list" variablePrefix="param">
+                        <L7p:AuditDetailAssertion>
+                            <L7p:Detail stringValue="Current parameter: ${param.current}"/>
+                            <L7p:Enabled booleanValue="false"/>
+                            <L7p:Level stringValue="WARNING"/>
+                        </L7p:AuditDetailAssertion>
+                        <L7p:AuditDetailAssertion>
+                            <L7p:Detail stringValue="Current arguments.str: ${arguments.str}"/>
+                            <L7p:Enabled booleanValue="false"/>
+                            <L7p:Level stringValue="WARNING"/>
+                        </L7p:AuditDetailAssertion>
+                        <L7p:Split>
+                            <L7p:InputVariable stringValue="param.current"/>
+                            <L7p:OutputVariable stringValue="args"/>
+                            <L7p:SplitPattern stringValue=":"/>
+                        </L7p:Split>
+                        <L7p:SetVariable>
+                            <L7p:Base64Expression stringValue="JHthcmdzWzBdfQ=="/>
+                            <L7p:VariableToSet stringValue="payloadArg"/>
+                        </L7p:SetVariable>
+                        <L7p:AuditDetailAssertion>
+                            <L7p:Detail stringValue="Current payloadArg: ${payloadArg}"/>
+                            <L7p:Enabled booleanValue="false"/>
+                            <L7p:Level stringValue="WARNING"/>
+                        </L7p:AuditDetailAssertion>
+                        <wsp:OneOrMore wsp:Usage="Required">
+                            <wsp:All wsp:Usage="Required">
+                                <L7p:ResponseXpathAssertion>
+                                    <L7p:VariablePrefix stringValue="parameter"/>
+                                    <L7p:XmlMsgSrc stringValue="payload.xml"/>
+                                    <L7p:XpathExpression xpathExpressionValue="included">
+                                    <L7p:Expression stringValue="//*[lower-case(local-name())='params_list']/*[local-name()=$payloadArg]"/>
+                                    <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                    </L7p:Namespaces>
+                                    <L7p:XpathVersion xpathVersion="XPATH_2_0"/>
+                                    </L7p:XpathExpression>
+                                </L7p:ResponseXpathAssertion>
+                                <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${parameter.result}"/>
+                                    <L7p:ExpressionIsVariable booleanValue="false"/>
+                                    <L7p:MultivaluedComparison multivaluedComparison="FIRST"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                    </L7p:item>
+                                    <L7p:item stringLength="included">
+                                    <L7p:Max intValue="-1"/>
+                                    <L7p:Min intValue="1"/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                </L7p:ComparisonAssertion>
+                                <wsp:OneOrMore wsp:Usage="Required">
+                                    <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${config.urlEncoding}"/>
+                                    <L7p:ExpressionIsVariable booleanValue="false"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Negated booleanValue="true"/>
+                                    <L7p:RightValue stringValue="Y"/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                    </L7p:ComparisonAssertion>
+                                    <L7p:EncodeDecode>
+                                    <L7p:SourceVariableName stringValue="parameter.result"/>
+                                    <L7p:TargetDataType variableDataType="string"/>
+                                    <L7p:TargetVariableName stringValue="parameter.result"/>
+                                    <L7p:TransformType transformType="URL_ENCODE"/>
+                                    </L7p:EncodeDecode>
+                                    <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// If ${urlEncode} =Y should encode"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:assertionComment>
+                                </wsp:OneOrMore>
+                                <L7p:SetVariable>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Append to arguments.str"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:Base64Expression stringValue="JHthcmd1bWVudHMuc3RyfSR7YXJnc1sxXX09JHtwYXJhbWV0ZXIucmVzdWx0fSY="/>
+                                    <L7p:VariableToSet stringValue="arguments.str"/>
+                                </L7p:SetVariable>
+                                <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// XPathed the parameter"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:assertionComment>
+                            </wsp:All>
+                            <L7p:SetVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Just add nothing if value isn't there"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:Base64Expression stringValue="JHthcmd1bWVudHMuc3RyfQ=="/>
+                                <L7p:VariableToSet stringValue="arguments.str"/>
+                            </L7p:SetVariable>
+                            <L7p:assertionComment>
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Append to ${arguments}"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:assertionComment>
+                        </wsp:OneOrMore>
+                        <L7p:assertionComment>
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="//LOOP foreach"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:assertionComment>
+                    </L7p:ForEachLoop>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHthcmd1bWVudHMuc3RyfQ=="/>
+                        <L7p:ContentType stringValue="text/xml; charset=utf-8"/>
+                        <L7p:DataType variableDataType="message"/>
+                        <L7p:VariableToSet stringValue="argumentsXml"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="argumentsXml=${argumentsXml.mainpart}"/>
+                    </L7p:AuditDetailAssertion>
+                </wsp:All>
+            </wsp:OneOrMore>
+        </wsp:All>
+    </wsp:Policy>
+</exp:Export>

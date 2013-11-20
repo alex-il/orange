@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.orange.co.il/services" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SampleService"
+	targetNamespace="http://www.orange.co.il/services">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.orange.co.il/services">
+			<xsd:element name="Invoke">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="serviceName" type="xsd:string" />
+						<xsd:element name="invocationParameters" type="tns:invocationParameters" />
+
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="LegacyInvocationResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:choice>
+							<xsd:element name="eta" type="xsd:int" />
+
+							<xsd:element name="response"
+								type="xsd:string" />
+
+							<xsd:element name="request-not-found"
+								type="xsd:string">
+							</xsd:element>
+						</xsd:choice>
+						<xsd:element name="requestId" type="xsd:string" />
+						<xsd:element name="LegacyStatus" type="xsd:string" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:complexType name="invocationParameters">
+				<xsd:sequence>
+					<xsd:element name="async" type="xsd:boolean" maxOccurs="1"
+						minOccurs="0" />
+
+					<xsd:element name="arguments" type="tns:ServiceArguments" />
+
+					<xsd:element name="sleep" type="xsd:int" minOccurs="0"
+						maxOccurs="1" />
+
+					<xsd:element name="cacheTTL" type="xsd:int" minOccurs="0"
+						maxOccurs="1" />
+
+					<xsd:element name="callbackServiceName" type="xsd:string"
+						minOccurs="0" maxOccurs="1" />
+
+					<xsd:element name="correlationInfo" type="tns:correlation"
+						minOccurs="0" maxOccurs="1" />
+
+					<xsd:element name="requestId" type="xsd:string"
+						maxOccurs="1" minOccurs="0" />
+
+					<xsd:element name="consumerTimeout" type="xsd:int"
+						minOccurs="0" maxOccurs="1" />
+
+					<xsd:element name="providerTimeout" type="xsd:int"
+						minOccurs="0" maxOccurs="1" />
+
+					<xsd:element name="reqOrigin" type="xsd:string" />
+					<xsd:element name="reqOriginApp" type="xsd:string" />
+
+					<xsd:element name="reqOriginator" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="correlation">
+				<xsd:sequence>
+					<xsd:element name="correlationId" type="xsd:string" />
+					<xsd:element name="externalId" type="xsd:string"
+						minOccurs="0" maxOccurs="1" />
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="ServiceArguments">
+				<xsd:sequence>
+					<xsd:element name="input" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:element name="Call">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="in" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="CallResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="out" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="InputMessage" type="xsd:string" />
+
+
+
+			<xsd:element name="GetResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="requestId" type="xsd:string" />
+
+						<xsd:element name="serviceName" type="xsd:string" />
+
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="GetResponseResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:choice>
+							<xsd:element name="eta" type="xsd:int" />
+
+							<xsd:element name="response" type="xsd:string" />
+
+						</xsd:choice>
+						<xsd:element name="requestId" type="xsd:string" />
+
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="InvokeRequest">
+		<wsdl:part element="tns:Invoke" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="LegacyInvocationResponse">
+		<wsdl:part element="tns:LegacyInvocationResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="CallRequest">
+		<wsdl:part name="parameters" element="tns:Call" />
+	</wsdl:message>
+	<wsdl:message name="CallResponse">
+		<wsdl:part name="parameters" element="tns:CallResponse" />
+	</wsdl:message>
+	<wsdl:message name="GetResponseRequest">
+		<wsdl:part name="parameters" element="tns:GetResponse" />
+	</wsdl:message>
+	<wsdl:portType name="ServiceInvoker">
+		<wsdl:operation name="Invoke">
+			<wsdl:input message="tns:InvokeRequest" />
+			<wsdl:output message="tns:LegacyInvocationResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="Call">
+			<wsdl:input message="tns:CallRequest" />
+			<wsdl:output message="tns:CallResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="GetResponse">
+			<wsdl:input message="tns:GetResponseRequest" />
+			<wsdl:output message="tns:LegacyInvocationResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="ServiceInvoker" type="tns:ServiceInvoker">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="Invoke">
+			<soap:operation
+				soapAction="http://www.orange.co.il/services/LegacyInvocation" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="Call">
+			<soap:operation
+				soapAction="http://www.orange.co.il/services/ServiceInvoker" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetResponse">
+			<soap:operation
+				soapAction="http://www.orange.co.il/services/GetResponse" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="ServiceInvoker">
+		<wsdl:port binding="tns:ServiceInvoker" name="ServiceInvoker">
+			<soap:address location="www.orange.co.il" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exp:Export Version="3.0"
+    xmlns:L7p="http://www.layer7tech.com/ws/policy"
+    xmlns:exp="http://www.layer7tech.com/ws/policy/export" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+    <exp:References>
+        <JdbcConnectionReference RefType="com.l7tech.console.policy.exporter.JdbcConnectionReference">
+            <ConnectionName>${config.connection}</ConnectionName>
+            <DriverClass>com.l7tech.jdbc.oracle.OracleDriver</DriverClass>
+            <JdbcUrl>jdbc:l7tech:oracle://znrtxtst3:1521;SID=rtxtst3</JdbcUrl>
+            <UserName>if_runner</UserName>
+        </JdbcConnectionReference>
+        <IncludedPolicyReference
+            RefType="com.l7tech.console.policy.exporter.IncludedPolicyReference"
+            guid="346df765-1a89-4206-b9de-97ddcbeeb25a" included="true"
+            name="Legacy - Last details" soap="false" type="INCLUDE_FRAGMENT">
+            <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="**Legacy  Last Details"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** Escape request/response used by regular expession"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Last Details"/>
+                    </L7p:AuditDetailAssertion>
+                    <wsp:All wsp:Usage="Required">
+                        <L7p:SetVariable>
+                            <L7p:Base64Expression stringValue=""/>
+                            <L7p:VariableToSet stringValue="audits"/>
+                        </L7p:SetVariable>
+                        <L7p:ForEachLoop L7p:Usage="Required"
+                            loopVariable="audit.details" variablePrefix="ad">
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHthZC5jdXJyZW50LnRpbWV9"/>
+                                <L7p:DataType variableDataType="dateTime"/>
+                                <L7p:DateOffsetExpression stringValue=""/>
+                                <L7p:VariableToSet stringValue="ad.current.time"/>
+                            </L7p:SetVariable>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHthdWRpdHN9DQoke2FkLmN1cnJlbnQudGltZX0gLSAke2FkLmN1cnJlbnQuZnVsbHRleHR9"/>
+                                <L7p:VariableToSet stringValue="audits"/>
+                            </L7p:SetVariable>
+                        </L7p:ForEachLoop>
+                        <L7p:SetVariable>
+                            <L7p:Base64Expression stringValue="PElGX1JFUExZPg0KPFNFUlZJQ0VfTkFNRT4ke3NlcnZpY2VOYW1lfTwvU0VSVklDRV9OQU1FPg0KPFJFUVVFU1RfU1RBVFVTPg0KPFNUQVRVUz5FUlJPUjwvU1RBVFVTPg0KPFNUQVRVU19DT0RFPjc8L1NUQVRVU19DT0RFPg0KPFNUQVRVU19NRVNTQUdFPkVTQjoke2F1ZGl0c30NCiR7YXNzZXJ0aW9uLm51bWJlcnN0cn0gDQo8L1NUQVRVU19NRVNTQUdFPg0KPC9SRVFVRVNUX1NUQVRVUz4NCjwvSUZfUkVQTFk+"/>
+                            <L7p:VariableToSet stringValue="jdbcQuery.return_value"/>
+                        </L7p:SetVariable>
+                        <L7p:SetVariable>
+                            <L7p:Base64Expression stringValue="JHtqZGJjUXVlcnkucmV0dXJuX3ZhbHVlfQ=="/>
+                            <L7p:ContentType stringValue="text/xml; charset=utf-8"/>
+                            <L7p:DataType variableDataType="message"/>
+                            <L7p:VariableToSet stringValue="HTTPoutput"/>
+                        </L7p:SetVariable>
+                    </wsp:All>
+                </wsp:All>
+            </wsp:Policy>
+        </IncludedPolicyReference>
+        <IncludedPolicyReference
+            RefType="com.l7tech.console.policy.exporter.IncludedPolicyReference"
+            guid="9b24fba0-6ba9-4c94-9d2b-04f611c4ff46" included="true"
+            name="Legacy - Escaper" soap="false" type="INCLUDE_FRAGMENT">
+            <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="**Legacy  Escaper"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** Escape request/response used by regular expession"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Escaper"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtqZGJjUXVlcnkucmV0dXJuX3ZhbHVlfQ=="/>
+                        <L7p:ContentType stringValue="text/xml; charset=utf-8"/>
+                        <L7p:DataType variableDataType="message"/>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:VariableToSet stringValue="responseOut"/>
+                    </L7p:SetVariable>
+                    <L7p:Regex>
+                        <L7p:AutoTarget booleanValue="false"/>
+                        <L7p:OtherTargetMessageVariable stringValue="responseOut"/>
+                        <L7p:Regex stringValue="&amp;"/>
+                        <L7p:RegexName stringValue="Replace &amp; with &amp;amp;"/>
+                        <L7p:Replace booleanValue="true"/>
+                        <L7p:Replacement stringValue="&amp;amp;"/>
+                        <L7p:Target target="OTHER"/>
+                    </L7p:Regex>
+                    <L7p:Regex>
+                        <L7p:AutoTarget booleanValue="false"/>
+                        <L7p:OtherTargetMessageVariable stringValue="responseOut"/>
+                        <L7p:Regex stringValue="&quot;"/>
+                        <L7p:RegexName stringValue="Replace &quot; with &amp;quot;"/>
+                        <L7p:Replace booleanValue="true"/>
+                        <L7p:Replacement stringValue="&amp;quot;"/>
+                        <L7p:Target target="OTHER"/>
+                    </L7p:Regex>
+                    <L7p:Regex>
+                        <L7p:AutoTarget booleanValue="false"/>
+                        <L7p:OtherTargetMessageVariable stringValue="responseOut"/>
+                        <L7p:Regex stringValue="'"/>
+                        <L7p:RegexName stringValue="Replace ' with &amp;apos;"/>
+                        <L7p:Replace booleanValue="true"/>
+                        <L7p:Replacement stringValue="&amp;apos;"/>
+                        <L7p:Target target="OTHER"/>
+                    </L7p:Regex>
+                    <L7p:Regex>
+                        <L7p:AutoTarget booleanValue="false"/>
+                        <L7p:OtherTargetMessageVariable stringValue="responseOut"/>
+                        <L7p:Regex stringValue="&lt;"/>
+                        <L7p:RegexName stringValue="Replace &lt; with &amp;lt;"/>
+                        <L7p:Replace booleanValue="true"/>
+                        <L7p:Replacement stringValue="&amp;lt;"/>
+                        <L7p:Target target="OTHER"/>
+                    </L7p:Regex>
+                    <L7p:Regex>
+                        <L7p:AutoTarget booleanValue="false"/>
+                        <L7p:OtherTargetMessageVariable stringValue="responseOut"/>
+                        <L7p:Regex stringValue=">"/>
+                        <L7p:RegexName stringValue="Replace > with &amp;gt;"/>
+                        <L7p:Replace booleanValue="true"/>
+                        <L7p:Replacement stringValue="&amp;gt;"/>
+                        <L7p:Target target="OTHER"/>
+                    </L7p:Regex>
+                    <L7p:HardcodedResponse>
+                        <L7p:Base64ResponseBody stringValue="JHtyZXNwb25zZU91dC5tYWlucGFydH0="/>
+                        <L7p:Enabled booleanValue="false"/>
+                    </L7p:HardcodedResponse>
+                </wsp:All>
+            </wsp:Policy>
+        </IncludedPolicyReference>
+    </exp:References>
+    <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+        <wsp:All wsp:Usage="Required">
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** SERVICE_NAME oracle service invocation"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** FOR STUB SERVICES"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** Make the JDBC call for the stub service"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="Policy Fragment: SERVICE_NAME - Invoke"/>
+            </L7p:AuditDetailAssertion>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="payload.result: ${payload.result}"/>
+            </L7p:AuditDetailAssertion>
+            <L7p:SetVariable>
+                <L7p:AssertionComment assertionComment="included">
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="// Cast the payload to a message type"/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:AssertionComment>
+                <L7p:Base64Expression stringValue="JHtvcmlnaW5hbC5wYXlsb2FkLnJlc3VsdH0="/>
+                <L7p:ContentType stringValue="text/xml; charset=utf-8"/>
+                <L7p:DataType variableDataType="message"/>
+                <L7p:VariableToSet stringValue="payload.xml"/>
+            </L7p:SetVariable>
+            <L7p:ResponseXpathAssertion>
+                <L7p:VariablePrefix stringValue="stubDelay"/>
+                <L7p:XmlMsgSrc stringValue="payload.xml"/>
+                <L7p:XpathExpression xpathExpressionValue="included">
+                    <L7p:Expression stringValue="//STUB_DELAY"/>
+                    <L7p:Namespaces mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="s"/>
+                            <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                        </L7p:entry>
+                    </L7p:Namespaces>
+                    <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                </L7p:XpathExpression>
+            </L7p:ResponseXpathAssertion>
+            <L7p:ManipulateMultiValuedVariable>
+                <L7p:SourceVariableName stringValue="stubDelay.result"/>
+                <L7p:TargetVariableName stringValue="arguments"/>
+            </L7p:ManipulateMultiValuedVariable>
+            <L7p:ResponseXpathAssertion>
+                <L7p:VariablePrefix stringValue="stubSize"/>
+                <L7p:XmlMsgSrc stringValue="payload.xml"/>
+                <L7p:XpathExpression xpathExpressionValue="included">
+                    <L7p:Expression stringValue="//STUB_SIZE"/>
+                    <L7p:Namespaces mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="s"/>
+                            <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                        </L7p:entry>
+                    </L7p:Namespaces>
+                    <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                </L7p:XpathExpression>
+            </L7p:ResponseXpathAssertion>
+            <L7p:ManipulateMultiValuedVariable>
+                <L7p:SourceVariableName stringValue="stubSize.result"/>
+                <L7p:TargetVariableName stringValue="arguments"/>
+            </L7p:ManipulateMultiValuedVariable>
+            <L7p:SetVariable>
+                <L7p:Base64Expression stringValue="U09NRSBEQVRFIFRPIFBBU1MgVE8gT1JBQ0xF"/>
+                <L7p:VariableToSet stringValue="stubInput"/>
+            </L7p:SetVariable>
+            <L7p:ManipulateMultiValuedVariable>
+                <L7p:SourceVariableName stringValue="stubInput"/>
+                <L7p:TargetVariableName stringValue="arguments"/>
+            </L7p:ManipulateMultiValuedVariable>
+            <wsp:OneOrMore wsp:Usage="Required">
+                <L7p:JdbcQuery>
+                    <L7p:AllowMultiValuedVariables booleanValue="true"/>
+                    <L7p:AssertionComment assertionComment="included">
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="// Activate the service (parsed)"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:AssertionComment>
+                    <L7p:ConnectionName stringValue="rtxtst3"/>
+                    <L7p:NullPattern stringValue="NULL"/>
+                    <L7p:Schema stringValue="ESBLR"/>
+                    <L7p:SqlQuery stringValue="FUNC ESB_TEST.HANDLE_REQUEST(${arguments})"/>
+                </L7p:JdbcQuery>
+                <L7p:Include>
+                    <L7p:PolicyGuid stringValue="346df765-1a89-4206-b9de-97ddcbeeb25a"/>
+                </L7p:Include>
+            </wsp:OneOrMore>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="jdbcQuery.return_value = ${jdbcQuery.return_value}"/>
+            </L7p:AuditDetailAssertion>
+            <L7p:SetVariable>
+                <L7p:Base64Expression stringValue="JHtqZGJjUXVlcnkucmV0dXJuX3ZhbHVlfQ=="/>
+                <L7p:VariableToSet stringValue="responseOut"/>
+            </L7p:SetVariable>
+            <L7p:SetVariable>
+                <L7p:Base64Expression stringValue="JHtqZGJjUXVlcnkucmV0dXJuX3ZhbHVlfQ=="/>
+                <L7p:VariableToSet stringValue="rawResponse"/>
+            </L7p:SetVariable>
+            <L7p:Include>
+                <L7p:PolicyGuid stringValue="9b24fba0-6ba9-4c94-9d2b-04f611c4ff46"/>
+            </L7p:Include>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="responseOut=  ${responseOut}"/>
+            </L7p:AuditDetailAssertion>
+            <L7p:SetVariable>
+                <L7p:Base64Expression stringValue="PHJlc3BvbnNlPiR7cmVzcG9uc2VPdXR9PC9yZXNwb25zZT4="/>
+                <L7p:VariableToSet stringValue="output"/>
+            </L7p:SetVariable>
+            <L7p:SetVariable>
+                <L7p:Base64Expression stringValue="VHJ1ZQ=="/>
+                <L7p:VariableToSet stringValue="partner.tracing.response"/>
+            </L7p:SetVariable>
+        </wsp:All>
+    </wsp:Policy>
+</exp:Export>

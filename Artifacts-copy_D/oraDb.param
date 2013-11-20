@@ -1,0 +1,8 @@
+{
+"host" : "billdbtst1",
+"port" : "1521",
+"SID" : "bscstst1",
+"dbuser" : "if_runner",
+"dbpass" : "if_runner"
+}
+

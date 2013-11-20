@@ -1,0 +1,2320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exp:Export Version="3.0"
+    xmlns:L7p="http://www.layer7tech.com/ws/policy"
+    xmlns:exp="http://www.layer7tech.com/ws/policy/export" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+    <exp:References>
+        <IncludedPolicyReference
+            RefType="com.l7tech.console.policy.exporter.IncludedPolicyReference"
+            guid="d63c6819-e433-4e07-8284-f8dfbf2de3a6" included="true"
+            name="Legacy - Get Service Configuration" soap="false" type="INCLUDE_FRAGMENT">
+            <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** Legacy Standard Get Service Configuration"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** Lookup in cluster properties and get configuration variable"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** OlegB add timeout params 10062013"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Legacy - Get Service Configuration From Cluster Properties"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtzZXJ2aWNlTmFtZX0="/>
+                        <L7p:VariableToSet stringValue="service.serviceName"/>
+                    </L7p:SetVariable>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:AssertionComment assertionComment="included">
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="Validating service configuration is loaded into the cluster properties"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:AssertionComment>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.source_encoding"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <wsp:OneOrMore wsp:Usage="Required">
+                        <wsp:All wsp:Usage="Required">
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Hi, servicename is ${serviceName}"/>
+                                <L7p:Level stringValue="WARNING"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.eta"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:VariableToSet stringValue="config.eta"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: eta=${config.eta}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.is_async"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:VariableToSet stringValue="config.async"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: async=${config.async}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.is_parsed"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:VariableToSet stringValue="config.parsed"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: parsed=${config.parsed}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.connection_route_name"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:VariableToSet stringValue="config.connection"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: connection=${config.connection}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.parameter_list"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:VariableToSet stringValue="config.arguments"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: arguments = ${config.arguments}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.source_encoding"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:VariableToSet stringValue="config.sourceEnc"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: sourceEnc=${config.sourceEnc}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.target_encoding"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:VariableToSet stringValue="config.targetEnc"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: targetEnc=${config.targetEnc}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.method"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:VariableToSet stringValue="config.method"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: method=${config.method}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.query_string"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:VariableToSet stringValue="config.queryString"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: config.queryString=${config.queryString}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.should_render"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:VariableToSet stringValue="config.xmlRender"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: Render=${config.xmlRender}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.service_name_concurrency_limit"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:VariableToSet stringValue="config.serviceNameConcurrencyLimit"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: serviceNameConcurrencyLimit=${config.serviceNameConcurrencyLimit}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.back_end_concurrency_limit"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:VariableToSet stringValue="config.backEndConcurrencyLimit"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: backEndConcurrencyLimit=${config.backEndConcurrencyLimit}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.qdrain_service_name_c_l"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:VariableToSet stringValue="config.qDrainServiceNameConcurrencyLimit"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: qDrainServiceNameConcurrencyLimit=${config.qDrainServiceNameConcurrencyLimit}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.qdrain_back_end_c_l"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:VariableToSet stringValue="config.qDrainBackEndConcurrencyLimit"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: config.qDrainBackEndConcurrencyLimit=${config.qDrainBackEndConcurrencyLimit}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.eta_devider"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:VariableToSet stringValue="config.etaDevider"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: etaDevider=${config.etaDevider}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.cancel_timeout"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:VariableToSet stringValue="config.cancelTimeout"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration:cancelTimeout=${config.cancelTimeout}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.timeout_customer"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:VariableToSet stringValue="config.timeoutCustomer"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: timeoutCustomer=${config.timeoutCustomer}"/>
+                                <L7p:Enabled booleanValue="false"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.service_name_sync_conc"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:VariableToSet stringValue="config.serviceNameSyncConc"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: serviceNameSyncConc=${config.serviceNameSyncConc}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.service_name_async_conc"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:VariableToSet stringValue="config.serviceNameAsyncConc"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: serviceNameAsyncConc=${config.serviceNameAsyncConc}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.url_encoding"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:VariableToSet stringValue="config.urlEncoding"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: urlEncoding=${config.urlEncoding}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.ip_whitelist"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:VariableToSet stringValue="config.ipwhitelist"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: ipwhitelist=${config.ipwhitelist}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.default.consumerTimeout"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:VariableToSet stringValue="config.consumerTimeout.default"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Legacy-Get Service Configuration:config.consumerTimeout.default=:${config.consumerTimeout.default}"/>
+                                <L7p:Enabled booleanValue="false"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.default.providerTimeout"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:VariableToSet stringValue="config.providerTimeout.default"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Legacy-Get Service Configuration:config.providerTimeout.default=:${config.providerTimeout.default}"/>
+                                <L7p:Enabled booleanValue="false"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.Enabled"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:VariableToSet stringValue="config.enabled"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Legacy-Get Service Configuration:config.enabled=:${config.enabled}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="  //list of allowed req origins"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.allowed_req_origin"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:VariableToSet stringValue="config.allowedReqOrigin"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Legacy-Get Service Configuration:config.allowedReqOrigin=:${config.allowedReqOrigin}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:LookupDynamicContextVariables>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="  //list of allowed req origins"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:FailOnNotFound booleanValue="false"/>
+                                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.block_req_origin"/>
+                                <L7p:TargetDataType variableDataType="string"/>
+                                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                            </L7p:LookupDynamicContextVariables>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                                <L7p:VariableToSet stringValue="config.blockReqOrigin"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Legacy-Get Service Configuration:config.blockReqOrigin=:${config.blockReqOrigin}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:assertionComment>
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Get configuration parameters for this service"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:assertionComment>
+                        </wsp:All>
+                    </wsp:OneOrMore>
+                </wsp:All>
+            </wsp:Policy>
+        </IncludedPolicyReference>
+        <IncludedPolicyReference
+            RefType="com.l7tech.console.policy.exporter.IncludedPolicyReference"
+            guid="9b24fba0-6ba9-4c94-9d2b-04f611c4ff46" included="true"
+            name="Legacy - Escaper" soap="false" type="INCLUDE_FRAGMENT">
+            <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="**Legacy  Escaper"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** Escape request/response used by regular expession"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Escaper"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtqZGJjUXVlcnkucmV0dXJuX3ZhbHVlfQ=="/>
+                        <L7p:ContentType stringValue="text/xml; charset=utf-8"/>
+                        <L7p:DataType variableDataType="message"/>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:VariableToSet stringValue="responseOut"/>
+                    </L7p:SetVariable>
+                    <L7p:Regex>
+                        <L7p:AutoTarget booleanValue="false"/>
+                        <L7p:OtherTargetMessageVariable stringValue="responseOut"/>
+                        <L7p:Regex stringValue="&amp;"/>
+                        <L7p:RegexName stringValue="Replace &amp; with &amp;amp;"/>
+                        <L7p:Replace booleanValue="true"/>
+                        <L7p:Replacement stringValue="&amp;amp;"/>
+                        <L7p:Target target="OTHER"/>
+                    </L7p:Regex>
+                    <L7p:Regex>
+                        <L7p:AutoTarget booleanValue="false"/>
+                        <L7p:OtherTargetMessageVariable stringValue="responseOut"/>
+                        <L7p:Regex stringValue="&quot;"/>
+                        <L7p:RegexName stringValue="Replace &quot; with &amp;quot;"/>
+                        <L7p:Replace booleanValue="true"/>
+                        <L7p:Replacement stringValue="&amp;quot;"/>
+                        <L7p:Target target="OTHER"/>
+                    </L7p:Regex>
+                    <L7p:Regex>
+                        <L7p:AutoTarget booleanValue="false"/>
+                        <L7p:OtherTargetMessageVariable stringValue="responseOut"/>
+                        <L7p:Regex stringValue="'"/>
+                        <L7p:RegexName stringValue="Replace ' with &amp;apos;"/>
+                        <L7p:Replace booleanValue="true"/>
+                        <L7p:Replacement stringValue="&amp;apos;"/>
+                        <L7p:Target target="OTHER"/>
+                    </L7p:Regex>
+                    <L7p:Regex>
+                        <L7p:AutoTarget booleanValue="false"/>
+                        <L7p:OtherTargetMessageVariable stringValue="responseOut"/>
+                        <L7p:Regex stringValue="&lt;"/>
+                        <L7p:RegexName stringValue="Replace &lt; with &amp;lt;"/>
+                        <L7p:Replace booleanValue="true"/>
+                        <L7p:Replacement stringValue="&amp;lt;"/>
+                        <L7p:Target target="OTHER"/>
+                    </L7p:Regex>
+                    <L7p:Regex>
+                        <L7p:AutoTarget booleanValue="false"/>
+                        <L7p:OtherTargetMessageVariable stringValue="responseOut"/>
+                        <L7p:Regex stringValue=">"/>
+                        <L7p:RegexName stringValue="Replace > with &amp;gt;"/>
+                        <L7p:Replace booleanValue="true"/>
+                        <L7p:Replacement stringValue="&amp;gt;"/>
+                        <L7p:Target target="OTHER"/>
+                    </L7p:Regex>
+                    <L7p:HardcodedResponse>
+                        <L7p:Base64ResponseBody stringValue="JHtyZXNwb25zZU91dC5tYWlucGFydH0="/>
+                        <L7p:Enabled booleanValue="false"/>
+                    </L7p:HardcodedResponse>
+                </wsp:All>
+            </wsp:Policy>
+        </IncludedPolicyReference>
+        <IncludedPolicyReference
+            RefType="com.l7tech.console.policy.exporter.IncludedPolicyReference"
+            guid="9e7cb9dd-80a8-4738-853d-6565750ed80f" included="true"
+            name="Legacy - Timeout Calculator" soap="false" type="INCLUDE_FRAGMENT">
+            <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="**Legacy - Timeout Calculator"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="**  Calculates T/O for service"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** Takes T/O from requests if exist"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="**  if does not, takes T/O from cluster property"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** @Autor: OlegB"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** @Date: 07-jun-2013"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** @Version: 1"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Timeout Calculator"/>
+                    </L7p:AuditDetailAssertion>
+                    <wsp:OneOrMore wsp:Usage="Required">
+                        <wsp:All wsp:Usage="Required">
+                            <L7p:RequestXpathAssertion>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="//get consumerTimeout from request"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:VariablePrefix stringValue="consumerTO"/>
+                                <L7p:XpathExpression xpathExpressionValue="included">
+                                    <L7p:Expression stringValue="//consumerTimeout"/>
+                                    <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="soapenv"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                    <L7p:entry>
+                                    <L7p:key stringValue="ser"/>
+                                    <L7p:value stringValue="http://www.orange.co.il/services"/>
+                                    </L7p:entry>
+                                    </L7p:Namespaces>
+                                    <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                                </L7p:XpathExpression>
+                            </L7p:RequestXpathAssertion>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjb25zdW1lclRPLnJlc3VsdH0="/>
+                                <L7p:DataType variableDataType="int"/>
+                                <L7p:VariableToSet stringValue="consumerTimeout"/>
+                            </L7p:SetVariable>
+                            <L7p:assertionComment>
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="  //timeout was provided in the request"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:assertionComment>
+                        </wsp:All>
+                        <wsp:All wsp:Usage="Required">
+                            <L7p:ComparisonAssertion>
+                                <L7p:CaseSensitive booleanValue="false"/>
+                                <L7p:Expression1 stringValue="${config.cancelTimeout}"/>
+                                <L7p:Expression2 stringValue="${policy.nullvalue}"/>
+                                <L7p:Negate booleanValue="true"/>
+                                <L7p:Predicates predicates="included">
+                                    <L7p:item binary="included">
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Negated booleanValue="true"/>
+                                    <L7p:RightValue stringValue="${policy.nullvalue}"/>
+                                    </L7p:item>
+                                </L7p:Predicates>
+                            </L7p:ComparisonAssertion>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtjb25maWcuY2FuY2VsVGltZW91dH0="/>
+                                <L7p:DataType variableDataType="int"/>
+                                <L7p:VariableToSet stringValue="consumerTimeout"/>
+                            </L7p:SetVariable>
+                            <L7p:assertionComment>
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="  //timeout defined in service"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:assertionComment>
+                        </wsp:All>
+                        <L7p:SetVariable>
+                            <L7p:AssertionComment assertionComment="included">
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="  //use default timeout"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:AssertionComment>
+                            <L7p:Base64Expression stringValue="JHtnYXRld2F5LnBhcnRuZXIuZGVmYXVsdC5wcm92aWRlclRpbWVvdXR9"/>
+                            <L7p:DataType variableDataType="int"/>
+                            <L7p:VariableToSet stringValue="consumerTimeout"/>
+                        </L7p:SetVariable>
+                    </wsp:OneOrMore>
+                    <wsp:OneOrMore L7p:Enabled="false" wsp:Usage="Required">
+                        <wsp:All wsp:Usage="Required">
+                            <L7p:RequestXpathAssertion>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="//get providerTimeout from request"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:VariablePrefix stringValue="providerTO"/>
+                                <L7p:XpathExpression xpathExpressionValue="included">
+                                    <L7p:Expression stringValue="//providerTimeout"/>
+                                    <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="soapenv"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                    <L7p:entry>
+                                    <L7p:key stringValue="ser"/>
+                                    <L7p:value stringValue="http://www.orange.co.il/services"/>
+                                    </L7p:entry>
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                    </L7p:Namespaces>
+                                    <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                                </L7p:XpathExpression>
+                            </L7p:RequestXpathAssertion>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtwcm92aWRlclRPLnJlc3VsdH0="/>
+                                <L7p:DataType variableDataType="int"/>
+                                <L7p:VariableToSet stringValue="providerTimeout"/>
+                            </L7p:SetVariable>
+                        </wsp:All>
+                        <L7p:SetVariable>
+                            <L7p:Base64Expression stringValue="JHtjb25maWcucHJvdmlkZXJUaW1lb3V0LmRlZmF1bHR9"/>
+                            <L7p:DataType variableDataType="int"/>
+                            <L7p:VariableToSet stringValue="providerTimeout"/>
+                        </L7p:SetVariable>
+                    </wsp:OneOrMore>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjb25zdW1lclRpbWVvdXR9"/>
+                        <L7p:DataType variableDataType="int"/>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:VariableToSet stringValue="providerTimeout.min"/>
+                    </L7p:SetVariable>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjb25zdW1lclRpbWVvdXQucmVzdWx0fQ=="/>
+                        <L7p:DataType variableDataType="int"/>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:VariableToSet stringValue="a"/>
+                    </L7p:SetVariable>
+                    <L7p:EvaluateMathExpression>
+                        <L7p:Expression stringValue="${consumerTimeout}"/>
+                        <L7p:OutputVariable stringValue="providerTimeout.min"/>
+                    </L7p:EvaluateMathExpression>
+                    <L7p:EvaluateMathExpression>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:Expression stringValue="${cancelTimeout}*1000"/>
+                        <L7p:OutputVariable stringValue="cancelTimeout"/>
+                    </L7p:EvaluateMathExpression>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtwcm92aWRlclRpbWVvdXR9"/>
+                        <L7p:DataType variableDataType="int"/>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:VariableToSet stringValue="a"/>
+                    </L7p:SetVariable>
+                    <L7p:EvaluateMathExpression>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:Expression stringValue="${a}"/>
+                        <L7p:OutputVariable stringValue="providerTimeout.min"/>
+                    </L7p:EvaluateMathExpression>
+                    <L7p:EvaluateMathExpression>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:Expression stringValue="${a}*1000"/>
+                        <L7p:OutputVariable stringValue="providerTimeout.curr"/>
+                    </L7p:EvaluateMathExpression>
+                    <L7p:SetVariable>
+                        <L7p:AssertionComment assertionComment="included">
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="  // For HTTP"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:AssertionComment>
+                        <L7p:Base64Expression stringValue="JHtwcm92aWRlclRpbWVvdXQubWlufQ=="/>
+                        <L7p:VariableToSet stringValue="providerTimeout.curr"/>
+                    </L7p:SetVariable>
+                </wsp:All>
+            </wsp:Policy>
+        </IncludedPolicyReference>
+        <IncludedPolicyReference
+            RefType="com.l7tech.console.policy.exporter.IncludedPolicyReference"
+            guid="72d8e575-3c95-4469-9b6e-5f1af5c327f6" included="true"
+            name="Legacy - GetResponse governance policy" soap="false" type="INCLUDE_FRAGMENT">
+            <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - GetResponse governance policy"/>
+                    </L7p:AuditDetailAssertion>
+                </wsp:All>
+            </wsp:Policy>
+        </IncludedPolicyReference>
+        <RemoteCacheReference RefType="com.l7tech.external.assertions.remotecacheassertion.RemoteCacheReference">
+            <OID>11567104</OID>
+            <Name>RemoteCache</Name>
+            <Classname>com.l7tech.external.assertions.remotecacheassertion.RemoteCacheEntity</Classname>
+            <Type>memcached</Type>
+            <Timeout>2</Timeout>
+            <Properties>
+                <Property mame="ports">vmmemct1:23000</Property>
+                <Property mame="bucketSpecified">false</Property>
+            </Properties>
+        </RemoteCacheReference>
+        <JdbcConnectionReference RefType="com.l7tech.console.policy.exporter.JdbcConnectionReference">
+            <ConnectionName>Tracer Database</ConnectionName>
+            <DriverClass>com.l7tech.jdbc.oracle.OracleDriver</DriverClass>
+            <JdbcUrl>jdbc:l7tech:oracle://it1dev01:1521;SID=ifdev1</JdbcUrl>
+            <UserName>IFRT_A</UserName>
+            <AdditionalProperties/>
+        </JdbcConnectionReference>
+        <IncludedPolicyReference
+            RefType="com.l7tech.console.policy.exporter.IncludedPolicyReference"
+            guid="6bc0190f-25b8-41cd-b4ea-78aef4876664" included="true"
+            name="Legacy - Generate Request ID" soap="false" type="INCLUDE_FRAGMENT">
+            <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** Legacy Generate Request ID"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** Generate request ID. Set as ${partner.requestid}"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="** "/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*************************************************************************"/>
+                    </L7p:CommentAssertion>
+                    <L7p:AuditAssertion/>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Generate Request ID"/>
+                    </L7p:AuditDetailAssertion>
+                    <wsp:OneOrMore wsp:Usage="Required">
+                        <wsp:All wsp:Usage="Required">
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="REQUEST GEN: Checking JMS"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:ComparisonAssertion>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Fail if this is not a JMS protocol"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:CaseSensitive booleanValue="false"/>
+                                <L7p:Expression1 stringValue="${request.clientid}"/>
+                                <L7p:FailIfVariableNotFound booleanValue="false"/>
+                                <L7p:Operator operatorNull="null"/>
+                                <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:RightValue stringValue="Protocol:Protocol:JMS"/>
+                                    </L7p:item>
+                                </L7p:Predicates>
+                            </L7p:ComparisonAssertion>
+                            <L7p:ComparisonAssertion>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Fail if this is not a JMS protocol"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:CaseSensitive booleanValue="false"/>
+                                <L7p:Expression1 stringValue="${request.jms.property.partner.requestid}"/>
+                                <L7p:Operator operatorNull="null"/>
+                                <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="int"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Operator operator="NE"/>
+                                    <L7p:RightValue stringValue="0"/>
+                                    </L7p:item>
+                                </L7p:Predicates>
+                            </L7p:ComparisonAssertion>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtyZXF1ZXN0Lmptcy5wcm9wZXJ0eS5wYXJ0bmVyLnJlcXVlc3RpZH0="/>
+                                <L7p:VariableToSet stringValue="partner.requestid"/>
+                            </L7p:SetVariable>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Found requestid as jms property: ${partner.requestid}"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:assertionComment>
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Set from jms property if found"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:assertionComment>
+                        </wsp:All>
+                        <wsp:All wsp:Usage="Required">
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="REQUEST GEN: Checking xml message"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:HardcodedResponse>
+                                <L7p:Base64ResponseBody stringValue="cmVxdWVzdCBtYWlucGFydHQKCiR7cmVxdWVzdC5tYWlucGFydH0="/>
+                                <L7p:EarlyResponse booleanValue="true"/>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:ResponseContentType stringValue="text/plain; charset=UTF-8"/>
+                            </L7p:HardcodedResponse>
+                            <L7p:RequestXpathAssertion>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:VariablePrefix stringValue=""/>
+                                <L7p:XpathExpression xpathExpressionValue="included">
+                                    <L7p:Expression stringValue="/s:Envelope/s:Body/ser:Invoke/requestId"/>
+                                    <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                    <L7p:entry>
+                                    <L7p:key stringValue="ser"/>
+                                    <L7p:value stringValue="http://www.orange.co.il/services"/>
+                                    </L7p:entry>
+                                    </L7p:Namespaces>
+                                    <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                                </L7p:XpathExpression>
+                            </L7p:RequestXpathAssertion>
+                            <L7p:Regex>
+                                <L7p:AutoTarget booleanValue="false"/>
+                                <L7p:CaptureVar stringValue="partner.requestid"/>
+                                <L7p:Regex stringValue="&lt;requestId>([0-9]+)&lt;/requestId>"/>
+                                <L7p:Replacement stringValue=""/>
+                            </L7p:Regex>
+                            <L7p:ComparisonAssertion>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Fail if this is not in the xpath"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:CaseSensitive booleanValue="false"/>
+                                <L7p:Expression1 stringValue="${partner.requestid[1]}"/>
+                                <L7p:Operator operatorNull="null"/>
+                                <L7p:Predicates predicates="included">
+                                    <L7p:item stringLength="included">
+                                    <L7p:Max intValue="-1"/>
+                                    <L7p:Min intValue="3"/>
+                                    </L7p:item>
+                                </L7p:Predicates>
+                            </L7p:ComparisonAssertion>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHtwYXJ0bmVyLnJlcXVlc3RpZFsxXX0="/>
+                                <L7p:VariableToSet stringValue="partner.requestid"/>
+                            </L7p:SetVariable>
+                            <L7p:assertionComment>
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Checking message itself"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:assertionComment>
+                        </wsp:All>
+                        <wsp:All wsp:Usage="Required">
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="REQUEST GEN: creating new"/>
+                            </L7p:AuditDetailAssertion>
+                            <wsp:All wsp:Usage="Required">
+                                <L7p:Regex>
+                                    <L7p:AutoTarget booleanValue="false"/>
+                                    <L7p:CaptureVar stringValue="count.match"/>
+                                    <L7p:OtherTargetMessageVariable stringValue="requestId"/>
+                                    <L7p:Regex stringValue="-([0-9a-f]+)$"/>
+                                    <L7p:Replacement stringValue=""/>
+                                    <L7p:Target target="OTHER"/>
+                                </L7p:Regex>
+                                <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="JHtjb3VudC5tYXRjaFsxXX0="/>
+                                    <L7p:VariableToSet stringValue="count.hex"/>
+                                </L7p:SetVariable>
+                                <L7p:CustomAssertion>
+                                    <L7p:base64SerializedValue>rO0ABXNyADFjb20ubDd0ZWNoLnBvbGljeS5hc3NlcnRpb24uQ3VzdG9tQXNzZXJ0aW9uSG9sZGVyZtcreFwddTICAANMAAhjYXRlZ29yeXQAKkxjb20vbDd0ZWNoL3BvbGljeS9hc3NlcnRpb24vZXh0L0NhdGVnb3J5O0wAD2N1c3RvbUFzc2VydGlvbnQAMUxjb20vbDd0ZWNoL3BvbGljeS9hc3NlcnRpb24vZXh0L0N1c3RvbUFzc2VydGlvbjtMAA9kZXNjcmlwdGlvblRleHR0ABJMamF2YS9sYW5nL1N0cmluZzt4cgAlY29tLmw3dGVjaC5wb2xpY3kuYXNzZXJ0aW9uLkFzc2VydGlvbttfY5k8vaKxAgACWgAHZW5hYmxlZEwAEGFzc2VydGlvbkNvbW1lbnR0AC9MY29tL2w3dGVjaC9wb2xpY3kvYXNzZXJ0aW9uL0Fzc2VydGlvbiRDb21tZW50O3hwAXBzcgAoY29tLmw3dGVjaC5wb2xpY3kuYXNzZXJ0aW9uLmV4dC5DYXRlZ29yeVqwnGWhRP41AgACSQAFbXlLZXlMAAZteU5hbWVxAH4AA3hwAAAACnQAC1BvbGljeUxvZ2ljc3IAVWNvbS5sN3RlY2guY3VzdG9tYXNzZXJ0aW9uLmhleHRvZGVjaW1hbGNvbnZlcnRlci5IZXhUb0RlY2ltYWxDb252ZXJ0ZXJDdXN0b21Bc3NlcnRpb25XGySdyOPmGgIAA1oAB3JldmVyc2VMABFpbnB1dFZhcmlhYmxlTmFtZXEAfgADTAASb3V0cHV0VmFyaWFibGVOYW1lcQB+AAN4cAB0AAljb3VudC5oZXh0AAljb3VudC5kZWN0AD48aHRtbD5Db252ZXJ0cyBhIEhleGFkZWNpbWFsIE51bWJlciB0byBhIERlY2ltYWwgTnVtYmVyPC9odG1sPg==</L7p:base64SerializedValue>
+                                </L7p:CustomAssertion>
+                                <wsp:OneOrMore wsp:Usage="Required">
+                                    <L7p:Regex>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Grab last three digits if >= 100"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:AutoTarget booleanValue="false"/>
+                                    <L7p:OtherTargetMessageVariable stringValue="count.dec"/>
+                                    <L7p:Regex stringValue=".*([0-9]{3}$)"/>
+                                    <L7p:Replace booleanValue="true"/>
+                                    <L7p:Replacement stringValue="$1"/>
+                                    <L7p:Target target="OTHER"/>
+                                    </L7p:Regex>
+                                    <L7p:Regex>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Left pad with 0 if 10 &lt;= x &lt;= 99"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:AutoTarget booleanValue="false"/>
+                                    <L7p:OtherTargetMessageVariable stringValue="count.dec"/>
+                                    <L7p:Regex stringValue="(^[0-9]{2}$)"/>
+                                    <L7p:Replace booleanValue="true"/>
+                                    <L7p:Replacement stringValue="0$1"/>
+                                    <L7p:Target target="OTHER"/>
+                                    </L7p:Regex>
+                                    <L7p:Regex>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Left pad with 00 if 1 &lt;= x &lt;= 9"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:AutoTarget booleanValue="false"/>
+                                    <L7p:OtherTargetMessageVariable stringValue="count.dec"/>
+                                    <L7p:Regex stringValue="(^[0-9]$)"/>
+                                    <L7p:Replace booleanValue="true"/>
+                                    <L7p:Replacement stringValue="00$1"/>
+                                    <L7p:Target target="OTHER"/>
+                                    </L7p:Regex>
+                                    <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Get last three digits, pad with 0 if required"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:assertionComment>
+                                </wsp:OneOrMore>
+                                <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Generate three characters from the requestId counter"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:assertionComment>
+                            </wsp:All>
+                            <L7p:Regex>
+                                <L7p:AutoTarget booleanValue="false"/>
+                                <L7p:CaptureVar stringValue="nodeid"/>
+                                <L7p:OtherTargetMessageVariable stringValue="ssgnode.name"/>
+                                <L7p:Regex stringValue="(\d)\.?"/>
+                                <L7p:RegexName stringValue="Get the node id"/>
+                                <L7p:Replacement stringValue=""/>
+                                <L7p:Target target="OTHER"/>
+                            </L7p:Regex>
+                            <L7p:SetVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Use internal Request ID for now."/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:Base64Expression stringValue="JHtyZXF1ZXN0LnRpbWUubG9jYWwueXlNTWRkSEhtbXNzU1NTfSR7Y291bnQuZGVjfSR7bm9kZWlkWzFdfQ=="/>
+                                <L7p:VariableToSet stringValue="partner.requestid"/>
+                            </L7p:SetVariable>
+                            <L7p:SetVariable>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Use internal Request ID for now."/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:Base64Expression stringValue="R0NfR0VUX0lORk9fT0RT"/>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:VariableToSet stringValue="request1.http.parameter.serviceName"/>
+                            </L7p:SetVariable>
+                            <L7p:assertionComment>
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Generate a new requestid"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:assertionComment>
+                        </wsp:All>
+                    </wsp:OneOrMore>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="putting servicename to cache: ${servicename.result}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:SetVariable>
+                        <L7p:AssertionComment assertionComment="included">
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Use internal Request ID for now."/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:AssertionComment>
+                        <L7p:Base64Expression stringValue="JHtyZXF1ZXN0Lmh0dHAucGFyYW1ldGVyLnNlcnZpY2VOYW1lfQ=="/>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:VariableToSet stringValue="serviceName.result"/>
+                    </L7p:SetVariable>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue=""/>
+                        <L7p:VariableToSet stringValue="uninitialized"/>
+                    </L7p:SetVariable>
+                    <L7p:RemoteCacheStore>
+                        <L7p:CacheDisplayName stringValue="${partner.requestid}-${gateway.partner.environment}-servicename"/>
+                        <L7p:CacheEntryKey stringValue="${partner.requestid}-${gateway.partner.environment}-servicename"/>
+                        <L7p:MaxEntryAge stringValue="30000"/>
+                        <L7p:OtherTargetMessageVariable stringValue="serviceName.result"/>
+                        <L7p:RemoteCacheId longValue="11567104"/>
+                        <L7p:Target target="OTHER"/>
+                    </L7p:RemoteCacheStore>
+                    <L7p:RemoteCacheStore>
+                        <L7p:CacheDisplayName stringValue="${partner.requestid}-${gateway.partner.environment}-response"/>
+                        <L7p:CacheEntryKey stringValue="${partner.requestid}-${gateway.partner.environment}-response"/>
+                        <L7p:MaxEntryAge stringValue="30000"/>
+                        <L7p:OtherTargetMessageVariable stringValue="uninitialized"/>
+                        <L7p:RemoteCacheId longValue="11567104"/>
+                        <L7p:Target target="OTHER"/>
+                    </L7p:RemoteCacheStore>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="--- putting unInitialized into cache: ${partner.requestid}-${gateway.partner.environment}-response"/>
+                        <L7p:Enabled booleanValue="false"/>
+                    </L7p:AuditDetailAssertion>
+                </wsp:All>
+            </wsp:Policy>
+        </IncludedPolicyReference>
+        <CustomAssertionReference RefType="com.l7tech.console.policy.exporter.CustomAssertionReference">
+            <CustomAssertionName>Hex To Decimal Converter</CustomAssertionName>
+        </CustomAssertionReference>
+        <IncludedPolicyReference
+            RefType="com.l7tech.console.policy.exporter.IncludedPolicyReference"
+            guid="2e3c985d-f971-4a79-9d91-6b266a6865c5" included="true"
+            name="Legacy - Invoke governance policy" soap="false" type="INCLUDE_FRAGMENT">
+            <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Invoke governance policy"/>
+                    </L7p:AuditDetailAssertion>
+                </wsp:All>
+            </wsp:Policy>
+        </IncludedPolicyReference>
+    </exp:References>
+    <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+        <wsp:All wsp:Usage="Required">
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** Legacy Standard Pre Invocation Fragment"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** This gets called first by all legacy services. Sets up request ID, etc"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** To do - use memcached instead of local cache"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** OlegB. Timeout parameters treatment added 10062013"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="Policy Fragment: Legacy - Pre Invocation Fragment"/>
+            </L7p:AuditDetailAssertion>
+            <L7p:FaultLevel>
+                <L7p:AssertionComment assertionComment="included">
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="// This is enabled during development. Remove later"/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:AssertionComment>
+                <L7p:LevelInfo soapFaultLevel="included">
+                    <L7p:IncludePolicyDownloadURL booleanValue="false"/>
+                    <L7p:Level intValue="4"/>
+                </L7p:LevelInfo>
+            </L7p:FaultLevel>
+            <L7p:SetVariable>
+                <L7p:Base64Expression stringValue=""/>
+                <L7p:DataType variableDataType="dateTime"/>
+                <L7p:DateOffsetExpression stringValue=""/>
+                <L7p:VariableToSet stringValue="originalAcceptTime"/>
+            </L7p:SetVariable>
+            <L7p:SetVariable>
+                <L7p:Base64Expression stringValue="JHtvcmlnaW5hbEFjY2VwdFRpbWV9"/>
+                <L7p:VariableToSet stringValue="acceptTime"/>
+            </L7p:SetVariable>
+            <L7p:SetVariable>
+                <L7p:Base64Expression stringValue="JHtyZXF1ZXN0LnRjcC5yZW1vdGVBZGRyZXNzfQ=="/>
+                <L7p:VariableToSet stringValue="requestIP"/>
+            </L7p:SetVariable>
+            <wsp:All wsp:Usage="Required">
+                <wsp:OneOrMore wsp:Usage="Required">
+                    <wsp:All wsp:Usage="Required">
+                        <L7p:ComparisonAssertion>
+                            <L7p:CaseSensitive booleanValue="false"/>
+                            <L7p:Expression1 stringValue="${request.http.parameter.serviceAlias}"/>
+                            <L7p:ExpressionIsVariable booleanValue="false"/>
+                            <L7p:Operator operatorNull="null"/>
+                            <L7p:Predicates predicates="included">
+                                <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                </L7p:item>
+                                <L7p:item binary="included">
+                                    <L7p:Negated booleanValue="true"/>
+                                    <L7p:Operator operator="EMPTY"/>
+                                    <L7p:RightValue stringValue=""/>
+                                </L7p:item>
+                            </L7p:Predicates>
+                        </L7p:ComparisonAssertion>
+                        <L7p:SetVariable>
+                            <L7p:Base64Expression stringValue="JHtyZXF1ZXN0Lmh0dHAucGFyYW1ldGVyLnNlcnZpY2VBbGlhc30="/>
+                            <L7p:VariableToSet stringValue="serviceName.result"/>
+                        </L7p:SetVariable>
+                        <L7p:AuditDetailAssertion>
+                            <L7p:Detail stringValue="NG:${serviceName.result}"/>
+                        </L7p:AuditDetailAssertion>
+                        <L7p:assertionComment>
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="  //set service name from alias (routed from another service)"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:assertionComment>
+                    </wsp:All>
+                    <wsp:All wsp:Usage="Required">
+                        <L7p:RequestXpathAssertion>
+                            <L7p:AssertionComment assertionComment="included">
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// The service name is required to be in the SOAP message"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:AssertionComment>
+                            <L7p:VariablePrefix stringValue="serviceName"/>
+                            <L7p:XpathExpression xpathExpressionValue="included">
+                                <L7p:Expression stringValue="/soapenv:Envelope/soapenv:Body//serviceName"/>
+                                <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="soapenv"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                    <L7p:entry>
+                                    <L7p:key stringValue="ser"/>
+                                    <L7p:value stringValue="http://www.orange.co.il/services"/>
+                                    </L7p:entry>
+                                </L7p:Namespaces>
+                                <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                            </L7p:XpathExpression>
+                        </L7p:RequestXpathAssertion>
+                        <L7p:AuditDetailAssertion>
+                            <L7p:Detail stringValue="NG: ${serviceName.found}"/>
+                        </L7p:AuditDetailAssertion>
+                        <L7p:assertionComment>
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="  //set service name from request"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:assertionComment>
+                    </wsp:All>
+                    <L7p:assertionComment>
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="  //set service name"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:assertionComment>
+                </wsp:OneOrMore>
+                <wsp:OneOrMore wsp:Usage="Required">
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="service name = ${servicename.result}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:ComparisonAssertion>
+                        <L7p:AssertionComment assertionComment="included">
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Confirm a match to this service"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:AssertionComment>
+                        <L7p:CaseSensitive booleanValue="false"/>
+                        <L7p:Expression1 stringValue="${serviceName.result}"/>
+                        <L7p:ExpressionIsVariable booleanValue="false"/>
+                        <L7p:Operator operatorNull="null"/>
+                        <L7p:Predicates predicates="included">
+                            <L7p:item dataType="included">
+                                <L7p:Type variableDataType="string"/>
+                            </L7p:item>
+                            <L7p:item binary="included">
+                                <L7p:RightValue stringValue="${service.name}"/>
+                            </L7p:item>
+                        </L7p:Predicates>
+                    </L7p:ComparisonAssertion>
+                    <L7p:ComparisonAssertion>
+                        <L7p:AssertionComment assertionComment="included">
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Confirm a match to this service"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:AssertionComment>
+                        <L7p:CaseSensitive booleanValue="false"/>
+                        <L7p:Expression1 stringValue="${serviceName.result} - QDRAIN"/>
+                        <L7p:ExpressionIsVariable booleanValue="false"/>
+                        <L7p:Operator operatorNull="null"/>
+                        <L7p:Predicates predicates="included">
+                            <L7p:item dataType="included">
+                                <L7p:Type variableDataType="string"/>
+                            </L7p:item>
+                            <L7p:item binary="included">
+                                <L7p:RightValue stringValue="${service.name}"/>
+                            </L7p:item>
+                        </L7p:Predicates>
+                    </L7p:ComparisonAssertion>
+                </wsp:OneOrMore>
+                <L7p:SetVariable>
+                    <L7p:Base64Expression stringValue="JHtzZXJ2aWNlTmFtZS5yZXN1bHR9"/>
+                    <L7p:VariableToSet stringValue="serviceName"/>
+                </L7p:SetVariable>
+                <L7p:AuditDetailAssertion>
+                    <L7p:Detail stringValueReference="inline"><![CDATA[serviceName = ${serviceName}
+serviceName.result = ${serviceName.result}]]></L7p:Detail>
+                    <L7p:Enabled booleanValue="false"/>
+                </L7p:AuditDetailAssertion>
+                <L7p:assertionComment>
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="// Confirm that the service name in the messages matches this service"/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:assertionComment>
+            </wsp:All>
+            <wsp:OneOrMore wsp:Usage="Required">
+                <L7p:Include>
+                    <L7p:PolicyGuid stringValue="d63c6819-e433-4e07-8284-f8dfbf2de3a6"/>
+                </L7p:Include>
+                <wsp:All wsp:Usage="Required">
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="PElGX1JFUExZPg0KPFNFUlZJQ0VfTkFNRT4ke3NlcnZpY2VOYW1lfTwvU0VSVklDRV9OQU1FPg0KPFJFUVVFU1RfU1RBVFVTPjxTVEFUVVM+RVJST1I8L1NUQVRVUz4NCjxTVEFUVVNfQ09ERT4tMTwvU1RBVFVTX0NPREU+DQo8U1RBVFVTX01FU1NBR0U+U2VydmljZSBub3QgcHJvcGVybHkgY29uZmlndXJlZDwvU1RBVFVTX01FU1NBR0U+DQo8REVCVUdfSU5GTz4ke2F1ZGl0LmRldGFpbHMubGFzdC5mdWxsVGV4dH08L0RFQlVHX0lORk8+DQo8L1JFUVVFU1RfU1RBVFVTPg0KPC9JRl9SRVBMWT4="/>
+                        <L7p:VariableToSet stringValue="responseOut"/>
+                    </L7p:SetVariable>
+                    <L7p:Include>
+                        <L7p:PolicyGuid stringValue="9b24fba0-6ba9-4c94-9d2b-04f611c4ff46"/>
+                    </L7p:Include>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="PHJlc3BvbnNlPiR7cmVzcG9uc2VPdXR9PC9yZXNwb25zZT4="/>
+                        <L7p:VariableToSet stringValue="output"/>
+                    </L7p:SetVariable>
+                    <L7p:HardcodedResponse>
+                        <L7p:AssertionComment assertionComment="included">
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Return immediate and proceed"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:AssertionComment>
+                        <L7p:Base64ResponseBody stringValue="PHNvYXBlbnY6RW52ZWxvcGUgeG1sbnM6c29hcGVudj0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iIHhtbG5zOnNlcj0iaHR0cDovL3d3dy5vcmFuZ2UuY28uaWwvc2VydmljZXMiPgogICA8c29hcGVudjpIZWFkZXIvPgogICA8c29hcGVudjpCb2R5PgogICAgICA8c2VyOkxlZ2FjeUludm9jYXRpb25SZXNwb25zZT4KICAgICAgICAgJHtvdXRwdXR9CiAgICAgICAgIDxyZXF1ZXN0SWQ+JHtwYXJ0bmVyLnJlcXVlc3RpZH08L3JlcXVlc3RJZD4KICAgICAgPC9zZXI6TGVnYWN5SW52b2NhdGlvblJlc3BvbnNlPgogICA8L3NvYXBlbnY6Qm9keT4KPC9zb2FwZW52OkVudmVsb3BlPgo="/>
+                        <L7p:EarlyResponse booleanValue="true"/>
+                    </L7p:HardcodedResponse>
+                    <L7p:FalseAssertion/>
+                    <L7p:assertionComment>
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="// If failed, error and fail"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:assertionComment>
+                </wsp:All>
+                <L7p:assertionComment>
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="Try to get service configuration. Fail gracefuly on problems"/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:assertionComment>
+            </wsp:OneOrMore>
+            <wsp:All wsp:Usage="Required">
+                <wsp:OneOrMore wsp:Usage="Required">
+                    <L7p:ComparisonAssertion>
+                        <L7p:CaseSensitive booleanValue="false"/>
+                        <L7p:Expression1 stringValue="${config.enabled}"/>
+                        <L7p:Operator operatorNull="null"/>
+                        <L7p:Predicates predicates="included">
+                            <L7p:item dataType="included">
+                                <L7p:Type variableDataType="string"/>
+                            </L7p:item>
+                            <L7p:item binary="included">
+                                <L7p:RightValue stringValue="Y"/>
+                            </L7p:item>
+                        </L7p:Predicates>
+                    </L7p:ComparisonAssertion>
+                    <wsp:All wsp:Usage="Required">
+                        <L7p:SetVariable>
+                            <L7p:Base64Expression stringValue="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiID8+IA0KPElGX1JFUExZPg0KICA8U0VSVklDRV9OQU1FPiR7c2VydmljZU5hbWV9PC9TRVJWSUNFX05BTUU+IA0KICA8UkVRVUVTVF9TVEFUVVM+DQogIAk8U1RBVFVTPkVSUk9SPC9TVEFUVVM+IA0KICAJPFNUQVRVU19DT0RFPjE8L1NUQVRVU19DT0RFPiANCiAJPFNUQVRVU19NRVNTQUdFPlNSQjogU2VydmljZSBEaXNhYmxlZDwvU1RBVFVTX01FU1NBR0U+IA0KICA8L1JFUVVFU1RfU1RBVFVTPg0KPC9JRl9SRVBMWT4="/>
+                            <L7p:ContentType stringValue="text/xml; charset=utf-8"/>
+                            <L7p:DataType variableDataType="message"/>
+                            <L7p:VariableToSet stringValue="responseOut"/>
+                        </L7p:SetVariable>
+                        <L7p:Include>
+                            <L7p:PolicyGuid stringValue="9b24fba0-6ba9-4c94-9d2b-04f611c4ff46"/>
+                        </L7p:Include>
+                        <L7p:HardcodedResponse>
+                            <L7p:Base64ResponseBody stringValue="PHNvYXBlbnY6RW52ZWxvcGUgeG1sbnM6c29hcGVudj0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iIHhtbG5zOnNlcj0iaHR0cDovL3d3dy5vcmFuZ2UuY28uaWwvc2VydmljZXMiPgogICA8c29hcGVudjpIZWFkZXIvPgogICA8c29hcGVudjpCb2R5PgogICAgICA8c2VyOkxlZ2FjeUludm9jYXRpb25SZXNwb25zZT4KICAgICAgICAgPHJlc3BvbnNlPiR7cmVzcG9uc2VPdXQubWFpbnBhcnR9PC9yZXNwb25zZT4KICAgICAgPC9zZXI6TGVnYWN5SW52b2NhdGlvblJlc3BvbnNlPgogICA8L3NvYXBlbnY6Qm9keT4KPC9zb2FwZW52OkVudmVsb3BlPg=="/>
+                            <L7p:EarlyResponse booleanValue="true"/>
+                        </L7p:HardcodedResponse>
+                        <L7p:FalseAssertion/>
+                    </wsp:All>
+                </wsp:OneOrMore>
+                <L7p:assertionComment>
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="  // Verify that service is enabled. "/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:assertionComment>
+            </wsp:All>
+            <wsp:All L7p:Enabled="false" wsp:Usage="Required">
+                <L7p:AuditDetailAssertion>
+                    <L7p:Detail stringValue="requestIP - ${requestIP}"/>
+                </L7p:AuditDetailAssertion>
+                <wsp:OneOrMore wsp:Usage="Required">
+                    <wsp:All wsp:Usage="Required">
+                        <L7p:ComparisonAssertion>
+                            <L7p:CaseSensitive booleanValue="false"/>
+                            <L7p:Expression1 stringValue="${config.ipwhitelist}"/>
+                            <L7p:Operator operatorNull="null"/>
+                            <L7p:Predicates predicates="included">
+                                <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                </L7p:item>
+                                <L7p:item binary="included">
+                                    <L7p:Negated booleanValue="true"/>
+                                    <L7p:Operator operator="EMPTY"/>
+                                    <L7p:RightValue stringValue=""/>
+                                </L7p:item>
+                            </L7p:Predicates>
+                        </L7p:ComparisonAssertion>
+                        <L7p:SetVariable>
+                            <L7p:Base64Expression stringValue="JHtjb25maWcuaXB3aGl0ZWxpc3R9"/>
+                            <L7p:VariableToSet stringValue="ipWhiteList"/>
+                        </L7p:SetVariable>
+                    </wsp:All>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="Z2F0ZXdheS5wYXJ0bmVyLmNvbmZpZ3VyYXRpb24uaXBXaGl0ZUxpc3Q="/>
+                        <L7p:VariableToSet stringValue="ipWhiteList"/>
+                    </L7p:SetVariable>
+                    <L7p:assertionComment>
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="  // If IPWhiteList per service exists - use it. ELSE use the global value"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:assertionComment>
+                </wsp:OneOrMore>
+                <L7p:Split>
+                    <L7p:InputVariable stringValue="ipWhiteList"/>
+                    <L7p:OutputVariable stringValue="ipWhiteList"/>
+                </L7p:Split>
+                <wsp:OneOrMore wsp:Usage="Required">
+                    <wsp:All wsp:Usage="Required">
+                        <L7p:IndexLookupByItem>
+                            <L7p:MultivaluedVariableName stringValue="ipWhiteList"/>
+                            <L7p:OutputVariableName stringValue="result"/>
+                            <L7p:ValueToSearchForVariableName stringValue="requestIP"/>
+                        </L7p:IndexLookupByItem>
+                        <L7p:AuditDetailAssertion>
+                            <L7p:Detail stringValue="IP result - ${result}"/>
+                        </L7p:AuditDetailAssertion>
+                    </wsp:All>
+                    <wsp:All wsp:Usage="Required">
+                        <L7p:HardcodedResponse>
+                            <L7p:Base64ResponseBody stringValue="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiID8+IAo8SUZfUkVQTFk+CiAgPFNFUlZJQ0VfTkFNRT4ke3NlcnZpY2VOYW1lfTwvU0VSVklDRV9OQU1FPiAKICA8UkVRVUVTVF9TVEFUVVM+CiAgCTxTVEFUVVM+RVJST1I8L1NUQVRVUz4gCiAgCTxTVEFUVVNfQ09ERT4xPC9TVEFUVVNfQ09ERT4gCiAJPFNUQVRVU19NRVNTQUdFPlNSQjpJUCBhZGRyZXNzIG5vdCBhdXRob3JpemVkPC9TVEFUVVNfTUVTU0FHRT4gCiAgPC9SRVFVRVNUX1NUQVRVUz4KIDwvSUZfUkVQTFk+Cg=="/>
+                            <L7p:EarlyResponse booleanValue="true"/>
+                        </L7p:HardcodedResponse>
+                        <L7p:FalseAssertion/>
+                    </wsp:All>
+                </wsp:OneOrMore>
+                <L7p:assertionComment>
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue=" // Check if ip is valid according to IPWhiteList"/>
+                        </L7p:entry>
+                        <L7p:entry>
+                            <L7p:key stringValue="LEFT.COMMENT"/>
+                            <L7p:value stringValue="ENABLE IN PROD"/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:assertionComment>
+            </wsp:All>
+            <wsp:OneOrMore wsp:Usage="Required">
+                <L7p:RequestXpathAssertion>
+                    <L7p:AssertionComment assertionComment="included">
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="// Check if getResponse"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:AssertionComment>
+                    <L7p:VariablePrefix stringValue="messageId"/>
+                    <L7p:XpathExpression xpathExpressionValue="included">
+                        <L7p:Expression stringValue="/soapenv:Envelope/soapenv:Body/ser:GetResponse/requestId"/>
+                        <L7p:Namespaces mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="soapenv"/>
+                                <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                            </L7p:entry>
+                            <L7p:entry>
+                                <L7p:key stringValue="ser"/>
+                                <L7p:value stringValue="http://www.orange.co.il/services"/>
+                            </L7p:entry>
+                            <L7p:entry>
+                                <L7p:key stringValue="s"/>
+                                <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                            </L7p:entry>
+                        </L7p:Namespaces>
+                        <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                    </L7p:XpathExpression>
+                </L7p:RequestXpathAssertion>
+                <wsp:All wsp:Usage="Required">
+                    <wsp:All wsp:Usage="Required">
+                        <L7p:RequestXpathAssertion>
+                            <L7p:AssertionComment assertionComment="included">
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// The service name is required to be in the SOAP message"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:AssertionComment>
+                            <L7p:VariablePrefix stringValue="reqOrigin"/>
+                            <L7p:XpathExpression xpathExpressionValue="included">
+                                <L7p:Expression stringValue="/s:Envelope/s:Body/ser:Invoke/invocationParameters/reqOrigin"/>
+                                <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="soapenv"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                    <L7p:entry>
+                                    <L7p:key stringValue="ser"/>
+                                    <L7p:value stringValue="http://www.orange.co.il/services"/>
+                                    </L7p:entry>
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                </L7p:Namespaces>
+                                <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                            </L7p:XpathExpression>
+                        </L7p:RequestXpathAssertion>
+                        <wsp:OneOrMore wsp:Usage="Required">
+                            <wsp:All wsp:Usage="Required">
+                                <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${config.blockReqOrigin}"/>
+                                    <L7p:Expression2 stringValue="NULL"/>
+                                    <L7p:Negate booleanValue="true"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item binary="included">
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Negated booleanValue="true"/>
+                                    <L7p:RightValue stringValue="NULL"/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                </L7p:ComparisonAssertion>
+                                <L7p:Split>
+                                    <L7p:InputVariable stringValue="config.blockReqOrigin"/>
+                                    <L7p:OutputVariable stringValue="blockReqOrigin"/>
+                                </L7p:Split>
+                                <L7p:AuditDetailAssertion>
+                                    <L7p:Detail stringValue="ReqOrigin block origins = ${blockReqOrigin}"/>
+                                </L7p:AuditDetailAssertion>
+                                <L7p:IndexLookupByItem>
+                                    <L7p:MultivaluedVariableName stringValue="blockReqOrigin"/>
+                                    <L7p:OutputVariableName stringValue="result"/>
+                                    <L7p:ValueToSearchForVariableName stringValue="reqOrigin.result"/>
+                                </L7p:IndexLookupByItem>
+                                <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiID8+IA0KPElGX1JFUExZPg0KICA8U0VSVklDRV9OQU1FPiR7c2VydmljZU5hbWV9PC9TRVJWSUNFX05BTUU+IA0KICA8UkVRVUVTVF9TVEFUVVM+DQogIAk8U1RBVFVTPkVSUk9SPC9TVEFUVVM+IA0KICAJPFNUQVRVU19DT0RFPjE8L1NUQVRVU19DT0RFPiANCiAJPFNUQVRVU19NRVNTQUdFPmludmFsaWQgY2xpZW50IGZvciAke3NlcnZpY2VOYW1lfTwvU1RBVFVTX01FU1NBR0U+IA0KICA8L1JFUVVFU1RfU1RBVFVTPg0KIDwvSUZfUkVQTFk+"/>
+                                    <L7p:ContentType stringValue="text/xml; charset=utf-8"/>
+                                    <L7p:DataType variableDataType="message"/>
+                                    <L7p:VariableToSet stringValue="responseOut"/>
+                                </L7p:SetVariable>
+                                <L7p:Include>
+                                    <L7p:PolicyGuid stringValue="9b24fba0-6ba9-4c94-9d2b-04f611c4ff46"/>
+                                </L7p:Include>
+                                <L7p:HardcodedResponse>
+                                    <L7p:Base64ResponseBody stringValue="PHNvYXBlbnY6RW52ZWxvcGUgeG1sbnM6c29hcGVudj0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iIHhtbG5zOnNlcj0iaHR0cDovL3d3dy5vcmFuZ2UuY28uaWwvc2VydmljZXMiPgogICA8c29hcGVudjpIZWFkZXIvPgogICA8c29hcGVudjpCb2R5PgogICAgICA8c2VyOkxlZ2FjeUludm9jYXRpb25SZXNwb25zZT4KICAgICAgICAgPHJlc3BvbnNlPiR7cmVzcG9uc2VPdXQubWFpbnBhcnR9PC9yZXNwb25zZT4KICAgICAgPC9zZXI6TGVnYWN5SW52b2NhdGlvblJlc3BvbnNlPgogICA8L3NvYXBlbnY6Qm9keT4KPC9zb2FwZW52OkVudmVsb3BlPg=="/>
+                                    <L7p:EarlyResponse booleanValue="true"/>
+                                </L7p:HardcodedResponse>
+                                <L7p:FalseAssertion/>
+                            </wsp:All>
+                            <L7p:TrueAssertion/>
+                        </wsp:OneOrMore>
+                        <L7p:assertionComment>
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue=" // Check if reqOrigin is in service block list"/>
+                                </L7p:entry>
+                                <L7p:entry>
+                                    <L7p:key stringValue="LEFT.COMMENT"/>
+                                    <L7p:value stringValue="ENABLE IN PROD"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:assertionComment>
+                    </wsp:All>
+                    <wsp:All wsp:Usage="Required">
+                        <L7p:RequestXpathAssertion>
+                            <L7p:AssertionComment assertionComment="included">
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// The service name is required to be in the SOAP message"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:AssertionComment>
+                            <L7p:VariablePrefix stringValue="reqOrigin"/>
+                            <L7p:XpathExpression xpathExpressionValue="included">
+                                <L7p:Expression stringValue="/s:Envelope/s:Body/ser:Invoke/invocationParameters/reqOrigin"/>
+                                <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="soapenv"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                    <L7p:entry>
+                                    <L7p:key stringValue="ser"/>
+                                    <L7p:value stringValue="http://www.orange.co.il/services"/>
+                                    </L7p:entry>
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                </L7p:Namespaces>
+                                <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                            </L7p:XpathExpression>
+                        </L7p:RequestXpathAssertion>
+                        <L7p:SetVariable>
+                            <L7p:Base64Expression stringValue="JHtwb2xpY3kubnVsbHZhbHVlfQ=="/>
+                            <L7p:VariableToSet stringValue="serviceFound"/>
+                        </L7p:SetVariable>
+                        <L7p:SetVariable>
+                            <L7p:Base64Expression stringValue="JHtwb2xpY3kubnVsbHZhbHVlfQ=="/>
+                            <L7p:VariableToSet stringValue="originFound"/>
+                        </L7p:SetVariable>
+                        <wsp:OneOrMore wsp:Usage="Required">
+                            <wsp:All wsp:Usage="Required">
+                                <L7p:ComparisonAssertion>
+                                    <L7p:Expression1 stringValue="${config.allowedReqOrigin}"/>
+                                    <L7p:Expression2 stringValue="NULL"/>
+                                    <L7p:Negate booleanValue="true"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item binary="included">
+                                    <L7p:Negated booleanValue="true"/>
+                                    <L7p:RightValue stringValue="NULL"/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                </L7p:ComparisonAssertion>
+                                <L7p:AuditDetailAssertion>
+                                    <L7p:Detail stringValue="req origin is ${reqOrigin.result}"/>
+                                </L7p:AuditDetailAssertion>
+                                <L7p:Split>
+                                    <L7p:InputVariable stringValue="config.allowedReqOrigin"/>
+                                    <L7p:OutputVariable stringValue="alllowedReqOrigin"/>
+                                </L7p:Split>
+                                <L7p:ForEachLoop L7p:Usage="Required"
+                                    loopVariable="alllowedReqOrigin" variablePrefix="var1">
+                                    <L7p:Split>
+                                    <L7p:InputVariable stringValue="var1.current"/>
+                                    <L7p:OutputVariable stringValue="allowedReqOrigin.curr"/>
+                                    <L7p:SplitPattern stringValue=":"/>
+                                    </L7p:Split>
+                                    <L7p:ItemLookupByIndex>
+                                    <L7p:MultivaluedVariableName stringValue="allowedReqOrigin.curr"/>
+                                    </L7p:ItemLookupByIndex>
+                                    <L7p:ItemLookupByIndex>
+                                    <L7p:IndexValue stringValue="1"/>
+                                    <L7p:MultivaluedVariableName stringValue="allowedReqOrigin.curr"/>
+                                    <L7p:OutputVariableName stringValue="output1"/>
+                                    </L7p:ItemLookupByIndex>
+                                    <wsp:OneOrMore wsp:Usage="Required">
+                                    <wsp:All wsp:Usage="Required">
+                                    <L7p:ComparisonAssertion>
+                                    <L7p:Expression1 stringValue="${reqOrigin.result}"/>
+                                    <L7p:Expression2 stringValue="${output}"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item binary="included">
+                                    <L7p:RightValue stringValue="${output}"/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                    </L7p:ComparisonAssertion>
+                                    <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="JHtvdXRwdXQxfQ=="/>
+                                    <L7p:VariableToSet stringValue="serviceFound"/>
+                                    </L7p:SetVariable>
+                                    <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="JHtvdXRwdXR9"/>
+                                    <L7p:VariableToSet stringValue="originFound"/>
+                                    </L7p:SetVariable>
+                                    <L7p:AuditDetailAssertion>
+                                    <L7p:Detail stringValue="req origin is allowed:  origin is ${originFound} route service ${serviceFound}"/>
+                                    </L7p:AuditDetailAssertion>
+                                    <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="  // set req origin and service name valuse if req origin was found"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:assertionComment>
+                                    </wsp:All>
+                                    <L7p:TrueAssertion/>
+                                    <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="  //check if current origin matches req origin"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:assertionComment>
+                                    </wsp:OneOrMore>
+                                    <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="  //looking for request req origin  on service allowed origins list"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:assertionComment>
+                                </L7p:ForEachLoop>
+                            </wsp:All>
+                            <L7p:TrueAssertion/>
+                        </wsp:OneOrMore>
+                        <wsp:OneOrMore wsp:Usage="Required">
+                            <wsp:All wsp:Usage="Required">
+                                <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${originFound}"/>
+                                    <L7p:Expression2 stringValue=""/>
+                                    <L7p:Operator operator="EMPTY"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item binary="included">
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Operator operator="EMPTY"/>
+                                    <L7p:RightValue stringValue=""/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                </L7p:ComparisonAssertion>
+                            </wsp:All>
+                            <wsp:All wsp:Usage="Required">
+                                <L7p:HttpRoutingAssertion>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue=" // using consumerTimeout here"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:ProtectedServiceUrl stringValue="http://localhost:8080/LegacyImported/${serviceFound}?serviceAlias=${serviceFound}"/>
+                                    <L7p:ProxyPassword stringValueNull="null"/>
+                                    <L7p:ProxyUsername stringValueNull="null"/>
+                                    <L7p:RequestHeaderRules httpPassthroughRuleSet="included">
+                                    <L7p:Rules httpPassthroughRules="included">
+                                    <L7p:item httpPassthroughRule="included">
+                                    <L7p:Name stringValue="Cookie"/>
+                                    </L7p:item>
+                                    <L7p:item httpPassthroughRule="included">
+                                    <L7p:Name stringValue="SOAPAction"/>
+                                    </L7p:item>
+                                    </L7p:Rules>
+                                    </L7p:RequestHeaderRules>
+                                    <L7p:RequestParamRules httpPassthroughRuleSet="included">
+                                    <L7p:ForwardAll booleanValue="true"/>
+                                    <L7p:Rules httpPassthroughRules="included"/>
+                                    </L7p:RequestParamRules>
+                                    <L7p:ResponseHeaderRules httpPassthroughRuleSet="included">
+                                    <L7p:Rules httpPassthroughRules="included">
+                                    <L7p:item httpPassthroughRule="included">
+                                    <L7p:Name stringValue="Set-Cookie"/>
+                                    </L7p:item>
+                                    </L7p:Rules>
+                                    </L7p:ResponseHeaderRules>
+                                    <L7p:ResponseMsgDest stringValue="responseMsg"/>
+                                    <L7p:SamlAssertionVersion intValue="2"/>
+                                </L7p:HttpRoutingAssertion>
+                                <L7p:HardcodedResponse>
+                                    <L7p:Base64ResponseBody stringValue="JHtyZXNwb25zZU1zZy5tYWlucGFydH0="/>
+                                    <L7p:EarlyResponse booleanValue="true"/>
+                                </L7p:HardcodedResponse>
+                                <L7p:FalseAssertion/>
+                            </wsp:All>
+                        </wsp:OneOrMore>
+                        <L7p:assertionComment>
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue=" // Check if reqOrigin configured with alias"/>
+                                </L7p:entry>
+                                <L7p:entry>
+                                    <L7p:key stringValue="LEFT.COMMENT"/>
+                                    <L7p:value stringValue="ENABLE IN PROD"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:assertionComment>
+                    </wsp:All>
+                    <wsp:All wsp:Usage="Required">
+                        <L7p:Split>
+                            <L7p:InputVariable stringValue="gateway.partner.configuration.reqOrigin.validValues"/>
+                            <L7p:OutputVariable stringValue="reqOrigin.validValues"/>
+                        </L7p:Split>
+                        <L7p:AuditDetailAssertion>
+                            <L7p:Detail stringValue="ReqOrigin Valid Values = ${reqOrigin.validValues}"/>
+                        </L7p:AuditDetailAssertion>
+                        <wsp:OneOrMore wsp:Usage="Required">
+                            <L7p:IndexLookupByItem>
+                                <L7p:MultivaluedVariableName stringValue="reqOrigin.validValues"/>
+                                <L7p:OutputVariableName stringValue="result"/>
+                                <L7p:ValueToSearchForVariableName stringValue="reqOrigin.result"/>
+                            </L7p:IndexLookupByItem>
+                            <wsp:All wsp:Usage="Required">
+                                <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiID8+IA0KPElGX1JFUExZPg0KICA8U0VSVklDRV9OQU1FPiR7c2VydmljZU5hbWV9PC9TRVJWSUNFX05BTUU+IA0KICA8UkVRVUVTVF9TVEFUVVM+DQogIAk8U1RBVFVTPkVSUk9SPC9TVEFUVVM+IA0KICAJPFNUQVRVU19DT0RFPjE8L1NUQVRVU19DT0RFPiANCiAJPFNUQVRVU19NRVNTQUdFPmNsaWVudCBub3QgZGVmaW5lZDwvU1RBVFVTX01FU1NBR0U+IA0KICA8L1JFUVVFU1RfU1RBVFVTPg0KIDwvSUZfUkVQTFk+"/>
+                                    <L7p:ContentType stringValue="text/xml; charset=utf-8"/>
+                                    <L7p:DataType variableDataType="message"/>
+                                    <L7p:VariableToSet stringValue="responseOut"/>
+                                </L7p:SetVariable>
+                                <L7p:Include>
+                                    <L7p:PolicyGuid stringValue="9b24fba0-6ba9-4c94-9d2b-04f611c4ff46"/>
+                                </L7p:Include>
+                                <L7p:HardcodedResponse>
+                                    <L7p:Base64ResponseBody stringValue="PHNvYXBlbnY6RW52ZWxvcGUgeG1sbnM6c29hcGVudj0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iIHhtbG5zOnNlcj0iaHR0cDovL3d3dy5vcmFuZ2UuY28uaWwvc2VydmljZXMiPgogICA8c29hcGVudjpIZWFkZXIvPgogICA8c29hcGVudjpCb2R5PgogICAgICA8c2VyOkxlZ2FjeUludm9jYXRpb25SZXNwb25zZT4KICAgICAgICAgPHJlc3BvbnNlPiR7cmVzcG9uc2VPdXQubWFpbnBhcnR9PC9yZXNwb25zZT4KICAgICAgPC9zZXI6TGVnYWN5SW52b2NhdGlvblJlc3BvbnNlPgogICA8L3NvYXBlbnY6Qm9keT4KPC9zb2FwZW52OkVudmVsb3BlPg=="/>
+                                    <L7p:EarlyResponse booleanValue="true"/>
+                                </L7p:HardcodedResponse>
+                                <L7p:FalseAssertion/>
+                            </wsp:All>
+                            <L7p:assertionComment>
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="  // If reqOrigin is valid - continue, ELSE - Return error message and stop."/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:assertionComment>
+                        </wsp:OneOrMore>
+                        <L7p:assertionComment>
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue=" // Check if reqOrigin is valid in environmemt"/>
+                                </L7p:entry>
+                                <L7p:entry>
+                                    <L7p:key stringValue="LEFT.COMMENT"/>
+                                    <L7p:value stringValue="ENABLE IN PROD"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:assertionComment>
+                    </wsp:All>
+                </wsp:All>
+                <L7p:assertionComment>
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="  // If not GetResponse, Handle reqOrigin information"/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:assertionComment>
+            </wsp:OneOrMore>
+            <L7p:Include>
+                <L7p:PolicyGuid stringValue="9e7cb9dd-80a8-4738-853d-6565750ed80f"/>
+            </L7p:Include>
+            <wsp:OneOrMore wsp:Usage="Required">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:ComparisonAssertion>
+                        <L7p:CaseSensitive booleanValue="false"/>
+                        <L7p:Expression1 stringValue="${request.http.parameter.LegacyTraceAction}"/>
+                        <L7p:Operator operatorNull="null"/>
+                        <L7p:Predicates predicates="included">
+                            <L7p:item dataType="included">
+                                <L7p:Type variableDataType="string"/>
+                            </L7p:item>
+                            <L7p:item binary="included">
+                                <L7p:Negated booleanValue="true"/>
+                                <L7p:Operator operator="EMPTY"/>
+                                <L7p:RightValue stringValue=""/>
+                            </L7p:item>
+                        </L7p:Predicates>
+                    </L7p:ComparisonAssertion>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtyZXF1ZXN0Lmh0dHAucGFyYW1ldGVyLkxlZ2FjeVRyYWNlQWN0aW9ufQ=="/>
+                        <L7p:VariableToSet stringValue="legacy.action"/>
+                    </L7p:SetVariable>
+                </wsp:All>
+                <L7p:TrueAssertion/>
+                <L7p:assertionComment>
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="  // Get the legacy trace action for DBE"/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:assertionComment>
+            </wsp:OneOrMore>
+            <wsp:OneOrMore wsp:Usage="Required">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:RequestXpathAssertion>
+                        <L7p:AssertionComment assertionComment="included">
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// XPath to ${messageId} since ${requestId} is reserved"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:AssertionComment>
+                        <L7p:VariablePrefix stringValue="messageId"/>
+                        <L7p:XpathExpression xpathExpressionValue="included">
+                            <L7p:Expression stringValue="/soapenv:Envelope/soapenv:Body/ser:GetResponse/requestId"/>
+                            <L7p:Namespaces mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="soapenv"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                </L7p:entry>
+                                <L7p:entry>
+                                    <L7p:key stringValue="ser"/>
+                                    <L7p:value stringValue="http://www.orange.co.il/services"/>
+                                </L7p:entry>
+                                <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                </L7p:entry>
+                            </L7p:Namespaces>
+                            <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                        </L7p:XpathExpression>
+                    </L7p:RequestXpathAssertion>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHttZXNzYWdlSWQucmVzdWx0fQ=="/>
+                        <L7p:VariableToSet stringValue="partner.requestId"/>
+                    </L7p:SetVariable>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="R2V0UmVzcG9uc2U="/>
+                        <L7p:VariableToSet stringValue="partner.operation"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="GetResponse: requestid=${partner.requestid}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:Include>
+                        <L7p:PolicyGuid stringValue="72d8e575-3c95-4469-9b6e-5f1af5c327f6"/>
+                    </L7p:Include>
+                    <wsp:OneOrMore wsp:Usage="Required">
+                        <wsp:All wsp:Usage="Required">
+                            <L7p:RemoteCacheLookup>
+                                <L7p:CacheEntryKey stringValue="${partner.requestId}-${gateway.partner.environment}-response"/>
+                                <L7p:OtherTargetMessageVariable stringValue="payload"/>
+                                <L7p:RemoteCacheId longValue="11567104"/>
+                                <L7p:Target target="OTHER"/>
+                            </L7p:RemoteCacheLookup>
+                            <L7p:AuditDetailAssertion>
+                                <L7p:Detail stringValue="Getting payload from cache. payload.mainpart=:${payload.mainpart}"/>
+                            </L7p:AuditDetailAssertion>
+                            <wsp:OneOrMore wsp:Usage="Required">
+                                <wsp:All wsp:Usage="Required">
+                                    <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${payload.mainpart}"/>
+                                    <L7p:ExpressionIsVariable booleanValue="false"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Operator operator="EMPTY"/>
+                                    <L7p:RightValue stringValue="asdf"/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                    </L7p:ComparisonAssertion>
+                                    <L7p:AuditDetailAssertion>
+                                    <L7p:Detail stringValue="Empty payload in cache. payload.mainpart=:${payload.mainpart}"/>
+                                    </L7p:AuditDetailAssertion>
+                                    <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="PGV0YT4ke2NvbmZpZy5ldGF9PC9ldGE+"/>
+                                    <L7p:VariableToSet stringValue="output"/>
+                                    </L7p:SetVariable>
+                                    <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue=" //payload found, but empty"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:assertionComment>
+                                </wsp:All>
+                                <wsp:All wsp:Usage="Required">
+                                    <L7p:AuditDetailAssertion>
+                                    <L7p:Detail stringValue="Found payload in cache. payload.mainpart=:${payload.mainpart}"/>
+                                    </L7p:AuditDetailAssertion>
+                                    <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="JHtwYXlsb2FkLm1haW5wYXJ0fQ=="/>
+                                    <L7p:VariableToSet stringValue="responseOut"/>
+                                    </L7p:SetVariable>
+                                    <L7p:Include>
+                                    <L7p:PolicyGuid stringValue="9b24fba0-6ba9-4c94-9d2b-04f611c4ff46"/>
+                                    </L7p:Include>
+                                    <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="PHJlc3BvbnNlPiR7cmVzcG9uc2VPdXR9PC9yZXNwb25zZT4="/>
+                                    <L7p:VariableToSet stringValue="output"/>
+                                    </L7p:SetVariable>
+                                    <L7p:AuditDetailAssertion>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="  // Write to splunk"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:CustomLoggerSuffix stringValue="splunk"/>
+                                    <L7p:Detail stringValue="GetResponse ${partner.requestId}-${gateway.partner.environment} Found in cache"/>
+                                    <L7p:LoggingOnly booleanValue="true"/>
+                                    </L7p:AuditDetailAssertion>
+                                    <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue=" //payload found"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:assertionComment>
+                                </wsp:All>
+                                <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue=" // If still empty, return eta"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:assertionComment>
+                            </wsp:OneOrMore>
+                            <L7p:assertionComment>
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Check cache for response message"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:assertionComment>
+                        </wsp:All>
+                        <wsp:All wsp:Usage="Required">
+                            <L7p:JdbcQuery>
+                                <L7p:AssertionFailureEnabled booleanValue="false"/>
+                                <L7p:ConnectionName stringValue="Tracer Database"/>
+                                <L7p:MaxRecords intValue="1"/>
+                                <L7p:SqlQuery stringValue="SELECT REQ_XML_REPLY AS payload FROM REQUESTS WHERE REQ_ID=${partner.requestid}"/>
+                            </L7p:JdbcQuery>
+                            <wsp:OneOrMore wsp:Usage="Required">
+                                <wsp:All wsp:Usage="Required">
+                                    <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${jdbcQuery.queryresult.count}"/>
+                                    <L7p:ExpressionIsVariable booleanValue="false"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="int"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:RightValue stringValue="0"/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                    </L7p:ComparisonAssertion>
+                                    <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="PHJlcXVlc3Qtbm90LWZvdW5kLz4="/>
+                                    <L7p:VariableToSet stringValue="output"/>
+                                    </L7p:SetVariable>
+                                    <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Request not found"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:assertionComment>
+                                </wsp:All>
+                                <wsp:All wsp:Usage="Required">
+                                    <L7p:ComparisonAssertion>
+                                    <L7p:CaseSensitive booleanValue="false"/>
+                                    <L7p:Expression1 stringValue="${jdbcQuery.payload}"/>
+                                    <L7p:ExpressionIsVariable booleanValue="false"/>
+                                    <L7p:Operator operatorNull="null"/>
+                                    <L7p:Predicates predicates="included">
+                                    <L7p:item dataType="included">
+                                    <L7p:Type variableDataType="string"/>
+                                    </L7p:item>
+                                    <L7p:item binary="included">
+                                    <L7p:Operator operator="EMPTY"/>
+                                    <L7p:RightValue stringValue=""/>
+                                    </L7p:item>
+                                    </L7p:Predicates>
+                                    </L7p:ComparisonAssertion>
+                                    <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="PGV0YT4ke2NvbmZpZy5ldGF9PC9ldGE+"/>
+                                    <L7p:VariableToSet stringValue="output"/>
+                                    </L7p:SetVariable>
+                                    <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Not ready yet"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:assertionComment>
+                                </wsp:All>
+                                <wsp:All wsp:Usage="Required">
+                                    <L7p:AuditDetailAssertion>
+                                    <L7p:Detail stringValue="Found payload in Tracing database"/>
+                                    </L7p:AuditDetailAssertion>
+                                    <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="JHtqZGJjUXVlcnkucGF5bG9hZH0="/>
+                                    <L7p:VariableToSet stringValue="responseOut"/>
+                                    </L7p:SetVariable>
+                                    <L7p:Include>
+                                    <L7p:PolicyGuid stringValue="9b24fba0-6ba9-4c94-9d2b-04f611c4ff46"/>
+                                    </L7p:Include>
+                                    <L7p:SetVariable>
+                                    <L7p:Base64Expression stringValue="PHJlc3BvbnNlPiR7cmVzcG9uc2VPdXR9PC9yZXNwb25zZT4="/>
+                                    <L7p:VariableToSet stringValue="output"/>
+                                    </L7p:SetVariable>
+                                    <L7p:AuditDetailAssertion>
+                                    <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="  // Write to splunk"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:AssertionComment>
+                                    <L7p:CustomLoggerSuffix stringValue="splunk"/>
+                                    <L7p:Detail stringValue="GetResponse ${partner.requestId}-${gateway.partner.environment} Found in database"/>
+                                    <L7p:LoggingOnly booleanValue="true"/>
+                                    </L7p:AuditDetailAssertion>
+                                    <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Response was found"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                    </L7p:assertionComment>
+                                </wsp:All>
+                                <L7p:assertionComment>
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Handle respone from Tracer DB"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:assertionComment>
+                            </wsp:OneOrMore>
+                            <L7p:assertionComment>
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Get response from Tracing DB"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:assertionComment>
+                        </wsp:All>
+                        <wsp:All wsp:Usage="Required">
+                            <L7p:AuditDetailAssertion>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="  // Write to splunk"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:CustomLoggerSuffix stringValue="splunk"/>
+                                <L7p:Detail stringValue="GetResponse ${partner.requestId}-${gateway.partner.environment} failed"/>
+                                <L7p:LoggingOnly booleanValue="true"/>
+                            </L7p:AuditDetailAssertion>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="PHJlcXVlc3Qtbm90LWZvdW5kPk5vdCBpbiBjYWNoZSBhbmQgREIgcXVlcnkgZmFpbGVkPC9yZXF1ZXN0LW5vdC1mb3VuZD4="/>
+                                <L7p:VariableToSet stringValue="output"/>
+                            </L7p:SetVariable>
+                            <L7p:assertionComment>
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Unable to query the tracer database"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:assertionComment>
+                        </wsp:All>
+                        <L7p:assertionComment>
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue=" // Get response from cache, DB or send a NOT YET response"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:assertionComment>
+                    </wsp:OneOrMore>
+                    <L7p:assertionComment>
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="// If the is GetResponse, fetch requestId and handle"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:assertionComment>
+                </wsp:All>
+                <wsp:All wsp:Usage="Required">
+                    <wsp:OneOrMore wsp:Usage="Required">
+                        <wsp:All L7p:Enabled="false" wsp:Usage="Required">
+                            <L7p:RequestXpathAssertion>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// XPath to ${messageId} since ${requestId} is reserved"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:VariablePrefix stringValue="messageId"/>
+                                <L7p:XpathExpression xpathExpressionValue="included">
+                                    <L7p:Expression stringValue="/soapenv:Envelope/soapenv:Body/ser:Invoke/requestId"/>
+                                    <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="soapenv"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                    <L7p:entry>
+                                    <L7p:key stringValue="ser"/>
+                                    <L7p:value stringValue="http://www.orange.co.il/services"/>
+                                    </L7p:entry>
+                                    </L7p:Namespaces>
+                                    <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                                </L7p:XpathExpression>
+                            </L7p:RequestXpathAssertion>
+                            <L7p:SetVariable>
+                                <L7p:Base64Expression stringValue="JHttZXNzYWdlSWQucmVzdWx0fQ=="/>
+                                <L7p:Enabled booleanValue="false"/>
+                                <L7p:VariableToSet stringValue="partner.requestId"/>
+                            </L7p:SetVariable>
+                            <L7p:assertionComment>
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// XPath for requestID on request"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:assertionComment>
+                        </wsp:All>
+                        <L7p:Include>
+                            <L7p:PolicyGuid stringValue="6bc0190f-25b8-41cd-b4ea-78aef4876664"/>
+                        </L7p:Include>
+                        <L7p:assertionComment>
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// If the consumer provides a request ID, use it. Otherwise generate."/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:assertionComment>
+                    </wsp:OneOrMore>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="SW52b2tl"/>
+                        <L7p:VariableToSet stringValue="partner.operation"/>
+                    </L7p:SetVariable>
+                    <L7p:Include>
+                        <L7p:PolicyGuid stringValue="2e3c985d-f971-4a79-9d91-6b266a6865c5"/>
+                    </L7p:Include>
+                    <L7p:assertionComment>
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="// This is an Invoke operation - just do the governance bit"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:assertionComment>
+                </wsp:All>
+                <L7p:assertionComment>
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="// Invoke or GetResponse? Handle accordingly"/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:assertionComment>
+            </wsp:OneOrMore>
+        </wsp:All>
+    </wsp:Policy>
+</exp:Export>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exp:Export Version="3.0"
+    xmlns:L7p="http://www.layer7tech.com/ws/policy"
+    xmlns:exp="http://www.layer7tech.com/ws/policy/export" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+    <exp:References/>
+    <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+        <wsp:All wsp:Usage="Required">
+            <L7p:RateLimitQuery>
+                <L7p:CounterName stringValue="gatewayConcurrency"/>
+                <L7p:VariablePrefix stringValue="conc"/>
+            </L7p:RateLimitQuery>
+            <L7p:AuditDetailAssertion>
+                <L7p:CustomLoggerSuffix stringValue="splunk"/>
+                <L7p:Detail stringValue="serviceName=${audit.var.serviceName} requestId=${audit.var.partner.requestId} processingTime=${audit.var.request.elapsedTime} serviceNameConcurrency=${audit.var.concurrency.serviceName.value} backendConcurrency=${audit.var.concurrency.backend.value} invokeMethod=${audit.var.partner.invokeMethod} asyncReason=${audit.var.partner.asyncReason} reqOriginIp=${audit.request.tcp.remoteAddress} L7ReqId=${audit.var.requestId} acceptTime=${audit.var.originalAcceptTime.millis} IF_RESPONSE=${audit.var.IF_REQUEST.xml.isCorrect} IF_REPLY=${audit.var.IF_REPLY.xml.isCorrect} executeTime=${audit.var.executeTime.millis} replyTime=${audit.var.replyTime.millis} timeToReply=${audit.var.timeToReply} concurrency=${conc.counter.concurrency} connection=${audit.var.config.connection}"/>
+                <L7p:LoggingOnly booleanValue="true"/>
+            </L7p:AuditDetailAssertion>
+        </wsp:All>
+    </wsp:Policy>
+</exp:Export>

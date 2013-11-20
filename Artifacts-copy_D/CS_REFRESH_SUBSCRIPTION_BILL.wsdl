@@ -1,0 +1,126 @@
+<!--Created by TIBCO WSDL--><wsdl:definitions name="Untitled" targetNamespace="http://www.orange.co.il/service/CS_Refresh_SubscriptionImpl/Process/CS_Refresh_SubscriptionImpl/GW/ESB/CS_Refresh_SubscriptionImpl/Process/WebSevices" xmlns:ns0="http://www.tibco.com/schemas/IF-SRB/GW/ESB/xsd.CS_Refresh_Subscription.xsd" xmlns:ns1="http://www.tibco.com/schemas/IF-SRB/GW/ESB/xsd.esbOpsResponse.xsd" xmlns:ns2="http://www.tibco.com/schemas/IF-SRB/GW/ESB/xsd.esbOpsRequest.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.orange.co.il/service/CS_Refresh_SubscriptionImpl/Process/CS_Refresh_SubscriptionImpl/GW/ESB/CS_Refresh_SubscriptionImpl/Process/WebSevices" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:types>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.tibco.com/schemas/IF-SRB/GW/ESB/xsd.esbOpsResponse.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:import namespace="http://www.tibco.com/schemas/IF-SRB/GW/ESB/xsd.esbOpsRequest.xsd"/>
+            <xs:import namespace="http://www.tibco.com/schemas/IF-SRB/GW/ESB/xsd.CS_Refresh_Subscription.xsd"/>
+            <xs:complexType name="ResponseOperationalParameters">
+                <xs:sequence>
+                    <xs:element name="requestId" type="xs:string"/>
+                    <xs:element name="serviceName" type="xs:string"/>
+                    <xs:choice>
+                        <xs:element name="eta" type="xs:string"/>
+                        <xs:element name="request-no-found" type="xs:string"/>
+                        <xs:element name="responseStatus">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="status" type="xs:string"/>
+                                    <xs:element name="statusCode" type="xs:string"/>
+                                    <xs:element name="statusMessage" type="xs:string"/>
+                                    <xs:element name="debugInfo" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="esbOps" type="ns1:ResponseOperationalParameters"/>
+        </xs:schema>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.tibco.com/schemas/IF-SRB/GW/ESB/xsd.CS_Refresh_Subscription.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:import namespace="http://www.tibco.com/schemas/IF-SRB/GW/ESB/xsd.esbOpsRequest.xsd"/>
+            <xs:import namespace="http://www.tibco.com/schemas/IF-SRB/GW/ESB/xsd.esbOpsResponse.xsd"/>
+            <xs:import namespace="http://www.tibco.com/schemas/IF-SRB/GW/ESB/xsd.esbOpsResponse.xsd"/>
+            <xs:import namespace="http://www.tibco.com/schemas/IF-SRB/GW/ESB/xsd.esbOpsRequest.xsd"/>
+            <xs:complexType name="inputParametersType">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="refreshParams">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="masterAccountIntegrationId" type="xs:string"/>
+                                <xs:element name="contractId" type="xs:string"/>
+                                <xs:element name="assetId" type="xs:string"/>
+                                <xs:element name="csrUserName" type="xs:string"/>
+                                <xs:element name="productName" type="xs:string"/>
+                                <xs:element name="className" type="xs:string"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="CS_Refresh_Subscription_Request">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns2:esbOps"/>
+                        <xs:element ref="ns0:inputParameters"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CS_Refresh_Subscription_Response">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns1:esbOps"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="inputParameters" type="ns0:inputParametersType"/>
+        </xs:schema>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.tibco.com/schemas/IF-SRB/GW/ESB/xsd.esbOpsRequest.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:import namespace="http://www.tibco.com/schemas/IF-SRB/GW/ESB/xsd.esbOpsResponse.xsd"/>
+            <xs:import namespace="http://www.tibco.com/schemas/IF-SRB/GW/ESB/xsd.CS_Refresh_Subscription.xsd"/>
+            <xs:complexType name="RequestOperationalParameters">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="serviceName" type="xs:string"/>
+                    <xs:element minOccurs="0" name="async" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="cacheTimeMax" type="xs:int"/>
+                    <xs:element minOccurs="0" name="callbackServiceName" type="xs:string"/>
+                    <xs:element minOccurs="0" name="correlationInfo" type="ns2:correlation"/>
+                    <xs:element minOccurs="0" name="requestId" type="xs:string"/>
+                    <xs:element minOccurs="0" name="consumerTimeout" type="xs:int"/>
+                    <xs:element minOccurs="0" name="providerTimeout" type="xs:int"/>
+                    <xs:element minOccurs="0" name="reqOrigin" type="xs:string"/>
+                    <xs:element minOccurs="0" name="reqOriginApp" type="xs:string"/>
+                    <xs:element minOccurs="0" name="reqOriginator" type="xs:string"/>
+                    <xs:element minOccurs="0" name="invokerId" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="correlation">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="correlationId" type="xs:string"/>
+                    <xs:element minOccurs="0" name="externalId" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="esbOps" type="ns2:RequestOperationalParameters"/>
+            <xs:element name="input">
+                <xs:complexType/>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:service name="RefreshService">
+        <wsdl:port binding="tns:EventSourceRefreshServiceBinding" name="EventSourceRefreshService">
+            <soap:address location="http://localhost:9007/Process/WebSevices/RefreshService"/>
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:portType name="CS_Refresh_Subscription">
+        <wsdl:operation name="CS_Refresh_Subscription">
+            <wsdl:input message="tns:CS_Refresh_SubscriptionRequest"/>
+            <wsdl:output message="tns:CS_Refresh_SubscriptionResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="EventSourceRefreshServiceBinding" type="tns:CS_Refresh_Subscription">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="CS_Refresh_Subscription">
+            <soap:operation soapAction="/Process/WebSevices/RefreshService" style="document"/>
+            <wsdl:input>
+                <soap:body parts="parameters" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="parameters" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:message name="CS_Refresh_SubscriptionRequest">
+        <wsdl:part element="ns0:CS_Refresh_Subscription_Request" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="CS_Refresh_SubscriptionResponse">
+        <wsdl:part element="ns0:CS_Refresh_Subscription_Response" name="parameters"/>
+    </wsdl:message>
+</wsdl:definitions>

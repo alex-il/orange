@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exp:Export Version="3.0"
+    xmlns:L7p="http://www.layer7tech.com/ws/policy"
+    xmlns:exp="http://www.layer7tech.com/ws/policy/export" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+    <exp:References/>
+    <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+        <wsp:All wsp:Usage="Required">
+            <L7p:SetVariable>
+                <L7p:Base64Expression stringValue=""/>
+                <L7p:DataType variableDataType="dateTime"/>
+                <L7p:DateOffsetExpression stringValue=""/>
+                <L7p:VariableToSet stringValue="originalExecTime"/>
+            </L7p:SetVariable>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="Legacy execute = ${originalExecTime}"/>
+            </L7p:AuditDetailAssertion>
+            <L7p:ExportVariables>
+                <L7p:Enabled booleanValue="false"/>
+                <L7p:ExportedVars stringArrayValue="included">
+                    <L7p:item stringValue="originalExecTime"/>
+                    <L7p:item stringValue="originalExecuteTime"/>
+                </L7p:ExportedVars>
+            </L7p:ExportVariables>
+        </wsp:All>
+    </wsp:Policy>
+</exp:Export>

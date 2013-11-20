@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exp:Export Version="3.0"
+    xmlns:L7p="http://www.layer7tech.com/ws/policy"
+    xmlns:exp="http://www.layer7tech.com/ws/policy/export" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+    <exp:References>
+        <CustomAssertionReference RefType="com.l7tech.console.policy.exporter.CustomAssertionReference">
+            <CustomAssertionName>Hex To Decimal Converter</CustomAssertionName>
+        </CustomAssertionReference>
+        <RemoteCacheReference RefType="com.l7tech.external.assertions.remotecacheassertion.RemoteCacheReference">
+            <OID>11567104</OID>
+            <Name>RemoteCache</Name>
+            <Classname>com.l7tech.external.assertions.remotecacheassertion.RemoteCacheEntity</Classname>
+            <Type>memcached</Type>
+            <Timeout>2</Timeout>
+            <Properties>
+                <Property mame="ports">vmmemct1:23000</Property>
+                <Property mame="bucketSpecified">false</Property>
+            </Properties>
+        </RemoteCacheReference>
+    </exp:References>
+    <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+        <wsp:All wsp:Usage="Required">
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="* Request ID generator"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** Generate request ID. Set as ${partner.requestid}"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** @Autor: OlegB"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** @Version: v.1.0 - initial"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** @Creation Date: 30-jul-2013"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:AuditAssertion/>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="==>>  Request ID generator"/>
+            </L7p:AuditDetailAssertion>
+            <wsp:OneOrMore wsp:Usage="Required">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="REQUEST GEN: Checking JMS"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:ComparisonAssertion>
+                        <L7p:AssertionComment assertionComment="included">
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Fail if this is not a JMS protocol"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:AssertionComment>
+                        <L7p:CaseSensitive booleanValue="false"/>
+                        <L7p:Expression1 stringValue="${request.clientid}"/>
+                        <L7p:ExpressionIsVariable booleanValue="false"/>
+                        <L7p:Operator operatorNull="null"/>
+                        <L7p:Predicates predicates="included">
+                            <L7p:item dataType="included">
+                                <L7p:Type variableDataType="string"/>
+                            </L7p:item>
+                            <L7p:item binary="included">
+                                <L7p:RightValue stringValue="Protocol:Protocol:JMS"/>
+                            </L7p:item>
+                        </L7p:Predicates>
+                    </L7p:ComparisonAssertion>
+                    <L7p:ComparisonAssertion>
+                        <L7p:AssertionComment assertionComment="included">
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Fail if this is not a JMS protocol"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:AssertionComment>
+                        <L7p:CaseSensitive booleanValue="false"/>
+                        <L7p:Expression1 stringValue="${request.jms.property.partner.requestid}"/>
+                        <L7p:Operator operatorNull="null"/>
+                        <L7p:Predicates predicates="included">
+                            <L7p:item dataType="included">
+                                <L7p:Type variableDataType="int"/>
+                            </L7p:item>
+                            <L7p:item binary="included">
+                                <L7p:CaseSensitive booleanValue="false"/>
+                                <L7p:Operator operator="NE"/>
+                                <L7p:RightValue stringValue="0"/>
+                            </L7p:item>
+                        </L7p:Predicates>
+                    </L7p:ComparisonAssertion>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtyZXF1ZXN0Lmptcy5wcm9wZXJ0eS5wYXJ0bmVyLnJlcXVlc3RpZH0="/>
+                        <L7p:VariableToSet stringValue="partner.requestid"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Found requestid as jms property: ${partner.requestid}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:assertionComment>
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="// Set from jms property if found"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:assertionComment>
+                </wsp:All>
+                <wsp:All wsp:Usage="Required">
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="REQUEST GEN: Checking xml message"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:HardcodedResponse>
+                        <L7p:Base64ResponseBody stringValue="cmVxdWVzdCBtYWlucGFydHQKCiR7cmVxdWVzdC5tYWlucGFydH0="/>
+                        <L7p:EarlyResponse booleanValue="true"/>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:ResponseContentType stringValue="text/plain; charset=UTF-8"/>
+                    </L7p:HardcodedResponse>
+                    <L7p:RequestXpathAssertion>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:VariablePrefix stringValue=""/>
+                        <L7p:XpathExpression xpathExpressionValue="included">
+                            <L7p:Expression stringValue="/s:Envelope/s:Body/ser:Invoke/requestId"/>
+                            <L7p:Namespaces mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                </L7p:entry>
+                                <L7p:entry>
+                                    <L7p:key stringValue="ser"/>
+                                    <L7p:value stringValue="http://www.orange.co.il/services"/>
+                                </L7p:entry>
+                            </L7p:Namespaces>
+                            <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                        </L7p:XpathExpression>
+                    </L7p:RequestXpathAssertion>
+                    <L7p:Regex>
+                        <L7p:AutoTarget booleanValue="false"/>
+                        <L7p:CaptureVar stringValue="partner.requestid"/>
+                        <L7p:Regex stringValue="&lt;requestId>([0-9]+)&lt;/requestId>"/>
+                        <L7p:Replacement stringValue=""/>
+                    </L7p:Regex>
+                    <L7p:ComparisonAssertion>
+                        <L7p:AssertionComment assertionComment="included">
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Fail if this is not in the xpath"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:AssertionComment>
+                        <L7p:CaseSensitive booleanValue="false"/>
+                        <L7p:Expression1 stringValue="${partner.requestid[1]}"/>
+                        <L7p:Operator operatorNull="null"/>
+                        <L7p:Predicates predicates="included">
+                            <L7p:item stringLength="included">
+                                <L7p:Max intValue="-1"/>
+                                <L7p:Min intValue="3"/>
+                            </L7p:item>
+                        </L7p:Predicates>
+                    </L7p:ComparisonAssertion>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtwYXJ0bmVyLnJlcXVlc3RpZFsxXX0="/>
+                        <L7p:VariableToSet stringValue="partner.requestid"/>
+                    </L7p:SetVariable>
+                    <L7p:assertionComment>
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="// Checking message itself"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:assertionComment>
+                </wsp:All>
+                <wsp:All wsp:Usage="Required">
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="REQUEST GEN: creating new"/>
+                    </L7p:AuditDetailAssertion>
+                    <wsp:All wsp:Usage="Required">
+                        <L7p:Regex>
+                            <L7p:AutoTarget booleanValue="false"/>
+                            <L7p:CaptureVar stringValue="count.match"/>
+                            <L7p:OtherTargetMessageVariable stringValue="requestId"/>
+                            <L7p:Regex stringValue="-([0-9a-f]+)$"/>
+                            <L7p:Replacement stringValue=""/>
+                            <L7p:Target target="OTHER"/>
+                        </L7p:Regex>
+                        <L7p:SetVariable>
+                            <L7p:Base64Expression stringValue="JHtjb3VudC5tYXRjaFsxXX0="/>
+                            <L7p:VariableToSet stringValue="count.hex"/>
+                        </L7p:SetVariable>
+                        <L7p:CustomAssertion>
+                            <L7p:base64SerializedValue>rO0ABXNyADFjb20ubDd0ZWNoLnBvbGljeS5hc3NlcnRpb24uQ3VzdG9tQXNzZXJ0aW9uSG9sZGVyZtcreFwddTICAANMAAhjYXRlZ29yeXQAKkxjb20vbDd0ZWNoL3BvbGljeS9hc3NlcnRpb24vZXh0L0NhdGVnb3J5O0wAD2N1c3RvbUFzc2VydGlvbnQAMUxjb20vbDd0ZWNoL3BvbGljeS9hc3NlcnRpb24vZXh0L0N1c3RvbUFzc2VydGlvbjtMAA9kZXNjcmlwdGlvblRleHR0ABJMamF2YS9sYW5nL1N0cmluZzt4cgAlY29tLmw3dGVjaC5wb2xpY3kuYXNzZXJ0aW9uLkFzc2VydGlvbttfY5k8vaKxAgACWgAHZW5hYmxlZEwAEGFzc2VydGlvbkNvbW1lbnR0AC9MY29tL2w3dGVjaC9wb2xpY3kvYXNzZXJ0aW9uL0Fzc2VydGlvbiRDb21tZW50O3hwAXBzcgAoY29tLmw3dGVjaC5wb2xpY3kuYXNzZXJ0aW9uLmV4dC5DYXRlZ29yeVqwnGWhRP41AgACSQAFbXlLZXlMAAZteU5hbWVxAH4AA3hwAAAACnQAC1BvbGljeUxvZ2ljc3IAVWNvbS5sN3RlY2guY3VzdG9tYXNzZXJ0aW9uLmhleHRvZGVjaW1hbGNvbnZlcnRlci5IZXhUb0RlY2ltYWxDb252ZXJ0ZXJDdXN0b21Bc3NlcnRpb25XGySdyOPmGgIAA1oAB3JldmVyc2VMABFpbnB1dFZhcmlhYmxlTmFtZXEAfgADTAASb3V0cHV0VmFyaWFibGVOYW1lcQB+AAN4cAB0AAljb3VudC5oZXh0AAljb3VudC5kZWN0AD48aHRtbD5Db252ZXJ0cyBhIEhleGFkZWNpbWFsIE51bWJlciB0byBhIERlY2ltYWwgTnVtYmVyPC9odG1sPg==</L7p:base64SerializedValue>
+                        </L7p:CustomAssertion>
+                        <wsp:OneOrMore wsp:Usage="Required">
+                            <L7p:Regex>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Grab last three digits if >= 100"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:AutoTarget booleanValue="false"/>
+                                <L7p:OtherTargetMessageVariable stringValue="count.dec"/>
+                                <L7p:Regex stringValue=".*([0-9]{3}$)"/>
+                                <L7p:Replace booleanValue="true"/>
+                                <L7p:Replacement stringValue="$1"/>
+                                <L7p:Target target="OTHER"/>
+                            </L7p:Regex>
+                            <L7p:Regex>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Left pad with 0 if 10 &lt;= x &lt;= 99"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:AutoTarget booleanValue="false"/>
+                                <L7p:OtherTargetMessageVariable stringValue="count.dec"/>
+                                <L7p:Regex stringValue="(^[0-9]{2}$)"/>
+                                <L7p:Replace booleanValue="true"/>
+                                <L7p:Replacement stringValue="0$1"/>
+                                <L7p:Target target="OTHER"/>
+                            </L7p:Regex>
+                            <L7p:Regex>
+                                <L7p:AssertionComment assertionComment="included">
+                                    <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Left pad with 00 if 1 &lt;= x &lt;= 9"/>
+                                    </L7p:entry>
+                                    </L7p:Properties>
+                                </L7p:AssertionComment>
+                                <L7p:AutoTarget booleanValue="false"/>
+                                <L7p:OtherTargetMessageVariable stringValue="count.dec"/>
+                                <L7p:Regex stringValue="(^[0-9]$)"/>
+                                <L7p:Replace booleanValue="true"/>
+                                <L7p:Replacement stringValue="00$1"/>
+                                <L7p:Target target="OTHER"/>
+                            </L7p:Regex>
+                            <L7p:assertionComment>
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Get last three digits, pad with 0 if required"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:assertionComment>
+                        </wsp:OneOrMore>
+                        <L7p:assertionComment>
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Generate three characters from the requestId counter"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:assertionComment>
+                    </wsp:All>
+                    <L7p:Regex>
+                        <L7p:AutoTarget booleanValue="false"/>
+                        <L7p:CaptureVar stringValue="nodeid"/>
+                        <L7p:OtherTargetMessageVariable stringValue="ssgnode.name"/>
+                        <L7p:Regex stringValue="(\d)\.?"/>
+                        <L7p:RegexName stringValue="Get the node id"/>
+                        <L7p:Replacement stringValue=""/>
+                        <L7p:Target target="OTHER"/>
+                    </L7p:Regex>
+                    <L7p:SetVariable>
+                        <L7p:AssertionComment assertionComment="included">
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Use internal Request ID for now."/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:AssertionComment>
+                        <L7p:Base64Expression stringValue="JHtyZXF1ZXN0LnRpbWUubG9jYWwueXlNTWRkSEhtbXNzU1NTfSR7Y291bnQuZGVjfSR7bm9kZWlkWzFdfQ=="/>
+                        <L7p:VariableToSet stringValue="partner.requestid"/>
+                    </L7p:SetVariable>
+                    <L7p:SetVariable>
+                        <L7p:AssertionComment assertionComment="included">
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Use internal Request ID for now."/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:AssertionComment>
+                        <L7p:Base64Expression stringValue="R0NfR0VUX0lORk9fT0RT"/>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:VariableToSet stringValue="request1.http.parameter.serviceName"/>
+                    </L7p:SetVariable>
+                    <L7p:assertionComment>
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="// Generate a new requestid"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:assertionComment>
+                </wsp:All>
+            </wsp:OneOrMore>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="putting servicename to cache: ${servicename.result}"/>
+            </L7p:AuditDetailAssertion>
+            <L7p:SetVariable>
+                <L7p:AssertionComment assertionComment="included">
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="// Use internal Request ID for now."/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:AssertionComment>
+                <L7p:Base64Expression stringValue="JHtyZXF1ZXN0Lmh0dHAucGFyYW1ldGVyLnNlcnZpY2VOYW1lfQ=="/>
+                <L7p:Enabled booleanValue="false"/>
+                <L7p:VariableToSet stringValue="serviceName.result"/>
+            </L7p:SetVariable>
+            <L7p:SetVariable>
+                <L7p:Base64Expression stringValue=""/>
+                <L7p:VariableToSet stringValue="uninitialized"/>
+            </L7p:SetVariable>
+            <L7p:RemoteCacheStore>
+                <L7p:CacheEntryKey stringValue="${partner.requestid}-${gateway.partner.environment}-servicename"/>
+                <L7p:MaxEntryAge stringValue="30000"/>
+                <L7p:OtherTargetMessageVariable stringValue="serviceName.result"/>
+                <L7p:RemoteCacheId longValue="11567104"/>
+                <L7p:Target target="OTHER"/>
+            </L7p:RemoteCacheStore>
+            <L7p:RemoteCacheStore>
+                <L7p:CacheEntryKey stringValue="${partner.requestid}-${gateway.partner.environment}-response"/>
+                <L7p:MaxEntryAge stringValue="30000"/>
+                <L7p:OtherTargetMessageVariable stringValue="uninitialized"/>
+                <L7p:RemoteCacheId longValue="11567104"/>
+                <L7p:Target target="OTHER"/>
+            </L7p:RemoteCacheStore>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="--- putting unInitialized into cache: ${partner.requestid}-${gateway.partner.environment}-response"/>
+                <L7p:Enabled booleanValue="false"/>
+            </L7p:AuditDetailAssertion>
+        </wsp:All>
+    </wsp:Policy>
+</exp:Export>

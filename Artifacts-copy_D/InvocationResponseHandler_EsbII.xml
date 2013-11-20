@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exp:Export Version="3.0"
+    xmlns:L7p="http://www.layer7tech.com/ws/policy"
+    xmlns:exp="http://www.layer7tech.com/ws/policy/export" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+    <exp:References>
+        <RemoteCacheReference RefType="com.l7tech.external.assertions.remotecacheassertion.RemoteCacheReference">
+            <OID>11567104</OID>
+            <Name>RemoteCache</Name>
+            <Classname>com.l7tech.external.assertions.remotecacheassertion.RemoteCacheEntity</Classname>
+            <Type>memcached</Type>
+            <Timeout>2</Timeout>
+            <Properties>
+                <Property mame="ports">vmmemct1:23000</Property>
+                <Property mame="bucketSpecified">false</Property>
+            </Properties>
+        </RemoteCacheReference>
+    </exp:References>
+    <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+        <wsp:All wsp:Usage="Required">
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="**  Invocation Response Handler"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="**  Puts  DB invocation response  in cache  &amp; into Tracer DB"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** @Autor: OlegB"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** @Version: v.1.0 - initial"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** @Creation Date: 30-jul-2013"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="==>> Invocation Response Handler"/>
+            </L7p:AuditDetailAssertion>
+            <wsp:OneOrMore wsp:Usage="Required">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:RemoteCacheStore>
+                        <L7p:CacheEntryKey stringValue="${partner.requestId}-${gateway.partner.environment}-response"/>
+                        <L7p:MaxEntryAge stringValue="30000"/>
+                        <L7p:OtherTargetMessageVariable stringValue="rawResponse"/>
+                        <L7p:RemoteCacheId longValue="11567104"/>
+                        <L7p:Target target="OTHER"/>
+                    </L7p:RemoteCacheStore>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="partner.requestId:=${partner.requestId}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="gateway.partner.environment:=${gateway.partner.environment}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:assertionComment>
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue=" // success!!! set to cache "/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:assertionComment>
+                </wsp:All>
+                <wsp:All wsp:Usage="Required">
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="BAD set to cache"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="rawResponse:=${rawResponse}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:assertionComment>
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue=" // bad :( set to cache"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:assertionComment>
+                </wsp:All>
+            </wsp:OneOrMore>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="&lt;&lt;== Invocation Response Handler"/>
+            </L7p:AuditDetailAssertion>
+        </wsp:All>
+    </wsp:Policy>
+</exp:Export>

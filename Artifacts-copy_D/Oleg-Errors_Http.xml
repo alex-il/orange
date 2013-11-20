@@ -1,0 +1,55 @@
+if=257:l7=73	SC_SELFSERVICE_MANAGE_USER_CRM (HTTP, PARSED=false, 1304030513516421391, UTF-8->UTF-8) - Sync NO MATCH ERROR
+============================================================================================================
+<IF_REQUEST><SERVICE_NAME>SC_SELFSERVICE_MANAGE_USER_CRM</SERVICE_NAME><PARAMS_LIST><SS_ACTION_TYPE>10</SS_ACTION_TYPE><CUSTOMER_ID>72086</CUSTOMER_ID><SS_REQUESTED_ACTION>1</SS_REQUESTED_ACTION><CRM_PROCESS_ID>72248982</CRM_PROCESS_ID></PARAMS_LIST></IF_REQUEST>
+----- IF Response
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY>
+    <SERVICE_NAME>SC_SELFSERVICE_MANAGE_USER_CRM</SERVICE_NAME>
+    <REQUEST_STATUS>
+        <STATUS>ERROR</STATUS>
+        <STATUS_CODE>7</STATUS_CODE>
+        <STATUS_MESSAGE>SE-HTTP:Error occurred while calling service provider</STATUS_MESSAGE>
+        <DEBUG_INFO>An IOException was thrown while trying to execute the Http method</DEBUG_INFO>
+        <IS_CANCEL_NEEDED>Y</IS_CANCEL_NEEDED>
+    </REQUEST_STATUS>
+    <REQUEST_ID>1304231756259277191</REQUEST_ID>
+</IF_REPLY>
+-----   L7 Response  -----
+<IF_REPLY>
+<STATUS>ERROR</STATUS>
+<STATUS_MESSAGE>ESB:Problem routing to 
+
+<-- o:: No params in url, not parsed???  -->
+http://vmssint4:7001/selfadmin/SC_SELFSERVICE_MANAGE_USER_CRM?xml=%3CIF_REQUEST%3E%3CSERVICE_NAME%3ESC_SELFSERVICE_MANAGE_USER_CRM%3C%2FSERVICE_NAME%3E%3CPARAMS_LIST%3E%3CSS_ACTION_TYPE%3E10%3C%2FSS_ACTION_TYPE%3E%3CCUSTOMER_ID%3E72086%3C%2FCUSTOMER_ID%3E%3CSS_REQUESTED_ACTION%3E1%3C%2FSS_REQUESTED_ACTION%3E%3CCRM_PROCESS_ID%3E72248982%3C%2FCRM_PROCESS_ID%3E%3C%2FPARAMS_LIST%3E%3C%2FIF_REQUEST%3E. Error msg: Unable to obtain HTTP response from http://vmssint4:7001/selfadmin/SC_SELFSERVICE_MANAGE_USER_CRM?xml=%3CIF_REQUEST%3E%3CSERVICE_NAME%3ESC_SELFSERVICE_MANAGE_USER_CRM%3C%2FSERVICE_NAME%3E%3CPARAMS_LIST%3E%3CSS_ACTION_TYPE%3E10%3C%2FSS_ACTION_TYPE%3E%3CCUSTOMER_ID%3E72086%3C%2FCUSTOMER_ID%3E%3CSS_REQUESTED_ACTION%3E1%3C%2FSS_REQUESTED_ACTION%3E%3CCRM_PROCESS_ID%3E72248982%3C%2FCRM_PROCESS_ID%3E%3C%2FPARAMS_LIST%3E%3C%2FIF_REQUEST%3E: Connection refused
+http://vmssint4:7001/selfadmin/SC_SELFSERVICE_MANAGE_USER_CRM
+</STATUS_MESSAGE>
+</IF_REPLY>
+
+========================================================================================================
+if=39:l7=108	SC_SELFSERVICE_MANAGE_USER_CRM (HTTP, PARSED=false, 1304030514382834391, UTF-8->UTF-8) - Sync NO MATCH ERROR
+========================================================================================================
+<IF_REQUEST><SERVICE_NAME>GC_GET_MENU_TREE_WAPSERVER</SERVICE_NAME><PARAMS_LIST></PARAMS_LIST></IF_REQUEST>
+----- IF Response
+<?xml version="1.0" encoding="UTF-8"?>
+<IF_REPLY>
+    <SERVICE_NAME>GC_GET_MENU_TREE_WAPSERVER</SERVICE_NAME>
+    <REQUEST_STATUS>        <STATUS>ERROR</STATUS>        <STATUS_CODE>7</STATUS_CODE>        <STATUS_MESSAGE>SE-HTTP:Error occurred while calling service provider</STATUS_MESSAGE>        <DEBUG_INFO>The Http Server replied with a 4XX status code</DEBUG_INFO>
+        <IS_CANCEL_NEEDED>Y</IS_CANCEL_NEEDED>
+    </REQUEST_STATUS>
+    <REQUEST_ID>1304231756272107591</REQUEST_ID>
+</IF_REPLY>
+-----   L7 Response  -----
+<IF_REPLY>
+<STATUS>ERROR</STATUS>
+<STATUS_MESSAGE>ESB:Problem routing to 
+
+<-- o:: No params in url, not parsed???  -->
+http://wap.orange.co.il:/niragongo/getTreeXml.asp?xml=%3CIF_REQUEST%3E%3CSERVICE_NAME%3EGC_GET_MENU_TREE_WAPSERVER%3C%2FSERVICE_NAME%3E%3CPARAMS_LIST%3E%3C%2FPARAMS_LIST%3E%3C%2FIF_REQUEST%3E. Error msg: Unable to obtain HTTP response from http://wap.orange.co.il/niragongo/getTreeXml.asp?xml=%3CIF_REQUEST%3E%3CSERVICE_NAME%3EGC_GET_MENU_TREE_WAPSERVER%3C%2FSERVICE_NAME%3E%3CPARAMS_LIST%3E%3C%2FPARAMS_LIST%3E%3C%2FIF_REQUEST%3E: Connection timed out</STATUS_MESSAGE>
+</IF_REPLY>
+
+========================================================================================================
+
+========================================================================================================
+========================================================================================================
+========================================================================================================
+========================================================================================================

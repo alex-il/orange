@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exp:Export Version="3.0"
+    xmlns:L7p="http://www.layer7tech.com/ws/policy"
+    xmlns:exp="http://www.layer7tech.com/ws/policy/export" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+    <exp:References>
+        <JdbcConnectionReference RefType="com.l7tech.console.policy.exporter.JdbcConnectionReference">
+            <ConnectionName>Tracer Database</ConnectionName>
+            <DriverClass>com.l7tech.jdbc.oracle.OracleDriver</DriverClass>
+            <JdbcUrl>jdbc:l7tech:oracle://it1dev01:1521;SID=ifdev1</JdbcUrl>
+            <UserName>IFRT_A</UserName>
+        </JdbcConnectionReference>
+    </exp:References>
+    <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+        <wsp:All wsp:Usage="Required">
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="****************************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** Handle admin type audit events"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** v1.0.0 - jmacdonald - 2013-03-17"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="****************************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:ComparisonAssertion>
+                <L7p:CaseSensitive booleanValue="false"/>
+                <L7p:Expression1 stringValue="${audit.type}"/>
+                <L7p:FailIfVariableNotFound booleanValue="false"/>
+                <L7p:Operator operatorNull="null"/>
+                <L7p:Predicates predicates="included">
+                    <L7p:item dataType="included">
+                        <L7p:Type variableDataType="string"/>
+                    </L7p:item>
+                    <L7p:item binary="included">
+                        <L7p:RightValue stringValue="admin"/>
+                    </L7p:item>
+                </L7p:Predicates>
+            </L7p:ComparisonAssertion>
+            <wsp:OneOrMore wsp:Usage="Required">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="Start Auto-Generated Sink Policy"/>
+                    </L7p:CommentAssertion>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*** DO NOT MODIFY THE AUTO-GENERATED PORTION OF THIS POLICY ***"/>
+                    </L7p:CommentAssertion>
+                    <L7p:UUIDGenerator>
+                        <L7p:TargetVariable stringValue="record.guid"/>
+                    </L7p:UUIDGenerator>
+                    <L7p:JdbcQuery>
+                        <L7p:AssertionFailureEnabled booleanValue="false"/>
+                        <L7p:ConnectionName stringValue="Tracer Database"/>
+                        <L7p:SqlQuery stringValue="insert into audit_main(id,nodeid,time,type,audit_level,name,message,ip_address,user_name,user_id,provider_oid,signature,properties,entity_class,entity_id,status,request_id,service_oid,operation_name,authenticated,authenticationType,request_length,response_length,request_xml,response_xml,response_status,routing_latency,component_id,action) values (${record.guid},${audit.nodeId},${audit.time},${audit.type},${audit.level},${audit.name},${audit.message},${audit.ipAddress},${audit.user.name},${audit.user.id},${audit.user.idProv},${audit.signature},${audit.properties},${audit.entity.class},${audit.entity.oid},${audit.status},${audit.requestId},${audit.serviceOid},${audit.operationName},${audit.authenticated},${audit.authType},${audit.savedRequestContentLength},${audit.savedResponseContentLength},${audit.reqZip},${audit.resZip},${audit.responseStatus},${audit.routingLatency},${audit.componentId},${audit.action})"/>
+                    </L7p:JdbcQuery>
+                    <L7p:ForEachLoop L7p:Usage="Required"
+                        loopVariable="audit.details" variablePrefix="i">
+                        <L7p:UUIDGenerator>
+                            <L7p:TargetVariable stringValue="detail.guid"/>
+                        </L7p:UUIDGenerator>
+                        <L7p:JdbcQuery>
+                            <L7p:AssertionFailureEnabled booleanValue="false"/>
+                            <L7p:ConnectionName stringValue="Tracer Database"/>
+                            <L7p:SqlQuery stringValue="insert into audit_detail( audit_oid,time,component_id,ordinal,message_id,exception_message,properties) values (${record.guid},${i.current.time},${i.current.componentId},${i.current.ordinal},${i.current.messageId},${i.current.exception},${i.current.properties})"/>
+                        </L7p:JdbcQuery>
+                    </L7p:ForEachLoop>
+                    <L7p:CommentAssertion>
+                        <L7p:Comment stringValue="*** END OF AUTO-GENERATED SINK POLICY ***"/>
+                    </L7p:CommentAssertion>
+                    <L7p:assertionComment>
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="// Auto generated - write to external DB"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:assertionComment>
+                </wsp:All>
+                <wsp:All wsp:Usage="Required">
+                    <L7p:AuditDetailAssertion>
+                        <L7p:CustomLoggerSuffix stringValue="externalAudit"/>
+                        <L7p:Detail stringValue="Failed to write to audit DB: ${audit.var.service.name}:${record.guid} - ${audit.message}"/>
+                        <L7p:LoggingOnly booleanValue="true"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:AssertionComment assertionComment="included">
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="LEFT.COMMENT"/>
+                                    <L7p:value stringValue="FIX THIS"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:AssertionComment>
+                        <L7p:CustomLoggerSuffix stringValue="externalAudit"/>
+                        <L7p:Detail stringValueReference="inline"><![CDATA[${audit.nodeId},${audit.time},${audit.type},${audit.level},${audit.name},${audit.message},${audit.ipAddress},${audit.user.name},${audit.user.id},${audit.user.idProv},${audit.signature},${audit.properties},${audit.entity.class},${audit.entity.oid},${audit.status},${audit.requestId},${audit.serviceOid},${audit.operationName},${audit.authenticated},${audit.authType},${audit.savedRequestContentLength}
+,${audit.savedResponseContentLength},${audit.reqZip},${audit.resZip},${audit.responseStatus},${audit.routingLatency},${audit.componentId},${audit.action}]]></L7p:Detail>
+                        <L7p:LoggingOnly booleanValue="true"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:ForEachLoop L7p:Usage="Required"
+                        loopVariable="audit.details" variablePrefix="i">
+                        <L7p:SetVariable>
+                            <L7p:AssertionComment assertionComment="included">
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Format the properties to put XML on one line. This will alter the content as well, but we want it all on one line for logging"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:AssertionComment>
+                            <L7p:Base64Expression stringValue="JHtpLmN1cnJlbnQucHJvcGVydGllc30="/>
+                            <L7p:VariableToSet stringValue="properties"/>
+                        </L7p:SetVariable>
+                        <L7p:Regex>
+                            <L7p:AssertionComment assertionComment="included">
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Strip leading spaces"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:AssertionComment>
+                            <L7p:AutoTarget booleanValue="false"/>
+                            <L7p:OtherTargetMessageVariable stringValue="properties"/>
+                            <L7p:Regex stringValue="^ *"/>
+                            <L7p:Replace booleanValue="true"/>
+                            <L7p:Replacement stringValue=""/>
+                            <L7p:Target target="OTHER"/>
+                        </L7p:Regex>
+                        <L7p:Regex>
+                            <L7p:AssertionComment assertionComment="included">
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Strip newlines"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:AssertionComment>
+                            <L7p:AutoTarget booleanValue="false"/>
+                            <L7p:OtherTargetMessageVariable stringValue="properties"/>
+                            <L7p:Regex stringValue="\n"/>
+                            <L7p:Replace booleanValue="true"/>
+                            <L7p:Replacement stringValue=""/>
+                            <L7p:Target target="OTHER"/>
+                        </L7p:Regex>
+                        <L7p:AuditDetailAssertion>
+                            <L7p:AssertionComment assertionComment="included">
+                                <L7p:Properties mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="LEFT.COMMENT"/>
+                                    <L7p:value stringValue="FIX THIS"/>
+                                    </L7p:entry>
+                                </L7p:Properties>
+                            </L7p:AssertionComment>
+                            <L7p:CustomLoggerSuffix stringValue="externalAudit"/>
+                            <L7p:Detail stringValue="${requestId}:${i.current.ordinal} - ${i.current.time},${i.current.componentId},${i.current.messageId},${i.current.exception},${properties}"/>
+                            <L7p:LoggingOnly booleanValue="true"/>
+                        </L7p:AuditDetailAssertion>
+                    </L7p:ForEachLoop>
+                    <L7p:assertionComment>
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="// External DB failed"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:assertionComment>
+                </wsp:All>
+                <L7p:assertionComment>
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="// External audit policy"/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:assertionComment>
+            </wsp:OneOrMore>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="Insert additional assertions from this point forward"/>
+            </L7p:CommentAssertion>
+        </wsp:All>
+    </wsp:Policy>
+</exp:Export>

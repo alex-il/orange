@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exp:Export Version="3.0"
+    xmlns:L7p="http://www.layer7tech.com/ws/policy"
+    xmlns:exp="http://www.layer7tech.com/ws/policy/export" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+    <exp:References/>
+    <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+        <wsp:All wsp:Usage="Required">
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** Legacy Standard Get Service Configuration"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** Lookup in cluster properties and get configuration variable"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** OlegB add timeout params 10062013"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="Legacy - Get Service Configuration From Cluster Properties"/>
+            </L7p:AuditDetailAssertion>
+            <L7p:SetVariable>
+                <L7p:Base64Expression stringValue="JHtzZXJ2aWNlTmFtZX0="/>
+                <L7p:VariableToSet stringValue="service.serviceName"/>
+            </L7p:SetVariable>
+            <L7p:LookupDynamicContextVariables>
+                <L7p:AssertionComment assertionComment="included">
+                    <L7p:Properties mapValue="included">
+                        <L7p:entry>
+                            <L7p:key stringValue="RIGHT.COMMENT"/>
+                            <L7p:value stringValue="Validating service configuration is loaded into the cluster properties"/>
+                        </L7p:entry>
+                    </L7p:Properties>
+                </L7p:AssertionComment>
+                <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.source_encoding"/>
+                <L7p:TargetDataType variableDataType="string"/>
+                <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+            </L7p:LookupDynamicContextVariables>
+            <wsp:OneOrMore wsp:Usage="Required">
+                <wsp:All wsp:Usage="Required">
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Hi, servicename is ${serviceName}"/>
+                        <L7p:Level stringValue="WARNING"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.eta"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:VariableToSet stringValue="config.eta"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: eta=${config.eta}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.is_async"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:VariableToSet stringValue="config.async"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: async=${config.async}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.is_parsed"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:VariableToSet stringValue="config.parsed"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: parsed=${config.parsed}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.connection_route_name"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:VariableToSet stringValue="config.connection"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: connection=${config.connection}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.parameter_list"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:VariableToSet stringValue="config.arguments"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: arguments = ${config.arguments}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.source_encoding"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:VariableToSet stringValue="config.sourceEnc"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: sourceEnc=${config.sourceEnc}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.target_encoding"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:VariableToSet stringValue="config.targetEnc"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: targetEnc=${config.targetEnc}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.method"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:VariableToSet stringValue="config.method"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: method=${config.method}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.query_string"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:VariableToSet stringValue="config.queryString"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: config.queryString=${config.queryString}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.should_render"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:VariableToSet stringValue="config.xmlRender"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: Render=${config.xmlRender}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.service_name_concurrency_limit"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:VariableToSet stringValue="config.serviceNameConcurrencyLimit"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: serviceNameConcurrencyLimit=${config.serviceNameConcurrencyLimit}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.back_end_concurrency_limit"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:VariableToSet stringValue="config.backEndConcurrencyLimit"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: backEndConcurrencyLimit=${config.backEndConcurrencyLimit}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.qdrain_service_name_c_l"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:VariableToSet stringValue="config.qDrainServiceNameConcurrencyLimit"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: qDrainServiceNameConcurrencyLimit=${config.qDrainServiceNameConcurrencyLimit}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.qdrain_back_end_c_l"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:VariableToSet stringValue="config.qDrainBackEndConcurrencyLimit"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: config.qDrainBackEndConcurrencyLimit=${config.qDrainBackEndConcurrencyLimit}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.eta_devider"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:VariableToSet stringValue="config.etaDevider"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: etaDevider=${config.etaDevider}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.cancel_timeout"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:VariableToSet stringValue="config.cancelTimeout"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration:cancelTimeout=${config.cancelTimeout}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.timeout_customer"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:VariableToSet stringValue="config.timeoutCustomer"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: timeoutCustomer=${config.timeoutCustomer}"/>
+                        <L7p:Enabled booleanValue="false"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.service_name_sync_conc"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:VariableToSet stringValue="config.serviceNameSyncConc"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: serviceNameSyncConc=${config.serviceNameSyncConc}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.service_name_async_conc"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:VariableToSet stringValue="config.serviceNameAsyncConc"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: serviceNameAsyncConc=${config.serviceNameAsyncConc}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.url_encoding"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:VariableToSet stringValue="config.urlEncoding"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: urlEncoding=${config.urlEncoding}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.ip_whitelist"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:VariableToSet stringValue="config.ipwhitelist"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Policy Fragment: Legacy - Get Service Configuration: ipwhitelist=${config.ipwhitelist}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.default.consumerTimeout"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:VariableToSet stringValue="config.consumerTimeout.default"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Legacy-Get Service Configuration:config.consumerTimeout.default=:${config.consumerTimeout.default}"/>
+                        <L7p:Enabled booleanValue="false"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.default.providerTimeout"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:Enabled booleanValue="false"/>
+                        <L7p:VariableToSet stringValue="config.providerTimeout.default"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Legacy-Get Service Configuration:config.providerTimeout.default=:${config.providerTimeout.default}"/>
+                        <L7p:Enabled booleanValue="false"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.Enabled"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:VariableToSet stringValue="config.enabled"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Legacy-Get Service Configuration:config.enabled=:${config.enabled}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:AssertionComment assertionComment="included">
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="  //list of allowed req origins"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:AssertionComment>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.allowed_req_origin"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:VariableToSet stringValue="config.allowedReqOrigin"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Legacy-Get Service Configuration:config.allowedReqOrigin=:${config.allowedReqOrigin}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:LookupDynamicContextVariables>
+                        <L7p:AssertionComment assertionComment="included">
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="  //list of allowed req origins"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:AssertionComment>
+                        <L7p:FailOnNotFound booleanValue="false"/>
+                        <L7p:SourceVariable stringValue="gateway.partner.configuration.${service.serviceName}.block_req_origin"/>
+                        <L7p:TargetDataType variableDataType="string"/>
+                        <L7p:TargetOutputVariablePrefix stringValue="clusterProp"/>
+                    </L7p:LookupDynamicContextVariables>
+                    <L7p:SetVariable>
+                        <L7p:Base64Expression stringValue="JHtjbHVzdGVyUHJvcC5vdXRwdXR9"/>
+                        <L7p:VariableToSet stringValue="config.blockReqOrigin"/>
+                    </L7p:SetVariable>
+                    <L7p:AuditDetailAssertion>
+                        <L7p:Detail stringValue="Legacy-Get Service Configuration:config.blockReqOrigin=:${config.blockReqOrigin}"/>
+                    </L7p:AuditDetailAssertion>
+                    <L7p:assertionComment>
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="// Get configuration parameters for this service"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:assertionComment>
+                </wsp:All>
+            </wsp:OneOrMore>
+        </wsp:All>
+    </wsp:Policy>
+</exp:Export>

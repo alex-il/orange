@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exp:Export Version="3.0"
+    xmlns:L7p="http://www.layer7tech.com/ws/policy"
+    xmlns:exp="http://www.layer7tech.com/ws/policy/export" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+    <exp:References>
+        <JdbcConnectionReference RefType="com.l7tech.console.policy.exporter.JdbcConnectionReference">
+            <ConnectionName>Tracer Database</ConnectionName>
+            <DriverClass>com.l7tech.jdbc.oracle.OracleDriver</DriverClass>
+            <JdbcUrl>jdbc:l7tech:oracle://it1dev01:1521;SID=ifdev1</JdbcUrl>
+            <UserName>IFRT_A</UserName>
+            <AdditionalProperties/>
+        </JdbcConnectionReference>
+    </exp:References>
+    <wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy">
+        <wsp:All wsp:Usage="Required">
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="**Legacy  Audit To Tracer DB"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** Insert request and response to tracing DB"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** Update Request table"/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="** "/>
+            </L7p:CommentAssertion>
+            <L7p:CommentAssertion>
+                <L7p:Comment stringValue="*************************************************************************"/>
+            </L7p:CommentAssertion>
+            <L7p:AuditDetailAssertion>
+                <L7p:Detail stringValue="Policy Fragment: Legacy - Audit To Tracer"/>
+            </L7p:AuditDetailAssertion>
+            <wsp:All wsp:Usage="Required">
+                <L7p:ComparisonAssertion>
+                    <L7p:Expression1 stringValue="${audit.var.partner.tracing.response}"/>
+                    <L7p:Expression2 stringValue="True"/>
+                    <L7p:ExpressionIsVariable booleanValue="false"/>
+                    <L7p:Predicates predicates="included">
+                        <L7p:item binary="included">
+                            <L7p:RightValue stringValue="True"/>
+                        </L7p:item>
+                    </L7p:Predicates>
+                </L7p:ComparisonAssertion>
+                <L7p:SetVariable>
+                    <L7p:Base64Expression stringValue="JHthdWRpdC52YXIuamRiY1F1ZXJ5Lm91dHB1dH0="/>
+                    <L7p:ContentType stringValue="text/xml; charset=utf-8"/>
+                    <L7p:DataType variableDataType="message"/>
+                    <L7p:VariableToSet stringValue="outputxml"/>
+                </L7p:SetVariable>
+                <wsp:OneOrMore wsp:Usage="Required">
+                    <wsp:All wsp:Usage="Required">
+                        <L7p:ResponseXpathAssertion>
+                            <L7p:VariablePrefix stringValue="status"/>
+                            <L7p:XmlMsgSrc stringValue="outputxml"/>
+                            <L7p:XpathExpression xpathExpressionValue="included">
+                                <L7p:Expression stringValue="/IF_REPLY/REQUEST_STATUS/STATUS"/>
+                                <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                </L7p:Namespaces>
+                                <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                            </L7p:XpathExpression>
+                        </L7p:ResponseXpathAssertion>
+                        <L7p:ResponseXpathAssertion>
+                            <L7p:VariablePrefix stringValue="statuscode"/>
+                            <L7p:XmlMsgSrc stringValue="outputxml"/>
+                            <L7p:XpathExpression xpathExpressionValue="included">
+                                <L7p:Expression stringValue="/IF_REPLY/REQUEST_STATUS/STATUS_CODE"/>
+                                <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                </L7p:Namespaces>
+                                <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                            </L7p:XpathExpression>
+                        </L7p:ResponseXpathAssertion>
+                        <L7p:ResponseXpathAssertion>
+                            <L7p:VariablePrefix stringValue="statusmessage"/>
+                            <L7p:XmlMsgSrc stringValue="outputxml"/>
+                            <L7p:XpathExpression xpathExpressionValue="included">
+                                <L7p:Expression stringValue="/IF_REPLY/REQUEST_STATUS/STATUS_MESSAGE"/>
+                                <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                </L7p:Namespaces>
+                                <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                            </L7p:XpathExpression>
+                        </L7p:ResponseXpathAssertion>
+                    </wsp:All>
+                    <wsp:All wsp:Usage="Required">
+                        <L7p:ResponseXpathAssertion>
+                            <L7p:VariablePrefix stringValue="status"/>
+                            <L7p:XmlMsgSrc stringValue="outputxml"/>
+                            <L7p:XpathExpression xpathExpressionValue="included">
+                                <L7p:Expression stringValue="/IF_MESSAGE/REQUEST_STATUS"/>
+                                <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                </L7p:Namespaces>
+                                <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                            </L7p:XpathExpression>
+                        </L7p:ResponseXpathAssertion>
+                        <L7p:ResponseXpathAssertion>
+                            <L7p:VariablePrefix stringValue="statusmessage"/>
+                            <L7p:XmlMsgSrc stringValue="outputxml"/>
+                            <L7p:XpathExpression xpathExpressionValue="included">
+                                <L7p:Expression stringValue="/IF_MESSAGE/REQUEST_STATUS_MESSAGE"/>
+                                <L7p:Namespaces mapValue="included">
+                                    <L7p:entry>
+                                    <L7p:key stringValue="s"/>
+                                    <L7p:value stringValue="http://schemas.xmlsoap.org/soap/envelope/"/>
+                                    </L7p:entry>
+                                </L7p:Namespaces>
+                                <L7p:XpathVersion xpathVersion="XPATH_1_0"/>
+                            </L7p:XpathExpression>
+                        </L7p:ResponseXpathAssertion>
+                    </wsp:All>
+                    <L7p:TrueAssertion/>
+                </wsp:OneOrMore>
+                <wsp:OneOrMore wsp:Usage="Required">
+                    <wsp:All wsp:Usage="Required">
+                        <L7p:JdbcQuery>
+                            <L7p:ConnectionName stringValue="Tracer Database"/>
+                            <L7p:SqlQuery stringValue="UPDATE REQUESTS SET REQ_XML_REPLY=${audit.var.jdbcQuery.return_value} ,REQ_STATUS=${status.result}, REQ_STATUS_CODE=${statuscode.result}, REQ_STATUS_TEXT=${statusmessage.result} WHERE REQ_ID=${audit.var.partner.requestid}"/>
+                            <L7p:VariablePrefix stringValue="jdbcUpdate"/>
+                        </L7p:JdbcQuery>
+                        <L7p:assertionComment>
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Attempt to update the table first"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:assertionComment>
+                    </wsp:All>
+                    <wsp:All wsp:Usage="Required">
+                        <L7p:SetVariable>
+                            <L7p:Base64Expression stringValue="JHtnYXRld2F5LnRpbWUubG9jYWwuZGRNTXl5eXkgSEg6TU06c3MuU1NTMH0="/>
+                            <L7p:VariableToSet stringValue="lastUpdateTime"/>
+                        </L7p:SetVariable>
+                        <L7p:JdbcQuery>
+                            <L7p:ConnectionName stringValue="Tracer Database"/>
+                            <L7p:SqlQuery stringValueReference="inline"><![CDATA[INSERT INTO REQUESTS (REQ_ID, REQ_SERVICE_NAME, REQ_XML_REQUEST, REQ_XML_REPLY, REQ_STATUS, REQ_STATUS_CODE, REQ_STATUS_TEXT, REQ_ACCEPT_TIME, REQ_EXECUTE_TIME, REQ_REPLY_TIME, REQ_LAST_UPDATE_TIME, REQ_QUEUE_PUBLISHE_TIME)
+VALUES (${audit.var.partner.requestid},${audit.var.serviceName},${audit.var.payload.result},${audit.var.jdbcQuery.return_value},${status.result},${statuscode.result},${statusmessage.result},TO_TIMESTAMP(${audit.var.acceptTime}, 'DD/MM/YYYY HH:MI:SS.FF4'),TO_TIMESTAMP(${audit.var.executeTime}, 'DD/MM/YYYY HH:MI:SS.FF4'),TO_TIMESTAMP(${audit.var.replayTime}, 'DD/MM/YYYY HH:MI:SS.FF4'), TO_TIMESTAMP(${lastUpdateTime}, 'DD/MM/YYYY HH:MI:SS.FF4'), TO_TIMESTAMP(${audit.var.PublishTime}, 'DD/MM/YYYY HH:MI:SS.FF4'))]]></L7p:SqlQuery>
+                            <L7p:VariablePrefix stringValue="jdbcUpdate"/>
+                        </L7p:JdbcQuery>
+                        <L7p:assertionComment>
+                            <L7p:Properties mapValue="included">
+                                <L7p:entry>
+                                    <L7p:key stringValue="RIGHT.COMMENT"/>
+                                    <L7p:value stringValue="// Insert new service to table"/>
+                                </L7p:entry>
+                            </L7p:Properties>
+                        </L7p:assertionComment>
+                    </wsp:All>
+                    <L7p:assertionComment>
+                        <L7p:Properties mapValue="included">
+                            <L7p:entry>
+                                <L7p:key stringValue="RIGHT.COMMENT"/>
+                                <L7p:value stringValue="// Put the request/response into the tracing database"/>
+                            </L7p:entry>
+                        </L7p:Properties>
+                    </L7p:assertionComment>
+                </wsp:OneOrMore>
+            </wsp:All>
+        </wsp:All>
+    </wsp:Policy>
+</exp:Export>
