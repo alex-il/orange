@@ -1,0 +1,36 @@
+13:39:43 TRACE PolicyCreator$:88 - action : updateJdbcConn
+13:39:43 TRACE JdbcCreator$:37 - JdbcCreator.createSingle
+dto: IFAdminDTOJ [action=updateJdbcConn, serviceName=null, envName=TEST3, ssgHost=10.4.11.229, ssgPort=7443, ssgUser=autoImport, ssgPwd=7layer7layer, artifactsDir=/app01/oraias/java6/artifacts, serviceFolderName=Legacy-Imported, standardFolderName=Standard Fragments, jmsProviderUrl=tcp://vmems1test3:7222, jmsQueueConnectionFactory=null, jmsTracerProviderUrl=tcp://vmems1test3:7222, jmsTracerQueueConnectionFactory=ESBL7QCF, serviceType=null, connName=1oleg, urlProviderEndpointHost=bscstst3, urlProviderEndpointPort=1521, urlProviderEndpointSID=bscstst3, urlProviderEndpointURI=null, urlProviderEndpointUser=IF_RUNNER, urlProviderEndpointPwd=if_runner, parsed=null, targetEncoding=null, sourceEncoding=null, funcName=null, args=null, queryString=null, host=null, port=null, method=null, urlEncoding=null, xmlRender=N, isServiceEnable=true, isJdbcConnEnable=true, isDebugEnabled=false, wsdlFileName=SERVICE_NAME.wsdl, jmsInboundPrefix=Inbound , baseDir=/app01/oraias/java6/, oraHost=it3tst3, oraPort=1521, oraUser=IFRT_TST3A, oraPwd=IFRT_TST3A, oraSID=iftst3, jmsScriptLocation=/app01/oraias/java6/qCreator.sh, isAsync=N, serviceSyncConcurrency=null, service_ASyncConcurrency=null, serviceConfigurerUri=:8080/configuration/UpdateConfig?serviceName=, serviceEta=30, serviceEtaDevider=1, allowedRerqOrigin=allowedRerqOrigin, invocationPerMinute=100, blockedRerqOrigin=blockedRerqOrigin, customerTO=777, providerTO=888, qdrain_be_cl=null, qdrain_sn_cl=null, servicConcurrencyLimit=111, ipWhiteList=0.0.0.0, ToraHost=null, ToraPort=null, ToraUser=null, ToraPwd=null, ToraSID=null, minOraDbConnectionPool=333, maxOraDbConnectionPool=5555]
+13:39:47 DEBUG JdbcCreator$:90 - Current: Set(geotest, 1_1_test, bscsdev2_iflocal50, blnctst1, adb__mlaytest, crm database, tracer database, gendb_new, erptst1_1, spectst1, vantst3, odstst3, intratst, bscstst1, rtxtst1, appltst, gendb, adb_mlaytest, gentstiw, bscstst3_new, mcp, ornatst, bhl10, amir_tst, futdev, medtest, elatst, ornatest, internal, pramstst, blnctst3, imgtst, gen11tst, response repository, 1oleg, cp_of_odstst3, tracer database test3, bsupg8, bigbro10, spectst3, crm database oracle driver, bdi database, bscstst3, rtxtst3, mlaytest, erptst1, erpupg, rtxhista, tran10, bhtst1, vanhdtst, ivrmng, b4utst3, conttst, intrtst1, erptst3, ladev, bdi database oracle jdbc, bscstest, ods database, bhtst3, odstst1, vantst1)
+13:39:47 DEBUG JdbcCreator$:127 - Updating: 1oleg
+Exception in thread "main" java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
+Caused by: com.l7tech.gateway.api.Accessor$AccessorSOAPFaultException: SOAP Fault: The service cannot comply with the request due to internal processing errors.
+     Actor: 
+      Code: env:Receiver
+  Subcodes: wsman:InternalError
+    Detail: argument type mismatch
+
+	at com.l7tech.gateway.api.impl.b.a(Unknown Source)
+	at com.l7tech.gateway.api.impl.b.put(Unknown Source)
+	at com.emet.management.JdbcCreator$.createSingle(JdbcCreator.scala:128)
+	at com.emet.management.JdbcCreator$.createSingle(JdbcCreator.scala:39)
+	at com.emet.management.PolicyCreator$.createPolicy(PolicyCreator.scala:89)
+	at com.emet.management.PolicyCreator$.main(PolicyCreator.scala:46)
+	at com.emet.management.PolicyCreator.main(PolicyCreator.scala)
+	... 5 more
+Caused by: com.sun.ws.management.client.exceptions.FaultException: SOAP Fault: The service cannot comply with the request due to internal processing errors.
+     Actor: 
+      Code: env:Receiver
+  Subcodes: wsman:InternalError
+    Detail: argument type mismatch
+
+	at com.sun.ws.management.client.impl.TransferableResourceImpl.put(TransferableResourceImpl.java:389)
+	at com.sun.ws.management.client.impl.TransferableResourceImpl.put(TransferableResourceImpl.java:303)
+	at com.l7tech.gateway.api.impl.e.invoke(Unknown Source)
+	at com.l7tech.gateway.api.impl.e.invoke(Unknown Source)
+	... 12 more

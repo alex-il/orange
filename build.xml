@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<project basedir="." default="build" name="Migrate">
+	<property environment="env" />
+	<property name="ECLIPSE_HOME" value="../../eclipse-372-indigo" />
+
+	<property name="export.jdbcCreator.com" value="export/jdbcCreator" />
+	<property name="export.mig.com" value="export/mig" />
+	<property name="export.oraDbParamsReader.com" value="export/oraDbParamsReader" />
+	<property name="export.oraDbtester.com" value="export/oraDbtester" />
+	<property name="export.base.dir" value="d:\\ws-372\\Migrate\\export\\" />
+	<property name="export.manifest.location" value="META-INF\MANIFEST.MF" />
+	<property name="export.mig.dir" value="mig/" />
+	<property name="export.jdbcCreator.dir" value="jdbcCreator" />
+	<property name="mig.jar" value="${export.base.dir}mig.jar" />
+	<property name="jdbcCreator.jar" value="${export.base.dir}jdbcCreator.jar" />
+	<property name="oraDbtester.jar" value="${export.base.dir}oraDbtester.jar" />
+	<property name="oraDbParamsReader.jar" value="${export.base.dir}oraDbParamsReader.jar" />
+
+	
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="target" value="1.6" />
+	<property name="source" value="1.6" />
+	
+	<path id="Scala Library [2.11.0-M3].libraryclasspath">
+		<pathelement location="${ECLIPSE_HOME}/configuration/org.eclipse.osgi/bundles/360/1/.cp/lib/scala-library.jar" />
+		<pathelement location="${ECLIPSE_HOME}/configuration/org.eclipse.osgi/bundles/360/1/.cp/lib/scala-swing.jar" />
+		<pathelement location="${ECLIPSE_HOME}/configuration/org.eclipse.osgi/bundles/360/1/.cp/lib/scala-actors.jar" />
+		<pathelement location="${ECLIPSE_HOME}/configuration/org.eclipse.osgi/bundles/359/1/.cp/lib/scala-reflect.jar" />
+	</path>
+	
+	<path id="Migrate.classpath">
+		<pathelement location="bin" />
+		<path refid="Scala Library [2.11.0-M3].libraryclasspath" />
+		<pathelement location="../../Jars/annotations-11.1.2.jar" />
+		<pathelement location="../../Jars/commons-codec-1.6.jar" />
+		<pathelement location="../../Jars/commons-lang-2.6.jar" />
+		<pathelement location="../../Jars/layer7-gateway-api.jar" />
+		<pathelement location="../../Jars/layer7-utility-7.0.jar" />
+		<pathelement location="../../Jars/opencsv-2.3.jar" />
+		<pathelement location="../../Jars/saaj-api-1.3.1.jar" />
+		<pathelement location="../../Jars/wiseman-client-1.0-l7p1.jar" />
+		<pathelement location="../../Jars/wiseman-core-1.0.jar" />
+		<pathelement location="../../Jars/httpcomponents-client-4.2.3/commons-codec-1.6.jar" />
+		<pathelement location="../../Jars/httpcomponents-client-4.2.3/commons-logging-1.1.1.jar" />
+		<pathelement location="../../Jars/httpcomponents-client-4.2.3/fluent-hc-4.2.3.jar" />
+		<pathelement location="../../Jars/httpcomponents-client-4.2.3/httpclient-4.2.3.jar" />
+		<pathelement location="../../Jars/httpcomponents-client-4.2.3/httpclient-cache-4.2.3.jar" />
+		<pathelement location="../../Jars/httpcomponents-client-4.2.3/httpcore-4.2.2.jar" />
+		<pathelement location="../../Jars/httpcomponents-client-4.2.3/httpmime-4.2.3.jar" />
+		<pathelement location="../../Jars/google-gson-2.2.4/gson-2.2.4.jar" />
+		<pathelement location="../../Jars/ora/ojdbc14.jar" />
+		<pathelement location="../../Jars/logger/log4j-1.2.17.jar" />
+		<pathelement location="../../Jars/logger/slf4j-api-1.7.5.jar" />
+		<pathelement location="../../Jars/logger/slf4j-log4j12-1.7.5.jar" />
+	</path>
+	<path id="run.Executor.bootclasspath">
+		<path refid="Scala Library [2.11.0-M3].libraryclasspath" />
+		<fileset dir="${java.home}/lib" includes="*.jar" />
+		<fileset dir="${java.home}/lib/ext" includes="*.jar" />
+	</path>
+	<path id="run.OraDbConnectionTester.bootclasspath">
+		<path refid="Scala Library [2.11.0-M3].libraryclasspath" />
+		<fileset dir="${java.home}/lib" includes="*.jar" />
+		<fileset dir="${java.home}/lib/ext" includes="*.jar" />
+	</path>
+	<path id="run.ProcedureParamsCaller.bootclasspath">
+		<path refid="Scala Library [2.11.0-M3].libraryclasspath" />
+		<fileset dir="${java.home}/lib" includes="*.jar" />
+		<fileset dir="${java.home}/lib/ext" includes="*.jar" />
+	</path>
+<!--
+	<echo> ${ant.library.dir}</echo>
+	<echo> ${java.class.path}</echo>
+-->
+	<buildnumber file="ifa.build.number" />
+	<target name="init">
+		<mkdir dir="bin" />
+		<copy includeemptydirs="false" todir="bin">
+			<fileset dir="src">
+				<exclude name="**/*.launch" />
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+	</target>
+	<target name="clean">
+		<delete dir="bin" />
+	</target>
+	<target depends="clean" name="cleanall" />
+	<target depends="build-subprojects,build-project" name="build" />
+	<target name="build-subprojects" />
+	<target depends="init" name="build-project">
+		<echo message="${ant.project.name}: ${ant.file}" />
+		<javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+			<src path="src" />
+			<classpath refid="Migrate.classpath" />
+		</javac>
+	</target>
+	<target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects" />
+	<target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+		<copy todir="${ant.library.dir}">
+			<fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar" />
+		</copy>
+		<unzip dest="${ant.library.dir}">
+			<patternset includes="jdtCompilerAdapter.jar" />
+			<fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar" />
+		</unzip>
+	</target>
+	<target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+		<property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter" />
+		<antcall target="build" />
+	</target>
+	<target name="Executor">
+		<java classname="com.emet.management.Executor" failonerror="true" fork="yes">
+			<classpath refid="Migrate.classpath" />
+			<bootclasspath>
+				<path refid="run.Executor.bootclasspath" />
+			</bootclasspath>
+		</java>
+	</target>
+	<target name="OraDbConnectionTester">
+		<java classname="com.emet.management.db.OraDbConnectionTester" failonerror="true" fork="yes">
+			<arg line="d:\2\package.param" />
+			<classpath refid="Migrate.classpath" />
+			<bootclasspath>
+				<path refid="run.OraDbConnectionTester.bootclasspath" />
+			</bootclasspath>
+		</java>
+	</target>
+	<target name="ProcedureParamsCaller">
+		<java classname="com.emet.management.db.paramsreader.ProcedureParamsCaller" failonerror="true" fork="yes">
+			<arg line="d:\2\dbtest.param" />
+			<classpath refid="Migrate.classpath" />
+			<bootclasspath>
+				<path refid="run.ProcedureParamsCaller.bootclasspath" />
+			</bootclasspath>
+		</java>
+	</target>
+
+	<tstamp>
+		<format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss" />
+	</tstamp>
+
+	<target name="cleanAllJars">
+		<delete dir="${export.mig.com}/com" />
+		<delete dir="${export.jdbcCreator.com}/com" />
+		<delete dir="${export.oraDbParamsReader.com}/com" />
+		<delete dir="${export.oraDbtester.com}/com" />
+	</target>
+	
+	<target name="z.deploy.All" depends=" copy.All.classes, create.All.jars, UploadIFA_to_juri oraias@10.4.10.170, UploadIFA_to_test oraias@10.4.10.170">
+    </target>
+	
+	<target name="copy.All.classes">
+		<copy includeemptydirs="false" overwrite="true" todir="${export.mig.com}">
+			<fileset dir="bin">
+				<exclude name="**/*.launch" />
+				<exclude name="**/*.java" />
+				<exclude name="**/*.scala" />
+				<exclude name="**/*.properties" />
+				<exclude name="**/*.MF" />
+			</fileset>
+		</copy>
+
+		<copy includeemptydirs="false" overwrite="true" todir="${export.jdbcCreator.com}">
+			<fileset dir="bin">
+				<exclude name="**/*.launch" />
+				<exclude name="**/*.java" />
+				<exclude name="**/*.scala" />
+				<exclude name="**/*.properties" />
+				<exclude name="**/*.MF" />
+			</fileset>
+		</copy>
+
+		<copy includeemptydirs="false" overwrite="true" todir="${export.oraDbParamsReader.com}">
+			<fileset dir="bin">
+				<exclude name="**/*.launch" />
+				<exclude name="**/*.java" />
+				<exclude name="**/*.scala" />
+				<exclude name="**/*.properties" />
+				<exclude name="**/*.MF" />
+			</fileset>
+		</copy>
+
+		<copy includeemptydirs="false" overwrite="true" todir="${export.oraDbtester.com}">
+			<fileset dir="bin">
+				<exclude name="**/*.launch" />
+				<exclude name="**/*.java" />
+				<exclude name="**/*.scala" />
+				<exclude name="**/*.properties" />
+				<exclude name="**/*.MF" />
+			</fileset>
+		</copy>
+	</target>
+	
+	<property name="manifest.file" value="d:\\ws-372\\Migrate\\MANIFEST.MF" />
+	
+	<target name="create.All.jars">
+
+		<jar basedir="${export.base.dir}oraDbParamsReader" 
+			destfile="${export.base.dir}oraDbParamsReader.jar" 
+			manifest="${export.base.dir}oraDbParamsReader\\${export.manifest.location}"
+			update="true" filesetmanifest="merge"
+			>
+			<manifest>
+				<attribute name="Created-By" value="Oleg B." />
+				<attribute name="Built-Number" value="1.${build.number}" />
+				<attribute name="Built-Date" value="${TODAY}" />
+			</manifest>
+		</jar>
+
+		<jar basedir="${export.base.dir}jdbcCreator" 
+			destfile="${export.base.dir}jdbcCreator.jar" 
+			manifest="${export.base.dir}jdbcCreator\\${export.manifest.location}"
+			update="true" filesetmanifest="merge"
+			>
+			<manifest>
+				<attribute name="Created-By" value="Oleg B." />
+				<attribute name="Built-Number" value="1.${build.number}" />
+				<attribute name="Built-Date" value="${TODAY}" />
+			</manifest>
+		</jar>
+
+		<jar basedir="${export.base.dir}oraDbtester" 
+			destfile="${export.base.dir}oraDbtester.jar" 
+			manifest="${export.base.dir}oraDbtester\\${export.manifest.location}"
+			update="true" filesetmanifest="merge"
+			>
+			<manifest>
+				<attribute name="Created-By" value="Oleg B." />
+				<attribute name="Built-Number" value="1.${build.number}" />
+				<attribute name="Built-Date" value="${TODAY}" />
+			</manifest>
+		</jar>
+
+		<jar basedir="${export.base.dir}mig" 
+			destfile="${export.base.dir}mig.jar" 
+			manifest="${export.base.dir}mig\\${export.manifest.location}"
+			update="true" filesetmanifest="merge"
+			>
+			<manifest>
+				<attribute name="Created-By" value="Oleg B." />
+				<attribute name="Built-Number" value="1.${build.number}" />
+				<attribute name="Built-Date" value="${TODAY}" />
+			</manifest>
+		</jar>
+
+	</target>
+	
+	<target name="UploadIFA_to_juri oraias@10.4.10.170">
+	 <ftp action="put"
+			server="10.4.10.170"
+		   	userid="oraias"
+		   	password="oraias"
+		   	remotedir="/app01/oraias/java6/"
+		 	depends="yes"
+	 	>
+	    <fileset file="${mig.jar}"/>
+	    <fileset file="${jdbcCreator.jar}"/>	    
+	    <fileset file="${oraDbtester.jar}"/>	    
+	    <fileset file="${oraDbParamsReader.jar}"/>
+	  </ftp>
+	</target>
+	
+	<target name="UploadIFA_to_test oraias@10.4.10.170">
+	 <ftp action="put"
+			server="10.4.10.170"
+		   	userid="oraias"
+		   	password="oraias"
+		   	remotedir="/app01/oraias/test/"
+		 	depends="yes"
+	 	>
+	    <fileset file="${mig.jar}"/>
+	    <fileset file="${jdbcCreator.jar}"/>	    
+	    <fileset file="${oraDbtester.jar}"/>	    
+	    <fileset file="${oraDbParamsReader.jar}"/>
+	  </ftp>
+	</target>
+	
+	<target name="1.test.jars">
+		<jar basedir="${export.base.dir}oraDbParamsReader" 
+			destfile="${export.base.dir}oraDbParamsReader.jar" 
+			manifest="${export.base.dir}oraDbParamsReader\\${export.manifest.location}"
+			update="true" filesetmanifest="merge"
+		>
+			<manifest>
+				<attribute name="Created-By" value="Oleg B." />
+				<attribute name="Built-Number" value="1.${build.number}" />
+				<attribute name="Built-Date" value="${TODAY}" />
+			</manifest>
+			
+		</jar>
+	</target>
+
+</project>

@@ -1,0 +1,9 @@
+{
+"action":"checkout",
+"host":"starteam1",
+"label":"nprod.v1:l.id=14637",
+"port":"49201",
+"user":"yzadok",
+"password":"Xx123456",
+"baseDir":"./"
+}

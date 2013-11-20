@@ -1,0 +1,7 @@
+{
+"host" : "itlabdb3",
+"port" : "1529",
+"sid"  : "odstst1",
+"user" : "IF_RUNNER",
+"password" : "IF_RUNNER"
+}

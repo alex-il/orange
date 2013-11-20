@@ -1,0 +1,1 @@
+java -jar mig.jar 1.params

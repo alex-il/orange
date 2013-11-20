@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.scala-ide.sdt.launching.SCALA_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="D:/Jars/ora/ojdbc14.jar"/>
+	<classpathentry kind="lib" path="D:/Jars/logger/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="D:/Jars/logger/slf4j-api-1.7.5.jar"/>
+	<classpathentry kind="lib" path="D:/Jars/logger/slf4j-log4j12-1.7.5.jar"/>
+	<classpathentry kind="lib" path="D:/Jars/commons-net-3.3.jar"/>
+	<classpathentry kind="lib" path="D:/Jars/httpcomponents-client-4.3.1/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="D:/Jars/httpcomponents-client-4.3.1/commons-logging-1.1.3.jar"/>
+	<classpathentry kind="lib" path="D:/Jars/httpcomponents-client-4.3.1/fluent-hc-4.3.1.jar"/>
+	<classpathentry kind="lib" path="D:/Jars/httpcomponents-client-4.3.1/httpclient-4.3.1.jar"/>
+	<classpathentry kind="lib" path="D:/Jars/httpcomponents-client-4.3.1/httpclient-cache-4.3.1.jar"/>
+	<classpathentry kind="lib" path="D:/Jars/httpcomponents-client-4.3.1/httpcore-4.3.jar"/>
+	<classpathentry kind="lib" path="D:/Jars/httpcomponents-client-4.3.1/httpmime-4.3.1.jar"/>
+	<classpathentry kind="lib" path="D:/Jars/l7/annotations-11.1.2.jar"/>
+	<classpathentry kind="lib" path="D:/Jars/l7/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="D:/Jars/l7/layer7-gateway-api.jar"/>
+	<classpathentry kind="lib" path="D:/Jars/l7/layer7-utility-7.0.jar"/>
+	<classpathentry kind="lib" path="D:/Jars/l7/saaj-api-1.3.1.jar"/>
+	<classpathentry kind="lib" path="D:/Jars/l7/wiseman-client-1.0-l7p1.jar"/>
+	<classpathentry kind="lib" path="D:/Jars/l7/wiseman-core-1.0.jar"/>
+	<classpathentry kind="lib" path="D:/Jars/gson-2.2.4.jar"/>
+	<classpathentry kind="lib" path="D:/Jars/scala-xml_2.11.0-M4-1.0-RC1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

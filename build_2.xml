@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="111">
+	<propertyfile file="mybuild.number">
+		<entry key="build.number" type="int" operation="+" value="1" pattern="0" />
+	</propertyfile >
+
+	<property environment="env" />
+	<property name="ECLIPSE_HOME" value="../../eclipse-j2ee" />
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="target" value="1.7" />
+	<property name="source" value="1.7" />
+	<path id="Test.classpath">
+		<pathelement location="bin" />
+		<pathelement location="lib/ini4j-0.5.2-SNAPSHOT.jar" />
+	</path>
+	<target name="init">
+		<mkdir dir="bin" />
+		<copy includeemptydirs="false" todir="bin">
+			<fileset dir="src">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+	</target>
+	<target name="clean">
+		<delete dir="bin" />
+	</target>
+	<target depends="clean" name="cleanall" />
+	<target depends="build-subprojects,build-project" name="build" />
+	<target name="build-subprojects" />
+	<target depends="init" name="build-project">
+		<echo message="${ant.project.name}: ${ant.file}" />
+		<javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+			<src path="src" />
+			<classpath refid="Test.classpath" />
+		</javac>
+	</target>
+	<target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects" />
+	<target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+		<copy todir="${ant.library.dir}">
+			<fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar" />
+		</copy>
+		<unzip dest="${ant.library.dir}">
+			<patternset includes="jdtCompilerAdapter.jar" />
+			<fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar" />
+		</unzip>
+	</target>
+	<target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+		<property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter" />
+		<antcall target="build" />
+	</target>
+	<target name="T1">
+		<java classname="test.T1" failonerror="true" fork="yes">
+			<classpath refid="Test.classpath" />
+		</java>
+	</target>
+
+
+	<tstamp>
+		<format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss" />
+	</tstamp>
+
+	<target name="xxx">
+		<manifest>
+			<attribute name="Signature-Title" value="${project.name}" />
+			<attribute name="Signature-Version" value="${release.version}" />
+			<attribute name="Signature-Vendor" value="${build.compiler}" />
+			<attribute name="Built-By" value="${user.name}" />
+			<attribute name="Built-Date" value="${TODAY}" />
+		</manifest>
+	</target>
+
+
+	<buildnumber file="mybuild.number" />
+
+	<target name="111">
+		<jar destfile="d:/1/1.jar" manifest="d:\1\MANIFEST.MF" update="true" filesetmanifest="merge">
+			<fileset dir="bin" />
+
+			<manifest>
+				<attribute name="---Signature-Title " value="1.${build.number}+1" />
+				<attribute name="Signature-Version" value="${user.name}" />
+				<attribute name="user.timezone" value="${user.timezone}" />
+				<attribute name="Created-By" value="${env.USERNAME}" />
+				<attribute name="---Built-Number2" value="${app.version}" />
+				<attribute name="Built-Date" value="${TODAY}" />
+			</manifest>
+		</jar>
+	</target>
+
+</project>

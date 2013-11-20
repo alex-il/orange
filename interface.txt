@@ -1,0 +1,38 @@
+"action":"create/update", 	//values: create update enable disable ...
+"envName":"test1",			// ESB_ENVIRONMENT: env_name
+"ssgHost":"10.4.11.227",	//ESB_ENVIRONMENT: ssg_host
+"ssgPort":"8443",			//ESB_ENVIRONMENT: ssg-port
+"ssgUser":"autoImport",		//ESB_ENVIRONMENT: ssg_user
+"ssgPwd":"7layer7layer",	//ESB_ENVIRONMENT: ssg_pwd
+"artifactsDir":"D:\\Artifacts",  //const, will in system window/table, depends on OS, sample linux /rrrr/appl/artifacts
+"serviceFolderName":"Legacy-Imported", 		//const  ssg internal
+"standardFolderName"="Standard Fragments",  //const  ssg internal 
+"jmsProviderUrl":"tcp://vmems1test3:7222",  //ESB_ENVIRONMENT: jms_Provider_Url
+"emsQueueConnectionFactory":"ESBL7QCF",     //ESB_ENVIRONMENT: JMS_Q_CONN_FACTORY 
+"jmsTracerQueueConnectionFactory":"val"     //ESB_ENVIRONMENT:  jmsTracerQueueConnectionFactory usually for production
+"jmsTracerProviderUrl":"val"                //ESB_ENVIRONMENT:  jmsTracerProviderUrl usually for production
+"serviceName":"GC_FEES_PREPAID_BILLING",    //ESB_SERVICE: SERVICE_NAME
+"serviceType":"ORACLE",						//ESB_TYPE
+"urlProviderEndpoint":"rtxtst3",			//ESB_CON_MAPPING.CONN_HOST:CONN_PORT/CONN_SCHEMA  //OLEG SHOULD CHECK
+"parsed":"false",							// ESB_SERVICE.IS_PARSED VALUES: true/false
+"targetEncoding":"UTF-8",			        //ESB_SERVICE.SERVICE_TARGET_ENC 
+"sourceEncoding":"UTF-8",					//ESB_SERVICE.SERVICE_SOURCE_ENC
+"templateOra":"NOTPARSED",					//ESB_SERVICE.PARAMETER_LIST
+"argsOra":"argsOra",						//ESB_SERVICE.SERVICE_ARGUMENTS //Oleg to check
+"queryString":"queryString",				//ESB_SERVICE.QUERY_STRING only for http	
+"host":"host",								//???
+"port":"port",								//???
+"method":"GET",								// values :PLSQL/GET/POST (case?)
+"urlEncoding":"urlEncoding",				// ESB_SERVICE.URL_ENCODING HTTP: Y/N , Ora not relevant
+"xmlRender":"xmlRender",					// ESB_SERVICE.XML_RENDER HTTP: Y/N , Ora not relevant//Yuri to add
+"wsdlFileName":"SERVICE_NAME.wsdl",			// internal
+"jmsInboundPrefix":"Inbound: ",				// internal
+"baseDir":".",								// System Window. application root
+"oraHost":"it3tst3",						// System Window. per environment  ESB_ENVIRONMENT
+"oraPort":"1521",							// System Window. per environment  ESB_ENVIRONMENT
+"oraUser":"IFRT_TST3A",						// System Window. per environment  ESB_ENVIRONMENT
+"oraPwd":"IFRT_TST3A",						// System Window. per environment  ESB_ENVIRONMENT
+"oraSID":"iftst3"							// System Window. per environment  ESB_ENVIRONMENT
+"jmsTracerQueueConnectionFactory":"val"     // jmsTracerQueueConnectionFactory usually for production
+"jmsTracerProviderUrl":"val"                // jmsTracerProviderUrl usually for production
+"isServiceEnabled":true

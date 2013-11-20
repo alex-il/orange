@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.8.2
+Created-By: Oleg B.
+Rsrc-Class-Path: ./ commons-lang-2.6.jar saaj-api-1.3.1.jar slf4j-api-
+ 1.7.5.jar wiseman-client-1.0-l7p1.jar layer7-utility-7.0.jar httpclie
+ nt-4.2.3.jar ojdbc6.jar annotations-11.1.2.jar gson-2.2.4.jar httpmim
+ e-4.2.3.jar wiseman-core-1.0.jar httpcore-4.2.2.jar httpclient-cache-
+ 4.2.3.jar layer7-gateway-api.jar log4j-1.2.17.jar commons-codec-1.6_2
+ .jar fluent-hc-4.2.3.jar slf4j-log4j12-1.7.5.jar commons-codec-1.6.ja
+ r commons-logging-1.1.1.jar opencsv-2.3.jar
+Rsrc-Main-Class: com.emet.management.db.paramsreader.ProcedureParamsCa
+ ller
+Main-Class: org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader
+Class-Path: .
+Built-Number: 1.4
+Built-Date: 2013-10-22 09:40:41
+
