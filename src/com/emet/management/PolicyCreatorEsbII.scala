@@ -129,7 +129,16 @@ object PolicyCreatorEsbII {
 		val qdEndPointEsbIITemplate = "/EsbII/%s/asyncQueueListener"
 
 		val sfmnames = List(
-			"ConcurrencyLimitsChecker_EsbII", "SOAPResponseTemplate_EsbII", "AsyncDecision_EsbII", "Responser_EsbII", "AsyncEarlyResponse_EsbII", "SNMPMessageSender_EsbII", "AsyncInvocator_EsbII", "Escaper_EsbII", "UnEscaper_EsbII", "DBE_Accept_ESBII", "DBE_Execute_ESBII", "DBE_Receive_ESBII", "DBE_Response_ESBII", "ErrorHandler_EsbII", "ErrorResponseImmediately_EsbII", "GovernanceResponser_EsbII", "GovernanceInvoker_EsbII", "InvocationResponseHandler_EsbII", "PayloadExtractor_EsbII", "ServiceConfigurationReader_EsbII", "TimeoutCalculator_EsbII", "RequestIDGenerator_EsbII", "PostInvoker_EsbII", "PreInvocation_EsbII"
+			"ConcurrencyLimitsChecker_EsbII",
+			"SOAPResponseTemplate_EsbII", "AsyncDecision_EsbII", 
+			"Responser_EsbII", "AsyncEarlyResponse_EsbII", "SNMPMessageSender_EsbII", 
+			"AsyncInvocator_EsbII", "Escaper_EsbII", "UnEscaper_EsbII", "DBE_Accept_ESBII", 
+			"DBE_Execute_ESBII", "DBE_Receive_ESBII", "DBE_Response_ESBII", "ErrorHandler_EsbII", 
+			"ErrorResponseImmediately_EsbII", "GovernanceResponser_EsbII", "GovernanceInvoker_EsbII", 
+			"InvocationResponseHandler_EsbII", 
+			"PayloadExtractor_EsbII", "ServiceConfigurationReader_EsbII", 
+			"TimeoutCalculator_EsbII", "RequestIDGenerator_EsbII", "PostInvoker_EsbII", 
+			"PreInvocation_EsbII"
 		)
 
 		//-------------------------------------------------------      
@@ -234,18 +243,17 @@ object PolicyCreatorEsbII {
 
 		if ( ifaDto.isFwII ) {
 			for ( fName <- sfmnames ) {
-				if ( isObjectExist( policyAccessor, fName ) == null ) {
+				val mo = isObjectExist( policyAccessor, fName )
+				if ( mo == null ) {
 					logger.debug( "Importing... Creating:" + fName )
 					val fragmentId = fragmentImport( client, standardFolderId, fName, fName, artifactsDir, fragments, null, jdbcConnections )
 					val createdFragment = policyAccessor.get( fragmentId )
-					// val policyDetail = createdFragment.getPolicyDetail()
 					fragments.put( fName, createdFragment.getGuid )
 					logger.debug( "Imported ===> " + fragmentId )
 				}else{
 					logger.debug( "Importing... updating:" + fName )
-					val fragmentId = fragmentImport( client, standardFolderId, fName, fName, artifactsDir, fragments, null, jdbcConnections )
+					val fragmentId = updateFragment( mo, client, standardFolderId, fName, fName, artifactsDir, fragments, null, jdbcConnections )
 					val createdFragment = policyAccessor.get( fragmentId )
-					// val policyDetail = createdFragment.getPolicyDetail()
 					fragments.put( fName, createdFragment.getGuid )
 					logger.debug( "Imported ===> " + fragmentId )
 					
