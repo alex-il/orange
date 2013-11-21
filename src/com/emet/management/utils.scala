@@ -16,7 +16,6 @@ import scala.xml.Text
 import scala.xml.XML
 import scala.xml.transform.RewriteRule
 import scala.xml.transform.RuleTransformer
-
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.DefaultHttpClient
 import org.slf4j.LoggerFactory
@@ -30,6 +29,7 @@ import com.l7tech.gateway.api.PolicyMO
 import com.l7tech.gateway.api.ResourceSet
 import com.l7tech.gateway.api.ServiceMO
 import org.apache.log4j.LogManager
+import java.util.Date
 
 object utils {
 	val logger = LoggerFactory.getLogger( getClass() );
@@ -380,14 +380,18 @@ object utils {
 		val tr5 = fixRemoteCacheAssertion( tr4 )
 		val policyXml = policyGuidTrans( tr5 )
 		val ipAddress = InetAddress.getLocalHost().getHostAddress()
-		val policyContent = policyXml.toString.replace( "** @Updated by: ", ipAddress )
+		val policyContent = policyXml.toString.replace( "@Updated by:", "@Updated by: "+ipAddress+" "+currentTime )
 		policyResourceSet.setTag( "policy" )
 		policyResource.setType( "policy" )
-		policyResource.setContent( policyXml toString )
+		policyResource.setContent( policyContent )
 		policyResourceSet.setResources( List( policyResource ) )
 		policyResourceSet
 	}
 
+	def currentTime = {
+			new java.text.SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SS ").format(new Date)
+	}
+	
 	def fragmentImport( client: Client,
 		baseFolder: String, filename: String,
 		name: String, dir: String, fragments: HashMap[String, String],
