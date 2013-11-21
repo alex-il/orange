@@ -249,14 +249,13 @@ object PolicyCreatorEsbII {
 					val fragmentId = fragmentImport( client, standardFolderId, fName, fName, artifactsDir, fragments, null, jdbcConnections )
 					val createdFragment = policyAccessor.get( fragmentId )
 					fragments.put( fName, createdFragment.getGuid )
-					logger.debug( "Imported ===> " + fragmentId )
+					logger.debug( "Import. Created ===> " + fragmentId )
 				}else{
 					logger.debug( "Importing... updating:" + fName )
 					val fragmentId = updateFragment( mo, client, standardFolderId, fName, fName, artifactsDir, fragments, null, jdbcConnections )
 					val createdFragment = policyAccessor.get( fragmentId )
 					fragments.put( fName, createdFragment.getGuid )
-					logger.debug( "Imported ===> " + fragmentId )
-					
+					logger.debug( "Import. Updated ===> " + fragmentId )
 				}
 			}
 		}

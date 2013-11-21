@@ -403,9 +403,7 @@ object utils {
 		policyDetail.setPolicyType( PolicyDetail.PolicyType.INCLUDE )
 		policy.setPolicyDetail( policyDetail )
 		policy.setResourceSets( List( policyResourceSet ) )
-
 		val id = policyAccessor.create( policy )
-
 		logger.debug( "name:" + name + ", id:" + id + ". policy created " )
 		id
 	}
@@ -434,12 +432,15 @@ object utils {
 		//    preparePolicyRs
 		p.setResourceSets( List( policyResourceSet ) )
 		policyAccessor.put( p )
-
 		logger.debug( "name:" + name + ", id:" + id + ". policy updated " )
 		logger.debug( "-----" )
 		id
 	}
 
+	/**
+	 * 
+	 * 
+	 */ 
 	def folderByName( client: Client, name: String ) = {
 			def nameMatch( f: FolderMO ): Boolean = {
 				f.getName == name
@@ -449,8 +450,14 @@ object utils {
 		folderAccessor.enumerate.find( nameMatch )
 
 	}
-	// sn - Service name
-	// endpoint - path such as /ImportedLegacy
+	
+	
+	/**
+	 * 
+	 * sn - Service name
+	 * endpoint - path such as /ImportedLegacy
+	 * 
+	 */ 
 	def soapImport( client: Client, baseFolder: String, filename: String, name: String, rawWsdl: String, dir: String, fragments: HashMap[String, String],
 		endpoint: String, serviceObj: Service, jdbcConnections: HashMap[String, String] ): String = {
 		val serviceAccessor = client.getAccessor( classOf[ServiceMO] )
@@ -478,10 +485,8 @@ object utils {
 		properties.put( "soap", true );
 		properties.put( "soapVersion", "1.1" )
 		detail.setProperties( properties.asInstanceOf[HashMap[String, java.lang.Object]] )
-
-		// WSDL
+		
 		logger.trace( "Preparing WSDL" )
-
 		val wsdl = rawWsdl.replace( "SERVICE_NAME", name )
 		wsdlResourceSet.setTag( "wsdl" )
 		wsdlResource.setType( "wsdl" )
@@ -504,11 +509,13 @@ object utils {
 		val serviceId = serviceAccessor.create( service )
 		serviceId
 	}
-
-	// Import a restful or similar service
-	// sn - Service name
-	// endpoint - path such as /ImportedLegacy
-	// verbs - HTTP verbs as List("POST" ..) or null
+	
+	/**
+	 * Import a restful or similar service
+	 * sn - Service name
+	 * endpoint - path such as /ImportedLegacy
+	 * verbs - HTTP verbs as List("POST" ..) or null
+	 */ 
 	def restImport( client: Client, baseFolder: String, filename: String, name: String, dir: String, fragments: HashMap[String, String],
 		endpoint: String, verbs: List[String], serviceObj: Service, jdbcConnections: HashMap[String, String] ): String = {
 		val serviceAccessor = client.getAccessor( classOf[ServiceMO] )
@@ -567,9 +574,11 @@ object utils {
 		}
 	}
 
-	/**
-	  * @author Olegbranopolsky
-	  */
+ /**
+  * 
+  * @author Olegbranopolsky
+  * 
+  */
 	def loadIFAdminDTO( ifaFile: String ): IFAdminDTOJ = {
 		try {
 			val br = new BufferedReader( new FileReader( ifaFile ) )
@@ -593,6 +602,10 @@ object utils {
 
 	}
 
+	/**
+	 * 
+	 * 
+	 */ 
 	def updateSsgParam(): Int = {
 		logger.error( "Updating params of service:{}", ifaDto.serviceName )
 		val oid = try {
