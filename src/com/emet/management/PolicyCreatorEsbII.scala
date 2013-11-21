@@ -7,7 +7,9 @@ import scala.collection.JavaConversions.asScalaIterator
 import scala.collection.JavaConversions.mapAsScalaMap
 import scala.collection.JavaConversions.mutableMapAsJavaMap
 import scala.collection.mutable.HashMap
+
 import org.slf4j.LoggerFactory
+
 import com.emet.management.common.ClusterProperties
 import com.emet.management.common.IUi.done
 import com.emet.management.common.IUi.errorTag
@@ -21,7 +23,15 @@ import com.l7tech.gateway.api.ManagedObjectFactory
 import com.l7tech.gateway.api.PolicyMO
 
 import JdbcCreator.createSingle
-import utils._
+import utils.Service
+import utils.delFolderRec
+import utils.findOrCreate
+import utils.fragmentImport
+import utils.loadIFAdminDTO
+import utils.printFolders
+import utils.restImport
+import utils.soapImport
+import utils.updateFragment
 
 // 
 /**
@@ -261,13 +271,14 @@ object PolicyCreatorEsbII {
 				}
 			}
 		}
-		else {
+//		else {
 			for ( p <- policyAccessor.enumerate ) {
-				val detail = p.getPolicyDetail
-				if ( detail.getFolderId == standardFolderId ) {
-					fragments.put( detail.getName, p.getGuid )
+				val d = p.getPolicyDetail
+				services.put(d.getName, p)
+				if ( d.getFolderId == standardFolderId ) {
+					fragments.put( d.getName, p.getGuid )
 				}
-			}
+//			}
 		}
 
 		// HashMap to record imported services and their load time
@@ -301,13 +312,14 @@ object PolicyCreatorEsbII {
 		}
 		catch {
 			case _ => {
+				logger.trace( "Folder for service: {} exist, updating...", serviceName )
 				logger.trace( "Deleting...service: {}", serviceName )
 				delFolderRec( client, ifaDto.serviceName )
 				baseFolderId = folderAccessor.create( baseFolder )
 			}
 		}
 
-		serviceType match {
+			serviceType match {
 			case "ORACLE" => {
 				println( "An oracle service" )
 				val parsed = ifaDto.parsed
@@ -369,6 +381,7 @@ object PolicyCreatorEsbII {
 		// Import the service specific Invoke fragment
 		val fm = if ( stub ) "STUB " + serviceInvoke else serviceType + " " + serviceInvoke
 		val fname = serviceInvoke.replace( "SERVICE_NAME", serviceName )
+//		generate( client, baseFolderId, fm, fname, artifactsDir, fragments, serviceObj, jdbcConnections )
 		val fragmentId = fragmentImport( client, baseFolderId, fm, fname, artifactsDir, fragments, serviceObj, jdbcConnections )
 		val createdFragment = policyAccessor.get( fragmentId )
 		val guid = createdFragment.getGuid
@@ -378,11 +391,14 @@ object PolicyCreatorEsbII {
 		for ( fm <- pfmnames ) {
 			val fname = fm.replace( "SERVICE_NAME", serviceName )
 			logger.debug( "Importing " + fname )
+			
+//			generate( client, baseFolderId, fm, fname, artifactsDir, fragments, serviceObj, jdbcConnections )
 			val fragmentId = fragmentImport( client, baseFolderId, fm, fname, artifactsDir, fragments, serviceObj, jdbcConnections )
 			val createdFragment = policyAccessor.get( fragmentId )
 			val guid = createdFragment.getGuid
 			fragments.put( fname, guid )
 			logger.debug( "Imported " + fname + " ===> " + guid )
+			
 		}
 
 		// Import the Qdrain rest service

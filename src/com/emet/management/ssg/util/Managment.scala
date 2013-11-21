@@ -5,7 +5,9 @@ import com.l7tech.gateway.api.PolicyMO
 import com.emet.management.ssg.IInternal._
 
 object Managment {
-
+	
+	val services = scala.collection.mutable.HashMap.empty[String, PolicyMO]
+	
 	/**
 	  *
 	  */
@@ -14,7 +16,7 @@ object Managment {
 			policyAccessor.get( imq, fName )
 		}
 		catch {
-			case _ =>	null
+			case _ => null
 		}
 
 	}
