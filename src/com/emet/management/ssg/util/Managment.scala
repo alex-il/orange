@@ -6,13 +6,12 @@ import com.emet.management.ssg.IInternal._
 
 object Managment {
 
-	val services = scala.collection.mutable.HashMap.empty[String, PolicyMO]
+	val polices = scala.collection.mutable.HashMap.empty[String, PolicyMO]
 
 	def getFolderId( name: String ): String = {
 		val k = name + "_Invoke"
-		if ( services contains ( k ) ) {
-			val r = services.get( k ).get.getPolicyDetail.getFolderId
-			System.err.println( r );
+		if ( polices contains ( k ) ) {
+			val r = polices.get( k ).get.getPolicyDetail.getFolderId
 			r
 		}
 		else {

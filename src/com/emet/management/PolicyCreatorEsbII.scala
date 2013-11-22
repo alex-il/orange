@@ -25,15 +25,7 @@ import com.l7tech.gateway.api.ManagedObjectFactory
 import com.l7tech.gateway.api.PolicyMO
 
 import JdbcCreator.createSingle
-import utils.Service
-import utils.delFolderRec
-import utils.findOrCreate
-import utils.fragmentImport
-import utils.loadIFAdminDTO
-import utils.printFolders
-import utils.restImport
-import utils.soapImport
-import utils.updateFragment
+import utils._
 
 // 
 /**
@@ -277,7 +269,7 @@ object PolicyCreatorEsbII {
 //		else {
 			for ( p <- policyAccessor.enumerate ) {
 				val d = p.getPolicyDetail
-				services.put(d.getName, p)
+				polices.put(d.getName, p)
 				if ( d.getFolderId == standardFolderId ) {
 					fragments.put( d.getName, p.getGuid )
 				}

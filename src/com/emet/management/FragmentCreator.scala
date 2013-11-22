@@ -55,10 +55,9 @@ object FragmentCreator {
 		var fragmentId = ""
 		var info = "{} created"
 		logger.debug( "{} importing ...  ", fName )
-		if( services contains(fName)){
-		  val  mo = services.get(fName).get
+		if( polices contains(fName)){
+		  val  mo = polices.get(fName).get
 		  val folderId = mo.getPolicyDetail.getFolderId
-		  System.err.println("folderId:"+folderId);
 			fragmentId = updateFragment( mo, client, folderId, fileName, fName, artifactsDir, fragments, serviceObj, jdbcConnections )
 			info = "{} updated"
 		}
