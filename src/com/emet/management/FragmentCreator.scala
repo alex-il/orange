@@ -40,29 +40,30 @@ object FragmentCreator {
 
 	}
 
-	def generate(
+	def deploy(
 //		pa: Accessor[PolicyMO],
 		client: Client,
-		standardFolderId: String,
-		filename: String,
+		folderId: String,
+		fileName: String,
 		fName: String,
 		artifactsDir: String,
 		fragments: HashMap[String, String],
-		service: Service = null,
+		serviceObj: Service = null,
 		jdbcConnections: HashMap[String, String] = null ) = {
 
 		val pa = client.getAccessor( classOf[PolicyMO] )
 		var fragmentId = ""
 		var info = "{} created"
-		var pMO: PolicyMO = null
 		logger.debug( "{} importing ...  ", fName )
-		val mo = pa.get( imq, fName )
-		if ( mo == null ) {
-			fragmentId = fragmentImport( client, standardFolderId, fName, fName, artifactsDir, fragments, null, jdbcConnections )
+		if( services contains(fName)){
+		  val  mo = services.get(fName).get
+		  val folderId = mo.getPolicyDetail.getFolderId
+		  System.err.println("folderId:"+folderId);
+			fragmentId = updateFragment( mo, client, folderId, fileName, fName, artifactsDir, fragments, serviceObj, jdbcConnections )
+			info = "{} updated"
 		}
 		else {
-			fragmentId = updateFragment( mo, client, standardFolderId, fName, fName, artifactsDir, fragments, null, jdbcConnections )
-			info = "{} updated"
+			fragmentId = fragmentImport( client, folderId, fileName, fName, artifactsDir, fragments, serviceObj, jdbcConnections )
 		}
 		fragments.put( fName, pa.get( fragmentId ).getGuid )
 		log.debug( info, fragmentId )

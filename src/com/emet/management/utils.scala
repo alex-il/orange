@@ -380,7 +380,7 @@ object utils {
 		val tr5 = fixRemoteCacheAssertion( tr4 )
 		val policyXml = policyGuidTrans( tr5 )
 		val ipAddress = InetAddress.getLocalHost().getHostAddress()
-		val policyContent = policyXml.toString.replace( "@Updated by:", "@Updated by: "+ipAddress+" "+currentTime )
+		val policyContent = policyXml.toString.replace( "@Updated by:", "@Updated by: " + ipAddress + " " + currentTime )
 		policyResourceSet.setTag( "policy" )
 		policyResource.setType( "policy" )
 		policyResource.setContent( policyContent )
@@ -389,15 +389,15 @@ object utils {
 	}
 
 	def currentTime = {
-			new java.text.SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SS ").format(new Date)
+		new java.text.SimpleDateFormat( "dd-MM-yyyy HH:mm:ss.SS " ).format( new Date )
 	}
-	
+
 	def fragmentImport( client: Client,
 		baseFolder: String, filename: String,
 		name: String, dir: String, fragments: HashMap[String, String],
 		service: Service = null,
 		jdbcConnections: HashMap[String, String] = null ): String = {
-		
+
 		val policyAccessor = client.getAccessor( classOf[PolicyMO] )
 		val policy = ManagedObjectFactory.createPolicy
 		val policyDetail = ManagedObjectFactory.createPolicyDetail
@@ -442,11 +442,12 @@ object utils {
 	}
 
 	/**
-	 * 
-	 * 
-	 */ 
+	  *
+	  *
+	  */
 	def folderByName( client: Client, name: String ) = {
 			def nameMatch( f: FolderMO ): Boolean = {
+				System.err.println( f.getName );
 				f.getName == name
 			}
 		val folderAccessor = client.getAccessor( classOf[FolderMO] )
@@ -454,19 +455,30 @@ object utils {
 		folderAccessor.enumerate.find( nameMatch )
 
 	}
-	
-	
+
+	def getServiceByName( client: Client, name: String ) = {
+
+			def nameMatch( f: ServiceMO ): Boolean = {
+				f.getServiceDetail.getName == name
+			}
+		val accessor = client.getAccessor( classOf[ServiceMO] )
+		//		for ( f <- accessor.enumerate )
+		//			System.err.println( f.getId() + ": " + f.getServiceDetail().getName() + ": " + f.getServiceDetail().getFolderId() );
+
+		accessor.enumerate.find( nameMatch )
+
+	}
+
 	/**
-	 * 
-	 * sn - Service name
-	 * endpoint - path such as /ImportedLegacy
-	 * 
-	 */ 
+	  *
+	  * sn - Service name
+	  * endpoint - path such as /ImportedLegacy
+	  *
+	  */
 	def soapImport( client: Client, baseFolder: String, filename: String, name: String, rawWsdl: String, dir: String, fragments: HashMap[String, String],
 		endpoint: String, serviceObj: Service, jdbcConnections: HashMap[String, String] ): String = {
 		val serviceAccessor = client.getAccessor( classOf[ServiceMO] )
 
-		val service = ManagedObjectFactory.createService
 		val detail = ManagedObjectFactory.createServiceDetail
 		val httpMapping = ManagedObjectFactory.createHttpMapping
 		val soapMapping = ManagedObjectFactory.createSoapMapping
@@ -489,7 +501,7 @@ object utils {
 		properties.put( "soap", true );
 		properties.put( "soapVersion", "1.1" )
 		detail.setProperties( properties.asInstanceOf[HashMap[String, java.lang.Object]] )
-		
+
 		logger.trace( "Preparing WSDL" )
 		val wsdl = rawWsdl.replace( "SERVICE_NAME", name )
 		wsdlResourceSet.setTag( "wsdl" )
@@ -499,32 +511,38 @@ object utils {
 
 		// Policy
 		logger.trace( "Preparing policy" )
-
 		val policyResourceSet = preparePolicyRs( client, baseFolder, filename, name, dir, fragments, serviceObj, jdbcConnections )
 
-		// Service
-		logger.trace( "Preparing service" )
-
-		service.setServiceDetail( detail )
-		service.setResourceSets( List( wsdlResourceSet, policyResourceSet ) )
-
-		logger.trace( "creating service" )
-
-		val serviceId = serviceAccessor.create( service )
+		var serviceId = ""
+		if ( PolicyCreatorEsbII.isUpdate ) {
+			logger.trace( "Updating {} service.", name )
+			//			val s = serviceAccessor.get( "Name", "CS_REFRESH_SUBSCRIPTION_BILL - QDRAIN" )
+			val s = getServiceByName( client, name ).get
+			s.setServiceDetail( detail )
+			s.setResourceSets( List( wsdlResourceSet, policyResourceSet ) )
+			serviceAccessor.put( s )
+			serviceId = s getId
+		}
+		else {
+			logger.trace( "Creating {} service.", name )
+			val service = ManagedObjectFactory.createService
+			service.setServiceDetail( detail )
+			service.setResourceSets( List( wsdlResourceSet, policyResourceSet ) )
+			serviceId = serviceAccessor.create( service )
+		}
 		serviceId
 	}
-	
+
 	/**
-	 * Import a restful or similar service
-	 * sn - Service name
-	 * endpoint - path such as /ImportedLegacy
-	 * verbs - HTTP verbs as List("POST" ..) or null
-	 */ 
+	  * Import a restful or similar service
+	  * sn - Service name
+	  * endpoint - path such as /ImportedLegacy
+	  * verbs - HTTP verbs as List("POST" ..) or null
+	  */
 	def restImport( client: Client, baseFolder: String, filename: String, name: String, dir: String, fragments: HashMap[String, String],
 		endpoint: String, verbs: List[String], serviceObj: Service, jdbcConnections: HashMap[String, String] ): String = {
 		val serviceAccessor = client.getAccessor( classOf[ServiceMO] )
 
-		val service = ManagedObjectFactory.createService
 		val detail = ManagedObjectFactory.createServiceDetail
 		val httpMapping = ManagedObjectFactory.createHttpMapping
 
@@ -541,23 +559,32 @@ object utils {
 			httpMapping.setVerbs( null )
 		else
 			httpMapping.setVerbs( verbs )
-
 		detail.setServiceMappings( List( httpMapping ) )
 
 		// Policy
 		logger.trace( "Preparing policy" )
-
 		val policyResourceSet = preparePolicyRs( client, baseFolder, filename, name, dir, fragments, serviceObj, jdbcConnections )
-
+		var serviceId = ""
 		// Service
 		logger.trace( "Preparing service" )
+		if ( PolicyCreatorEsbII.isUpdate ) {
+			logger.trace( "Updating {} service.", name )
+			//			val s = serviceAccessor.get( "Name", "CS_REFRESH_SUBSCRIPTION_BILL - QDRAIN" )
+			val s = getServiceByName( client, name ).get
+			s.setServiceDetail( detail )
+			s.setResourceSets( List( policyResourceSet ) )
+			serviceAccessor.put( s )
+			serviceId = s getId
+		}
+		else {
+			val service = ManagedObjectFactory.createService
+			service.setServiceDetail( detail )
+			service.setResourceSets( List( policyResourceSet ) )
+			logger.trace( "creating service" )
+			serviceId = serviceAccessor.create( service )
+			logger.trace( "Service {} created", serviceId )
 
-		service.setServiceDetail( detail )
-		service.setResourceSets( List( policyResourceSet ) )
-
-		logger.trace( "creating service" )
-
-		val serviceId = serviceAccessor.create( service )
+		}
 		serviceId
 	}
 
@@ -572,17 +599,17 @@ object utils {
 				val fname = ManagedObjectFactory.createFolder
 				fname.setName( name )
 				fname.setFolderId( parentId )
-				logger.debug( "Creating " + name )
+				logger.debug( " findOrCreate. Creating " + name )
 				folderAccessor.create( fname )
 			}
 		}
 	}
 
- /**
-  * 
-  * @author Olegbranopolsky
-  * 
-  */
+	/**
+	  *
+	  * @author Olegbranopolsky
+	  *
+	  */
 	def loadIFAdminDTO( ifaFile: String ): IFAdminDTOJ = {
 		try {
 			val br = new BufferedReader( new FileReader( ifaFile ) )
@@ -607,9 +634,9 @@ object utils {
 	}
 
 	/**
-	 * 
-	 * 
-	 */ 
+	  *
+	  *
+	  */
 	def updateSsgParam(): Int = {
 		logger.error( "Updating params of service:{}", ifaDto.serviceName )
 		val oid = try {
